@@ -4,13 +4,11 @@ import 'package:track_booking/utils/app_colors/app_colors.dart';
 import 'package:track_booking/utils/app_images/app_images.dart';
 import 'package:track_booking/utils/app_strings/app_strings.dart';
 import 'package:track_booking/view/widgets/custom_image/custom_image.dart';
-import 'package:track_booking/view/widgets/custom_widgets/custom_widgets.dart';
 
 
 class SideDrawer extends StatelessWidget {
   SideDrawer({super.key});
 
-  final CustomWidgets customWidget = CustomWidgets();
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +23,7 @@ class SideDrawer extends StatelessWidget {
       child: Column(
         children: [
           ///================================ APP LOGO ==============================///
-          const CustomImage(
-            size: 100,
-            imageSrc: AppImages.logo,
-            imageType: ImageType.png,
-          ),
+
 
           Expanded(
             child: SingleChildScrollView(
@@ -39,12 +33,7 @@ class SideDrawer extends StatelessWidget {
                   children: [
                     ///====================== My Profile ======================>
 
-                    customWidget.customRow(
 
-                        onTap: () {
-                          // Get.toNamed(AppRoute.myProfileScreen);
-                        },
-                        title: AppStrings.confirmPassword),
 
 
                   ],

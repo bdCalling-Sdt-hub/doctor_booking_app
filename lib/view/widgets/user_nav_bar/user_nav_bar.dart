@@ -22,17 +22,11 @@ class _NavBarState extends State<UserNavBar> {
   var bottomNavIndex = 0;
 
   List<String> unselectedIcon = [
-    AppIcons.userHomeUnSelected,
-    AppIcons.userTripUnselected,
-    AppIcons.userMessageUnSelected,
-    AppIcons.userProfileUnSelected,
+
   ];
 
   List<String> selectedIcon = [
-    AppIcons.userHomeSelected,
-    AppIcons.userTripSelected,
-    AppIcons.userMessageSelected,
-    AppIcons.userProfileSelected,
+
   ];
 
   @override

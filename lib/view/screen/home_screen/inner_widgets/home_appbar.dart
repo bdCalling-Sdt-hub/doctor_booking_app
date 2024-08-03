@@ -50,7 +50,7 @@ class HomeAppBar extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
-                        text: AppStrings.welcome,
+                        text: '',
                         fontWeight: FontWeight.w500,
                         color: AppColors.white,
                         fontSize: 16.sp,
