@@ -10,7 +10,4 @@ class AppColors {
   static const Color black = Color(0xff2C2C2C);
   static const Color normalBlack = Color(0xff929394);
 
-
-
-
 }
