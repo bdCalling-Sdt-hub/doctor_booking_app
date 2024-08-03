@@ -72,7 +72,7 @@ class HomeAppBar extends StatelessWidget {
 
                     scaffoldKey.currentState?.openDrawer();
                   },
-                  child: const CustomImage(imageSrc: AppIcons.drawer))
+                  child: const CustomImage(imageSrc: AppIcons.eye))
 
             ],
           ),

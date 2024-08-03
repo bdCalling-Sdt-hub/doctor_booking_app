@@ -3,7 +3,7 @@ class AppImages {
 
   ///====================== onboard =========================
 
-  static const String onBoardImages = "$basePath/onBoard_Images.png";
+  static const String accessLocation = "$basePath/accessLocation.png";
 
 
 
