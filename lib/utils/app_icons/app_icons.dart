@@ -35,4 +35,15 @@ class AppIcons {
   static const String gallery = "$basePath/gallery.svg";
   static const String myAppointment = "$basePath/myAppointment.svg";
   static const String tranjectionHistory = "$basePath/tranjection_history.svg";
+
+  ///==========================nav bar=================
+  static const String homeSelected = "$basePath/home_selected.svg";
+  static const String homeUnSelected = "$basePath/home_unselected.svg";
+  static const String favoriteSelected = "$basePath/favorite_selected.svg";
+  static const String hospitalUnselected = "$basePath/hospital_unselected.svg";
+  static const String hospitalSelected = "$basePath/hospital_selected.svg";
+  static const String appointmentSelected = "$basePath/appointment_selected.svg";
+  static const String appointmentUnselected = "$basePath/appointment_unselected.svg";
+  static const String profileSelected = "$basePath/profile_selected.svg";
+  static const String profileUnselected = "$basePath/profile_unselected.svg";
 }
