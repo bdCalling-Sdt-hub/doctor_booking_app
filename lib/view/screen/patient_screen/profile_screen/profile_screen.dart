@@ -36,7 +36,10 @@ class ProfileScreen extends StatelessWidget {
             CustomProfileCard(
                 text: AppStrings.appointmentHistory,
                 leadingIcon: AppIcons.history,
-                onTap: (){},
+                onTap: (){
+                  Get.toNamed(AppRoutes.appointmentHistoryScreen);
+
+                },
                 isCevron: true),
             ///=======================paymentOption==============
 
