@@ -14,8 +14,8 @@ class CustomButton extends StatelessWidget {
         this.title = '',
         this.marginVerticel = 0,
         this.marginHorizontal = 0,
-        this.fillColor,
-        this.textColor = AppColors.white});
+        this.fillColor=AppColors.blackNormal,
+        this.textColor = AppColors.whiteNormal});
 
   final double height;
   final double width;
@@ -42,7 +42,7 @@ class CustomButton extends StatelessWidget {
         height: height,
         width: width,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r), color: fillColor),
+            borderRadius: BorderRadius.circular(100), color: fillColor),
         child: CustomText(
             fontSize: 14,
             fontWeight: FontWeight.w500,

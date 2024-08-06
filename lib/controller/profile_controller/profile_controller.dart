@@ -1,11 +1,18 @@
 import 'dart:io';
-
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileController extends GetxController{
 
+
+  TextEditingController fullNameController =TextEditingController();
+  TextEditingController emailController =TextEditingController();
+  TextEditingController phoneNumberController =TextEditingController();
+  TextEditingController dateOfBirthController =TextEditingController();
+  TextEditingController ganderController =TextEditingController();
+  TextEditingController locationController =TextEditingController();
   ///============================Image picker method================
   RxString image = "".obs;
 

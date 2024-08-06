@@ -36,7 +36,7 @@ class AppRoutes {
     GetPage(name: helpCenterScreen, page: () =>  HelpCenterScreen()),
     GetPage(name: appointmentHistoryScreen, page: () =>  const AppointmentHistoryScreen()),
     GetPage(name: accountInfoScreen, page: () =>  const AccountInfoScreen()),
-    GetPage(name: accountEditScreen, page: () =>  const AccountEditScreen()),
+    GetPage(name: accountEditScreen, page: () =>   AccountEditScreen()),
 
     ///============================Home section================
     GetPage(name: searchScreen, page: () =>  const SearchScreen()),

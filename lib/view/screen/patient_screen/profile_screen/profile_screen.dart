@@ -28,7 +28,9 @@ class ProfileScreen extends StatelessWidget {
             CustomProfileCard(
                 text: AppStrings.accountInfo,
                 leadingIcon: AppIcons.person,
-                onTap: (){},
+                onTap: (){
+                  Get.toNamed(AppRoutes.accountInfoScreen);
+                },
                 isCevron: true),
             ///=======================Appointment History==============
             CustomProfileCard(

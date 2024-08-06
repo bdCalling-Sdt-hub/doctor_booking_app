@@ -20,6 +20,7 @@ class HelpCenterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       backgroundColor: Colors.white,
       bottomNavigationBar: const PatientNavBart(currentIndex: 4),
 

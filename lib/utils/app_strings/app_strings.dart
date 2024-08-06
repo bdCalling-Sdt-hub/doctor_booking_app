@@ -133,6 +133,7 @@ static const String calls = 'Calls';
 static const String hospitals = 'Hospitals';
 static const String favorite = 'Favorite';
 static const String appointments = 'Appointments';
+static const String update = 'Update';
 
 
 ///================================Doctor Section ========================
