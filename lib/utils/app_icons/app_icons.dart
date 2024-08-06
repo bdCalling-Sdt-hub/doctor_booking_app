@@ -12,7 +12,6 @@ class AppIcons {
   static const String policy = "$basePath/policy.svg";
   static const String setting = "$basePath/setting.svg";
   static const String northEast = "$basePath/north_east.svg";
-  static const String favorite = "$basePath/favorite.svg";
   static const String eventAvailable = "$basePath/event_available.svg";
   static const String calendarClock = "$basePath/calendar_clock.svg";
   static const String eventBusy = "$basePath/event_busy.svg";
@@ -35,11 +34,14 @@ class AppIcons {
   static const String gallery = "$basePath/gallery.svg";
   static const String myAppointment = "$basePath/myAppointment.svg";
   static const String tranjectionHistory = "$basePath/tranjection_history.svg";
+  static const String arrowLeft = "$basePath/arrow_left_alt.svg";
 
   ///==========================nav bar=================
-  static const String homeSelected = "$basePath/home_selected.svg";
-  static const String homeUnSelected = "$basePath/home_unselected.svg";
+
   static const String favoriteSelected = "$basePath/favorite_selected.svg";
+  static const String homeSelected = "$basePath/homeSelected.svg";
+  static const String homeUnselected = "$basePath/home_unselected.svg";
+  static const String favoriteUnselected = "$basePath/favorite_unselect.svg";
   static const String hospitalUnselected = "$basePath/hospital_unselected.svg";
   static const String hospitalSelected = "$basePath/hospital_selected.svg";
   static const String appointmentSelected = "$basePath/appointment_selected.svg";

@@ -132,6 +132,7 @@ static const String home = 'Home';
 static const String calls = 'Calls';
 static const String hospitals = 'Hospitals';
 static const String favorite = 'Favorite';
+static const String appointments = 'Appointments';
 
 
 ///================================Doctor Section ========================

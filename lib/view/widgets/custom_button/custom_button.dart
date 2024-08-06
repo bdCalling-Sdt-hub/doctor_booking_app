@@ -1,8 +1,7 @@
 
+import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:track_booking/utils/app_colors/app_colors.dart';
-import 'package:track_booking/utils/app_strings/app_strings.dart';
 
 import '../custom_text/custom_text.dart';
 

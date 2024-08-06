@@ -1,13 +1,11 @@
+import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:track_booking/utils/app_colors/app_colors.dart';
-import 'package:track_booking/utils/app_images/app_images.dart';
-import 'package:track_booking/utils/app_strings/app_strings.dart';
-import 'package:track_booking/view/widgets/custom_image/custom_image.dart';
+
 
 
 class SideDrawer extends StatelessWidget {
-  SideDrawer({super.key});
+  const SideDrawer({super.key});
 
 
   @override

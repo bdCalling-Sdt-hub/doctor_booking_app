@@ -1,6 +1,8 @@
+import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:track_booking/utils/app_colors/app_colors.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class CustomText extends StatelessWidget {
   const CustomText(
@@ -11,9 +13,9 @@ class CustomText extends StatelessWidget {
         this.right = 0,
         this.top = 0,
         this.bottom = 0,
-        this.fontSize = 12,
-        this.fontWeight = FontWeight.w300,
-        this.color = AppColors.selectNavbarColor,
+        this.fontSize = 0,
+        this.fontWeight = FontWeight.w400,
+        this.color = AppColors.black,
         required this.text,
         this.overflow = TextOverflow.ellipsis,
         this.decoration
@@ -33,6 +35,7 @@ class CustomText extends StatelessWidget {
   final TextOverflow overflow;
   final TextDecoration? decoration;
 
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -43,13 +46,14 @@ class CustomText extends StatelessWidget {
         text,
         maxLines: maxLines,
         overflow: overflow,
-        style: TextStyle(
-          fontSize: fontSize.w,
+        style: GoogleFonts.poppins(
+          fontSize: fontSize,
           fontWeight: fontWeight,
           color: color,
           decoration: decoration,
-          decorationColor: Colors.white,
+          decorationColor: AppColors.bluNormalHover,
           decorationThickness:2,
+
 
         ),
       ),

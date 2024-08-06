@@ -1,9 +1,9 @@
 
+import 'package:doctor_booking/core/app_routes/app_routes.dart';
+import 'package:doctor_booking/core/dependency/dependency_injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:track_booking/core/app_routes/app_routes.dart';
-import 'package:track_booking/core/dependency/dependency_injection.dart';
 
 
 void main() {

@@ -1,9 +1,9 @@
 
+import 'package:doctor_booking/view/screen/patient_screen/home_screen/home_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/profile_screen/edit_profile_screen/edit_profile_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/splash_screen/splash_screen.dart';
 import 'package:get/get.dart';
-import 'package:track_booking/view/screen/home_screen/home_screen.dart';
-import 'package:track_booking/view/screen/profile_screen/edit_profile_screen/edit_profile_screen.dart';
-import 'package:track_booking/view/screen/profile_screen/profile_screen.dart';
-import 'package:track_booking/view/screen/splash_screen/splash_screen.dart';
+
 
 class AppRoutes {
   static const String splashScreen = "/SplashScreen";
