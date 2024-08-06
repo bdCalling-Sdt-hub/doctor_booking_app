@@ -111,7 +111,9 @@ class AccountEditScreen extends StatelessWidget {
                   ///===================Update Button===========
                   CustomButton(
                     title: AppStrings.update,
-                    onTap: (){},)
+                    onTap: (){
+                      Get.back();
+                    },)
                 ],
               );
             }
