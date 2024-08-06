@@ -1,6 +1,6 @@
 
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/home_screen.dart';
-import 'package:doctor_booking/view/screen/patient_screen/profile_screen/edit_profile_screen/edit_profile_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/profile_screen/help_center_screen/help_center_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/splash_screen/splash_screen.dart';
 import 'package:get/get.dart';
 
@@ -12,8 +12,7 @@ class AppRoutes {
   static const String homeScreen = "/HomeScreen";
 
   ///==============================Profile section================
-  static const String editProfileScreen = "/EditProfileScreen";
-  // static const String profileScreen = "/ProfileScreen";
+  static const String helpCenterScreen = "/HelpCenterScreen";
 
 
   static List<GetPage> routes = [
@@ -23,8 +22,7 @@ class AppRoutes {
      GetPage(name: homeScreen, page: () =>  HomeScreen()),
 
     ///==============================Profile section================
-    GetPage(name: editProfileScreen, page: () =>  EditProfileScreen()),
-    // GetPage(name: profileScreen, page: () =>  ProfileScreen()),
+    GetPage(name: helpCenterScreen, page: () =>  HelpCenterScreen()),
 
   ];
 }

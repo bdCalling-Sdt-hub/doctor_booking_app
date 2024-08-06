@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class CustomText extends StatelessWidget {
   const CustomText(
       {super.key,
@@ -13,7 +12,7 @@ class CustomText extends StatelessWidget {
         this.right = 0,
         this.top = 0,
         this.bottom = 0,
-        this.fontSize = 0,
+        this.fontSize = 14,
         this.fontWeight = FontWeight.w400,
         this.color = AppColors.black,
         required this.text,
@@ -47,7 +46,7 @@ class CustomText extends StatelessWidget {
         maxLines: maxLines,
         overflow: overflow,
         style: GoogleFonts.poppins(
-          fontSize: fontSize,
+          fontSize: fontSize.w,
           fontWeight: fontWeight,
           color: color,
           decoration: decoration,
