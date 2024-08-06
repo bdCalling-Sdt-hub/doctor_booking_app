@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:track_booking/utils/app_colors/app_colors.dart';
 import 'package:track_booking/view/widgets/user_nav_bar/user_nav_bar.dart';
 
 import 'inner_widgets/home_appbar.dart';
@@ -15,7 +16,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-
+   backgroundColor: AppColors.whiteLightActive,
       ///===================================Side Drawer=============================
       drawer: SideDrawer(),
       bottomNavigationBar: const UserNavBar(currentIndex: 0),
