@@ -44,6 +44,7 @@ class CustomHelpQuestion extends StatelessWidget {
                               textAlign: TextAlign.left,
                               text: faqList[index]["que"]!,
                               fontWeight: FontWeight.w500,
+                              maxLines: 2,
                             )),
                         IconButton(
                             onPressed: () {
