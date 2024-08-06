@@ -1,34 +1,45 @@
+import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
+import 'package:doctor_booking/utils/app_icons/app_icons.dart';
+import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+
 
 class CustomContainer extends StatelessWidget {
-  final Widget child;
-  final Color color;
-  final bool isBorder;
-  final double? height;  // Changed from bool to double
-  final double? weight;  // Changed from bool to double
+  final String routeName;
+  final String iconSrc;
+  final Color backgroundColor;
+  final Color iconColor;
+  final VoidCallback? onTap;
 
   const CustomContainer({
     super.key,
-    required this.child,
-    required this.color,
-    this.isBorder = false, this.height, this.weight,
+    this.routeName = '',
+    this.iconSrc = AppIcons.notification,
+    this.backgroundColor = AppColors.blackLight,
+    this.iconColor = AppColors.blackNormal,  this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      width: weight,
-      margin: EdgeInsets.symmetric(vertical: 10.h),
-      padding: EdgeInsets.all(10.h),
-      decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-              color: isBorder ? AppColors.white : AppColors.whiteDarkActive)),
-      child: child,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: backgroundColor,
+        ),
+        child: IconButton(
+          onPressed: () {
+            Get.toNamed(routeName);
+          },
+          icon: CustomImage(
+            imageSrc: iconSrc,
+            imageColor: iconColor,
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/home_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/notification_screen/notification_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/account_info_screen/account_edit_screen/account_edit_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/account_info_screen/account_info_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/appointment_history_screen/appointment_history_screen.dart';
@@ -20,7 +21,9 @@ class AppRoutes {
   static const String appointmentHistoryScreen = "/AppointmentHistoryScreen";
   static const String accountInfoScreen = "/AccountInfoScreen";
   static const String accountEditScreen = "/AccountEditScreen";
+  ///===========================Home Section================
   static const String searchScreen = "/SearchScreen";
+  static const String notificationScreen = "/NotificationScreen";
 
 
   static List<GetPage> routes = [
@@ -34,7 +37,10 @@ class AppRoutes {
     GetPage(name: appointmentHistoryScreen, page: () =>  const AppointmentHistoryScreen()),
     GetPage(name: accountInfoScreen, page: () =>  const AccountInfoScreen()),
     GetPage(name: accountEditScreen, page: () =>  const AccountEditScreen()),
+
+    ///============================Home section================
     GetPage(name: searchScreen, page: () =>  const SearchScreen()),
+    GetPage(name: notificationScreen, page: () =>  const NotificationScreen()),
 
   ];
 }

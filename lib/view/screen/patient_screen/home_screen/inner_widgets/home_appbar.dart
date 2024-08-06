@@ -2,6 +2,7 @@ import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/widgets/custom_container/custom_container.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text_field/custom_text_field.dart';
@@ -79,19 +80,8 @@ class HomeAppBar extends StatelessWidget {
               Row(
                 children: [
                   ///<==================== notification ====================>
-                  Container(
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.blackLight,
-                    ),
-                    child: IconButton(
-                        onPressed: () {
-                          // Get.toNamed(AppRoute.notificationScreen);
-                        },
-                        icon: const CustomImage(
-                          imageSrc: AppIcons.notification,
-                          imageColor: AppColors.blackNormal,
-                        )),
+                  const CustomContainer(
+                    routeName: AppRoutes.notificationScreen,
                   ),
                   SizedBox(width: 7.w,),
                   ///<==================== Menu Bar ====================>
