@@ -83,8 +83,8 @@ class _PatientNavBartState extends State<PatientNavBart> {
                   fontSize: 12,
                   text: userNavText[index],
                   color: index == bottomNavIndex
-                      ? AppColors.darkActive
-                      : AppColors.darkActive,
+                      ? AppColors.whiteDarkActive
+                      : AppColors.whiteDarkActive,
                 ),
               ],
             )
