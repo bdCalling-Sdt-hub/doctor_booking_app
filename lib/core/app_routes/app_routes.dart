@@ -40,7 +40,7 @@ class AppRoutes {
 
     ///============================Home section================
     GetPage(name: searchScreen, page: () =>  const SearchScreen()),
-    GetPage(name: notificationScreen, page: () =>  const NotificationScreen()),
+    GetPage(name: notificationScreen, page: () =>   NotificationScreen()),
 
   ];
 }
