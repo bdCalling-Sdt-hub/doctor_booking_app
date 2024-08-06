@@ -1,4 +1,4 @@
-
+import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
@@ -7,17 +7,19 @@ import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_
 import 'package:doctor_booking/view/widgets/custom_text_field/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../utils/app_const/app_const.dart';
+import 'package:get/get.dart';
 import '../../../../widgets/custom_text/custom_text.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({
     super.key,
-    required this.scaffoldKey,
+    required this.scaffoldKey, required this.image, required this.name, required this.location,
   });
 
   final GlobalKey<ScaffoldState> scaffoldKey;
-  // final HomeController homeController = Get.find<HomeController>();
+  final String image;
+  final String name;
+  final String location;
 
   @override
   Widget build(BuildContext context) {
@@ -39,30 +41,36 @@ class HomeAppBar extends StatelessWidget {
                   ///==================== Profile =====================
                   CustomNetworkImage(
                       boxShape: BoxShape.circle,
-                      imageUrl: AppConstants.userNtr,
+                      imageUrl: image,
                       height: 60,
                       width: 60),
-
 
                   SizedBox(
                     width: 16.w,
                   ),
+
                   ///==========================Welcome back======================
-                  const Column(
+                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
-                        text: 'Hi, Robert Smith',
+                        text: name,
                         color: AppColors.whiteDarker,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
+
                       ///========================name=============================
-                      CustomText(
-                        text: 'California, USA',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                        color: AppColors.whiteDarker,
+                       Row(
+                        children: [
+                          const CustomImage(imageSrc: AppIcons.location),
+                          CustomText(
+                            text: location,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: AppColors.whiteDarker,
+                          )
+                        ],
                       )
                     ],
                   )
@@ -71,21 +79,38 @@ class HomeAppBar extends StatelessWidget {
               Row(
                 children: [
                   ///<==================== notification ====================>
-                  IconButton(
-                      onPressed: () {
-                        // Get.toNamed(AppRoute.notificationScreen);
-                      },
-                      icon: const CustomImage(imageSrc: AppIcons.notification,imageColor: AppColors.blackNormal,)),
-
+                  Container(
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.blackLight,
+                    ),
+                    child: IconButton(
+                        onPressed: () {
+                          // Get.toNamed(AppRoute.notificationScreen);
+                        },
+                        icon: const CustomImage(
+                          imageSrc: AppIcons.notification,
+                          imageColor: AppColors.blackNormal,
+                        )),
+                  ),
+                  SizedBox(width: 7.w,),
                   ///<==================== Menu Bar ====================>
-                  IconButton(
-                      onPressed: () {
-                        scaffoldKey.currentState?.openDrawer();
-                      },
-                      icon: const Icon(
-                        Icons.menu,
-                        color: AppColors.blackNormal,
-                      ))
+                  Container(
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.blackLight,
+                      ),
+                      child:
+
+
+                          IconButton(
+                              onPressed: () {
+                                scaffoldKey.currentState?.openDrawer();
+                              },
+                              icon: const Icon(
+                                Icons.menu,
+                                color: AppColors.blackNormal,
+                              ))),
                 ],
               )
             ],
@@ -102,17 +127,20 @@ class HomeAppBar extends StatelessWidget {
                 flex: 8,
                 child: CustomTextField(
                   fillColor: AppColors.white,
-                  onTap: (){
-                    // Get.toNamed(AppRoute.searchScreen);
+                  onTap: () {
+                    Get.toNamed(AppRoutes.searchScreen);
                   },
                   fieldBorderColor: AppColors.whiteDarkHover,
                   readOnly: true,
                   hintText: AppStrings.search,
-                  hintStyle:  TextStyle(color: AppColors.white),
+                  hintStyle: const TextStyle(color: AppColors.whiteDarkActive),
                   isPrefixIcon: true,
                   prefixIcon: const Padding(
                     padding: EdgeInsets.only(left: 12),
-                    child: Icon(Icons.search,color: AppColors.whiteDarkActive,),
+                    child: Icon(
+                      Icons.search,
+                      color: AppColors.whiteDarkActive,
+                    ),
                   ),
                 ),
               ),
@@ -122,24 +150,22 @@ class HomeAppBar extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: InkWell(
-                  onTap: (){
+                  onTap: () {
                     // Get.toNamed(AppRoute.filterSelectedGenresScreen);
                   },
                   child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 15),
                     height: 55,
                     width: 54,
                     decoration: BoxDecoration(
-                        color: AppColors.whiteNormal,
-                        borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: const Icon(Icons.filter_alt,size:35,color: AppColors.whiteDarkActive,),
+                        color: AppColors.blackNormal,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: const CustomImage(imageSrc: AppIcons.filterList)
                   ),
                 ),
               )
             ],
           ),
-
-
         ],
       ),
     );
