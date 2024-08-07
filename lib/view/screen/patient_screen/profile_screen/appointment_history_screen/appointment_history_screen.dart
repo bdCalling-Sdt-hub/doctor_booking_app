@@ -17,9 +17,9 @@ class AppointmentHistoryScreen extends StatelessWidget {
       backgroundColor: AppColors.whiteLightActive,
       bottomNavigationBar: const PatientNavBart(currentIndex: 4),
 
-      ///==================swapHistory Appbar===============
-      appBar: CustomAppBar(
-        appBarContent: AppStrings.appointmentHistory.tr,
+      ///==================Appointment Appbar===============
+      appBar: const CustomAppBar(
+        appBarContent: AppStrings.appointmentHistory,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
