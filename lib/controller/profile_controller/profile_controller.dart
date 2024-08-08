@@ -13,6 +13,9 @@ class ProfileController extends GetxController{
   TextEditingController dateOfBirthController =TextEditingController();
   TextEditingController ganderController =TextEditingController();
   TextEditingController locationController =TextEditingController();
+  TextEditingController currentPasswordController =TextEditingController();
+  TextEditingController newPasswordController =TextEditingController();
+  TextEditingController retypePasswordController =TextEditingController();
   ///============================Image picker method================
   RxString image = "".obs;
 

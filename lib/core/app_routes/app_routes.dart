@@ -7,6 +7,7 @@ import 'package:doctor_booking/view/screen/patient_screen/profile_screen/account
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/appointment_history_screen/appointment_history_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/help_center_screen/help_center_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/search_screen/search_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/setting_screen/change_password_screen/change_password_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/setting_screen/setting_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/splash_screen/splash_screen.dart';
 import 'package:get/get.dart';
@@ -27,6 +28,7 @@ class AppRoutes {
   static const String searchScreen = "/SearchScreen";
   static const String notificationScreen = "/NotificationScreen";
   static const String settingScreen = "/SettingScreen";
+  static const String changePasswordScreen = "/ChangePasswordScreen";
 
   ///===================Hospital Section====================
   static const String hospitalScreen = "/HospitalScreen";
@@ -48,6 +50,7 @@ class AppRoutes {
     GetPage(name: searchScreen, page: () =>  const SearchScreen()),
     GetPage(name: notificationScreen, page: () =>   NotificationScreen()),
     GetPage(name: settingScreen, page: () =>   const SettingScreen()),
+    GetPage(name: changePasswordScreen, page: () =>    ChangePasswordScreen()),
 
     ///=============================Hospital Section======================
     GetPage(name: hospitalScreen, page: () =>    HospitalScreen()),
