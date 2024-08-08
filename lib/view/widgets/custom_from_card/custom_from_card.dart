@@ -35,7 +35,7 @@ class CustomFormCard extends StatelessWidget {
       children: [
         CustomText(
           text: title,
-          color: AppColors.black,
+          color: AppColors.grayNormal,
           fontWeight: FontWeight.w500,
           fontSize: 16.sp,
           bottom: 12.h,
@@ -48,7 +48,7 @@ class CustomFormCard extends StatelessWidget {
               hasSuffixIcon ? const Icon(Icons.keyboard_arrow_down) : null,
           isPassword: isPassword,
           textEditingController: controller,
-          inputTextStyle: const TextStyle(color: AppColors.black),
+          inputTextStyle: const TextStyle(color: AppColors.grayNormal),
           fillColor: hasBackgroundColor
               ? AppColors.whiteNormal
               : AppColors.whiteNormal,

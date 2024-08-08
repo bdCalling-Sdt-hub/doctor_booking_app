@@ -43,7 +43,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           children: [
             IconButton(
               icon: const CustomImage(imageSrc: AppIcons.arrowLeft),
-              color: AppColors.black,
+              color: AppColors.grayNormal,
               onPressed: () {
                 Navigator.of(context).pop();
               },

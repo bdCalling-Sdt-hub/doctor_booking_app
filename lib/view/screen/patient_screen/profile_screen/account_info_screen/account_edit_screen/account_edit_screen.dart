@@ -76,7 +76,7 @@ class AccountEditScreen extends StatelessWidget {
                                 child: Container(
                                   padding: const EdgeInsets.all(2),
                                   decoration: const BoxDecoration(
-                                      color: AppColors.black,
+                                      color: AppColors.grayNormal,
                                       shape: BoxShape.circle),
                                   child: const CustomImage(
                                       imageSrc: AppIcons.photoCamera),

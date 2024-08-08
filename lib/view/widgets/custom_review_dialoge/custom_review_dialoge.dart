@@ -74,7 +74,7 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
               text: AppStrings.rating,
               fontWeight: FontWeight.w500,
               fontSize: 14,
-              color: AppColors.black,
+              color: AppColors.grayNormal,
               bottom: 15,
               top: 12,
             ),
@@ -99,11 +99,11 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
             ),
             Padding(
               padding: EdgeInsets.only(top: 15.h),
-              child: CustomText(
-                text: 'Comments'.tr,
+              child: const CustomText(
+                text: 'Comments',
                 fontWeight: FontWeight.w500,
                 fontSize: 14,
-                color: AppColors.black,
+                color: AppColors.grayNormal,
                 bottom: 15,
                 top: 12,
               ),

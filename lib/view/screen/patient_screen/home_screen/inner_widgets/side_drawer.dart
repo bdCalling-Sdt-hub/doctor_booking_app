@@ -43,19 +43,28 @@ class SideDrawer extends StatelessWidget {
                     customRow(
                         title: AppStrings.callHistory,
                         icon: AppIcons.videoCam,
-                        onTap: () {}),
+                        onTap: () {
+                          Get.toNamed(AppRoutes.callHistoryScreen);
+
+                        }),
 
                     ///====================== termsAndConditions======================>
                     customRow(
                         title: AppStrings.termsAndConditions,
                         icon: AppIcons.terms,
-                        onTap: () {}),
+                        onTap: () {
+                          Get.toNamed(AppRoutes.termsAndConditionScreen);
+
+                        }),
 
                     ///====================== privacyPolicy======================>
                     customRow(
                         title: AppStrings.privacyPolicy,
                         icon: AppIcons.policy,
-                        onTap: () {}),
+                        onTap: () {
+                          Get.toNamed(AppRoutes.privacyPolicyScreen);
+
+                        }),
 
                     ///====================== settings======================>
                     customRow(

@@ -59,11 +59,11 @@ class CustomHelpQuestion extends StatelessWidget {
                             icon: selectedFqw.value == index
                                 ? const Icon(
                               Icons.keyboard_arrow_down_rounded,
-                              color: AppColors.black,
+                              color: AppColors.grayNormal,
                             )
                                 : const Icon(
                               Icons.keyboard_arrow_right_rounded,
-                              color: AppColors.black,
+                              color: AppColors.grayNormal,
                             ))
                       ],
                     ),

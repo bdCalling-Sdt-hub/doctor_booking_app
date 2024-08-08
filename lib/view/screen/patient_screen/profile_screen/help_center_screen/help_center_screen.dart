@@ -36,11 +36,11 @@ class HelpCenterScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ///======================FrequentyAsk ============================
-                  CustomText(
-                    text: AppStrings.frequentlyAskedQuestions.tr,
+                  const CustomText(
+                    text: AppStrings.frequentlyAskedQuestions,
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
-                    color: AppColors.black,
+                    color: AppColors.grayNormal,
                     bottom: 12,
                   ),
 
@@ -55,11 +55,11 @@ class HelpCenterScreen extends StatelessWidget {
                   SizedBox(height: 20.h),
 
                   ///=========================Need More Help=================
-                  CustomText(
-                    text: AppStrings.needMoreHelp.tr,
+                  const CustomText(
+                    text: AppStrings.needMoreHelp,
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
-                    color: AppColors.black,
+                    color: AppColors.grayNormal,
                   ),
                   SizedBox(height: 10.h),
 

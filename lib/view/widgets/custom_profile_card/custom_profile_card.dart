@@ -45,7 +45,7 @@ class CustomProfileCard extends StatelessWidget {
                   text: text,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.black,
+                  color: AppColors.grayNormal,
                 ),
                 const Spacer(),
                 if (isCevron)

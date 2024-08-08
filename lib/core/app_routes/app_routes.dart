@@ -7,8 +7,11 @@ import 'package:doctor_booking/view/screen/patient_screen/profile_screen/account
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/appointment_history_screen/appointment_history_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/help_center_screen/help_center_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/search_screen/search_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/setting_screen/call_history_screen/call_history_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/setting_screen/change_password_screen/change_password_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/setting_screen/privacy_policy_screen/privacy_policy_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/setting_screen/setting_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/setting_screen/terms_and_condition_screen/terms_and_condition_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/splash_screen/splash_screen.dart';
 import 'package:get/get.dart';
 
@@ -29,6 +32,9 @@ class AppRoutes {
   static const String notificationScreen = "/NotificationScreen";
   static const String settingScreen = "/SettingScreen";
   static const String changePasswordScreen = "/ChangePasswordScreen";
+  static const String privacyPolicyScreen = "/PrivacyPolicyScreen";
+  static const String termsAndConditionScreen = "/TermsAndConditionScreen";
+  static const String callHistoryScreen = "/CallHistoryScreen";
 
   ///===================Hospital Section====================
   static const String hospitalScreen = "/HospitalScreen";
@@ -49,8 +55,11 @@ class AppRoutes {
     ///============================Home section================
     GetPage(name: searchScreen, page: () =>  const SearchScreen()),
     GetPage(name: notificationScreen, page: () =>   NotificationScreen()),
-    GetPage(name: settingScreen, page: () =>   const SettingScreen()),
+    GetPage(name: settingScreen, page: () =>    SettingScreen()),
     GetPage(name: changePasswordScreen, page: () =>    ChangePasswordScreen()),
+    GetPage(name: privacyPolicyScreen, page: () =>    const PrivacyPolicyScreen()),
+    GetPage(name: termsAndConditionScreen, page: () =>    const TermsAndConditionScreen()),
+    GetPage(name: callHistoryScreen, page: () =>    const CallHistoryScreen()),
 
     ///=============================Hospital Section======================
     GetPage(name: hospitalScreen, page: () =>    HospitalScreen()),
