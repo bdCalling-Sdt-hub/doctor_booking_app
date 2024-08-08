@@ -1,4 +1,3 @@
-import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
@@ -6,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
-class CustomContainer extends StatelessWidget {
+class CustomCircleContainer extends StatelessWidget {
   final String routeName;
   final String iconSrc;
   final Color backgroundColor;
   final Color iconColor;
   final VoidCallback? onTap;
 
-  const CustomContainer({
+  const CustomCircleContainer({
     super.key,
     this.routeName = '',
     this.iconSrc = AppIcons.notification,

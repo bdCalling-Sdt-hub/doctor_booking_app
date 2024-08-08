@@ -30,18 +30,14 @@ class AppointmentHistoryScreen extends StatelessWidget {
               Column(
                   children:List.generate(4, (index){
                     return     CustomAppointmentHistory(
-                      onTapName: (){
-                        // Get.toNamed(AppRoutes.otherProfile);
-                      },
                       image: AppConstants.userNtr,
-                      name: 'Zahid '.tr,
-                      date: '12/06/24'.tr,
-                      onTap: () {
+                      name: 'Dianne Russell',
+                      date: '24 May, Sun',
+                      reviewButton: () {
                         showDialogBox(
                             context);
-                      },
-                      firstProductName: 'Samsung Galaxy S22'.tr,
-                      exchangeProductName: 'Sony Y1G Android TV'.tr,
+                      }, profession: 'Cardiologist', time: '10 AM ',
+
                     );
                   })
               )

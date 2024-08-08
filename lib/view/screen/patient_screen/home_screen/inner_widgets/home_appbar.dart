@@ -2,7 +2,7 @@ import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
-import 'package:doctor_booking/view/widgets/custom_container/custom_container.dart';
+import 'package:doctor_booking/view/widgets/custom_circle_container/custom_circle_container.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text_field/custom_text_field.dart';
@@ -80,7 +80,7 @@ class HomeAppBar extends StatelessWidget {
               Row(
                 children: [
                   ///<==================== notification ====================>
-                  const CustomContainer(
+                  const CustomCircleContainer(
                     routeName: AppRoutes.notificationScreen,
                   ),
                   SizedBox(width: 7.w,),

@@ -1,8 +1,7 @@
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
-import 'package:doctor_booking/utils/app_icons/app_icons.dart';
+
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
-import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
-import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
+
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,22 +11,21 @@ import '../custom_netwrok_image/custom_network_image.dart';
 class CustomAppointmentHistory extends StatelessWidget {
   final String image;
   final String name;
+  final String profession;
   final String date;
-  final String firstProductName;
-  final String exchangeProductName;
+  final String time;
   final Color backgroundColor;
-  final VoidCallback onTap;
-  final VoidCallback onTapName;
+  final VoidCallback reviewButton;
 
   const CustomAppointmentHistory({
     super.key,
     required this.image,
     required this.name,
-    required this.date,
+    required this.profession,
     this.backgroundColor = AppColors.white,
-    required this.onTap,
-    required this.firstProductName,
-    required this.exchangeProductName, required this.onTapName,
+    required this.reviewButton,
+    required this.date,
+    required this.time,
   });
 
   @override
@@ -38,19 +36,12 @@ class CustomAppointmentHistory extends StatelessWidget {
           padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: backgroundColor,
-            border: Border.all(color: AppColors.grayNormal),
+            color: AppColors.whiteNormal,
+            border: Border.all(color: AppColors.grayLightHover),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustomText(
-                bottom: 10,
-                text: AppStrings.appointmentHistory,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: AppColors.black,
-              ),
               Row(
                 children: [
                   CustomNetworkImage(
@@ -62,75 +53,71 @@ class CustomAppointmentHistory extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        GestureDetector(
-                          onTap:onTapName,
-                          child: CustomText(
-                            left: 8,
-                            text: name,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.bluNormalHover,
-                          ),
+                        CustomText(
+                          left: 8,
+                          text: name,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.grayNormal,
                         ),
                         CustomText(
                           left: 10,
-                          text: date,
+                          text: profession,
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
-                          color: AppColors.black,
+                          color: AppColors.whiteDarker,
                         ),
+
                       ],
                     ),
                   ),
-                  const Spacer(),
-                  Expanded(
-                    child: CustomButton(
-                      onTap: onTap,
-                      title: AppStrings.review,
-                      fillColor: AppColors.white,
-                      textColor: AppColors.bluNormalHover,
-                      isBorder: true,
+                  ///===========================review Button===============
+                  GestureDetector(
+                    onTap: reviewButton,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
+                      decoration: BoxDecoration(
+                          color:AppColors.whiteNormal,
+                        border: Border.all(color: AppColors.blackLight)
+                      ),
+                      child: const CustomText(text: AppStrings.review,
+                        color: AppColors.blackNormal,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,),
                     ),
-                  ),
+                  )
                 ],
               ),
-              const CustomText(
-                top: 10,
-                left: 7,
-                text: AppStrings.searchYourQuestionHere,
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-                color: AppColors.black,
-              ),
+              const SizedBox(height: 7),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  CustomText(
-                    text: firstProductName,
+                  const CustomText(
+                    text: AppStrings.appointmentTime,
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    color: AppColors.black,
-                  ),
-                   const CustomImage(
-                    imageSrc: AppIcons.setting,
-                    imageColor: AppColors.black,
+                    color: AppColors.whiteDarker,
                   ),
                   CustomText(
-                    text: exchangeProductName,
+                    text: date,
                     fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.black,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.grayNormal,
+                  ),
+                  CustomText(
+                    text: date,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.grayNormal,
                   ),
                 ],
-              ),
-              SizedBox(
-                height: 12.h,
               ),
 
             ],
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 17),
       ],
     );
   }
