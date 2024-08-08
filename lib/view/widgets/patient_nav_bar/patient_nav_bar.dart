@@ -5,6 +5,7 @@ import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/ap
 import 'package:doctor_booking/view/screen/patient_screen/favorite_screen/favorite_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/home_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/hospital_screen/hospital_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/hospital_screen/location_screen/location_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/profile_screen.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -100,7 +101,7 @@ class _PatientNavBartState extends State<PatientNavBart> {
     } else if (index == 1 && widget.currentIndex != 1) {
       Get.to(() => const FavoriteScreen());
     } else if (index == 2 && widget.currentIndex != 2) {
-      Get.to(() => const HospitalScreen());
+      Get.to(() => const LocationScreen());
     } else if (index == 3 && widget.currentIndex != 3) {
       Get.to(() => const AppointmentsScreen());
     }else if (index == 4 && widget.currentIndex != 4) {
