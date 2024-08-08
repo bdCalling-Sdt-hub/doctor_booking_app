@@ -49,29 +49,29 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
                   onTap: () {
                     Get.back();
                   },
-                  child:  CustomImage(
-                    imageSrc: AppIcons.review,
+                  child:  const CustomImage(
+                    imageSrc: AppIcons.close,
                     imageType: ImageType.svg,
                   ),
                 ),
               ],
             ),
-            Center(
+            const Center(
               child: Column(
                 children: [
                   CustomText(
-                    text: AppStrings.review.tr,
+                    text: AppStrings.review,
                     fontWeight: FontWeight.w500,
                     fontSize: 18,
-                    color: AppColors.black,
+                    color: AppColors.grayNormal,
                     bottom: 15,
                     top: 12,
                   ),
                 ],
               ),
             ),
-            CustomText(
-              text: AppStrings.overallRating,
+            const CustomText(
+              text: AppStrings.rating,
               fontWeight: FontWeight.w500,
               fontSize: 14,
               color: AppColors.black,
@@ -111,6 +111,7 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
             CustomTextField(
               textEditingController: TextEditingController(),
               hintText: 'Write Your Review Here',
+              hintStyle: const TextStyle(fontSize: 10),
               fillColor: Colors.white,
               maxLines: 4,
             ),
@@ -120,7 +121,7 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
               padding: EdgeInsets.only(top: 10.h),
               child: CustomButton(
                 onTap: widget.onSubmit,
-                title: AppStrings.signUp,
+                title: AppStrings.review,
               ),
             ),
           ],

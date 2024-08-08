@@ -35,6 +35,7 @@ class AppIcons {
   static const String myAppointment = "$basePath/myAppointment.svg";
   static const String tranjectionHistory = "$basePath/tranjection_history.svg";
   static const String arrowLeft = "$basePath/arrow_left_alt.svg";
+  static const String close = "$basePath/close_small.svg";
 
   ///==========================nav bar=================
 
