@@ -62,7 +62,9 @@ class ProfileScreen extends StatelessWidget {
             CustomProfileCard(
                 text: AppStrings.logOut,
                 leadingIcon: AppIcons.logOut,
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(AppRoutes.signInScreen);
+                },
                 isCevron: true),
           ],
         ),

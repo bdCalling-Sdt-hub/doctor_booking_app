@@ -8,5 +8,7 @@ class AppImages {
   static const String onBoardTwo = "$basePath/onboard_two.png";
   static const String onBoardThree = "$basePath/onboard_three.jpg";
   static const String logo = "$basePath/logo.png";
+  static const String ilera = "$basePath/ilera.png";
   static const String bannerOne = "$basePath/banner_one.png";
+  static const String splashScreen = "$basePath/Splash_Screen.png";
 }

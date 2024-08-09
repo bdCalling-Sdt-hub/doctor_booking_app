@@ -1,4 +1,9 @@
 
+import 'package:doctor_booking/view/screen/patient_screen/authentication/forget_password_screen/forget_password_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/authentication/reset_password_screen/reset_password_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_in_screen/sign_in_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_up_otp_screen/sign_up_otp_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_up_screen/sign_up_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/call_history_screen/call_history_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/categories_screen/categories_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/categories_screen/sub_categories_screen/sub_categories_screen.dart';
@@ -14,8 +19,8 @@ import 'package:doctor_booking/view/screen/patient_screen/profile_screen/help_ce
 import 'package:doctor_booking/view/screen/patient_screen/search_screen/search_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/setting_screen/change_password_screen/change_password_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/setting_screen/setting_screen.dart';
-import 'package:doctor_booking/view/screen/patient_screen/splash_screen/splash_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/terms_and_condition_screen/terms_and_condition_screen.dart';
+import 'package:doctor_booking/view/screen/splash_screen/spalsh_screen.dart';
 import 'package:get/get.dart';
 
 
@@ -41,6 +46,14 @@ class AppRoutes {
   static const String categoriesScreen = "/CategoriesScreen";
   static const String subCategoriesScreen = "/SubCategoriesScreen";
   static const String popularSpecialistsScreen = "/PopularSpecialistsScreen";
+
+  ///===========================patient Authentication=====================
+
+  static const String signInScreen = "/SignInScreen";
+  static const String signUpScreen = "/SignUpScreen";
+  static const String signUpOtpScreen = "/SignUpOtpScreen";
+  static const String forgetPasswordScreen = "/ForgetPasswordScreen";
+  static const String resetPasswordScreen = "/ResetPasswordScreen";
 
   ///===================Hospital Section====================
   static const String hospitalScreen = "/HospitalScreen";
@@ -69,6 +82,13 @@ class AppRoutes {
     GetPage(name: categoriesScreen, page: () =>     CategoriesScreen()),
     GetPage(name: subCategoriesScreen, page: () =>      const SubCategoriesScreen()),
     GetPage(name: popularSpecialistsScreen, page: () =>      const PopularSpecialistsScreen()),
+
+    ///================================patient Auth========================
+    GetPage(name: signInScreen, page: () =>      const SignInScreen()),
+    GetPage(name: signUpScreen, page: () =>      const SignUpScreen()),
+    GetPage(name: signUpOtpScreen, page: () =>      const SignUpOtpScreen()),
+    GetPage(name: forgetPasswordScreen, page: () =>      const ForgetPasswordScreen()),
+    GetPage(name: resetPasswordScreen, page: () =>      const ResetPasswordScreen()),
 
     ///=============================Hospital Section======================
     GetPage(name: hospitalScreen, page: () =>    HospitalScreen()),

@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomFormCard extends StatelessWidget {
   final String title;
+  final String? hintText;
   final TextEditingController controller;
   final bool isPassword;
   final bool hasSuffixIcon;
@@ -26,6 +27,7 @@ class CustomFormCard extends StatelessWidget {
     this.hasBackgroundColor = false,
     this.isMultiLine = false,
     this.validator,
+    this.hintText,
   });
 
   @override
@@ -44,6 +46,11 @@ class CustomFormCard extends StatelessWidget {
         CustomTextField(
           validator: validator,
           readOnly: readOnly,
+          hintText: hintText,
+          hintStyle: const TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
+              color: AppColors.whiteDarkHover),
           suffixIcon:
               hasSuffixIcon ? const Icon(Icons.keyboard_arrow_down) : null,
           isPassword: isPassword,

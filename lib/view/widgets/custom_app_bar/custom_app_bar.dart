@@ -13,6 +13,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String? appBarContent;
   final IconData? iconData;
 
+
   const CustomAppBar({
     this.appBarHeight = 64,
     this.appBarWidth,

@@ -16,10 +16,12 @@ class AppStrings {
   static const String welcomeToIlera = "Welcome to ilera";
   static const String next = "Next";
   static const String ilera = "ilera";
+  static const String newPassword = "New Password";
   static const String popularSpecialist = "Popular Specialists";
   static const String getStart = "Get start";
   static const String callHistory = "Call History";
   static const String rating = "Rating";
+  static const String setANewPassword = "Set a new password";
   static const String bookAppointmentsEffortlessly = "Book Appointments Effortlessly";
   static const String simplifyYourHealthcareExperience = "Simplify your healthcare experience. Manage appointments, access records, and more.";
   static const String findAndBookAvailableSlots = "Find and book available slots with your preferred doctors in just a few taps.";
