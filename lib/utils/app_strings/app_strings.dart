@@ -16,6 +16,7 @@ class AppStrings {
   static const String welcomeToIlera = "Welcome to ilera";
   static const String next = "Next";
   static const String ilera = "ilera";
+  static const String popularSpecialist = "Popular Specialists";
   static const String getStart = "Get start";
   static const String callHistory = "Call History";
   static const String rating = "Rating";
@@ -69,6 +70,7 @@ class AppStrings {
   static const String viewAll = "View All";
   static const String popularDoctors = "Popular Doctors";
   static const String recommendedDoctors = "Recommended Doctors";
+  static const String recommendedSpecialist = "Recommended Specialists";
   static const String termsAndConditions = "Terms & conditions";
   static const String privacyPolicy = "Privacy policy";
   static const String settings = "Settings";

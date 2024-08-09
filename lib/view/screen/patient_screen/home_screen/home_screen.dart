@@ -3,7 +3,9 @@ import 'package:doctor_booking/controller/home_controller/home_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
+import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/widgets/custom_card/custom_card.dart';
 import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_image.dart';
 import 'package:doctor_booking/view/widgets/custom_row/custom_row.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
@@ -24,8 +26,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: AppColors.whiteLightActive,
@@ -104,8 +104,9 @@ class HomeScreen extends StatelessWidget {
                       height: 16.w,
                     ),
 
-                     CustomRow(
-                      onTap: (){
+                    ///================================Categories Section==========================
+                    CustomRow(
+                      onTap: () {
                         Get.toNamed(AppRoutes.categoriesScreen);
                       },
                       title: AppStrings.categories,
@@ -117,36 +118,93 @@ class HomeScreen extends StatelessWidget {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: List.generate(homeController.categoriesList.length, (index)
-
-                        {
+                        children: List.generate(
+                            homeController.categoriesList.length, (index) {
                           var data = homeController.categoriesList[index];
                           return Column(
                             children: [
                               GestureDetector(
-                                onTap:(){
-                                  Get.toNamed(AppRoutes.subCategoriesScreen,arguments: data);
+                                onTap: () {
+                                  Get.toNamed(AppRoutes.subCategoriesScreen,
+                                      arguments: data);
                                 },
                                 child: CustomNetworkImage(
                                   boxShape: BoxShape.circle,
-                                  imageUrl:homeController.categoriesList[index]['image']!,
+                                  imageUrl: homeController.categoriesList[index]
+                                      ['image']!,
                                   height: 54,
                                   width: 54,
                                 ),
                               ),
                               const SizedBox(height: 6),
-                               CustomText(
-                                 left: 20,
-                                text: homeController.categoriesList[index]['name']!,
+                              CustomText(
+                                left: 20,
+                                text: homeController.categoriesList[index]
+                                    ['name']!,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
                               ),
                             ],
                           );
-
                         }),
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+
+                    ///=================================PopularSpecialist Section==================
+                    CustomRow(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.popularSpecialistsScreen);
+                      },
+                      title: AppStrings.popularSpecialist,
+                      subtitle: AppStrings.viewAll,
+                    ),
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List.generate(4, (index){
+                        return   CustomCard(
+                          imageSrc: AppIcons.favoriteUnselected,
+                          networkImageUrl: AppConstants.userNtr,
+                          name: 'Jenny Wilson',
+                          profession: 'Gynecologists',
+                          rating: 4.7,
+                        );
+                      }),
+                    ),
+                  ),
+                    SizedBox(
+                      height: 34.h,
+                    ),
+                    ///=================================recommendedSpecialist Section==================
+                    CustomRow(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.popularSpecialistsScreen);
+                      },
+                      title: AppStrings.recommendedSpecialist,
+                      subtitle: AppStrings.viewAll,
+                    ),  SizedBox(
+                      height: 15.h,
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(4, (index){
+                          return   CustomCard(
+                            imageSrc: AppIcons.favoriteUnselected,
+                            networkImageUrl: AppConstants.userNtr,
+                            name: 'Jenny Wilson',
+                            profession: 'Gynecologists',
+                            rating: 4.7,
+                          );
+                        }),
+                      ),
+                    ),
                   ],
                 ),
               ),

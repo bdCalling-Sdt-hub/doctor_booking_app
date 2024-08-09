@@ -4,6 +4,7 @@ import 'package:doctor_booking/view/screen/patient_screen/categories_screen/sub_
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/home_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/hospital_screen/hospital_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/notification_screen/notification_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/popular_specialists_screen/popular_specialists_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/account_info_screen/account_edit_screen/account_edit_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/account_info_screen/account_info_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/appointment_history_screen/appointment_history_screen.dart';
@@ -39,6 +40,7 @@ class AppRoutes {
   static const String callHistoryScreen = "/CallHistoryScreen";
   static const String categoriesScreen = "/CategoriesScreen";
   static const String subCategoriesScreen = "/SubCategoriesScreen";
+  static const String popularSpecialistsScreen = "/PopularSpecialistsScreen";
 
   ///===================Hospital Section====================
   static const String hospitalScreen = "/HospitalScreen";
@@ -65,7 +67,8 @@ class AppRoutes {
     GetPage(name: termsAndConditionScreen, page: () =>    const TermsAndConditionScreen()),
     GetPage(name: callHistoryScreen, page: () =>    const CallHistoryScreen()),
     GetPage(name: categoriesScreen, page: () =>     CategoriesScreen()),
-    GetPage(name: subCategoriesScreen, page: () =>      SubCategoriesScreen()),
+    GetPage(name: subCategoriesScreen, page: () =>      const SubCategoriesScreen()),
+    GetPage(name: popularSpecialistsScreen, page: () =>      const PopularSpecialistsScreen()),
 
     ///=============================Hospital Section======================
     GetPage(name: hospitalScreen, page: () =>    HospitalScreen()),
