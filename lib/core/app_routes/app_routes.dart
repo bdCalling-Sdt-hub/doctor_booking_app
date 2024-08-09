@@ -1,5 +1,8 @@
 
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_screen.dart';
+import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_one/onboard_screen_one.dart';
+import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_three/onboard_screen_three.dart';
+import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_two/onboard_screen_two.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/forget_password_screen/forget_password_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/reset_password_screen/reset_password_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_in_screen/sign_in_screen.dart';
@@ -59,6 +62,11 @@ class AppRoutes {
   ///===================Hospital Section====================
   static const String hospitalScreen = "/HospitalScreen";
 
+  ///=============================Onboard Section==================
+  static const String onboardScreenOne = "/OnboardScreenOne";
+  static const String onboardScreenTwo = "/OnboardScreenTwo";
+  static const String onboardScreenThree = "/OnboardScreenThree";
+
   ///==============================>>>>>>Doctor Section<<<<<<<========================
   //===================================home Section====================
   static const String doctorHomeScreen = "/DoctorHomeScreen";
@@ -99,6 +107,11 @@ class AppRoutes {
 
     ///=============================Hospital Section======================
     GetPage(name: hospitalScreen, page: () =>    HospitalScreen()),
+
+    ///===============================OnBord Section=====================
+    GetPage(name: onboardScreenOne, page: () =>    const OnboardScreenOne()),
+    GetPage(name: onboardScreenTwo, page: () =>    const OnboardScreenTwo()),
+    GetPage(name: onboardScreenThree, page: () =>    const OnboardScreenThree()),
 
     ///==============================>>>>>>Doctor Section<<<<<<<========================
     //===================================home Section====================
