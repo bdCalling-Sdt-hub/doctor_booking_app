@@ -20,7 +20,7 @@ final HospitalController hospitalController = Get.find<HospitalController>();
       appBar: const CustomAppBar(
         appBarContent: AppStrings.hospitals,
       ),
-      bottomNavigationBar: const PatientNavBart(currentIndex: 2),
+      bottomNavigationBar: const PatientNavBar(currentIndex: 2),
       body: GridView.builder(
         scrollDirection: Axis.vertical,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -15,7 +15,7 @@ class AppointmentHistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.whiteLightActive,
-      bottomNavigationBar: const PatientNavBart(currentIndex: 4),
+      bottomNavigationBar: const PatientNavBar(currentIndex: 4),
 
       ///==================Appointment Appbar===============
       appBar: const CustomAppBar(

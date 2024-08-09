@@ -22,7 +22,7 @@ class HelpCenterScreen extends StatelessWidget {
     return Scaffold(
 
       backgroundColor: Colors.white,
-      bottomNavigationBar: const PatientNavBart(currentIndex: 4),
+      bottomNavigationBar: const PatientNavBar(currentIndex: 4),
 
       body: SingleChildScrollView(
         child: Column(

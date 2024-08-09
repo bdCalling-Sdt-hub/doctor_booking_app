@@ -1,4 +1,6 @@
 
+import 'package:doctor_booking/view/screen/patient_screen/categories_screen/categories_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/categories_screen/sub_categories_screen/sub_categories_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/home_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/hospital_screen/hospital_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/notification_screen/notification_screen.dart';
@@ -35,6 +37,8 @@ class AppRoutes {
   static const String privacyPolicyScreen = "/PrivacyPolicyScreen";
   static const String termsAndConditionScreen = "/TermsAndConditionScreen";
   static const String callHistoryScreen = "/CallHistoryScreen";
+  static const String categoriesScreen = "/CategoriesScreen";
+  static const String subCategoriesScreen = "/SubCategoriesScreen";
 
   ///===================Hospital Section====================
   static const String hospitalScreen = "/HospitalScreen";
@@ -60,6 +64,8 @@ class AppRoutes {
     GetPage(name: privacyPolicyScreen, page: () =>    const PrivacyPolicyScreen()),
     GetPage(name: termsAndConditionScreen, page: () =>    const TermsAndConditionScreen()),
     GetPage(name: callHistoryScreen, page: () =>    const CallHistoryScreen()),
+    GetPage(name: categoriesScreen, page: () =>     CategoriesScreen()),
+    GetPage(name: subCategoriesScreen, page: () =>      SubCategoriesScreen()),
 
     ///=============================Hospital Section======================
     GetPage(name: hospitalScreen, page: () =>    HospitalScreen()),

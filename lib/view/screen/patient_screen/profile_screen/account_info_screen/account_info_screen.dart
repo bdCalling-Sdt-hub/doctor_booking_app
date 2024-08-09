@@ -17,7 +17,7 @@ class AccountInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const PatientNavBart(currentIndex: 4),
+      bottomNavigationBar: const PatientNavBar(currentIndex: 4),
 
       backgroundColor: AppColors.whiteLightActive,
       appBar: const CustomAppBar(

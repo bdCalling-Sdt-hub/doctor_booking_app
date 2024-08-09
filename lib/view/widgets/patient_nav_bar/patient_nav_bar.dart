@@ -13,16 +13,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class PatientNavBart extends StatefulWidget {
+class PatientNavBar extends StatefulWidget {
   final int currentIndex;
 
-  const PatientNavBart({required this.currentIndex, super.key});
+  const PatientNavBar({required this.currentIndex, super.key});
 
   @override
-  State<PatientNavBart> createState() => _PatientNavBartState();
+  State<PatientNavBar> createState() => _PatientNavBarState();
 }
 
-class _PatientNavBartState extends State<PatientNavBart> {
+class _PatientNavBarState extends State<PatientNavBar> {
   var bottomNavIndex = 0;
 
   List<String> unselectedIcon = [

@@ -12,7 +12,7 @@ class FavoriteScreen extends StatelessWidget {
     return const Scaffold(
       backgroundColor: AppColors.whiteLightActive,
       appBar: CustomAppBar(appBarContent: AppStrings.favorite,),
-      bottomNavigationBar: PatientNavBart(currentIndex: 1),
+      bottomNavigationBar: PatientNavBar(currentIndex: 1),
     );
   }
 }

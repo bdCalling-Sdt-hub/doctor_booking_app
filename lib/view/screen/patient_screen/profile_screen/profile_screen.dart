@@ -19,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
       backgroundColor: AppColors.whiteLightActive,
      ///===========================Profile Appbar==================
      appBar: const CustomAppBar(appBarContent: AppStrings.profile,),
-      bottomNavigationBar: const PatientNavBart(currentIndex: 4),
+      bottomNavigationBar: const PatientNavBar(currentIndex: 4),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
