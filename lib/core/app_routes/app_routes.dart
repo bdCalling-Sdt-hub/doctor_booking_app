@@ -1,4 +1,5 @@
 
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/forget_password_screen/forget_password_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/reset_password_screen/reset_password_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_in_screen/sign_in_screen.dart';
@@ -58,6 +59,12 @@ class AppRoutes {
   ///===================Hospital Section====================
   static const String hospitalScreen = "/HospitalScreen";
 
+  ///==============================>>>>>>Doctor Section<<<<<<<========================
+  //===================================home Section====================
+  static const String doctorHomeScreen = "/DoctorHomeScreen";
+
+
+
 
   static List<GetPage> routes = [
      GetPage(name: splashScreen, page: () => const SplashScreen()),
@@ -92,6 +99,10 @@ class AppRoutes {
 
     ///=============================Hospital Section======================
     GetPage(name: hospitalScreen, page: () =>    HospitalScreen()),
+
+    ///==============================>>>>>>Doctor Section<<<<<<<========================
+    //===================================home Section====================
+    GetPage(name: doctorHomeScreen, page: () =>    const DoctorHomeScreen()),
 
   ];
 }

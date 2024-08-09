@@ -40,6 +40,11 @@ class AppIcons {
   ///==========================nav bar=================
 
   static const String favoriteSelected = "$basePath/favorite_selected.svg";
+  static const String scheduleUnselected = "$basePath/scheduleUnselected.svg";
+  static const String scheduleSelected = "$basePath/schedule.svg";
+  static const String notificationSelected = "$basePath/notification_selected.svg";
+  static const String callUnselected = "$basePath/call_unselected.svg";
+  static const String callSelected = "$basePath/call_selected.svg";
   static const String homeSelected = "$basePath/homeSelected.svg";
   static const String homeUnselected = "$basePath/home_unselected.svg";
   static const String favoriteUnselected = "$basePath/favorite_unselect.svg";
