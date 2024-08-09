@@ -21,6 +21,13 @@ class HomeController extends GetxController {
 
 
   ];
+  RxString _selectedOption = 'Health Professional'.obs;
+
+  String get selectedOption => _selectedOption.value;
+
+  void setSelectedOption(String value) {
+    _selectedOption.value = value;
+  }
   RxInt bannerIndex = 0.obs;
   Rx<PageController> pageController = PageController().obs;
 

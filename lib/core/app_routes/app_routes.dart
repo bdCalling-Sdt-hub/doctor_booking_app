@@ -114,7 +114,7 @@ class AppRoutes {
     GetPage(name: onboardScreenOne, page: () =>    const OnboardScreenOne()),
     GetPage(name: onboardScreenTwo, page: () =>    const OnboardScreenTwo()),
     GetPage(name: onboardScreenThree, page: () =>    const OnboardScreenThree()),
-    GetPage(name: chooseScreen, page: () =>    const ChooseScreen()),
+    GetPage(name: chooseScreen, page: () =>     ChooseScreen()),
 
     ///==============================>>>>>>Doctor Section<<<<<<<========================
     //===================================home Section====================
