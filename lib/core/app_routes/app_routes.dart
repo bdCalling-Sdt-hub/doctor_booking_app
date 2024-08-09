@@ -1,4 +1,5 @@
 
+import 'package:doctor_booking/view/screen/choose_screen/choose_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_screen.dart';
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_one/onboard_screen_one.dart';
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_three/onboard_screen_three.dart';
@@ -66,6 +67,7 @@ class AppRoutes {
   static const String onboardScreenOne = "/OnboardScreenOne";
   static const String onboardScreenTwo = "/OnboardScreenTwo";
   static const String onboardScreenThree = "/OnboardScreenThree";
+  static const String chooseScreen = "/ChooseScreen";
 
   ///==============================>>>>>>Doctor Section<<<<<<<========================
   //===================================home Section====================
@@ -112,6 +114,7 @@ class AppRoutes {
     GetPage(name: onboardScreenOne, page: () =>    const OnboardScreenOne()),
     GetPage(name: onboardScreenTwo, page: () =>    const OnboardScreenTwo()),
     GetPage(name: onboardScreenThree, page: () =>    const OnboardScreenThree()),
+    GetPage(name: chooseScreen, page: () =>    const ChooseScreen()),
 
     ///==============================>>>>>>Doctor Section<<<<<<<========================
     //===================================home Section====================
