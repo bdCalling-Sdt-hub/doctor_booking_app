@@ -1,21 +1,21 @@
 
+import 'package:doctor_booking/view/screen/patient_screen/call_history_screen/call_history_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/categories_screen/categories_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/categories_screen/sub_categories_screen/sub_categories_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/home_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/hospital_screen/hospital_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/notification_screen/notification_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/popular_specialists_screen/popular_specialists_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/privacy_policy_screen/privacy_policy_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/account_info_screen/account_edit_screen/account_edit_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/account_info_screen/account_info_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/appointment_history_screen/appointment_history_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/help_center_screen/help_center_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/search_screen/search_screen.dart';
-import 'package:doctor_booking/view/screen/patient_screen/setting_screen/call_history_screen/call_history_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/setting_screen/change_password_screen/change_password_screen.dart';
-import 'package:doctor_booking/view/screen/patient_screen/setting_screen/privacy_policy_screen/privacy_policy_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/setting_screen/setting_screen.dart';
-import 'package:doctor_booking/view/screen/patient_screen/setting_screen/terms_and_condition_screen/terms_and_condition_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/splash_screen/splash_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/terms_and_condition_screen/terms_and_condition_screen.dart';
 import 'package:get/get.dart';
 
 
