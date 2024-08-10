@@ -15,6 +15,7 @@ class CustomFormCard extends StatelessWidget {
   final bool hasBackgroundColor;
   final bool isMultiLine;
   final String? Function(dynamic)? validator;
+  final bool? hintTextChangeColor;
 
   const CustomFormCard({
     super.key,
@@ -28,6 +29,7 @@ class CustomFormCard extends StatelessWidget {
     this.isMultiLine = false,
     this.validator,
     this.hintText,
+    this.hintTextChangeColor = false,
   });
 
   @override
@@ -37,8 +39,10 @@ class CustomFormCard extends StatelessWidget {
       children: [
         CustomText(
           text: title,
-          color: AppColors.grayNormal,
-          fontWeight: FontWeight.w500,
+          color: hintTextChangeColor!
+              ? AppColors.whiteDarker
+              : AppColors.grayNormal,
+          fontWeight: hintTextChangeColor! ? FontWeight.w400 : FontWeight.w500,
           fontSize: 16.sp,
           bottom: 12.h,
           maxLines: 2,
@@ -57,7 +61,7 @@ class CustomFormCard extends StatelessWidget {
           textEditingController: controller,
           inputTextStyle: const TextStyle(color: AppColors.grayNormal),
           fillColor: hasBackgroundColor
-              ? AppColors.whiteNormal
+              ? AppColors.whiteLightActive
               : AppColors.whiteNormal,
           fieldBorderColor: AppColors.grayLightHover,
           keyboardType:

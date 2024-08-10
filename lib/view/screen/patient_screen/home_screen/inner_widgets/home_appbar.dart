@@ -14,7 +14,10 @@ import '../../../../widgets/custom_text/custom_text.dart';
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({
     super.key,
-    required this.scaffoldKey, required this.image, required this.name, required this.location,
+    required this.scaffoldKey,
+    required this.image,
+    required this.name,
+    required this.location,
   });
 
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -51,7 +54,7 @@ class HomeAppBar extends StatelessWidget {
                   ),
 
                   ///==========================Welcome back======================
-                   Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
@@ -62,7 +65,7 @@ class HomeAppBar extends StatelessWidget {
                       ),
 
                       ///========================name=============================
-                       Row(
+                      Row(
                         children: [
                           const CustomImage(imageSrc: AppIcons.location),
                           CustomText(
@@ -83,24 +86,26 @@ class HomeAppBar extends StatelessWidget {
                   const CustomCircleContainer(
                     routeName: AppRoutes.notificationScreen,
                   ),
-                  SizedBox(width: 7.w,),
+                  SizedBox(
+                    width: 7.w,
+                  ),
+
                   ///<==================== Menu Bar ====================>
                   Container(
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColors.blackLight,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.blackLight,
+                    ),
+                    child: IconButton(
+                      onPressed: () {
+                        scaffoldKey.currentState?.openDrawer();
+                      },
+                      icon: const Icon(
+                        Icons.menu,
+                        color: AppColors.blackNormal,
                       ),
-                      child:
-
-
-                          IconButton(
-                              onPressed: () {
-                                scaffoldKey.currentState?.openDrawer();
-                              },
-                              icon: const Icon(
-                                Icons.menu,
-                                color: AppColors.blackNormal,
-                              ))),
+                    ),
+                  ),
                 ],
               )
             ],
@@ -144,14 +149,14 @@ class HomeAppBar extends StatelessWidget {
                     // Get.toNamed(AppRoute.filterSelectedGenresScreen);
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 15),
-                    height: 55,
-                    width: 54,
-                    decoration: BoxDecoration(
-                        color: AppColors.blackNormal,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: const CustomImage(imageSrc: AppIcons.filterList)
-                  ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 15),
+                      height: 55,
+                      width: 54,
+                      decoration: BoxDecoration(
+                          color: AppColors.blackNormal,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: const CustomImage(imageSrc: AppIcons.filterList)),
                 ),
               )
             ],

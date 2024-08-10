@@ -1,10 +1,8 @@
-
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
-
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final double appBarHeight;
@@ -12,7 +10,6 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final Color appBarBgColor;
   final String? appBarContent;
   final IconData? iconData;
-
 
   const CustomAppBar({
     this.appBarHeight = 64,
@@ -56,7 +53,6 @@ class _CustomAppBarState extends State<CustomAppBar> {
                 fontSize: 18,
                 color: AppColors.grayNormal,
               ),
-
           ],
         ),
       ),

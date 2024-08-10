@@ -1,4 +1,3 @@
-
 import 'package:doctor_booking/view/screen/choose_screen/choose_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_screen.dart';
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_one/onboard_screen_one.dart';
@@ -28,7 +27,6 @@ import 'package:doctor_booking/view/screen/patient_screen/terms_and_condition_sc
 import 'package:doctor_booking/view/screen/splash_screen/spalsh_screen.dart';
 import 'package:get/get.dart';
 
-
 class AppRoutes {
   static const String splashScreen = "/SplashScreen";
 
@@ -40,6 +38,7 @@ class AppRoutes {
   static const String appointmentHistoryScreen = "/AppointmentHistoryScreen";
   static const String accountInfoScreen = "/AccountInfoScreen";
   static const String accountEditScreen = "/AccountEditScreen";
+
   ///===========================Home Section================
   static const String searchScreen = "/SearchScreen";
   static const String notificationScreen = "/NotificationScreen";
@@ -73,52 +72,55 @@ class AppRoutes {
   //===================================home Section====================
   static const String doctorHomeScreen = "/DoctorHomeScreen";
 
-
-
-
   static List<GetPage> routes = [
-     GetPage(name: splashScreen, page: () => const SplashScreen()),
+    GetPage(name: splashScreen, page: () => const SplashScreen()),
 
     ///========================Home screen================
-     GetPage(name: homeScreen, page: () =>  HomeScreen()),
+    GetPage(name: homeScreen, page: () => HomeScreen()),
 
     ///==============================Profile section================
-    GetPage(name: helpCenterScreen, page: () =>  HelpCenterScreen()),
-    GetPage(name: appointmentHistoryScreen, page: () =>  const AppointmentHistoryScreen()),
-    GetPage(name: accountInfoScreen, page: () =>  const AccountInfoScreen()),
-    GetPage(name: accountEditScreen, page: () =>   AccountEditScreen()),
+    GetPage(name: helpCenterScreen, page: () => HelpCenterScreen()),
+    GetPage(
+        name: appointmentHistoryScreen,
+        page: () => const AppointmentHistoryScreen()),
+    GetPage(name: accountInfoScreen, page: () => const AccountInfoScreen()),
+    GetPage(name: accountEditScreen, page: () => AccountEditScreen()),
 
     ///============================Home section================
-    GetPage(name: searchScreen, page: () =>  const SearchScreen()),
-    GetPage(name: notificationScreen, page: () =>   NotificationScreen()),
-    GetPage(name: settingScreen, page: () =>    SettingScreen()),
-    GetPage(name: changePasswordScreen, page: () =>    ChangePasswordScreen()),
-    GetPage(name: privacyPolicyScreen, page: () =>    const PrivacyPolicyScreen()),
-    GetPage(name: termsAndConditionScreen, page: () =>    const TermsAndConditionScreen()),
-    GetPage(name: callHistoryScreen, page: () =>    const CallHistoryScreen()),
-    GetPage(name: categoriesScreen, page: () =>     CategoriesScreen()),
-    GetPage(name: subCategoriesScreen, page: () =>      const SubCategoriesScreen()),
-    GetPage(name: popularSpecialistsScreen, page: () =>      const PopularSpecialistsScreen()),
+    GetPage(name: searchScreen, page: () => const SearchScreen()),
+    GetPage(name: notificationScreen, page: () => NotificationScreen()),
+    GetPage(name: settingScreen, page: () => SettingScreen()),
+    GetPage(name: changePasswordScreen, page: () => ChangePasswordScreen()),
+    GetPage(name: privacyPolicyScreen, page: () => const PrivacyPolicyScreen()),
+    GetPage(
+        name: termsAndConditionScreen,
+        page: () => const TermsAndConditionScreen()),
+    GetPage(name: callHistoryScreen, page: () => const CallHistoryScreen()),
+    GetPage(name: categoriesScreen, page: () => CategoriesScreen()),
+    GetPage(name: subCategoriesScreen, page: () => const SubCategoriesScreen()),
+    GetPage(
+        name: popularSpecialistsScreen,
+        page: () => const PopularSpecialistsScreen()),
 
     ///================================patient Auth========================
-    GetPage(name: signInScreen, page: () =>      const SignInScreen()),
-    GetPage(name: signUpScreen, page: () =>      const SignUpScreen()),
-    GetPage(name: signUpOtpScreen, page: () =>      const SignUpOtpScreen()),
-    GetPage(name: forgetPasswordScreen, page: () =>      const ForgetPasswordScreen()),
-    GetPage(name: resetPasswordScreen, page: () =>      const ResetPasswordScreen()),
+    GetPage(name: signInScreen, page: () => const SignInScreen()),
+    GetPage(name: signUpScreen, page: () => const SignUpScreen()),
+    GetPage(name: signUpOtpScreen, page: () => const SignUpOtpScreen()),
+    GetPage(
+        name: forgetPasswordScreen, page: () => const ForgetPasswordScreen()),
+    GetPage(name: resetPasswordScreen, page: () => const ResetPasswordScreen()),
 
     ///=============================Hospital Section======================
-    GetPage(name: hospitalScreen, page: () =>    HospitalScreen()),
+    GetPage(name: hospitalScreen, page: () => HospitalScreen()),
 
     ///===============================OnBord Section=====================
-    GetPage(name: onboardScreenOne, page: () =>    const OnboardScreenOne()),
-    GetPage(name: onboardScreenTwo, page: () =>    const OnboardScreenTwo()),
-    GetPage(name: onboardScreenThree, page: () =>    const OnboardScreenThree()),
-    GetPage(name: chooseScreen, page: () =>     ChooseScreen()),
+    GetPage(name: onboardScreenOne, page: () => const OnboardScreenOne()),
+    GetPage(name: onboardScreenTwo, page: () => const OnboardScreenTwo()),
+    GetPage(name: onboardScreenThree, page: () => const OnboardScreenThree()),
+    GetPage(name: chooseScreen, page: () => ChooseScreen()),
 
     ///==============================>>>>>>Doctor Section<<<<<<<========================
     //===================================home Section====================
-    GetPage(name: doctorHomeScreen, page: () =>    const DoctorHomeScreen()),
-
+    GetPage(name: doctorHomeScreen, page: () => DoctorHomeScreen()),
   ];
 }

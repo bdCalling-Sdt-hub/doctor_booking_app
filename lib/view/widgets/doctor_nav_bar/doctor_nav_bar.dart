@@ -50,7 +50,6 @@ class _DoctorNavBarState extends State<DoctorNavBar> {
     AppStrings.calls,
     AppStrings.notification,
     AppStrings.profile
-
   ];
   @override
   void initState() {
@@ -71,7 +70,7 @@ class _DoctorNavBarState extends State<DoctorNavBar> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: List.generate(
           unselectedIcon.length,
-              (index) => InkWell(
+          (index) => InkWell(
               onTap: () => onTap(index),
               child: Column(
                 children: [
@@ -92,8 +91,7 @@ class _DoctorNavBarState extends State<DoctorNavBar> {
                         : AppColors.whiteDarkActive,
                   ),
                 ],
-              )
-          ),
+              )),
         ),
       ),
     );
@@ -101,14 +99,14 @@ class _DoctorNavBarState extends State<DoctorNavBar> {
 
   void onTap(int index) {
     if (index == 0 && widget.currentIndex != 0) {
-      Get.offAll(() => const DoctorHomeScreen());
+      Get.offAll(() => DoctorHomeScreen());
     } else if (index == 1 && widget.currentIndex != 1) {
       Get.to(() => const ScheduleScreen());
     } else if (index == 2 && widget.currentIndex != 2) {
       Get.to(() => const CallScreen());
     } else if (index == 3 && widget.currentIndex != 3) {
       Get.to(() => const DoctorNotificationScreen());
-    }else if (index == 4 && widget.currentIndex != 4) {
+    } else if (index == 4 && widget.currentIndex != 4) {
       Get.to(() => const DoctorProfileScreen());
     }
   }

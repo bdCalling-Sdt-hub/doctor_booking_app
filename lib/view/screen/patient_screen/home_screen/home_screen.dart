@@ -164,23 +164,24 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(
                       height: 15.h,
                     ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: List.generate(4, (index){
-                        return   CustomCard(
-                          imageSrc: AppIcons.favoriteUnselected,
-                          networkImageUrl: AppConstants.userNtr,
-                          name: 'Jenny Wilson',
-                          profession: 'Gynecologists',
-                          rating: 4.7,
-                        );
-                      }),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(4, (index) {
+                          return CustomCard(
+                            imageSrc: AppIcons.favoriteUnselected,
+                            networkImageUrl: AppConstants.userNtr,
+                            name: 'Jenny Wilson',
+                            profession: 'Gynecologists',
+                            rating: 4.7,
+                          );
+                        }),
+                      ),
                     ),
-                  ),
                     SizedBox(
                       height: 34.h,
                     ),
+
                     ///=================================recommendedSpecialist Section==================
                     CustomRow(
                       onTap: () {
@@ -188,14 +189,15 @@ class HomeScreen extends StatelessWidget {
                       },
                       title: AppStrings.recommendedSpecialist,
                       subtitle: AppStrings.viewAll,
-                    ),  SizedBox(
+                    ),
+                    SizedBox(
                       height: 15.h,
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: List.generate(4, (index){
-                          return   CustomCard(
+                        children: List.generate(4, (index) {
+                          return CustomCard(
                             imageSrc: AppIcons.favoriteUnselected,
                             networkImageUrl: AppConstants.userNtr,
                             name: 'Jenny Wilson',

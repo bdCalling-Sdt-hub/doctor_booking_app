@@ -14,62 +14,60 @@ import 'package:get/get.dart';
 class ChooseScreen extends StatelessWidget {
   final HomeController _controller = Get.find<HomeController>();
 
-   ChooseScreen({super.key});
+  ChooseScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 20),
-        child: Obx(
-           () {
-            return Column(
-              children: [
-                SizedBox(
-                  height: 50.h,
-                ),
-                const CustomImage(
-                  imageSrc: AppImages.ilera,
-                  imageType: ImageType.png,
-                ),
-                const CustomText(
-                  top: 32,
-                  bottom: 98,
-                  text: AppStrings.choseYourRole,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 24,
-                  color: AppColors.grayNormal,
-                ),
-                CustomRadioButton(
-                  value: 'Patient',
-                  groupValue: _controller.selectedOption,
-                  onChanged: (value) {
-                    _controller.setSelectedOption(value!);
-                  },
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                CustomRadioButton(
-                  value: 'Health Professional',
-                  groupValue: _controller.selectedOption,
-                  onChanged: (value) {
-                    _controller.setSelectedOption(value!);
-                  },
-                ),
-                SizedBox(
-                  height: 30.h,
-                ),
-                CustomButton(
-                  title: AppStrings.continues,
-                  onTap: () {
-                    Get.toNamed(AppRoutes.signInScreen);
-                  },
-                ),
-              ],
-            );
-          }
-        ),
+        child: Obx(() {
+          return Column(
+            children: [
+              SizedBox(
+                height: 50.h,
+              ),
+              const CustomImage(
+                imageSrc: AppImages.ilera,
+                imageType: ImageType.png,
+              ),
+              const CustomText(
+                top: 32,
+                bottom: 98,
+                text: AppStrings.choseYourRole,
+                fontWeight: FontWeight.w500,
+                fontSize: 24,
+                color: AppColors.grayNormal,
+              ),
+              CustomRadioButton(
+                value: 'Patient',
+                groupValue: _controller.selectedOption,
+                onChanged: (value) {
+                  _controller.setSelectedOption(value!);
+                },
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              CustomRadioButton(
+                value: 'Health Professional',
+                groupValue: _controller.selectedOption,
+                onChanged: (value) {
+                  _controller.setSelectedOption(value!);
+                },
+              ),
+              SizedBox(
+                height: 30.h,
+              ),
+              CustomButton(
+                title: AppStrings.continues,
+                onTap: () {
+                  Get.toNamed(AppRoutes.signInScreen);
+                },
+              ),
+            ],
+          );
+        }),
       ),
     );
   }
