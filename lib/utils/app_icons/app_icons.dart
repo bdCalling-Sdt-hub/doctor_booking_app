@@ -46,7 +46,7 @@ class AppIcons {
   static const String scheduleSelected = "$basePath/schedule.svg";
   static const String notificationSelected =
       "$basePath/notification_selected.svg";
-  static const String callUnselected = "$basePath/call_unselected.svg";
+  static const String callUnselected = "$basePath/vediocall.svg";
   static const String callSelected = "$basePath/call_selected.svg";
   static const String homeSelected = "$basePath/homeSelected.svg";
   static const String homeUnselected = "$basePath/home_unselected.svg";

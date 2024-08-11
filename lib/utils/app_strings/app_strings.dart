@@ -194,4 +194,8 @@ class AppStrings {
   static const String californiaUsa = 'California, USA';
   static const String cammera = 'Cammera';
   static const String gallery = 'Gallery';
+
+  //===================== Doctor Notification =====================//
+  static const String notificationToday = 'TODAY';
+  static const String notificationYesterday = 'YESTERDAY';
 }

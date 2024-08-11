@@ -92,7 +92,7 @@ class PatientDetails extends StatelessWidget {
                         maxLines: 200,
                         textAlign: TextAlign.justify,
                         text:
-                            'Ive been experiencing chronic back pain \nfor the past six months. The pain started gradually without any clear injury or incident. It began as a dull ache in my lower back.',
+                            'Ive been experiencing chronic back pain for the past six months. The pain started gradually without any clear injury or incident. It began as a dull ache in my lower back.',
                         fontSize: 13.sp,
                         fontWeight: FontWeight.w400,
                         color: AppColors.grayNormal,
