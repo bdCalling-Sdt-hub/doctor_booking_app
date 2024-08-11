@@ -22,7 +22,6 @@ class CustomHelpAppBar extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       decoration: const BoxDecoration(
           color: AppColors.blackNormal,
-
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(24),
               bottomRight: Radius.circular(24))),

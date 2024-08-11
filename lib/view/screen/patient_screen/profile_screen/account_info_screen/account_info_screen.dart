@@ -18,26 +18,25 @@ class AccountInfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: const PatientNavBar(currentIndex: 4),
-
       backgroundColor: AppColors.whiteLightActive,
       appBar: const CustomAppBar(
         appBarContent: AppStrings.accountInfo,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
           children: [
-
             const Row(
-             children: [
-               SizedBox(),
-               Spacer(),
-               CustomCircleContainer(
-                 routeName: AppRoutes.accountEditScreen,
-                 iconSrc: AppIcons.borderColor,
-               ),
-             ],
-           ),
+              children: [
+                SizedBox(),
+                Spacer(),
+                CustomCircleContainer(
+                  routeName: AppRoutes.accountEditScreen,
+                  iconSrc: AppIcons.borderColor,
+                ),
+              ],
+            ),
+
             ///====================Image=================
             CustomNetworkImage(
                 boxShape: BoxShape.circle,
@@ -54,6 +53,7 @@ class AccountInfoScreen extends StatelessWidget {
               fontSize: 18,
               bottom: 5,
             ),
+
             ///=========================Email==================
             const CustomText(
               text: 'rakibhossain12@gmail.com',

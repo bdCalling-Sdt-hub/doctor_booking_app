@@ -10,22 +10,17 @@ import 'package:flutter/material.dart';
 class PopularSpecialistsScreen extends StatelessWidget {
   const PopularSpecialistsScreen({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         backgroundColor: AppColors.whiteLightActive,
         appBar: const CustomAppBar(
           appBarContent: AppStrings.popularSpecialist,
         ),
-        body:GridView.builder(
+        body: GridView.builder(
           scrollDirection: Axis.vertical,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 18.0,
-              mainAxisExtent: 250
-          ),
+              crossAxisCount: 2, mainAxisSpacing: 18.0, mainAxisExtent: 250),
           itemCount: 4,
           itemBuilder: (context, index) {
             return CustomCard(
@@ -38,7 +33,6 @@ class PopularSpecialistsScreen extends StatelessWidget {
           },
           shrinkWrap: true,
           padding: const EdgeInsets.all(10.0),
-        )
-    );
+        ));
   }
 }

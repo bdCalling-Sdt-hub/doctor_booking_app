@@ -1,5 +1,5 @@
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
-import 'package:doctor_booking/main.dart';
+
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';

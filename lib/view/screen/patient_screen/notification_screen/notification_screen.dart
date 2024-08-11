@@ -8,31 +8,34 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NotificationScreen extends StatelessWidget {
-   NotificationScreen({super.key});
+  NotificationScreen({super.key});
 
-  final NotificationController notificationController = Get.find<NotificationController>();
+  final NotificationController notificationController =
+      Get.find<NotificationController>();
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.whiteLightActive,
+
       ///===========================Notification Appbar=-=================
       appBar: const CustomAppBar(
         appBarContent: AppStrings.notifications,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
-          children: List.generate(notificationController.notificationList.length, (index){
-            return  NotificationItem(
-              container: CustomCircleContainer(
-                iconSrc: notificationController.notificationList[index]['icon'],
-              ),
-              title: notificationController.notificationList[index]['title'],
-              description: notificationController.notificationList[index]['subtitle'],
-              time: notificationController.notificationList[index]['time'],
-            );
-          })
-        ),
+            children: List.generate(
+                notificationController.notificationList.length, (index) {
+          return NotificationItem(
+            container: CustomCircleContainer(
+              iconSrc: notificationController.notificationList[index]['icon'],
+            ),
+            title: notificationController.notificationList[index]['title'],
+            description: notificationController.notificationList[index]
+                ['subtitle'],
+            time: notificationController.notificationList[index]['time'],
+          );
+        })),
       ),
     );
   }

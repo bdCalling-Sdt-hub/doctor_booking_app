@@ -1,3 +1,4 @@
+import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
@@ -10,6 +11,7 @@ import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:doctor_booking/view/widgets/doctor_nav_bar/doctor_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
   const DoctorProfileScreen({super.key});
@@ -19,11 +21,11 @@ class DoctorProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.whiteNormal,
 
-      ///==================AppBar============//
+      ///================== AppBar ============//
       appBar: const CustomAppBar(
         appBarContent: AppStrings.profile,
       ),
-      //===================body==============//
+      //=================== body ==============//
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -31,32 +33,11 @@ class DoctorProfileScreen extends StatelessWidget {
               SizedBox(
                 height: 6.h,
               ),
-              Stack(
-                children: [
-                  CustomNetworkImage(
-                    imageUrl: AppConstants.userNtr,
-                    height: 80.h,
-                    width: 80.w,
-                    borderRadius: BorderRadius.circular(45),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: InkWell(
-                      onTap: () {},
-                      child: const CircleAvatar(
-                        radius: 17,
-                        backgroundColor: AppColors.blackNormal,
-                        child: Center(
-                          child: CustomImage(
-                            imageSrc: AppIcons.photoCamera,
-                            sizeWidth: 18,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
+              CustomNetworkImage(
+                imageUrl: AppConstants.userNtr,
+                height: 90.h,
+                width: 90.w,
+                boxShape: BoxShape.circle,
               ),
               SizedBox(
                 height: 24.h,
@@ -75,8 +56,12 @@ class DoctorProfileScreen extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           color: AppColors.whiteDarker,
                         ),
+                        // ================= personal info screen button ==========//
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Get.toNamed(
+                                AppRoutes.doctorEditPersonalProfileScreen);
+                          },
                           child: const CustomImage(
                             imageSrc: AppIcons.edit,
                             imageType: ImageType.png,
@@ -97,13 +82,7 @@ class DoctorProfileScreen extends StatelessWidget {
                     SizedBox(
                       height: 16.h,
                     ),
-                    // CustomText(
-                    //   text: AppStrings.yourName,
-                    //   fontSize: 16,
-                    //   fontWeight: FontWeight.w400,
-                    //   color: AppColors.whiteDarker,
-                    //   bottom: 12,
-                    // ),
+                    // ============== doctor name ===============//
                     CustomFormCard(
                       hasBackgroundColor: true,
                       title: AppStrings.yourName,
@@ -112,6 +91,7 @@ class DoctorProfileScreen extends StatelessWidget {
                       readOnly: true,
                       hintText: 'Dr. Hassan',
                     ),
+                    //============== doctor date of birth =============\\
                     CustomFormCard(
                       hasBackgroundColor: true,
                       title: AppStrings.dateOfBirth,
@@ -120,6 +100,7 @@ class DoctorProfileScreen extends StatelessWidget {
                       readOnly: true,
                       hintText: '05-12-2001',
                     ),
+                    //============ doctor email ==============//
                     CustomFormCard(
                       hasBackgroundColor: true,
                       title: AppStrings.email,
@@ -128,6 +109,7 @@ class DoctorProfileScreen extends StatelessWidget {
                       readOnly: true,
                       hintText: 'info@gmail.com',
                     ),
+                    //============ doctor phnoe number ===========//
                     CustomFormCard(
                       hasBackgroundColor: true,
                       title: AppStrings.phoneNumber,
@@ -136,6 +118,8 @@ class DoctorProfileScreen extends StatelessWidget {
                       readOnly: true,
                       hintText: '(00)+5452 125 36',
                     ),
+
+                    ///=============== doctor loaction ============//
                     CustomFormCard(
                       hasBackgroundColor: true,
                       title: AppStrings.location,
@@ -144,17 +128,24 @@ class DoctorProfileScreen extends StatelessWidget {
                       readOnly: true,
                       hintText: '775 Rolling Green Rd.',
                     ),
+                    SizedBox(
+                      height: 12.h,
+                    ),
+                    //===========professional info ==========//
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const CustomText(
-                          text: AppStrings.personalInfo,
+                          text: AppStrings.professionalInfo,
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
                           color: AppColors.whiteDarker,
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Get.toNamed(
+                                AppRoutes.doctorEditProfessinalProfileScreen);
+                          },
                           child: const CustomImage(
                             imageSrc: AppIcons.edit,
                             imageType: ImageType.png,
@@ -172,19 +163,16 @@ class DoctorProfileScreen extends StatelessWidget {
                         color: AppColors.whiteNormalHover,
                       ),
                     ),
-
-                    SizedBox(
-                      height: 8.h,
-                    ),
+                    //=============== doctor medical licence image =============//
                     CustomText(
+                      top: 8.h,
+                      bottom: 8.h,
                       text: AppStrings.medicalLicenceImage,
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
                       color: AppColors.whiteDarker,
                     ),
-                    SizedBox(
-                      height: 8.h,
-                    ),
+
                     CustomNetworkImage(
                       imageUrl: AppConstants.medicalLicence,
                       height: 120.h,
@@ -193,6 +181,7 @@ class DoctorProfileScreen extends StatelessWidget {
                     SizedBox(
                       height: 8.h,
                     ),
+                    //============ doctor specilization ============//
                     CustomFormCard(
                       hasBackgroundColor: true,
                       title: AppStrings.specialization,
@@ -209,6 +198,9 @@ class DoctorProfileScreen extends StatelessWidget {
                       readOnly: true,
                       hintText: '4 years',
                     ),
+
+                    ///============================= Education Background ===============================
+
                     CustomFormCard(
                       hasBackgroundColor: true,
                       title: AppStrings.educationalBackground,
@@ -217,6 +209,7 @@ class DoctorProfileScreen extends StatelessWidget {
                       readOnly: true,
                       hintText: 'type here',
                     ),
+                    //================= doctor currentAffiliation =============//
                     CustomFormCard(
                       hasBackgroundColor: true,
                       title: AppStrings.currentAffiliation,
@@ -232,7 +225,7 @@ class DoctorProfileScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: DoctorNavBar(currentIndex: 4),
+      bottomNavigationBar: const DoctorNavBar(currentIndex: 4),
     );
   }
 }

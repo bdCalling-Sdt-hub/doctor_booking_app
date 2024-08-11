@@ -27,7 +27,10 @@ class AppConstants {
   static String other =
       'https://regionalneurological.com/wp-content/uploads/2019/12/AdobeStock_172813720.jpeg';
   static String medicalLicence =
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdVeDXQwnCKQpDSHXXWOGOzeg8AbsQZ4bJuQ&s';
+      'https://plus.unsplash.com/premium_photo-1672759455907-bdaef741cd88?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTN8fG1lZGljYWwlMjBsaWNlbmNlfGVufDB8fDB8fHww';
+
+  static String prescribtion =
+      'https://plus.unsplash.com/premium_photo-1687814802129-1896ae12cb36?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTE3fHxwcmVzY3JpcHRpb258ZW58MHx8MHx8fDA%3D';
 }
 
 enum Status { loading, error, completed, internetError }

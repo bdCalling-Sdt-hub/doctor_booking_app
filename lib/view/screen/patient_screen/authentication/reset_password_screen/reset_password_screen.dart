@@ -26,7 +26,7 @@ class ResetPasswordScreen extends StatelessWidget {
           color: AppColors.grayNormal,
         ),
       ),
-      body:  Padding(
+      body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 19),
         child: Column(
           children: [
@@ -36,7 +36,8 @@ class ResetPasswordScreen extends StatelessWidget {
               fontWeight: FontWeight.w500,
               fontSize: 18,
               bottom: 12,
-            ) ,const CustomText(
+            ),
+            const CustomText(
               text: AppStrings.createANewPasswordEnsureIt,
               color: AppColors.whiteDarker,
               fontWeight: FontWeight.w400,
@@ -44,20 +45,26 @@ class ResetPasswordScreen extends StatelessWidget {
               bottom: 55,
               maxLines: 3,
             ),
+
             ///============================New Password Field=================
             CustomFormCard(
                 hintText: AppStrings.enterNewPassword,
-                title: AppStrings.newPassword, controller: TextEditingController()),
+                title: AppStrings.newPassword,
+                controller: TextEditingController()),
 
             ///============================Confirm Password Field=================
             CustomFormCard(
                 hintText: AppStrings.enterNewPassword,
-                title: AppStrings.confirmPassword, controller: TextEditingController()),
+                title: AppStrings.confirmPassword,
+                controller: TextEditingController()),
 
             ///==============================Update Password button=============
-            CustomButton(onTap: (){
-              Get.toNamed(AppRoutes.signInScreen);
-            },title: AppStrings.updatePassword,)
+            CustomButton(
+              onTap: () {
+                Get.toNamed(AppRoutes.signInScreen);
+              },
+              title: AppStrings.updatePassword,
+            )
           ],
         ),
       ),

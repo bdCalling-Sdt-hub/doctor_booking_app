@@ -101,6 +101,8 @@ class AppStrings {
   static const String patientsChecked = 'Patients Checked';
   static const String overallRating = 'Overall Rating';
   static const String appointmentFee = 'Appointment Fee';
+  static const String editPersonalInformation = 'Edit Personal Info';
+  static const String editProfessinalInformation = 'Edit Professional Info';
 
   ///==========================Schedule=================
   static const String schedule = 'Schedule';
@@ -190,4 +192,6 @@ class AppStrings {
   static const String areYouSureYouWantTo =
       'Are you sure you want to Delete your account?';
   static const String californiaUsa = 'California, USA';
+  static const String cammera = 'Cammera';
+  static const String gallery = 'Gallery';
 }

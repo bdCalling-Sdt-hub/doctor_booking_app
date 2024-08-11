@@ -35,7 +35,9 @@ class CustomProfileCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: backgroundColor,
-              border: isBorder ? Border.all(color: AppColors.grayLightHover) : null, // Corrected border handling
+              border: isBorder
+                  ? Border.all(color: AppColors.grayLightHover)
+                  : null, // Corrected border handling
             ),
             child: Row(
               children: [

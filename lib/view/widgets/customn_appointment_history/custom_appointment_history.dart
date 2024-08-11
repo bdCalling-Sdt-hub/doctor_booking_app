@@ -67,29 +67,30 @@ class CustomAppointmentHistory extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           color: AppColors.whiteDarker,
                         ),
-
                       ],
                     ),
                   ),
+
                   ///===========================review Button===============
                   GestureDetector(
                     onTap: reviewButton,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 18, vertical: 6),
                       decoration: BoxDecoration(
-                          color:AppColors.whiteNormal,
-                        border: Border.all(color: AppColors.blackLight)
-                      ),
-                      child: const CustomText(text: AppStrings.review,
+                          color: AppColors.whiteNormal,
+                          border: Border.all(color: AppColors.blackLight)),
+                      child: const CustomText(
+                        text: AppStrings.review,
                         color: AppColors.blackNormal,
                         fontSize: 12,
-                        fontWeight: FontWeight.w500,),
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   )
                 ],
               ),
               const SizedBox(height: 7),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -113,7 +114,6 @@ class CustomAppointmentHistory extends StatelessWidget {
                   ),
                 ],
               ),
-
             ],
           ),
         ),

@@ -28,36 +28,33 @@ class AppointmentHistoryScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
-                  children:List.generate(4, (index){
-                    return     CustomAppointmentHistory(
-                      image: AppConstants.userNtr,
-                      name: 'Dianne Russell',
-                      date: '24 May, Sun',
-                      reviewButton: () {
-                        showDialogBox(
-                            context);
-                      }, profession: 'Cardiologist', time: '10 AM ',
-
-                    );
-                  })
-              )
+                  children: List.generate(4, (index) {
+                return CustomAppointmentHistory(
+                  image: AppConstants.userNtr,
+                  name: 'Dianne Russell',
+                  date: '24 May, Sun',
+                  reviewButton: () {
+                    showDialogBox(context);
+                  },
+                  profession: 'Cardiologist',
+                  time: '10 AM ',
+                );
+              }))
             ],
           ),
         ),
       ),
     );
   }
+
   ///========================This is Accept Button Dialog box==============
   void showDialogBox(BuildContext context) {
-    Get.dialog(
-        CustomReviewDialog(
-          commentController: TextEditingController(),
-          onSubmit: (){
-            Get.back();
-          },
-          initialRating:0, // Pass the initial rating value here
-        )
-    );
+    Get.dialog(CustomReviewDialog(
+      commentController: TextEditingController(),
+      onSubmit: () {
+        Get.back();
+      },
+      initialRating: 0, // Pass the initial rating value here
+    ));
   }
-
 }

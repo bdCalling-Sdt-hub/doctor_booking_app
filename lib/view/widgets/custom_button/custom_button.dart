@@ -1,30 +1,27 @@
-
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../custom_text/custom_text.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton(
-      {super.key,
-        this.height = 48,
-        this.width = double.maxFinite,
-        required this.onTap,
-        this.title = '',
-        this.marginVerticel = 0,
-        this.marginHorizontal = 0,
-        this.fillColor=AppColors.blackNormal,
-        this.textColor = AppColors.whiteNormal,
-        this.isBorder = false,
-
-      });
+  const CustomButton({
+    super.key,
+    this.height = 48,
+    this.width = double.maxFinite,
+    required this.onTap,
+    this.title = '',
+    this.marginVerticel = 0,
+    this.marginHorizontal = 0,
+    this.fillColor = AppColors.blackNormal,
+    this.textColor = AppColors.whiteNormal,
+    this.isBorder = false,
+  });
 
   final double height;
   final double width;
   final Color? fillColor;
   final Color textColor;
   final bool isBorder;
-
 
   final VoidCallback onTap;
 

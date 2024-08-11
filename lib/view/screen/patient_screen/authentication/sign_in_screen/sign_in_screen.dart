@@ -67,7 +67,7 @@ class SignInScreen extends StatelessWidget {
                 children: [
                   const SpacerWidget(),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Get.toNamed(AppRoutes.forgetPasswordScreen);
                     },
                     child: CustomText(
@@ -100,14 +100,17 @@ class SignInScreen extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                     color: AppColors.whiteDarker,
                   ),
+
                   ///========================Create Account===================
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Get.toNamed(AppRoutes.signUpScreen);
                     },
                     child: const CustomText(
                       left: 8,
-                      text: AppStrings.createAccount,color: AppColors.bluNormalHover,),
+                      text: AppStrings.createAccount,
+                      color: AppColors.bluNormalHover,
+                    ),
                   ),
                 ],
               )

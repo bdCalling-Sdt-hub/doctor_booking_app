@@ -1,5 +1,8 @@
 import 'package:doctor_booking/view/screen/choose_screen/choose_screen.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_personal_profile_screen/doctor_edit_personal_profile_screen.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_professional_profile_screen/doctor_edit_professional_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_screen.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/patient_details/patient_details.dart';
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_one/onboard_screen_one.dart';
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_three/onboard_screen_three.dart';
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_two/onboard_screen_two.dart';
@@ -71,6 +74,14 @@ class AppRoutes {
   ///==============================>>>>>>Doctor Section<<<<<<<========================
   //===================================home Section====================
   static const String doctorHomeScreen = "/DoctorHomeScreen";
+  static const String patientDetails = "/PatientDetails";
+
+  //=============== Doctor edit profile section ===========-===//
+
+  static const String doctorEditPersonalProfileScreen =
+      "/DoctorEditPersonalProfileScreen";
+  static const String doctorEditProfessinalProfileScreen =
+      "/DoctorEditProfessinalProfileScreen";
 
   static List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
@@ -122,5 +133,12 @@ class AppRoutes {
     ///==============================>>>>>>Doctor Section<<<<<<<========================
     //===================================home Section====================
     GetPage(name: doctorHomeScreen, page: () => DoctorHomeScreen()),
+    GetPage(
+        name: doctorEditPersonalProfileScreen,
+        page: () => DoctorEditPersonalProfileScreen()),
+    GetPage(
+        name: doctorEditProfessinalProfileScreen,
+        page: () => DoctorEditProfessionalProfileScreen()),
+    GetPage(name: patientDetails, page: () => PatientDetails()),
   ];
 }

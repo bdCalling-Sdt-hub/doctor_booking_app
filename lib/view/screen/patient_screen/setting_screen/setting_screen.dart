@@ -10,36 +10,40 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SettingScreen extends StatelessWidget {
-   SettingScreen({super.key});
+  SettingScreen({super.key});
 
   final ProfileController profileController = Get.find<ProfileController>();
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.whiteLightActive,
+
       ///======================Setting Appbar==================
-      appBar: const CustomAppBar(appBarContent: AppStrings.settings,),
+      appBar: const CustomAppBar(
+        appBarContent: AppStrings.settings,
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
             ///========================Change Password===================
             CustomProfileCard(
-               isBorder: true,
+                isBorder: true,
                 text: AppStrings.changePassword,
                 leadingIcon: AppIcons.key,
-                onTap: (){
-                 Get.toNamed(AppRoutes.changePasswordScreen);
+                onTap: () {
+                  Get.toNamed(AppRoutes.changePasswordScreen);
                 },
                 isCevron: true),
 
             ///========================Delete Account===================
             CustomProfileCard(
-               isBorder: true,
+                isBorder: true,
                 text: AppStrings.deleteAccount,
                 leadingIcon: AppIcons.frame,
-                onTap: (){
-                  showDialogBox(context,profileController.retypePasswordController);
+                onTap: () {
+                  showDialogBox(
+                      context, profileController.retypePasswordController);
                 },
                 isCevron: false),
           ],
@@ -47,6 +51,7 @@ class SettingScreen extends StatelessWidget {
       ),
     );
   }
+
   void openDialog(context) {
     showDialogBox(context, profileController.retypePasswordController);
   }

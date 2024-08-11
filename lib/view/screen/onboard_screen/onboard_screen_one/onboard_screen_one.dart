@@ -39,7 +39,6 @@ class OnboardScreenOne extends StatelessWidget {
                   color: AppColors.blackO,
                   bottom: 8,
                 ),
-
                 const CustomText(
                   text: AppStrings.simplifyYourHealthcareExperience,
                   fontSize: 14,

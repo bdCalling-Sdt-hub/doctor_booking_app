@@ -6,19 +6,19 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomText extends StatelessWidget {
   const CustomText(
       {super.key,
-        this.maxLines,
-        this.textAlign = TextAlign.center,
-        this.left = 0,
-        this.right = 0,
-        this.top = 0,
-        this.bottom = 0,
-        this.fontSize = 14,
-        this.fontWeight = FontWeight.w400,
-        this.color = AppColors.grayNormal,
-        required this.text,
-        this.overflow = TextOverflow.ellipsis,
-        this.decoration
-        // this.decoration = TextDecoration.none,
+      this.maxLines,
+      this.textAlign = TextAlign.center,
+      this.left = 0,
+      this.right = 0,
+      this.top = 0,
+      this.bottom = 0,
+      this.fontSize = 14,
+      this.fontWeight = FontWeight.w400,
+      this.color = AppColors.grayNormal,
+      required this.text,
+      this.overflow = TextOverflow.ellipsis,
+      this.decoration
+      // this.decoration = TextDecoration.none,
       });
 
   final double left;
@@ -34,12 +34,11 @@ class CustomText extends StatelessWidget {
   final TextOverflow overflow;
   final TextDecoration? decoration;
 
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding:
-      EdgeInsets.only(left: left, right: right, top: top, bottom: bottom),
+          EdgeInsets.only(left: left, right: right, top: top, bottom: bottom),
       child: Text(
         textAlign: textAlign,
         text,
@@ -51,9 +50,7 @@ class CustomText extends StatelessWidget {
           color: color,
           decoration: decoration,
           decorationColor: AppColors.bluNormalHover,
-          decorationThickness:2,
-
-
+          decorationThickness: 2,
         ),
       ),
     );

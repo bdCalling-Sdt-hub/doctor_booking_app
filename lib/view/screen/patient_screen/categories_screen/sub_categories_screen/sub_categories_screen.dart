@@ -10,36 +10,31 @@ import 'package:get/get.dart';
 class SubCategoriesScreen extends StatelessWidget {
   const SubCategoriesScreen({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     var data = Get.arguments;
 
     return Scaffold(
-      backgroundColor: AppColors.whiteLightActive,
-      appBar: CustomAppBar(
-        appBarContent: data['name'],
-      ),
-      body:GridView.builder(
-        scrollDirection: Axis.vertical,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 18.0,
-          mainAxisExtent: 250
+        backgroundColor: AppColors.whiteLightActive,
+        appBar: CustomAppBar(
+          appBarContent: data['name'],
         ),
-        itemCount: 4,
-        itemBuilder: (context, index) {
-          return CustomCard(
-            imageSrc: AppIcons.favoriteUnselected,
-            networkImageUrl: AppConstants.userNtr,
-            name: 'Jenny Wilson',
-            profession: 'Gynecologists',
-            rating: 4.7,
-          );
-        },
-        shrinkWrap: true,
-        padding: const EdgeInsets.all(10.0),
-      )
-    );
+        body: GridView.builder(
+          scrollDirection: Axis.vertical,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, mainAxisSpacing: 18.0, mainAxisExtent: 250),
+          itemCount: 4,
+          itemBuilder: (context, index) {
+            return CustomCard(
+              imageSrc: AppIcons.favoriteUnselected,
+              networkImageUrl: AppConstants.userNtr,
+              name: 'Jenny Wilson',
+              profession: 'Gynecologists',
+              rating: 4.7,
+            );
+          },
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(10.0),
+        ));
   }
 }

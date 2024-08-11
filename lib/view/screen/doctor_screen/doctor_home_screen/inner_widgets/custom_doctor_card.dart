@@ -27,14 +27,14 @@ class CustomDoctorCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.only(bottom: 10),
+        margin: const EdgeInsets.only(bottom: 10),
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           color: AppColors.whiteNormal,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -66,7 +66,7 @@ class CustomDoctorCard extends StatelessWidget {
                         ///===============more icon =============
 
                         IconButton(
-                            onPressed: () {}, icon: Icon(Icons.more_vert))
+                            onPressed: () {}, icon: const Icon(Icons.more_vert))
                       ],
                     ),
                     //==============time=============//

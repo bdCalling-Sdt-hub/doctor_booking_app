@@ -1,8 +1,10 @@
 import 'package:doctor_booking/controller/doctor_home_controller/doctor_home_controller.dart';
+import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/inner_widgets/custom_doctor_card.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/inner_widgets/doctor_side_drawer.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/inner_widgets/home_appbar.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/inner_widgets/home_container.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/inner_widgets/home_small_container.dart';
@@ -15,20 +17,23 @@ import 'package:get/get.dart';
 class DoctorHomeScreen extends StatelessWidget {
   DoctorHomeScreen({super.key});
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final controller = Get.put(DoctorHomeController());
+
+  final DoctorHomeController controller = Get.find<DoctorHomeController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const DoctorSideDrawer(),
+      key: scaffoldKey,
       backgroundColor: AppColors.whiteLightActive,
       body: SingleChildScrollView(
         child: Column(
           children: [
             ///==================================Home Appbar=======================
-            const HomeAppbarDoctor(
+            HomeAppbarDoctor(
               name: AppStrings.currentLocation,
               loacation: AppStrings.californiaUsa,
-              // scaffoldKey: scaffoldKey,
+              scaffoldKey: scaffoldKey,
             ),
             SizedBox(
               height: 12.h,
@@ -41,116 +46,115 @@ class DoctorHomeScreen extends StatelessWidget {
                   ///===============================Total Card==========================
                   Row(
                     children: [
-                      const HomeContainer(
-                        title: AppStrings.totalBalance,
-                        subTitle: '\$4,520',
+                      const Flexible(
+                        child: HomeContainer(
+                          title: AppStrings.totalBalance,
+                          subTitle: '\$4,520',
+                        ),
                       ),
                       SizedBox(
                         width: 23.5.h,
                       ),
-                      const HomeContainer(
-                        title: AppStrings.totalAppointment,
-                        subTitle: '1000',
+                      const Flexible(
+                        child: HomeContainer(
+                          title: AppStrings.totalAppointment,
+                          subTitle: '1000',
+                        ),
                       ),
                     ],
                   ),
                   SizedBox(
                     height: 24.h,
                   ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomText(
-                          text: AppStrings.schedule,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.grayNormal),
-                      CustomText(
-                          text: AppStrings.cancel,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.grayNormal),
-                    ],
+
+                  ///============= Schedule or Cancel tab view ========///
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.0.h),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          child: CustomText(
+                              text: AppStrings.schedule,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.grayNormal),
+                        ),
+                        SizedBox(
+                          child: CustomText(
+                              text: AppStrings.cancel,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.grayNormal),
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(
-                    height: 7.h,
+                    height: 5.h,
                   ),
-                  Container(
-                    width: 375.w,
-                    height: 2.h,
-                    color: AppColors.whiteNormal,
-                  ),
+                  const Divider(),
                   SizedBox(
                     height: 24.h,
                   ),
                   Container(
-                    width: 335.w,
+                    width: MediaQuery.sizeOf(context).width,
                     height: 56.h,
                     decoration: BoxDecoration(
                       color: AppColors.whiteNormal,
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0.h),
                       child: Obx(
                         () {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              HomeSmallContainer(
+                              ///============= To Day Container ===========//
+                              Flexible(
+                                child: HomeSmallContainer(
                                   onTap: () {
                                     controller.scheduleTime.value =
                                         AppStrings.today;
                                   },
-                                  bgColor: controller.scheduleTime.value ==
+                                  isActive: controller.scheduleTime.value ==
                                           AppStrings.today
-                                      ? AppColors.blackNormal
-                                      : AppColors.blackLight,
-                                  textColor: controller.scheduleTime.value ==
-                                          AppStrings.today
-                                      ? AppColors.whiteNormal
-                                      : AppColors.blackNormal,
-                                  borderColor: controller.scheduleTime.value ==
-                                          AppStrings.today
-                                      ? Colors.transparent
-                                      : AppColors.grayLightHover,
-                                  title: AppStrings.today),
-                              HomeSmallContainer(
+                                      ? true
+                                      : false,
+                                  title: AppStrings.today,
+                                ),
+                              ),
+                              //=============== Weekly Container ==========////
+
+                              Flexible(
+                                child: HomeSmallContainer(
                                   onTap: () {
                                     controller.scheduleTime.value =
                                         AppStrings.weekly;
                                   },
-                                  bgColor: controller.scheduleTime.value ==
+                                  isActive: controller.scheduleTime.value ==
                                           AppStrings.weekly
-                                      ? AppColors.blackNormal
-                                      : AppColors.blackLight,
-                                  textColor: controller.scheduleTime.value ==
-                                          AppStrings.weekly
-                                      ? AppColors.whiteNormal
-                                      : AppColors.blackNormal,
-                                  borderColor: controller.scheduleTime.value ==
-                                          AppStrings.weekly
-                                      ? Colors.transparent
-                                      : AppColors.grayLightHover,
-                                  title: AppStrings.weekly),
-                              HomeSmallContainer(
+                                      ? true
+                                      : false,
+                                  title: AppStrings.weekly,
+                                ),
+                              ),
+
+                              ///================== Monthly Container ============///
+                              Flexible(
+                                child: HomeSmallContainer(
                                   onTap: () {
                                     controller.scheduleTime.value =
                                         AppStrings.monthly;
                                   },
-                                  bgColor: controller.scheduleTime.value ==
+                                  isActive: controller.scheduleTime.value ==
                                           AppStrings.monthly
-                                      ? AppColors.blackNormal
-                                      : AppColors.blackLight,
-                                  textColor: controller.scheduleTime.value ==
-                                          AppStrings.monthly
-                                      ? AppColors.whiteNormal
-                                      : AppColors.blackNormal,
-                                  borderColor: controller.scheduleTime.value ==
-                                          AppStrings.monthly
-                                      ? Colors.transparent
-                                      : AppColors.grayLightHover,
-                                  title: AppStrings.monthly),
+                                      ? true
+                                      : false,
+                                  title: AppStrings.monthly,
+                                ),
+                              ),
                             ],
                           );
                         },
@@ -160,7 +164,7 @@ class DoctorHomeScreen extends StatelessWidget {
                   SizedBox(
                     height: 16.h,
                   ),
-
+                  //=============== Patent List ===========////
                   Column(
                     children: List.generate(4, (index) {
                       return CustomDoctorCard(
@@ -168,7 +172,9 @@ class DoctorHomeScreen extends StatelessWidget {
                           patentName: 'Heart Disease',
                           time: 'Today  ( 12 : 00 AM )',
                           loacation: 'Online Appointment',
-                          onTap: () {});
+                          onTap: () {
+                            Get.toNamed(AppRoutes.patientDetails);
+                          });
                     }),
                   )
                 ],

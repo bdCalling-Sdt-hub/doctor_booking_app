@@ -41,11 +41,11 @@ class CustomHelpQuestion extends StatelessWidget {
                       children: [
                         Expanded(
                             child: CustomText(
-                              textAlign: TextAlign.left,
-                              text: faqList[index]["que"]!,
-                              fontWeight: FontWeight.w500,
-                              maxLines: 2,
-                            )),
+                          textAlign: TextAlign.left,
+                          text: faqList[index]["que"]!,
+                          fontWeight: FontWeight.w500,
+                          maxLines: 2,
+                        )),
                         IconButton(
                             onPressed: () {
                               if (selectedFqw.value == index) {
@@ -58,13 +58,13 @@ class CustomHelpQuestion extends StatelessWidget {
                             },
                             icon: selectedFqw.value == index
                                 ? const Icon(
-                              Icons.keyboard_arrow_down_rounded,
-                              color: AppColors.grayNormal,
-                            )
+                                    Icons.keyboard_arrow_down_rounded,
+                                    color: AppColors.grayNormal,
+                                  )
                                 : const Icon(
-                              Icons.keyboard_arrow_right_rounded,
-                              color: AppColors.grayNormal,
-                            ))
+                                    Icons.keyboard_arrow_right_rounded,
+                                    color: AppColors.grayNormal,
+                                  ))
                       ],
                     ),
                   ),
@@ -74,25 +74,23 @@ class CustomHelpQuestion extends StatelessWidget {
 
                 index == selectedFqw.value
                     ? CustomExpandedSection(
-                    expand: index ==selectedFqw.value
-                        ? true
-                        : false,
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 8),
-                      padding: EdgeInsets.all(8.r),
-                      alignment: Alignment.center,
-                      height: 100.h,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: AppColors.whiteNormal,
-                        borderRadius: BorderRadius.circular(8.r),
-                      ),
-                      child: CustomText(
-                        textAlign: TextAlign.left,
-                        text: faqList[index]["ans"]!,
-                        maxLines: 6,
-                      ),
-                    ))
+                        expand: index == selectedFqw.value ? true : false,
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 8),
+                          padding: EdgeInsets.all(8.r),
+                          alignment: Alignment.center,
+                          height: 100.h,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: AppColors.whiteNormal,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: CustomText(
+                            textAlign: TextAlign.left,
+                            text: faqList[index]["ans"]!,
+                            maxLines: 6,
+                          ),
+                        ))
                     : const SizedBox()
               ],
             ),

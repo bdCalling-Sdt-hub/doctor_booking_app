@@ -11,7 +11,9 @@ class AppointmentsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: AppColors.whiteLightActive,
-      appBar: CustomAppBar(appBarContent: AppStrings.appointments,),
+      appBar: CustomAppBar(
+        appBarContent: AppStrings.appointments,
+      ),
       bottomNavigationBar: PatientNavBar(currentIndex: 3),
     );
   }

@@ -45,7 +45,6 @@ class SideDrawer extends StatelessWidget {
                         icon: AppIcons.videoCam,
                         onTap: () {
                           Get.toNamed(AppRoutes.callHistoryScreen);
-
                         }),
 
                     ///====================== termsAndConditions======================>
@@ -54,7 +53,6 @@ class SideDrawer extends StatelessWidget {
                         icon: AppIcons.terms,
                         onTap: () {
                           Get.toNamed(AppRoutes.termsAndConditionScreen);
-
                         }),
 
                     ///====================== privacyPolicy======================>
@@ -63,7 +61,6 @@ class SideDrawer extends StatelessWidget {
                         icon: AppIcons.policy,
                         onTap: () {
                           Get.toNamed(AppRoutes.privacyPolicyScreen);
-
                         }),
 
                     ///====================== settings======================>
@@ -73,8 +70,6 @@ class SideDrawer extends StatelessWidget {
                         onTap: () {
                           Get.toNamed(AppRoutes.settingScreen);
                         }),
-
-
                   ],
                 ),
               ),

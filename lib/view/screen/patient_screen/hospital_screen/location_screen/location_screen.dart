@@ -22,7 +22,7 @@ class LocationScreen extends StatelessWidget {
       appBar: const CustomAppBar(appBarContent: AppStrings.location),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

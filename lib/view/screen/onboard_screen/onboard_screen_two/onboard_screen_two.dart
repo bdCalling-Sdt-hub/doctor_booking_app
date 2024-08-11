@@ -18,9 +18,11 @@ class OnboardScreenTwo extends StatelessWidget {
       body: Column(
         children: [
           const CustomImage(
-            imageSrc: AppImages.onBoardTwo
-            ,imageType: ImageType.png,
-            fit: BoxFit.cover,),
+            imageSrc: AppImages.onBoardTwo,
+            imageType: ImageType.png,
+            fit: BoxFit.cover,
+          ),
+
           ///===========================Next Button==============
           SizedBox(
             height: 24.h,
@@ -37,7 +39,6 @@ class OnboardScreenTwo extends StatelessWidget {
                   color: AppColors.blackO,
                   bottom: 8,
                 ),
-
                 const CustomText(
                   text: AppStrings.findAndBookAvailableSlots,
                   fontSize: 14,
@@ -46,9 +47,10 @@ class OnboardScreenTwo extends StatelessWidget {
                   color: AppColors.whiteDarkActive,
                   bottom: 24,
                 ),
-                CustomButton(onTap: (){
-                  Get.toNamed(AppRoutes.onboardScreenThree);
-                },
+                CustomButton(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.onboardScreenThree);
+                  },
                   title: AppStrings.next,
                 )
               ],

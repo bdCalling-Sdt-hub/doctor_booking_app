@@ -6,9 +6,9 @@ class CustomExpandedSection extends StatefulWidget {
   final int duration;
   const CustomExpandedSection(
       {super.key,
-        this.expand = false,
-        required this.child,
-        this.duration = 500});
+      this.expand = false,
+      required this.child,
+      this.duration = 500});
 
   @override
   State<CustomExpandedSection> createState() => _CustomExpandedSectionState();

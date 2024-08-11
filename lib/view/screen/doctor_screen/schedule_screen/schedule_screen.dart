@@ -6,7 +6,7 @@ class ScheduleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       bottomNavigationBar: DoctorNavBar(currentIndex: 1),
     );
   }

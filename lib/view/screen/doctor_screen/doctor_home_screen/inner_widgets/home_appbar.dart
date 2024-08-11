@@ -11,12 +11,12 @@ class HomeAppbarDoctor extends StatelessWidget {
     super.key,
     required this.loacation,
     required this.name,
-    // required this.scaffoldKey,
+    required this.scaffoldKey,
   });
 
   final String loacation;
   final String name;
-  // final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,9 @@ class HomeAppbarDoctor extends StatelessWidget {
                 ],
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  scaffoldKey.currentState?.openDrawer();
+                },
                 icon: const Icon(
                   Icons.menu,
                   color: AppColors.blackNormal,

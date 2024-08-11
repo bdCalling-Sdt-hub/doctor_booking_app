@@ -1,16 +1,12 @@
 import 'dart:ui';
 
 class AppColors {
-
   // static const Color background = Color(0xffFDFDFD);
   // static const Color appBarBackground = Color(0xff050A1E);
   // static const Color selectNavbarColor = Color(0xffE2E8FF);
   // static const Color borderColor = Color(0xffE7E7E7);
   // static const Color black = Color(0xff2C2C2C);
   // static const Color normalBlack = Color(0xff929394);
-
-
-
 
   static const Color textColor = Color(0xff374151);
   static const Color whiteDarkActive = Color(0xff6D6D6D);
@@ -30,8 +26,4 @@ class AppColors {
   static const Color red = Color(0xffCC2020);
   static const Color green = Color(0xff7CC84E);
   static const Color blackO = Color(0xff000000);
-
-
-
-
 }

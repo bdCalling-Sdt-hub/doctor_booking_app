@@ -6,13 +6,13 @@ import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class CustomCallHistory extends StatelessWidget {
   final String image;
   final String name;
   final String date;
 
-  const CustomCallHistory({super.key, required this.image, required this.name, required this.date});
+  const CustomCallHistory(
+      {super.key, required this.image, required this.name, required this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class CustomCallHistory extends StatelessWidget {
               boxShape: BoxShape.circle,
               imageUrl: image,
               height: 55.h, // Use ScreenUtil for responsive height
-              width: 55.w,  // Use ScreenUtil for responsive width
+              width: 55.w, // Use ScreenUtil for responsive width
             ),
             SizedBox(
               width: 16.w, // Use ScreenUtil for responsive width

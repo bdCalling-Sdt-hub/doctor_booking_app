@@ -10,25 +10,22 @@ class HomeController extends GetxController {
     AppImages.bannerOne,
     AppImages.bannerOne,
   ];
-  final List<Map<String, String>> categoriesList =  [
+  final List<Map<String, String>> categoriesList = [
     {"image": AppConstants.dentist, "name": "Dentist"},
     {"image": AppConstants.neurologist, "name": "Neurologist"},
     {"image": AppConstants.other, "name": "Cardiologist"},
     {"image": AppConstants.dentist, "name": "Dentist"},
     {"image": AppConstants.neurologist, "name": "Neurologist"},
     {"image": AppConstants.other, "name": "Cardiologist"},
-
-
-
   ];
-  RxString _selectedOption = 'Health Professional'.obs;
+  final RxString _selectedOption = 'Health Professional'.obs;
 
   String get selectedOption => _selectedOption.value;
 
   void setSelectedOption(String value) {
     _selectedOption.value = value;
   }
+
   RxInt bannerIndex = 0.obs;
   Rx<PageController> pageController = PageController().obs;
-
 }

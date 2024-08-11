@@ -6,11 +6,6 @@ import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doct
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_notification_screen/doctor_notification_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/schedule_screen.dart';
-import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/appointments_screen.dart';
-import 'package:doctor_booking/view/screen/patient_screen/favorite_screen/favorite_screen.dart';
-import 'package:doctor_booking/view/screen/patient_screen/home_screen/home_screen.dart';
-import 'package:doctor_booking/view/screen/patient_screen/hospital_screen/location_screen/location_screen.dart';
-import 'package:doctor_booking/view/screen/patient_screen/profile_screen/profile_screen.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -17,9 +17,9 @@ class CustomReviewDialog extends StatefulWidget {
 
   const CustomReviewDialog(
       {super.key,
-        required this.onSubmit,
-        required this.initialRating,
-        required this.commentController});
+      required this.onSubmit,
+      required this.initialRating,
+      required this.commentController});
 
   @override
   _CustomReviewDialogState createState() => _CustomReviewDialogState();
@@ -49,7 +49,7 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
                   onTap: () {
                     Get.back();
                   },
-                  child:  const CustomImage(
+                  child: const CustomImage(
                     imageSrc: AppIcons.close,
                     imageType: ImageType.svg,
                   ),

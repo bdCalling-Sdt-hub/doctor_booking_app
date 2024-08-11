@@ -1,0 +1,84 @@
+import 'dart:io';
+
+import 'package:doctor_booking/view/widgets/custom_image_picker_popup/custom_image_picker_popup.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+
+class GeneralController extends GetxController with GetxServiceMixin {
+  RxString profileID = "".obs;
+
+  RxString role = "".obs;
+
+  ///================== Show Loader ====================
+
+  showPopUpLoader() {
+    return showDialog(
+        barrierDismissible: true,
+        barrierColor: Colors.transparent,
+        context: Get.context!,
+        builder: (_) {
+          return SizedBox(
+            height: 70,
+            child: AlertDialog(
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              content: CustomImagePickerPopup(
+                galleryButton: () {
+                  openGallery(source: ImageSource.gallery);
+                },
+                cammeraButton: () {
+                  openGallery(source: ImageSource.camera);
+                },
+              ),
+            ),
+          );
+        });
+  }
+
+  ///================== Get User Id ====================
+  // getUserID() async {
+  //   profileID.value = await SharePrefsHelper.getString(AppConstants.profileID);
+  //   profileID.refresh();
+  // }
+
+  ///================== Get User Role ====================
+  // getRole() async {
+  //   role.value = await SharePrefsHelper.getString(AppConstants.role);
+  //   role.refresh();
+
+  //   debugPrint("User Role=================>>>>>>>>>>${role.value}");
+  // }
+
+  ///===================== Get All Info at once ===================
+  // getAllInfo() {
+  //   getUserID();
+  //   getRole();
+  // }
+
+  ///================== Get Calender value ====================
+
+  Rx<DateTime> calenderValue = DateTime.now().obs;
+
+  pickDate(
+      {required BuildContext context, TextEditingController? value}) async {
+    DateTime? result = await showDatePicker(
+        context: context, firstDate: DateTime(1980), lastDate: DateTime.now());
+
+    calenderValue.value = result ?? DateTime.now();
+
+    // value!.text = DateConverter.yearMonthDate(calenderValue.value);
+    refresh();
+  }
+
+  ///====================== Pick Image =====================
+  Rx<File?> proImage = Rx<File?>(null);
+
+  Future<void> openGallery({required ImageSource source}) async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: source, imageQuality: 10);
+    if (pickedFile != null) {
+      proImage.value = File(pickedFile.path);
+    }
+  }
+}

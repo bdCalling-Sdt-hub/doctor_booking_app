@@ -11,14 +11,16 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: AppColors.whiteLightActive,
-      appBar: CustomAppBar(appBarContent: AppStrings.search,),
+      appBar: CustomAppBar(
+        appBarContent: AppStrings.search,
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
             CustomTextField(
               isPrefixIcon: true,
-              prefixIcon: const Padding(
+              prefixIcon: Padding(
                 padding: EdgeInsets.only(left: 12),
                 child: Icon(
                   Icons.search,
@@ -26,7 +28,7 @@ class SearchScreen extends StatelessWidget {
                 ),
               ),
               hintText: AppStrings.whatAreYouLookingFor,
-              hintStyle: const TextStyle(color: AppColors.whiteDarkActive),
+              hintStyle: TextStyle(color: AppColors.whiteDarkActive),
               fillColor: AppColors.white,
               fieldBorderColor: AppColors.grayLightHover,
             )

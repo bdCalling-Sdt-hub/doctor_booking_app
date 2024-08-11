@@ -5,8 +5,6 @@ class DateConverter {
     return DateFormat('dd MMM yyyy').format(dateTime);
   }
 
-
-
   ///=============== Calculate Time of Day ===============
 
   static String getTimePeriod() {

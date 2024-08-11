@@ -27,7 +27,8 @@ class CustomRow extends StatelessWidget {
         ),
         const SpacerWidget(),
         GestureDetector(
-          onTap: onTap ?? () {}, // Provide a default no-op function if onTap is null
+          onTap: onTap ??
+              () {}, // Provide a default no-op function if onTap is null
           child: CustomText(
             text: subtitle,
             fontWeight: FontWeight.w400,

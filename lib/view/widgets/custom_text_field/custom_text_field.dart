@@ -1,39 +1,38 @@
-
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
 class CustomTextField extends StatefulWidget {
   const CustomTextField(
       {this.inputFormatters,
-        this.onFieldSubmitted,
-        this.textEditingController,
-        this.focusNode,
-        this.keyboardType = TextInputType.text,
-        this.textInputAction = TextInputAction.next,
-        this.cursorColor = AppColors.grayNormal,
-        this.inputTextStyle,
-        this.textAlignVertical = TextAlignVertical.center,
-        this.textAlign = TextAlign.start,
-        this.onChanged,
-        this.maxLines = 1,
-        this.validator,
-        this.hintText,
-        this.hintStyle,
-        this.fillColor = AppColors.whiteNormal,
-        this.suffixIcon,
-        this.suffixIconColor,
-        this.fieldBorderRadius = 8,
-        this.fieldBorderColor = const Color(0xffB5D8EE),
-        this.isPassword = false,
-        this.isPrefixIcon = true,
-        this.readOnly = false,
-        this.maxLength,
-        super.key,
-        this.prefixIcon, this.onTap});
+      this.onFieldSubmitted,
+      this.textEditingController,
+      this.focusNode,
+      this.keyboardType = TextInputType.text,
+      this.textInputAction = TextInputAction.next,
+      this.cursorColor = AppColors.grayNormal,
+      this.inputTextStyle,
+      this.textAlignVertical = TextAlignVertical.center,
+      this.textAlign = TextAlign.start,
+      this.onChanged,
+      this.maxLines = 1,
+      this.validator,
+      this.hintText,
+      this.hintStyle,
+      this.fillColor = AppColors.whiteNormal,
+      this.suffixIcon,
+      this.suffixIconColor,
+      this.fieldBorderRadius = 8,
+      this.fieldBorderColor = const Color(0xffB5D8EE),
+      this.isPassword = false,
+      this.isPrefixIcon = true,
+      this.readOnly = false,
+      this.maxLength,
+      super.key,
+      this.prefixIcon,
+      this.onTap});
 
   final TextEditingController? textEditingController;
   final FocusNode? focusNode;
@@ -98,16 +97,16 @@ class _CustomTextFieldState extends State<CustomTextField> {
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPassword
             ? GestureDetector(
-          onTap: toggle,
-          child: Padding(
-            padding: const EdgeInsets.only(
-                left: 16, right: 16, top: 16, bottom: 16),
-            child: SvgPicture.asset(
-                obscureText ? AppIcons.eyeOff : AppIcons.eye,
-                height: 22,
-                width: 22),
-          ),
-        )
+                onTap: toggle,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 16, right: 16, top: 16, bottom: 16),
+                  child: SvgPicture.asset(
+                      obscureText ? AppIcons.eyeOff : AppIcons.eye,
+                      height: 22,
+                      width: 22),
+                ),
+              )
             : widget.suffixIcon,
         suffixIconColor: widget.suffixIconColor,
         border: OutlineInputBorder(

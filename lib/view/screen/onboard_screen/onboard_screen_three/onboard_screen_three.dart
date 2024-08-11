@@ -18,9 +18,11 @@ class OnboardScreenThree extends StatelessWidget {
       body: Column(
         children: [
           const CustomImage(
-            imageSrc: AppImages.onBoardThree
-            ,imageType: ImageType.png,
-            fit: BoxFit.cover,),
+            imageSrc: AppImages.onBoardThree,
+            imageType: ImageType.png,
+            fit: BoxFit.cover,
+          ),
+
           ///===========================Next Button==============
           SizedBox(
             height: 24.h,
@@ -38,7 +40,6 @@ class OnboardScreenThree extends StatelessWidget {
                   bottom: 8,
                   maxLines: 2,
                 ),
-
                 const CustomText(
                   text: AppStrings.securelyAccessYourMedical,
                   fontSize: 14,
@@ -47,9 +48,10 @@ class OnboardScreenThree extends StatelessWidget {
                   color: AppColors.whiteDarkActive,
                   bottom: 24,
                 ),
-                CustomButton(onTap: (){
-                  Get.toNamed(AppRoutes.chooseScreen);
-                },
+                CustomButton(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.chooseScreen);
+                  },
                   title: AppStrings.next,
                 )
               ],

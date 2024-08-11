@@ -1,5 +1,4 @@
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
-import 'package:doctor_booking/main.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
@@ -35,33 +34,39 @@ class SignUpScreen extends StatelessWidget {
             children: [
               ///===============================Your Name Here=====================
               CustomFormCard(
-                hintText: AppStrings.yourNameHere,
-                  title: AppStrings.yourName, controller: TextEditingController()),
+                  hintText: AppStrings.yourNameHere,
+                  title: AppStrings.yourName,
+                  controller: TextEditingController()),
 
               ///===============================dateOfBirth=====================
               CustomFormCard(
-                hintText: 'dd/mm/yy',
-                  title: AppStrings.dateOfBirth, controller: TextEditingController()),
+                  hintText: 'dd/mm/yy',
+                  title: AppStrings.dateOfBirth,
+                  controller: TextEditingController()),
 
               ///===============================Email=====================
               CustomFormCard(
-                hintText: AppStrings.yourMailHere,
-                  title: AppStrings.email, controller: TextEditingController()),
+                  hintText: AppStrings.yourMailHere,
+                  title: AppStrings.email,
+                  controller: TextEditingController()),
 
               ///===============================Phone number=====================
               CustomFormCard(
-                hintText: AppStrings.yourPhoneNumberHere,
-                  title: AppStrings.phoneNumber, controller: TextEditingController()),
+                  hintText: AppStrings.yourPhoneNumberHere,
+                  title: AppStrings.phoneNumber,
+                  controller: TextEditingController()),
 
               ///===============================Location=====================
               CustomFormCard(
-                hintText: AppStrings.typeYourLocationHere,
-                  title: AppStrings.location, controller: TextEditingController()),
+                  hintText: AppStrings.typeYourLocationHere,
+                  title: AppStrings.location,
+                  controller: TextEditingController()),
 
               ///===============================Password=====================
               CustomFormCard(
-                hintText: AppStrings.enterPassword,
-                  title: AppStrings.password, controller: TextEditingController()),
+                  hintText: AppStrings.enterPassword,
+                  title: AppStrings.password,
+                  controller: TextEditingController()),
 
               ///===============================confirmPassword=====================
               CustomFormCard(
@@ -71,10 +76,11 @@ class SignUpScreen extends StatelessWidget {
 
               ///==========================Continue Button=========================
 
-              CustomButton(onTap: (){
-                Get.toNamed(AppRoutes.signUpOtpScreen);
-              },
-              title: AppStrings.continues,
+              CustomButton(
+                onTap: () {
+                  Get.toNamed(AppRoutes.signUpOtpScreen);
+                },
+                title: AppStrings.continues,
               ),
               SizedBox(
                 height: 20.h,
@@ -89,12 +95,14 @@ class SignUpScreen extends StatelessWidget {
                     color: AppColors.whiteDarker,
                   ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Get.toNamed(AppRoutes.signInScreen);
                     },
                     child: const CustomText(
                       left: 8,
-                      text: AppStrings.signIn,color: AppColors.bluNormalHover,),
+                      text: AppStrings.signIn,
+                      color: AppColors.bluNormalHover,
+                    ),
                   ),
                 ],
               )

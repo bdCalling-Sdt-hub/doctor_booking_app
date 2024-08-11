@@ -5,7 +5,8 @@ class CustomRadioButton extends StatelessWidget {
   final String groupValue;
   final ValueChanged<String?> onChanged;
 
-  const CustomRadioButton({super.key,
+  const CustomRadioButton({
+    super.key,
     required this.value,
     required this.groupValue,
     required this.onChanged,
@@ -33,15 +34,15 @@ class CustomRadioButton extends StatelessWidget {
             ),
             child: isSelected
                 ? Center(
-              child: Container(
-                height: 12,
-                width: 12,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.black,
-                ),
-              ),
-            )
+                    child: Container(
+                      height: 12,
+                      width: 12,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.black,
+                      ),
+                    ),
+                  )
                 : null,
           ),
           const SizedBox(width: 10),

@@ -11,23 +11,18 @@ import 'package:flutter/material.dart';
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      bottomNavigationBar: const PatientNavBar(currentIndex: 1),
+        bottomNavigationBar: const PatientNavBar(currentIndex: 1),
         backgroundColor: AppColors.whiteLightActive,
         appBar: const CustomAppBar(
           appBarContent: AppStrings.favorites,
         ),
-        body:GridView.builder(
+        body: GridView.builder(
           scrollDirection: Axis.vertical,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 18.0,
-              mainAxisExtent: 250
-          ),
+              crossAxisCount: 2, mainAxisSpacing: 18.0, mainAxisExtent: 250),
           itemCount: 4,
           itemBuilder: (context, index) {
             return CustomCard(
@@ -40,7 +35,6 @@ class FavoriteScreen extends StatelessWidget {
           },
           shrinkWrap: true,
           padding: const EdgeInsets.all(10.0),
-        )
-    );
+        ));
   }
 }

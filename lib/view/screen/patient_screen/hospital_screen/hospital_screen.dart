@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HospitalScreen extends StatelessWidget {
-   HospitalScreen({super.key});
+  HospitalScreen({super.key});
 
-final HospitalController hospitalController = Get.find<HospitalController>();
+  final HospitalController hospitalController = Get.find<HospitalController>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ final HospitalController hospitalController = Get.find<HospitalController>();
         itemCount: hospitalController.hospitals.length,
         itemBuilder: (context, index) {
           return customHospital(
-            image:hospitalController. hospitals[index]['image']!,
+            image: hospitalController.hospitals[index]['image']!,
             name: hospitalController.hospitals[index]['name']!,
           );
         },
@@ -39,27 +39,27 @@ final HospitalController hospitalController = Get.find<HospitalController>();
     );
   }
 
-   Widget customHospital({
-     required String image,
-     required String name,
-   }) =>
-       Column(
-         children: [
-           CustomNetworkImage(
-             borderRadius: const BorderRadius.all(Radius.circular(12)),
-             imageUrl: image,
-             height: 160,
-             width: 162,
-           ),
-           Expanded(
-             child: CustomText(
-               text: name,
-               fontWeight: FontWeight.w400,
-               fontSize: 16,
-               color: AppColors.grayNormal,
-               top: 10,
-             ),
-           ),
-         ],
-       );
+  Widget customHospital({
+    required String image,
+    required String name,
+  }) =>
+      Column(
+        children: [
+          CustomNetworkImage(
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            imageUrl: image,
+            height: 160,
+            width: 162,
+          ),
+          Expanded(
+            child: CustomText(
+              text: name,
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
+              color: AppColors.grayNormal,
+              top: 10,
+            ),
+          ),
+        ],
+      );
 }

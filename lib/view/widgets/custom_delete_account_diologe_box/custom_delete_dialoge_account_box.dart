@@ -9,7 +9,8 @@ import 'package:doctor_booking/view/widgets/custom_text_field/custom_text_field.
 
 import '../../../utils/app_icons/app_icons.dart';
 
-void showDialogBox(BuildContext context, TextEditingController passwordController) {
+void showDialogBox(
+    BuildContext context, TextEditingController passwordController) {
   Get.dialog(
     AlertDialog(
       backgroundColor: AppColors.white,
@@ -71,7 +72,8 @@ void showDialogBox(BuildContext context, TextEditingController passwordControlle
                   flex: 5,
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(AppColors.red),
+                      backgroundColor:
+                          WidgetStateProperty.all<Color>(AppColors.red),
                     ),
                     onPressed: () {
                       // Handle "Yes" action
@@ -90,7 +92,8 @@ void showDialogBox(BuildContext context, TextEditingController passwordControlle
                   flex: 5,
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(AppColors.green),
+                      backgroundColor:
+                          WidgetStateProperty.all<Color>(AppColors.green),
                     ),
                     onPressed: () {
                       // Handle "Cancel" action

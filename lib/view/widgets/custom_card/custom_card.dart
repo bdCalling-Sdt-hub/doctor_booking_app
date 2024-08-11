@@ -25,7 +25,7 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(right: 18),
-      width: 150.w,  // Constrained width
+      width: 150.w, // Constrained width
       height: 250.h, // Constrained height
       decoration: BoxDecoration(
         color: AppColors.whiteNormal,
@@ -37,12 +37,10 @@ class CustomCard extends StatelessWidget {
             top: 10.h, // Positioning from the top
             left: 120.w, // Positioning from the left
             right: 0.w, // Positioning from the right
-            child:   CustomImage(
+            child: CustomImage(
               imageSrc: imageSrc,
               imageType: ImageType.svg,
-
             ),
-
           ),
           Positioned(
             top: 40.h, // Adjust based on your layout

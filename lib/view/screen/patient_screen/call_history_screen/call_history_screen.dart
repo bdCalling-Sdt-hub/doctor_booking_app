@@ -13,6 +13,7 @@ class CallHistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.whiteLightActive,
+
       ///============================Call History Appbar==================
       appBar: const CustomAppBar(
         appBarContent: AppStrings.callHistory,
@@ -24,7 +25,7 @@ class CallHistoryScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
-                children: List.generate(10, (index){
+                children: List.generate(10, (index) {
                   return CustomCallHistory(
                       image: AppConstants.userNtr,
                       name: 'Hasibur Rashid Mah',

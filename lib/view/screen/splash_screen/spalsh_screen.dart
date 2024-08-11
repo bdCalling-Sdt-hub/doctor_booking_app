@@ -29,33 +29,24 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body:Stack(
-            children: [
-              ///=============================BackGround Image========================
-              Container(
-                height: double.maxFinite,
-                width: double.maxFinite,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(
-                          AppImages.splashScreen,
+          body: Stack(
+        children: [
+          ///=============================BackGround Image========================
+          Container(
+            height: double.maxFinite,
+            width: double.maxFinite,
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage(
+                      AppImages.splashScreen,
+                    ))),
+          ),
 
-                        ))),
-
-              ),
-              ///========================This is loader=====================
-              const Positioned.fill(
-                  top: 200,
-                  child: CustomLoader())
-            ],
-          )
-      ),
+          ///========================This is loader=====================
+          const Positioned.fill(top: 200, child: CustomLoader())
+        ],
+      )),
     );
   }
 }
-
-
-
-
-

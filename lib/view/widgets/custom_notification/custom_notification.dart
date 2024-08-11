@@ -59,13 +59,12 @@ class NotificationItem extends StatelessWidget {
                 ],
               ),
               const Divider(),
-               SizedBox(height: 15.h,)
+              SizedBox(
+                height: 15.h,
+              )
             ],
-
           ),
-
         ),
-
       ],
     );
   }

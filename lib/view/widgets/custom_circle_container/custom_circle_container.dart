@@ -4,7 +4,6 @@ import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class CustomCircleContainer extends StatelessWidget {
   final String routeName;
   final String iconSrc;
@@ -17,7 +16,8 @@ class CustomCircleContainer extends StatelessWidget {
     this.routeName = '',
     this.iconSrc = AppIcons.notification,
     this.backgroundColor = AppColors.blackLight,
-    this.iconColor = AppColors.blackNormal,  this.onTap,
+    this.iconColor = AppColors.blackNormal,
+    this.onTap,
   });
 
   @override

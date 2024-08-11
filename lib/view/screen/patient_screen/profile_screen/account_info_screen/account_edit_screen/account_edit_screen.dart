@@ -17,7 +17,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class AccountEditScreen extends StatelessWidget {
-   AccountEditScreen({super.key});
+  AccountEditScreen({super.key});
 
   final ProfileController profileController = Get.find<ProfileController>();
   @override
@@ -31,93 +31,95 @@ class AccountEditScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Obx(
-            () {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const CustomText(
-                    text: AppStrings.uploadPhoto,
-                    color: AppColors.grayNormal,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  ///=====================Image Upload============
-                  Align(
-                    alignment: Alignment.center,
-                    child: GestureDetector(
-                        onTap: () {
-                          profileController.selectImage();
-                        },
-                        child: profileController.image.isNotEmpty
-                            ? Container(
-                          height: 100.h,
-                          width: 100.w,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: FileImage(
-                                  File(profileController.image.value),
-                                ),
-                                fit: BoxFit.cover,
-                              ),
-                              shape: BoxShape.circle),
-                        )
-                            : Stack(
-                          children: [
-                            CustomNetworkImage(
-                              boxShape: BoxShape.circle,
-                              imageUrl: AppConstants.userNtr,
+          child: Obx(() {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const CustomText(
+                  text: AppStrings.uploadPhoto,
+                  color: AppColors.grayNormal,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+
+                ///=====================Image Upload============
+                Align(
+                  alignment: Alignment.center,
+                  child: GestureDetector(
+                      onTap: () {
+                        profileController.selectImage();
+                      },
+                      child: profileController.image.isNotEmpty
+                          ? Container(
                               height: 100.h,
                               width: 100.w,
-                            ),
-                            Positioned(
-                                right: 0,
-                                bottom: 0,
-                                child: Container(
-                                  padding: const EdgeInsets.all(2),
-                                  decoration: const BoxDecoration(
-                                      color: AppColors.grayNormal,
-                                      shape: BoxShape.circle),
-                                  child: const CustomImage(
-                                      imageSrc: AppIcons.photoCamera),
-                                ))
-                          ],
-                        )),
-                  ),
-                  ///=====================Full Name ================
-                  CustomFormCard(
-                      title: AppStrings.fullName,
-                      controller: TextEditingController()),
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: FileImage(
+                                      File(profileController.image.value),
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  shape: BoxShape.circle),
+                            )
+                          : Stack(
+                              children: [
+                                CustomNetworkImage(
+                                  boxShape: BoxShape.circle,
+                                  imageUrl: AppConstants.userNtr,
+                                  height: 100.h,
+                                  width: 100.w,
+                                ),
+                                Positioned(
+                                    right: 0,
+                                    bottom: 0,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(2),
+                                      decoration: const BoxDecoration(
+                                          color: AppColors.grayNormal,
+                                          shape: BoxShape.circle),
+                                      child: const CustomImage(
+                                          imageSrc: AppIcons.photoCamera),
+                                    ))
+                              ],
+                            )),
+                ),
 
-                  ///=====================Email ================
-                  CustomFormCard(
-                      title: AppStrings.email, controller: TextEditingController()),
+                ///=====================Full Name ================
+                CustomFormCard(
+                    title: AppStrings.fullName,
+                    controller: TextEditingController()),
 
-                  ///=====================Phone Number ================
-                  CustomFormCard(
-                      title: AppStrings.phoneNumber,
-                      controller: TextEditingController()),
+                ///=====================Email ================
+                CustomFormCard(
+                    title: AppStrings.email,
+                    controller: TextEditingController()),
 
-                  ///=====================Date Of Birth================
-                  CustomFormCard(
-                      title: AppStrings.dateOfBirth,
-                      controller: TextEditingController()),
+                ///=====================Phone Number ================
+                CustomFormCard(
+                    title: AppStrings.phoneNumber,
+                    controller: TextEditingController()),
 
-                  ///=====================Location================
-                  CustomFormCard(
-                      title: AppStrings.location,
-                      controller: TextEditingController()),
-                  
-                  ///===================Update Button===========
-                  CustomButton(
-                    title: AppStrings.update,
-                    onTap: (){
-                      Get.back();
-                    },)
-                ],
-              );
-            }
-          ),
+                ///=====================Date Of Birth================
+                CustomFormCard(
+                    title: AppStrings.dateOfBirth,
+                    controller: TextEditingController()),
+
+                ///=====================Location================
+                CustomFormCard(
+                    title: AppStrings.location,
+                    controller: TextEditingController()),
+
+                ///===================Update Button===========
+                CustomButton(
+                  title: AppStrings.update,
+                  onTap: () {
+                    Get.back();
+                  },
+                )
+              ],
+            );
+          }),
         ),
       ),
     );

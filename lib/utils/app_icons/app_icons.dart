@@ -37,6 +37,7 @@ class AppIcons {
   static const String arrowLeft = "$basePath/arrow_left_alt.svg";
   static const String close = "$basePath/close_small.svg";
   static const String edit = "$basePath/edit.png";
+  static const String gallary = "$basePath/gallary.png";
 
   ///==========================nav bar=================
 

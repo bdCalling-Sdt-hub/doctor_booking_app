@@ -5,7 +5,6 @@ import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
-import 'package:doctor_booking/view/widgets/custom_text_field/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -41,7 +40,6 @@ class ChangePasswordScreen extends StatelessWidget {
               ///==========================EnterCurrentPassword==============
 
               CustomFormCard(
-
                   title: AppStrings.enterCurrentPassword,
                   controller: TextEditingController()),
 
