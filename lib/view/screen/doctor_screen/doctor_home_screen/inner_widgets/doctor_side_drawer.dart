@@ -1,3 +1,4 @@
+import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_images/app_images.dart';
@@ -6,6 +7,7 @@ import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class DoctorSideDrawer extends StatelessWidget {
   const DoctorSideDrawer({super.key});
@@ -43,7 +45,9 @@ class DoctorSideDrawer extends StatelessWidget {
                     customRow(
                         title: AppStrings.appointmentHistory,
                         icon: AppIcons.appointmentSelected,
-                        onTap: () {}),
+                        onTap: () {
+                          Get.toNamed(AppRoutes.doctorAppointmentsHistory);
+                        }),
 
                     ///====================== termsAndConditions======================>
                     customRow(

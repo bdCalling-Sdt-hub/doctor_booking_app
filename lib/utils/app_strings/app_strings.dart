@@ -167,7 +167,9 @@ class AppStrings {
   static const String byContinueYouAccept = 'By continue you accept our';
   static const String and = '&';
   static const String totalBalance = 'Total \nBalance';
+  static const String totalBalance2 = 'Total Balance';
   static const String totalAppointment = 'Total \nAppointment';
+  static const String totalAppointment2 = 'Total Appointment';
   static const String today = 'Today';
   static const String weekly = 'Weekly';
   static const String monthly = 'Monthly';

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/inner_widget/appointments_history_dialog.dart';
 import 'package:doctor_booking/view/widgets/custom_image_picker_popup/custom_image_picker_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,6 +31,38 @@ class GeneralController extends GetxController with GetxServiceMixin {
                 cammeraButton: () {
                   openGallery(source: ImageSource.camera);
                 },
+              ),
+            ),
+          );
+        });
+  }
+
+  showAppintmentHistoryDialog({
+    required String imageUrl,
+    required String patientName,
+    required String sickName,
+    required String appointmentFee,
+    required String contactNumber,
+    required String appointmentTime,
+    required String rated,
+  }) {
+    return showDialog(
+        barrierDismissible: true,
+        context: Get.context!,
+        builder: (_) {
+          return SizedBox(
+            height: 70,
+            child: AlertDialog(
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              content: AppointmentsHistoryDialog(
+                imageUrl: imageUrl,
+                patientName: patientName,
+                sickName: sickName,
+                appointmentFee: appointmentFee,
+                contactNumber: contactNumber,
+                appointmentTime: appointmentTime,
+                rated: rated,
               ),
             ),
           );

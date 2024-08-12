@@ -1,4 +1,5 @@
 import 'package:doctor_booking/view/screen/choose_screen/choose_screen.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/doctor_appointments_history.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_personal_profile_screen/doctor_edit_personal_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_professional_profile_screen/doctor_edit_professional_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_screen.dart';
@@ -83,6 +84,10 @@ class AppRoutes {
   static const String doctorEditProfessinalProfileScreen =
       "/DoctorEditProfessinalProfileScreen";
 
+  //=================== Doctor appointments history ===================//
+
+  static const String doctorAppointmentsHistory = "/DoctorAppointmentsHistory";
+
   static List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
 
@@ -139,6 +144,12 @@ class AppRoutes {
     GetPage(
         name: doctorEditProfessinalProfileScreen,
         page: () => DoctorEditProfessionalProfileScreen()),
-    GetPage(name: patientDetails, page: () => PatientDetails()),
+    GetPage(name: patientDetails, page: () => const PatientDetails()),
+
+    //====================== Doctor appointments history ========================//
+
+    GetPage(
+        name: doctorAppointmentsHistory,
+        page: () => DoctorAppointmentsHistory()),
   ];
 }
