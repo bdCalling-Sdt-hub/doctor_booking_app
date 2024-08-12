@@ -117,6 +117,7 @@ class AppStrings {
   static const String appointmentTime = 'Appointment Time:';
   static const String rescheduleAppointment = 'Reschedule Appointment';
   static const String rescheduleDate = 'Reschedule Date';
+  static const String reschedule = 'Reschedule';
 
   ///=============================Profile===================
   static const String profile = 'Profile';
@@ -200,4 +201,5 @@ class AppStrings {
   //===================== Doctor Notification =====================//
   static const String notificationToday = 'TODAY';
   static const String notificationYesterday = 'YESTERDAY';
+  static const String removeFromCallLog = 'Remove from call log';
 }

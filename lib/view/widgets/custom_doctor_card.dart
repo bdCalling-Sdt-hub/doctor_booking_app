@@ -66,7 +66,9 @@ class CustomDoctorCard extends StatelessWidget {
                         ///===============more icon =============
 
                         IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.more_vert))
+                          onPressed: () {},
+                          icon: const Icon(Icons.more_vert),
+                        ),
                       ],
                     ),
                     //==============time=============//

@@ -52,7 +52,7 @@ class CustomCallHistory extends StatelessWidget {
               width: 16.w, // Adjusted for consistency
             ),
             const CustomImage(
-              imageSrc: AppIcons.videoCam,
+              imageSrc: AppIcons.videoCammera,
               imageColor: AppColors.grayNormal,
             ),
             SizedBox(
