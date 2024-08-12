@@ -168,13 +168,17 @@ class DoctorHomeScreen extends StatelessWidget {
                   Column(
                     children: List.generate(4, (index) {
                       return CustomDoctorCard(
-                          imageUrl: AppConstants.userNtr,
-                          patentName: 'Heart Disease',
-                          time: 'Today  ( 12 : 00 AM )',
-                          loacation: 'Online Appointment',
-                          onTap: () {
-                            Get.toNamed(AppRoutes.patientDetails);
-                          });
+                        imageUrl: AppConstants.userNtr,
+                        patentName: 'Heart Disease',
+                        time: 'Today  ( 12 : 00 AM )',
+                        loacation: 'Online Appointment',
+                        onTap: () {
+                          Get.toNamed(AppRoutes.patientDetails);
+                        },
+                        reScheduleButton: () {
+                          controller.showHomePopup();
+                        },
+                      );
                     }),
                   )
                 ],

@@ -1,5 +1,6 @@
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
+import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
@@ -14,6 +15,7 @@ class CustomDoctorCard extends StatelessWidget {
     required this.time,
     required this.loacation,
     required this.onTap,
+    this.reScheduleButton,
   });
 
   final String imageUrl;
@@ -21,6 +23,7 @@ class CustomDoctorCard extends StatelessWidget {
   final String time;
   final String loacation;
   final VoidCallback onTap;
+  final VoidCallback? reScheduleButton;
 
   @override
   Widget build(BuildContext context) {
@@ -64,11 +67,29 @@ class CustomDoctorCard extends StatelessWidget {
                         ),
 
                         ///===============more icon =============
-
-                        IconButton(
-                          onPressed: () {},
+                        PopupMenuButton<int>(
+                          shadowColor: AppColors.white,
+                          surfaceTintColor: AppColors.white,
+                          color: AppColors.white,
                           icon: const Icon(Icons.more_vert),
+                          itemBuilder: (context) => [
+                            // popupmenu item 1
+                            PopupMenuItem(
+                              value: 1,
+                              // row has two child icon and text.
+                              child: InkWell(
+                                onTap: reScheduleButton,
+                                child: const CustomText(
+                                  text: AppStrings.reschedule,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
+                        // IconButton(
+                        //   onPressed:reScheduleButton ?? (){},
+                        //   icon: const Icon(Icons.more_vert),
+                        // ),
                       ],
                     ),
                     //==============time=============//
