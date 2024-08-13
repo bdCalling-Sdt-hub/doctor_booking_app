@@ -50,7 +50,7 @@ class OnboardScreenThree extends StatelessWidget {
                 ),
                 CustomButton(
                   onTap: () {
-                    Get.toNamed(AppRoutes.chooseScreen);
+                    Get.toNamed(AppRoutes.signInScreen);
                   },
                   title: AppStrings.next,
                 )

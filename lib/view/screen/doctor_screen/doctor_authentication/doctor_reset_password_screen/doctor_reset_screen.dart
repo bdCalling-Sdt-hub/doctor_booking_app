@@ -61,7 +61,7 @@ class DoctorResetScreen extends StatelessWidget {
             ///==============================Update Password button=============
             CustomButton(
               onTap: () {
-                Get.toNamed(AppRoutes.doctorSignInScreen);
+                Get.toNamed(AppRoutes.signInScreen);
               },
               title: AppStrings.updatePassword,
             )
