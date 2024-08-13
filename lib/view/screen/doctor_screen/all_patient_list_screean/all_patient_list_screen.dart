@@ -13,7 +13,7 @@ class AllPatientListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         appBarContent: AppStrings.allPatientList,
       ),
       body: SingleChildScrollView(
