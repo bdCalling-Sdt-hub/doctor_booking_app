@@ -164,10 +164,10 @@ class AppRoutes {
         name: doctorEditProfessinalProfileScreen,
         page: () => DoctorEditProfessionalProfileScreen()),
     GetPage(name: patientDetails, page: () => const PatientDetails()),
-    GetPage(name: doctorSignUp, page: () => const DoctorSignUp()),
+    GetPage(name: doctorSignUp, page: () =>  DoctorSignUp()),
     GetPage(name: appointmentInfoScreen, page: () => const AppointmentInfoScreen()),
-    GetPage(name: personalInfoScreen, page: () => const PersonalInfoScreen()),
-    GetPage(name: professionalInfoScreen, page: () => const ProfessionalInfoScreen()),
+    GetPage(name: personalInfoScreen, page: () =>  PersonalInfoScreen()),
+    GetPage(name: professionalInfoScreen, page: () =>  ProfessionalInfoScreen()),
 
     //====================== Doctor appointments history ========================//
 
