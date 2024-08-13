@@ -1,6 +1,8 @@
 import 'package:doctor_booking/view/screen/choose_screen/choose_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/all_patient_list_screean/all_patient_list_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/doctor_appointments_history.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/doctor_sign_up.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/appointment_info_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_personal_profile_screen/doctor_edit_personal_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_professional_profile_screen/doctor_edit_professional_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_screen.dart';
@@ -80,8 +82,10 @@ class AppRoutes {
   ///==============================>>>>>>Doctor Section<<<<<<<========================
   //===================================home Section====================
   static const String doctorHomeScreen = "/DoctorHomeScreen";
-  static const String patientDetails = "/PatientDetails";
 
+  static const String patientDetails = "/PatientDetails";
+  static const String doctorSignUp = "/DoctorSignUp";
+  static const String appointmentInfoScreen = "/AppointmentInfoScreen";
   //=============== Doctor edit profile section ===========-===//
 
   static const String doctorEditPersonalProfileScreen =
@@ -138,6 +142,7 @@ class AppRoutes {
 
     ///=============================Hospital Section======================
     GetPage(name: hospitalScreen, page: () => HospitalScreen()),
+    GetPage(name: doctorSignUp, page: () => const DoctorSignUp()),
 
     ///===============================OnBord Section=====================
     GetPage(name: onboardScreenOne, page: () => const OnboardScreenOne()),
@@ -150,6 +155,8 @@ class AppRoutes {
     ///==============================>>>>>>Doctor Section<<<<<<<========================
     //===================================home Section====================
     GetPage(name: doctorHomeScreen, page: () => DoctorHomeScreen()),
+    GetPage(
+        name: appointmentInfoScreen, page: () => const AppointmentInfoScreen()),
     GetPage(
         name: doctorEditPersonalProfileScreen,
         page: () => DoctorEditPersonalProfileScreen()),
