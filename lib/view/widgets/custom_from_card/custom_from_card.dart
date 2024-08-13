@@ -55,8 +55,9 @@ class CustomFormCard extends StatelessWidget {
               fontWeight: FontWeight.w400,
               fontSize: 16,
               color: AppColors.whiteDarkHover),
-          suffixIcon:
-              hasSuffixIcon ? const Icon(Icons.keyboard_arrow_down) : null,
+          suffixIcon: hasSuffixIcon
+              ? const Icon(Icons.keyboard_arrow_down)
+              : Icon(Icons.alarm),
           isPassword: isPassword,
           textEditingController: controller,
           inputTextStyle: const TextStyle(color: AppColors.grayNormal),

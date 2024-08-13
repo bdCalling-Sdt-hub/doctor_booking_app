@@ -205,4 +205,7 @@ class AppStrings {
   static const String notificationToday = 'TODAY';
   static const String notificationYesterday = 'YESTERDAY';
   static const String removeFromCallLog = 'Remove from call log';
+  static const String dayOfWeek = 'Day of Week';
+  static const String startTime = 'Start Time';
+  static const String endTime = 'End Time';
 }

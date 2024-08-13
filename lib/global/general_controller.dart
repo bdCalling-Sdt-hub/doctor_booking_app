@@ -104,6 +104,28 @@ class GeneralController extends GetxController with GetxServiceMixin {
     refresh();
   }
 
+  Rx<DateTime> startTimeValue = DateTime.now().obs;
+  Rx<DateTime> endTimeValue = DateTime.now().obs;
+
+  pickTime({required BuildContext context}) async {
+    TimeOfDay? time =
+        await showTimePicker(context: context, initialTime: TimeOfDay.now());
+
+    if (time != null) {
+      DateTime dateTime = DateTime.now();
+
+      DateTime selectedTime = DateTime(
+        dateTime.year,
+        dateTime.month,
+        dateTime.day,
+        time.hour,
+        time.minute,
+      );
+      startTimeValue.value = selectedTime;
+      print(selectedTime);
+    }
+  }
+
   ///====================== Pick Image =====================
   Rx<File?> proImage = Rx<File?>(null);
 

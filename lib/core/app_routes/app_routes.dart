@@ -67,7 +67,6 @@ class AppRoutes {
   static const String subCategoriesScreen = "/SubCategoriesScreen";
   static const String popularSpecialistsScreen = "/PopularSpecialistsScreen";
 
-
   ///===========================patient Authentication=====================
 
   static const String signInScreen = "/SignInScreen";
@@ -85,13 +84,6 @@ class AppRoutes {
   static const String onboardScreenThree = "/OnboardScreenThree";
   static const String chooseScreen = "/ChooseScreen";
 
-
-
-
-
-
-
-
   ///==============================>>>>>>Doctor Section<<<<<<<========================
   //===================================home Section====================
   static const String doctorHomeScreen = "/DoctorHomeScreen";
@@ -100,7 +92,8 @@ class AppRoutes {
   //=============== Doctor edit profile section ===========-===//
   static const String doctorSignUp = "/DoctorSignUp";
   static const String doctorSignInScreen = "/DoctorSignInScreen";
-  static const String doctorForgetPasswordScreen = "/DoctorForgetPasswordScreen";
+  static const String doctorForgetPasswordScreen =
+      "/DoctorForgetPasswordScreen";
   static const String doctorResetScreen = "/DoctorResetScreen";
   static const String appointmentInfoScreen = "/AppointmentInfoScreen";
   static const String personalInfoScreen = "/PersonalInfoScreen";
@@ -151,7 +144,9 @@ class AppRoutes {
     ///================================patient Auth========================
     GetPage(name: signInScreen, page: () => const SignInScreen()),
     GetPage(name: signUpScreen, page: () => const SignUpScreen()),
-    GetPage(name: doctorForgetPasswordScreen, page: () => const DoctorForgetPasswordScreen()),
+    GetPage(
+        name: doctorForgetPasswordScreen,
+        page: () => const DoctorForgetPasswordScreen()),
     GetPage(name: signUpOtpScreen, page: () => const SignUpOtpScreen()),
     GetPage(
         name: forgetPasswordScreen, page: () => const ForgetPasswordScreen()),
@@ -166,15 +161,7 @@ class AppRoutes {
     GetPage(name: onboardScreenThree, page: () => const OnboardScreenThree()),
     GetPage(name: chooseScreen, page: () => ChooseScreen()),
     GetPage(name: doctorProfileScreen, page: () => const DoctorProfileScreen()),
-    GetPage(name: specialistProfile, page: () =>  const SpecialistProfile()),
-
-
-
-
-
-
-
-
+    GetPage(name: specialistProfile, page: () => const SpecialistProfile()),
 
     ///==============================>>>>>>Doctor Section<<<<<<<========================
     //===================================home Section====================
@@ -187,11 +174,11 @@ class AppRoutes {
         name: doctorEditProfessinalProfileScreen,
         page: () => DoctorEditProfessionalProfileScreen()),
     GetPage(name: patientDetails, page: () => const PatientDetails()),
-    GetPage(name: doctorSignUp, page: () =>  DoctorSignUp()),
-    GetPage(name: doctorSignInScreen, page: () =>  const DoctorSignInScreen()),
-    GetPage(name: appointmentInfoScreen, page: () => const AppointmentInfoScreen()),
-    GetPage(name: personalInfoScreen, page: () =>  PersonalInfoScreen()),
-    GetPage(name: professionalInfoScreen, page: () =>  ProfessionalInfoScreen()),
+    GetPage(name: doctorSignUp, page: () => DoctorSignUp()),
+    GetPage(name: doctorSignInScreen, page: () => const DoctorSignInScreen()),
+    GetPage(name: appointmentInfoScreen, page: () => AppointmentInfoScreen()),
+    GetPage(name: personalInfoScreen, page: () => PersonalInfoScreen()),
+    GetPage(name: professionalInfoScreen, page: () => ProfessionalInfoScreen()),
 
     //====================== Doctor appointments history ========================//
 
