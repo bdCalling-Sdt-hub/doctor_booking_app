@@ -186,7 +186,7 @@ class AppRoutes {
         page: () => DoctorEditProfessionalProfileScreen()),
     GetPage(name: patientDetails, page: () => const PatientDetails()),
     GetPage(name: doctorSignUp, page: () =>  DoctorSignUp()),
-    GetPage(name: appointmentInfoScreen, page: () => const AppointmentInfoScreen()),
+    GetPage(name: appointmentInfoScreen, page: () => const AppointmentInfoWidget()),
     GetPage(name: personalInfoScreen, page: () =>  PersonalInfoScreen()),
     GetPage(name: professionalInfoScreen, page: () =>  ProfessionalInfoScreen()),
 

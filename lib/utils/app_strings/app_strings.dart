@@ -120,6 +120,7 @@ class AppStrings {
   static const String rescheduleDate = 'Reschedule Date';
   static const String reschedule = 'Reschedule';
   static const String similarSpecialist = 'Similar Specialists';
+  static const String daysOfWeek = 'Day of Week:';
 
   ///=============================Profile===================
   static const String profile = 'Profile';
