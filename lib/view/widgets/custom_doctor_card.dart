@@ -16,6 +16,7 @@ class CustomDoctorCard extends StatelessWidget {
     required this.loacation,
     required this.onTap,
     this.reScheduleButton,
+    this.timeTextColor,
   });
 
   final String imageUrl;
@@ -24,6 +25,7 @@ class CustomDoctorCard extends StatelessWidget {
   final String loacation;
   final VoidCallback onTap;
   final VoidCallback? reScheduleButton;
+  final Color? timeTextColor;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,7 @@ class CustomDoctorCard extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,7 +100,7 @@ class CustomDoctorCard extends StatelessWidget {
                       text: time,
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
-                      color: AppColors.grayNormal,
+                      color: timeTextColor ?? AppColors.grayNormal,
                       bottom: 8,
                     ),
 

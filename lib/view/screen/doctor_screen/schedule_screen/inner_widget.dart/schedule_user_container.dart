@@ -99,33 +99,6 @@ class AvatarRow extends StatelessWidget {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import 'package:flutter/material.dart';
 
 // class CardExample extends StatelessWidget {

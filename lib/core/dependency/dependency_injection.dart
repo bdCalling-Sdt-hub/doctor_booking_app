@@ -1,5 +1,7 @@
 import 'package:doctor_booking/controller/calls_controller.dart/calls_controller.dart';
+import 'package:doctor_booking/controller/doctor_auth_controller/doctor_auth_controller.dart';
 import 'package:doctor_booking/controller/doctor_home_controller/doctor_home_controller.dart';
+import 'package:doctor_booking/controller/doctor_schedule_controller/doctor_schedule_controller.dart';
 import 'package:doctor_booking/controller/home_controller/home_controller.dart';
 import 'package:doctor_booking/controller/hospital_controller/hospital_controller.dart';
 import 'package:doctor_booking/controller/notification_controller/notification_controller.dart';
@@ -27,5 +29,13 @@ class DependencyInjection extends Bindings {
     Get.lazyPut(() => GeneralController(), fenix: true);
     //============== Call Controller ===================//
     Get.lazyPut(() => CallsController(), fenix: true);
+
+    //=================== Doctor Schedule Controller =====================//
+
+    Get.lazyPut(() => DoctorScheduleController(), fenix: true);
+
+    //=============== Doctor Auth Controller =======================///
+
+    Get.lazyPut(() => DoctorAuthController(), fenix: true);
   }
 }
