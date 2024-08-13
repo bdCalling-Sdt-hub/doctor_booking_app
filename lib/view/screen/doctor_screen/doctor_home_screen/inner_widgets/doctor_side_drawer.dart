@@ -41,7 +41,7 @@ class DoctorSideDrawer extends StatelessWidget {
                 padding: EdgeInsets.only(top: 30.h, left: 20.w, right: 20.w),
                 child: Column(
                   children: [
-                    ///====================== Call History======================>
+                    ///====================== appointmentHistory======================>
                     customRow(
                         title: AppStrings.appointmentHistory,
                         icon: AppIcons.appointmentSelected,
@@ -53,19 +53,27 @@ class DoctorSideDrawer extends StatelessWidget {
                     customRow(
                         title: AppStrings.termsAndConditions,
                         icon: AppIcons.terms,
-                        onTap: () {}),
-
-                    ///====================== settings======================>
-                    customRow(
-                        title: AppStrings.settings,
-                        icon: AppIcons.setting,
-                        onTap: () {}),
+                        onTap: () {
+                          Get.toNamed(AppRoutes.termsAndConditionScreen);
+                        }),
 
                     ///====================== privacyPolicy======================>
                     customRow(
                         title: AppStrings.privacyPolicy,
                         icon: AppIcons.policy,
-                        onTap: () {}),
+                        onTap: () {
+                          Get.toNamed(AppRoutes.privacyPolicyScreen);
+
+                        }),
+
+                    ///====================== settings======================>
+                    customRow(
+                        title: AppStrings.settings,
+                        icon: AppIcons.setting,
+                        onTap: () {
+                          Get.toNamed(AppRoutes.settingScreen);
+
+                        }),
                   ],
                 ),
               ),
