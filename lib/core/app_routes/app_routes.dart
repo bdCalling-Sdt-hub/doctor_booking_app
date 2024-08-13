@@ -1,6 +1,10 @@
 import 'package:doctor_booking/view/screen/choose_screen/choose_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/all_patient_list_screean/all_patient_list_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/doctor_appointments_history.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/doctor_sign_up.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/appointment_info_screen.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/personal_info_screen/personal_info_screen.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/professional_info_screen/professional_info_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_personal_profile_screen/doctor_edit_personal_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_professional_profile_screen/doctor_edit_professional_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_screen.dart';
@@ -60,6 +64,7 @@ class AppRoutes {
   static const String subCategoriesScreen = "/SubCategoriesScreen";
   static const String popularSpecialistsScreen = "/PopularSpecialistsScreen";
 
+
   ///===========================patient Authentication=====================
 
   static const String signInScreen = "/SignInScreen";
@@ -83,7 +88,10 @@ class AppRoutes {
   static const String patientDetails = "/PatientDetails";
 
   //=============== Doctor edit profile section ===========-===//
-
+  static const String doctorSignUp = "/DoctorSignUp";
+  static const String appointmentInfoScreen = "/AppointmentInfoScreen";
+  static const String personalInfoScreen = "/PersonalInfoScreen";
+  static const String professionalInfoScreen = "/ProfessionalInfoScreen";
   static const String doctorEditPersonalProfileScreen =
       "/DoctorEditPersonalProfileScreen";
   static const String doctorEditProfessinalProfileScreen =
@@ -156,6 +164,10 @@ class AppRoutes {
         name: doctorEditProfessinalProfileScreen,
         page: () => DoctorEditProfessionalProfileScreen()),
     GetPage(name: patientDetails, page: () => const PatientDetails()),
+    GetPage(name: doctorSignUp, page: () => const DoctorSignUp()),
+    GetPage(name: appointmentInfoScreen, page: () => const AppointmentInfoScreen()),
+    GetPage(name: personalInfoScreen, page: () => const PersonalInfoScreen()),
+    GetPage(name: professionalInfoScreen, page: () => const ProfessionalInfoScreen()),
 
     //====================== Doctor appointments history ========================//
 
