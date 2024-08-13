@@ -5,7 +5,6 @@ import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_appointment_card/custom_appointment_card.dart';
 import 'package:doctor_booking/view/widgets/custom_tab_selected/custom_tab_selected.dart';
-import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:doctor_booking/view/widgets/patient_nav_bar/patient_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,7 +32,8 @@ class AppointmentsScreen extends StatelessWidget {
                 ///===========================3 Tab bar=======================
                 CustomTabSelector(
                   tabs: patientAppointmentController.userList,
-                  selectedIndex: patientAppointmentController.selectedIndex.value,
+                  selectedIndex:
+                      patientAppointmentController.selectedIndex.value,
                   onTabSelected: (index) {
                     patientAppointmentController.selectedIndex.value = index;
                     // Handle any additional actions here if needed
@@ -41,7 +41,6 @@ class AppointmentsScreen extends StatelessWidget {
                   selectedColor: AppColors.blackNormal,
                   unselectedColor: AppColors.whiteDarkHover,
                 ),
-
 
                 ///=================================Upcoming Data==================
                 patientAppointmentController.selectedIndex.value == 0
@@ -67,8 +66,9 @@ class AppointmentsScreen extends StatelessWidget {
                         }),
                       )
                     :
-                ///==================================Past Data=====================
-                patientAppointmentController.selectedIndex.value == 1
+
+                    ///==================================Past Data=====================
+                    patientAppointmentController.selectedIndex.value == 1
                         ? Column(
                             children: List.generate(4, (index) {
                               return CustomAppointmentCard(
@@ -91,8 +91,9 @@ class AppointmentsScreen extends StatelessWidget {
                             }),
                           )
                         :
-                ///===============================Canceled Data=========================
-                patientAppointmentController.selectedIndex.value == 2
+
+                        ///===============================Canceled Data=========================
+                        patientAppointmentController.selectedIndex.value == 2
                             ? Column(
                                 children: List.generate(4, (index) {
                                   return CustomAppointmentCard(

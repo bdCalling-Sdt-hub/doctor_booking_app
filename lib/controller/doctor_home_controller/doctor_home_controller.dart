@@ -14,6 +14,9 @@ class DoctorHomeController extends GetxController {
   // ];
   RxInt selectedIndex = RxInt(0);
 
+  List<String> tabs = [AppStrings.schedule, AppStrings.cancel];
+  RxInt tabSelectedIndex = RxInt(0);
+
   showHomePopup() {
     return showDialog(
       context: Get.context!,

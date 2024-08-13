@@ -6,6 +6,8 @@ class CustomTabSelector extends StatelessWidget {
   final ValueChanged<int> onTabSelected;
   final Color selectedColor;
   final Color unselectedColor;
+  final Color? textColor;
+  final bool? isTextColorActive;
 
   const CustomTabSelector({
     super.key,
@@ -14,6 +16,8 @@ class CustomTabSelector extends StatelessWidget {
     required this.onTabSelected,
     required this.selectedColor,
     required this.unselectedColor,
+    this.textColor,
+    this.isTextColorActive = false,
   });
 
   @override
@@ -36,9 +40,12 @@ class CustomTabSelector extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
+                //color: AppColors.red,
                 border: Border(
                   bottom: BorderSide(
-                    color: selectedIndex == index ? selectedColor : Colors.transparent,
+                    color: selectedIndex == index
+                        ? selectedColor
+                        : Colors.transparent,
                     width: 2.0,
                   ),
                 ),
@@ -46,7 +53,11 @@ class CustomTabSelector extends StatelessWidget {
               child: Text(
                 tabs[index],
                 style: TextStyle(
-                  color: selectedIndex == index ? selectedColor : unselectedColor,
+                  color: selectedIndex == index
+                      ? selectedColor
+                      : isTextColorActive!
+                          ? textColor
+                          : unselectedColor,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),

@@ -96,7 +96,7 @@ class _DoctorNavBarState extends State<DoctorNavBar> {
     if (index == 0 && widget.currentIndex != 0) {
       Get.offAll(() => DoctorHomeScreen());
     } else if (index == 1 && widget.currentIndex != 1) {
-      Get.to(() => const ScheduleScreen());
+      Get.to(() => ScheduleScreen());
     } else if (index == 2 && widget.currentIndex != 2) {
       Get.to(() => CallScreen());
     } else if (index == 3 && widget.currentIndex != 3) {

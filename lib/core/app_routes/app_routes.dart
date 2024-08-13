@@ -1,6 +1,7 @@
 import 'package:doctor_booking/view/screen/choose_screen/choose_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/all_patient_list_screean/all_patient_list_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/doctor_appointments_history.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_auth/doctor_signup_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_personal_profile_screen/doctor_edit_personal_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_professional_profile_screen/doctor_edit_professional_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_screen.dart';
@@ -93,6 +94,9 @@ class AppRoutes {
 
   static const String allPatientListScreen = "/AllPatientListScreen";
 
+  //========================= Doctor signup screen ===================//
+  static const String doctorSignupScreen = "/DoctorSignupScreen";
+
   static List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
 
@@ -161,5 +165,9 @@ class AppRoutes {
 
     GetPage(
         name: allPatientListScreen, page: () => const AllPatientListScreen()),
+
+    //========================== Doctor signup screen =================///
+
+    GetPage(name: doctorSignupScreen, page: () => const DoctorSignupScreen()),
   ];
 }

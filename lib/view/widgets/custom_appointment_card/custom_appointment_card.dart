@@ -1,4 +1,3 @@
-import 'package:doctor_booking/controller/calls_controller.dart/calls_controller.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
@@ -24,7 +23,10 @@ class CustomAppointmentCard extends StatelessWidget {
     required this.name,
     required this.profession,
     this.trailing,
-    this.onTap, required this.date, required this.time, required this.location,
+    this.onTap,
+    required this.date,
+    required this.time,
+    required this.location,
   });
 
   @override
@@ -82,7 +84,7 @@ class CustomAppointmentCard extends StatelessWidget {
                 if (trailing != null) trailing!,
               ],
             ),
-             Row(
+            Row(
               children: [
                 const CustomText(
                   top: 7,
@@ -90,17 +92,19 @@ class CustomAppointmentCard extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   fontSize: 12,
                   color: AppColors.whiteDarker,
-                ), CustomText(
+                ),
+                CustomText(
                   left: 10,
                   top: 7,
-                  text:date,
+                  text: date,
                   fontWeight: FontWeight.w500,
                   fontSize: 12,
                   color: AppColors.grayNormal,
-                ), CustomText(
+                ),
+                CustomText(
                   left: 10,
                   top: 7,
-                  text:time,
+                  text: time,
                   fontWeight: FontWeight.w500,
                   fontSize: 12,
                   color: AppColors.grayNormal,
@@ -110,12 +114,16 @@ class CustomAppointmentCard extends StatelessWidget {
             SizedBox(
               height: 7.h,
             ),
-             Row(
+            Row(
               children: [
                 const CustomImage(imageSrc: AppIcons.location),
                 CustomText(
-                    left: 5,
-                  text: location,fontSize: 12,fontWeight: FontWeight.w400,color: AppColors.grayNormal,)
+                  left: 5,
+                  text: location,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.grayNormal,
+                )
               ],
             )
           ],
