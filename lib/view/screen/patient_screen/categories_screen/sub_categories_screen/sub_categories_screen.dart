@@ -1,3 +1,4 @@
+import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
@@ -25,12 +26,17 @@ class SubCategoriesScreen extends StatelessWidget {
               crossAxisCount: 2, mainAxisSpacing: 18.0, mainAxisExtent: 250),
           itemCount: 4,
           itemBuilder: (context, index) {
-            return CustomCard(
-              imageSrc: AppIcons.favoriteUnselected,
-              networkImageUrl: AppConstants.userNtr,
-              name: 'Jenny Wilson',
-              profession: 'Gynecologists',
-              rating: 4.7,
+            return GestureDetector(
+              onTap: (){
+                Get.toNamed(AppRoutes.specialistProfile);
+              },
+              child: CustomCard(
+                imageSrc: AppIcons.favoriteUnselected,
+                networkImageUrl: AppConstants.userNtr,
+                name: 'Jenny Wilson',
+                profession: 'Gynecologists',
+                rating: 4.7,
+              ),
             );
           },
           shrinkWrap: true,

@@ -3,6 +3,7 @@ import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_his
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_personal_profile_screen/doctor_edit_personal_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_professional_profile_screen/doctor_edit_professional_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_screen.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/patient_details/patient_details.dart';
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_one/onboard_screen_one.dart';
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_three/onboard_screen_three.dart';
@@ -27,6 +28,7 @@ import 'package:doctor_booking/view/screen/patient_screen/profile_screen/help_ce
 import 'package:doctor_booking/view/screen/patient_screen/search_screen/search_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/setting_screen/change_password_screen/change_password_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/setting_screen/setting_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/specialist_profile/specialistProfile.dart';
 import 'package:doctor_booking/view/screen/patient_screen/terms_and_condition_screen/terms_and_condition_screen.dart';
 import 'package:doctor_booking/view/screen/splash_screen/spalsh_screen.dart';
 import 'package:get/get.dart';
@@ -36,6 +38,8 @@ class AppRoutes {
 
   ///========================Home screen================
   static const String homeScreen = "/HomeScreen";
+  static const String doctorProfileScreen = "/DoctorProfileScreen";
+  static const String specialistProfile = "/SpecialistProfile";
 
   ///==============================Profile section================
   static const String helpCenterScreen = "/HelpCenterScreen";
@@ -134,6 +138,8 @@ class AppRoutes {
     GetPage(name: onboardScreenTwo, page: () => const OnboardScreenTwo()),
     GetPage(name: onboardScreenThree, page: () => const OnboardScreenThree()),
     GetPage(name: chooseScreen, page: () => ChooseScreen()),
+    GetPage(name: doctorProfileScreen, page: () => const DoctorProfileScreen()),
+    GetPage(name: specialistProfile, page: () =>  const SpecialistProfile()),
 
     ///==============================>>>>>>Doctor Section<<<<<<<========================
     //===================================home Section====================

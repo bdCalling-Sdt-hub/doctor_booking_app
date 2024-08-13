@@ -36,6 +36,7 @@ class AppStrings {
   ///==========================Authentication====================
   static const String choseYourRole = "Choose your role";
   static const String patient = "Patient";
+  static const String availableFor = "Available For";
   static const String healthProfessional = "Health Professional";
   static const String continues = "Continue";
   static const String signIn = "Sign In";
@@ -118,6 +119,7 @@ class AppStrings {
   static const String rescheduleAppointment = 'Reschedule Appointment';
   static const String rescheduleDate = 'Reschedule Date';
   static const String reschedule = 'Reschedule';
+  static const String similarSpecialist = 'Similar Specialists';
 
   ///=============================Profile===================
   static const String profile = 'Profile';
@@ -161,6 +163,7 @@ class AppStrings {
   static const String professionalInfo = 'Professional Info';
   static const String medicalLicenceImage = 'Medical license image';
   static const String specialization = 'Specialization';
+  static const String specialistProfile = 'Specialist’s Profile';
   static const String yearsOfExperience = 'Years of experience';
   static const String educationalBackground = 'Educational Background';
   static const String currentAffiliation = 'Current Affiliation';
