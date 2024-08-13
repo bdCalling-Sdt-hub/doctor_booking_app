@@ -1,13 +1,16 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/inner_widget.dart/schedule_patient_list.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_doctor_card.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:doctor_booking/view/widgets/doctor_nav_bar/doctor_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class ScheduleScreen extends StatelessWidget {
   const ScheduleScreen({super.key});
@@ -36,24 +39,25 @@ class ScheduleScreen extends StatelessWidget {
                 onValueChanged: (dates) {},
               ),
             ),
-//================= patient liat ================//
-            // SingleChildScrollView(
-            //   scrollDirection: Axis.horizontal,
-            //   child: AvatarRow(avatars: [
-            //     AppConstants.userNtr,
-            //     AppConstants.userNtr,
-            //     AppConstants.userNtr,
-            //     AppConstants.userNtr,
-            //     AppConstants.userNtr,
-            //   ], extraCount: 30),
-            // ),
-            SizedBox(
-              height: 25.h,
-            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0.h),
               child: Column(
                 children: [
+//================= patient liat ================//
+                  SizedBox(
+                    height: 25.h,
+                  ),
+
+                  SchedulePatientList(
+                    patientImageList: const [],
+                    onTap: () {
+                      Get.toNamed(AppRoutes.allPatientListScreen);
+                    },
+                  ),
+
+                  SizedBox(
+                    height: 25.h,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
