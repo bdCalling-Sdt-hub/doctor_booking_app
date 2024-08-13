@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         defaultTransition: Transition.fadeIn,
         transitionDuration: const Duration(milliseconds: 200),
+        initialRoute: AppRoutes.splashScreen,
         initialRoute: AppRoutes.doctorSignUp,
         navigatorKey: Get.key,
         getPages: AppRoutes.routes,
