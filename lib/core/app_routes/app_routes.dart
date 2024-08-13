@@ -1,6 +1,9 @@
 import 'package:doctor_booking/view/screen/choose_screen/choose_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/all_patient_list_screean/all_patient_list_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/doctor_appointments_history.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_forget_password_screen/doctor_forget_password_screen.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_reset_password_screen/doctor_reset_screen.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_in_screen/doctor_sign_in_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/doctor_sign_up.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/appointment_info_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/personal_info_screen/personal_info_screen.dart';
@@ -82,6 +85,13 @@ class AppRoutes {
   static const String onboardScreenThree = "/OnboardScreenThree";
   static const String chooseScreen = "/ChooseScreen";
 
+
+
+
+
+
+
+
   ///==============================>>>>>>Doctor Section<<<<<<<========================
   //===================================home Section====================
   static const String doctorHomeScreen = "/DoctorHomeScreen";
@@ -89,6 +99,9 @@ class AppRoutes {
 
   //=============== Doctor edit profile section ===========-===//
   static const String doctorSignUp = "/DoctorSignUp";
+  static const String doctorSignInScreen = "/DoctorSignInScreen";
+  static const String doctorForgetPasswordScreen = "/DoctorForgetPasswordScreen";
+  static const String doctorResetScreen = "/DoctorResetScreen";
   static const String appointmentInfoScreen = "/AppointmentInfoScreen";
   static const String personalInfoScreen = "/PersonalInfoScreen";
   static const String professionalInfoScreen = "/ProfessionalInfoScreen";
@@ -138,6 +151,7 @@ class AppRoutes {
     ///================================patient Auth========================
     GetPage(name: signInScreen, page: () => const SignInScreen()),
     GetPage(name: signUpScreen, page: () => const SignUpScreen()),
+    GetPage(name: doctorForgetPasswordScreen, page: () => const DoctorForgetPasswordScreen()),
     GetPage(name: signUpOtpScreen, page: () => const SignUpOtpScreen()),
     GetPage(
         name: forgetPasswordScreen, page: () => const ForgetPasswordScreen()),
@@ -154,9 +168,18 @@ class AppRoutes {
     GetPage(name: doctorProfileScreen, page: () => const DoctorProfileScreen()),
     GetPage(name: specialistProfile, page: () =>  const SpecialistProfile()),
 
+
+
+
+
+
+
+
+
     ///==============================>>>>>>Doctor Section<<<<<<<========================
     //===================================home Section====================
     GetPage(name: doctorHomeScreen, page: () => DoctorHomeScreen()),
+    GetPage(name: doctorResetScreen, page: () => const DoctorResetScreen()),
     GetPage(
         name: doctorEditPersonalProfileScreen,
         page: () => DoctorEditPersonalProfileScreen()),
@@ -165,6 +188,7 @@ class AppRoutes {
         page: () => DoctorEditProfessionalProfileScreen()),
     GetPage(name: patientDetails, page: () => const PatientDetails()),
     GetPage(name: doctorSignUp, page: () =>  DoctorSignUp()),
+    GetPage(name: doctorSignInScreen, page: () =>  const DoctorSignInScreen()),
     GetPage(name: appointmentInfoScreen, page: () => const AppointmentInfoScreen()),
     GetPage(name: personalInfoScreen, page: () =>  PersonalInfoScreen()),
     GetPage(name: professionalInfoScreen, page: () =>  ProfessionalInfoScreen()),
