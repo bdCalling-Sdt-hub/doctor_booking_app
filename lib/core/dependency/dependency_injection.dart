@@ -17,22 +17,22 @@ class DependencyInjection extends Bindings {
     Get.lazyPut(() => ProfileController(), fenix: true);
     Get.lazyPut(() => HomeController(), fenix: true);
     Get.lazyPut(() => NotificationController(), fenix: true);
-    Get.lazyPut(() => HospitalController(), fenix: true);
-    Get.lazyPut(() => PatientAppointmentController(), fenix: true);
+    Get.lazyPut(() => HospitalController(), fenix: false);
+    Get.lazyPut(() => PatientAppointmentController(), fenix: false);
 
     ///========================== Doctor Home section ==================
 
-    Get.lazyPut(() => DoctorHomeController(), fenix: true);
+    Get.lazyPut(() => DoctorHomeController(), fenix: false);
 
     //=========================== General Controller ==============//
 
     Get.lazyPut(() => GeneralController(), fenix: true);
     //============== Call Controller ===================//
-    Get.lazyPut(() => CallsController(), fenix: true);
+    Get.lazyPut(() => CallsController(), fenix: false);
 
     //=================== Doctor Schedule Controller =====================//
 
-    Get.lazyPut(() => DoctorScheduleController(), fenix: true);
+    Get.lazyPut(() => DoctorScheduleController(), fenix: false);
 
     //=============== Doctor Auth Controller =======================///
 
