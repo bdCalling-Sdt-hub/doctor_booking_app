@@ -29,6 +29,7 @@ class HomeController extends GetxController {
   RxInt bannerIndex = 0.obs;
   Rx<PageController> pageController = PageController().obs;
 
+  PageController pageControllers = PageController();
 
 
 

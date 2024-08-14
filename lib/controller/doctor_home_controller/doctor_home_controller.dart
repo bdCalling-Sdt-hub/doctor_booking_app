@@ -12,6 +12,9 @@ class DoctorHomeController extends GetxController {
   //   AppStrings.schedule,
   //   AppStrings.cancel
   // ];
+
+  RxInt popupAvailableTimeCurrentIndex = RxInt(0);
+  RxInt popupReschuduleCurrentIndex = RxInt(0);
   RxInt selectedIndex = RxInt(0);
 
   List<String> tabs = [AppStrings.schedule, AppStrings.cancel];
@@ -20,9 +23,9 @@ class DoctorHomeController extends GetxController {
   showHomePopup() {
     return showDialog(
       context: Get.context!,
-      builder: (_) => const AlertDialog(
+      builder: (_) => AlertDialog(
         backgroundColor: AppColors.whiteNormal,
-        title: CustomText(
+        title: const CustomText(
           text: AppStrings.reschedule,
           fontSize: 16,
           fontWeight: FontWeight.w500,
