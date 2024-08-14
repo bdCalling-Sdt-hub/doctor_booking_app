@@ -9,22 +9,22 @@ import 'onboard_screen_two/onboard_screen_two.dart';
 class OnboardScreen extends StatelessWidget {
   final HomeController homeController = Get.find<HomeController>();
 
+  OnboardScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(
-        () {
-          return PageView(
-            controller: homeController.pageController.value,
-            children: [
-              OnboardScreenOne(), // First onboarding screen
-              OnboardScreenTwo(), // Second onboarding screen
-              OnboardScreenThree(),
-              // Third onboarding screen
-            ],
-          );
-        }
-      ),
+      body: Obx(() {
+        return PageView(
+          controller: homeController.pageController.value,
+          children: [
+            OnboardScreenOne(), // First onboarding screen
+            OnboardScreenTwo(), // Second onboarding screen
+            OnboardScreenThree(),
+            // Third onboarding screen
+          ],
+        );
+      }),
     );
   }
 }

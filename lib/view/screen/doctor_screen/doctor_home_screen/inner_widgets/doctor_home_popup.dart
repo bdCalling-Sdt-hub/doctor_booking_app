@@ -1,13 +1,11 @@
-import 'package:doctor_booking/controller/doctor_home_controller/doctor_home_controller.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class DoctorHomePopup extends StatelessWidget {
-  DoctorHomePopup({super.key});
+  const DoctorHomePopup({super.key});
 
   final String availableTime = '07 pm';
 

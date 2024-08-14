@@ -12,7 +12,6 @@ import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_professiona
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/patient_details/patient_details.dart';
-import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen.dart';
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_one/onboard_screen_one.dart';
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_three/onboard_screen_three.dart';
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_two/onboard_screen_two.dart';
@@ -21,7 +20,6 @@ import 'package:doctor_booking/view/screen/patient_screen/authentication/reset_p
 import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_in_screen/sign_in_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_up_otp_screen/sign_up_otp_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_up_screen/sign_up_screen.dart';
-import 'package:doctor_booking/view/screen/patient_screen/book_appointment_patient_details/book_appointment_patient_details.dart';
 import 'package:doctor_booking/view/screen/patient_screen/call_history_screen/call_history_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/categories_screen/categories_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/categories_screen/sub_categories_screen/sub_categories_screen.dart';
@@ -95,7 +93,6 @@ class AppRoutes {
 
   //=============== Doctor edit profile section ===========-===//
   static const String doctorSignUp = "/DoctorSignUp";
-  static const String doctorSignInScreen = "/DoctorSignInScreen";
   static const String doctorForgetPasswordScreen =
       "/DoctorForgetPasswordScreen";
   static const String doctorResetScreen = "/DoctorResetScreen";
@@ -181,7 +178,6 @@ class AppRoutes {
         page: () => DoctorEditProfessionalProfileScreen()),
     GetPage(name: patientDetails, page: () => const PatientDetails()),
     GetPage(name: doctorSignUp, page: () => DoctorSignUp()),
-    // GetPage(name: doctorSignInScreen, page: () => const DoctorSignInScreen()),
     GetPage(name: appointmentInfoScreen, page: () => AppointmentInfoScreen()),
     GetPage(name: personalInfoScreen, page: () => PersonalInfoScreen()),
     GetPage(name: professionalInfoScreen, page: () => ProfessionalInfoScreen()),

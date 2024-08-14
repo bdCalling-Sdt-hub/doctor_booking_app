@@ -23,9 +23,9 @@ class DoctorHomeController extends GetxController {
   showHomePopup() {
     return showDialog(
       context: Get.context!,
-      builder: (_) => AlertDialog(
+      builder: (_) => const AlertDialog(
         backgroundColor: AppColors.whiteNormal,
-        title: const CustomText(
+        title: CustomText(
           text: AppStrings.reschedule,
           fontSize: 16,
           fontWeight: FontWeight.w500,
