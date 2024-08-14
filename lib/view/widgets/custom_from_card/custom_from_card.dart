@@ -9,7 +9,7 @@ class CustomFormCard extends StatelessWidget {
   final String? hintText;
   final TextEditingController controller;
   final bool isPassword;
-  final bool hasSuffixIcon;
+  final bool? hasSuffixIcon;
   final bool readOnly;
   final VoidCallback? onTap;
   final bool hasBackgroundColor;
@@ -22,7 +22,7 @@ class CustomFormCard extends StatelessWidget {
     required this.title,
     required this.controller,
     this.isPassword = false,
-    this.hasSuffixIcon = false,
+    this.hasSuffixIcon,
     this.readOnly = false,
     this.onTap,
     this.hasBackgroundColor = false,
@@ -55,11 +55,13 @@ class CustomFormCard extends StatelessWidget {
               fontWeight: FontWeight.w400,
               fontSize: 16,
               color: AppColors.whiteDarkHover),
-          suffixIcon: hasSuffixIcon
-              ? const Icon(Icons.keyboard_arrow_down)
-              : hasSuffixIcon == null
-                  ? const Icon(Icons.alarm)
-                  : null,
+          suffixIcon: hasSuffixIcon == null
+              ? null
+              : hasSuffixIcon!
+                  ? const Icon(Icons.keyboard_arrow_down)
+                  :
+                  // ignore: unnecessary_null_comparison
+                  const Icon(Icons.alarm),
           isPassword: isPassword,
           textEditingController: controller,
           inputTextStyle: const TextStyle(color: AppColors.grayNormal),

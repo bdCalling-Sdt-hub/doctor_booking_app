@@ -21,7 +21,8 @@ class CustomAppointmentInfo extends StatelessWidget {
   final VoidCallback endTimeTap;
   final VoidCallback availableTab;
 
-  final DoctorAuthController doctorAuthController = Get.find<DoctorAuthController>();
+  final DoctorAuthController doctorAuthController =
+      Get.find<DoctorAuthController>();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -49,10 +50,11 @@ class CustomAppointmentInfo extends StatelessWidget {
           children: [
             Flexible(
               child: CustomFormCard(
+                hasSuffixIcon: false,
                 readOnly: true,
                 hintText: 'Input time',
                 hasBackgroundColor: true,
-                title:'Start Time',
+                title: 'Start Time',
                 controller: TextEditingController(),
                 onTap: () {},
               ),
@@ -64,7 +66,7 @@ class CustomAppointmentInfo extends StatelessWidget {
               child: CustomFormCard(
                 hintText: 'Input time',
                 hasBackgroundColor: true,
-                title:'End Time',
+                title: 'End Time',
                 controller: TextEditingController(),
                 readOnly: true,
                 hasSuffixIcon: false,
@@ -91,7 +93,6 @@ class CustomAppointmentInfo extends StatelessWidget {
           hasSuffixIcon: true,
           onTap: () {},
         ),
-
 
         SizedBox(
           height: 24.h,
