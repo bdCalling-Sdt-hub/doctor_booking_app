@@ -12,13 +12,18 @@ class OnboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        controller: homeController.pageControllers,
-        children: [
-          OnboardScreenOne(), // First onboarding screen
-          OnboardScreenTwo(), // Second onboarding screen
-          OnboardScreenThree(), // Third onboarding screen
-        ],
+      body: Obx(
+        () {
+          return PageView(
+            controller: homeController.pageController.value,
+            children: [
+              OnboardScreenOne(), // First onboarding screen
+              OnboardScreenTwo(), // Second onboarding screen
+              OnboardScreenThree(),
+              // Third onboarding screen
+            ],
+          );
+        }
       ),
     );
   }

@@ -55,7 +55,7 @@ class OnboardScreenThree extends StatelessWidget {
                   onTap: () {
                     Get.toNamed(AppRoutes.signInScreen);
                   },
-                  title: AppStrings.next,
+                  title: AppStrings.getStart,
                 ),
                 SizedBox(
                   height: 40.h,

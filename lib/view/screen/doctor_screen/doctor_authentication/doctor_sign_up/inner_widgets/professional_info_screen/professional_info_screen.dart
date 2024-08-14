@@ -38,7 +38,7 @@ class ProfessionalInfoScreen extends StatelessWidget {
                 ///==================================specialization==========================
                 CustomFormCard(
                     hasBackgroundColor: true,
-                    title: AppStrings.specialization, controller: TextEditingController()),
+                    title: 'Specialisation', controller: TextEditingController()),
 
                 ///==================================yearsOfExperience==========================
                 CustomFormCard(

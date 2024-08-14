@@ -110,7 +110,8 @@ class SignInScreen extends StatelessWidget {
                     child: const CustomText(
                       left: 8,
                       text: AppStrings.createAccount,
-                      color: AppColors.bluNormalHover,
+                      color: AppColors.blackNormal,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],

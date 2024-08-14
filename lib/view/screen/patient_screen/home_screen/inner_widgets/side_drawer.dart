@@ -41,8 +41,8 @@ class SideDrawer extends StatelessWidget {
                   children: [
                     ///====================== Call History======================>
                     customRow(
-                        title: AppStrings.callHistory,
-                        icon: AppIcons.videoCam,
+                        title: AppStrings.appointmentHistory,
+                        icon: AppIcons.appointmentSelected,
                         onTap: () {
                           Get.toNamed(AppRoutes.callHistoryScreen);
                         }),
