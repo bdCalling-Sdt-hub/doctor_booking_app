@@ -36,6 +36,6 @@ class DoctorHomeController extends GetxController {
     );
   }
 
-  RxInt popupAvailableTimeCurrentIndex = RxInt(0);
-  RxInt popupReschuduleCurrentIndex = RxInt(0);
+  // RxInt popupAvailableTimeCurrentIndex = RxInt(0);
+  // RxInt popupReschuduleCurrentIndex = RxInt(0);
 }

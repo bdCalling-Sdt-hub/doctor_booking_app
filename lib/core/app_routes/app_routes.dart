@@ -148,7 +148,7 @@ class AppRoutes {
 
     ///================================patient Auth========================
     GetPage(name: signInScreen, page: () => SignInScreen()),
-    GetPage(name: onboardScreen, page: () => OnboardScreen()),
+    // GetPage(name: onboardScreen, page: () => OnboardScreen()),
     GetPage(name: signUpScreen, page: () => const SignUpScreen()),
     GetPage(
         name: doctorForgetPasswordScreen,
@@ -181,9 +181,8 @@ class AppRoutes {
         page: () => DoctorEditProfessionalProfileScreen()),
     GetPage(name: patientDetails, page: () => const PatientDetails()),
     GetPage(name: doctorSignUp, page: () => DoctorSignUp()),
-    GetPage(name: doctorSignInScreen, page: () => const DoctorSignInScreen()),
-    GetPage(
-        name: appointmentInfoScreen, page: () => const AppointmentInfoScreen()),
+    // GetPage(name: doctorSignInScreen, page: () => const DoctorSignInScreen()),
+    GetPage(name: appointmentInfoScreen, page: () => AppointmentInfoScreen()),
     GetPage(name: personalInfoScreen, page: () => PersonalInfoScreen()),
     GetPage(name: professionalInfoScreen, page: () => ProfessionalInfoScreen()),
 

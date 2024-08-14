@@ -31,72 +31,6 @@ class DoctorHomePopup extends StatelessWidget {
           SizedBox(
             height: 12.h,
           ),
-          Row(
-            children: [
-              AvailableTimeContainer(
-                time: '09 AM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '10 AM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '11 AM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '12 AM',
-                onTap: () {},
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Row(
-            children: [
-              AvailableTimeContainer(
-                time: '01 PM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '02 PM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '03 PM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '04 PM',
-                onTap: () {},
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Row(
-            children: [
-              AvailableTimeContainer(
-                time: '01 PM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '02 PM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '03 PM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '04 PM',
-                onTap: () {},
-              ),
-            ],
-          ),
           SizedBox(
             height: 26.h,
           ),
@@ -149,7 +83,6 @@ class AvailableTimeContainer extends StatelessWidget {
     return Row(
       children: [
         InkWell(
-          onTap: onTap,
           child: Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
