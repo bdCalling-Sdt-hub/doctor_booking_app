@@ -114,4 +114,43 @@ class GeneralController extends GetxController with GetxServiceMixin {
       proImage.value = File(pickedFile.path);
     }
   }
+
+
+  ///============================Multi Image picker method================
+  RxList<File> selectedImagesMulti = <File>[].obs;
+  final ImagePicker picker = ImagePicker();
+
+  void pickMultiImage() async {
+    try {
+      final pickedFiles = await picker.pickMultiImage(
+        imageQuality: 80,
+      );
+
+      if (pickedFiles == null || pickedFiles.isEmpty) {
+        Get.snackbar('No Images Selected', 'No images were selected.');
+        selectedImagesMulti.clear();
+        return;
+      }
+
+      if (pickedFiles.length > 6) {
+        Get.snackbar('Image Limit Exceeded', 'You can only select up to 6 images.');
+        return;
+      }
+
+      selectedImagesMulti.clear();
+      for (var xFile in pickedFiles) {
+        if (selectedImagesMulti.length < 6) {
+          selectedImagesMulti.add(File(xFile.path));
+        } else {
+          Get.snackbar('', 'You can only pick up to 6 images for each product.');
+          break;
+        }
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'An error occurred while picking images: $e');
+    } finally {
+      // Notify listeners of changes
+      update();
+    }
+  }
 }
