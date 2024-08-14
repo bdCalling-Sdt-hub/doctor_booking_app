@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/inner_widget/appointments_history_dialog.dart';
 import 'package:doctor_booking/view/widgets/custom_image_picker_popup/custom_image_picker_popup.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -122,7 +123,9 @@ class GeneralController extends GetxController with GetxServiceMixin {
         time.minute,
       );
       startTimeValue.value = selectedTime;
-      print(selectedTime);
+      if (kDebugMode) {
+        print(selectedTime);
+      }
     }
   }
 
@@ -134,6 +137,47 @@ class GeneralController extends GetxController with GetxServiceMixin {
         await ImagePicker().pickImage(source: source, imageQuality: 10);
     if (pickedFile != null) {
       proImage.value = File(pickedFile.path);
+    }
+  }
+
+  ///============================Multi Image picker method================
+  RxList<File> selectedImagesMulti = <File>[].obs;
+  final ImagePicker picker = ImagePicker();
+
+  void pickMultiImage() async {
+    try {
+      final pickedFiles = await picker.pickMultiImage(
+        imageQuality: 80,
+      );
+
+      // ignore: unnecessary_null_comparison
+      if (pickedFiles == null || pickedFiles.isEmpty) {
+        Get.snackbar('No Images Selected', 'No images were selected.');
+        selectedImagesMulti.clear();
+        return;
+      }
+
+      if (pickedFiles.length > 6) {
+        Get.snackbar(
+            'Image Limit Exceeded', 'You can only select up to 6 images.');
+        return;
+      }
+
+      selectedImagesMulti.clear();
+      for (var xFile in pickedFiles) {
+        if (selectedImagesMulti.length < 6) {
+          selectedImagesMulti.add(File(xFile.path));
+        } else {
+          Get.snackbar(
+              '', 'You can only pick up to 6 images for each product.');
+          break;
+        }
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'An error occurred while picking images: $e');
+    } finally {
+      // Notify listeners of changes
+      update();
     }
   }
 }

@@ -27,6 +27,7 @@ import 'package:doctor_booking/view/screen/patient_screen/categories_screen/sub_
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/home_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/hospital_screen/hospital_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/notification_screen/notification_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/patient_details_screen/patient_details_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/popular_specialists_screen/popular_specialists_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/privacy_policy_screen/privacy_policy_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/account_info_screen/account_edit_screen/account_edit_screen.dart';
@@ -110,6 +111,7 @@ class AppRoutes {
   //======================== All patient list screen =====================///
 
   static const String allPatientListScreen = "/AllPatientListScreen";
+  static const String patientDetails2 = "/PatientDetailsScreen";
 
   static List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
@@ -191,6 +193,8 @@ class AppRoutes {
     GetPage(
         name: allPatientListScreen, page: () => const AllPatientListScreen()),
 
-    //========================== Doctor signup screen =================///
+    //========================== patient details =================///
+
+    GetPage(name: patientDetails2, page: () => PatientDetailsScreen()),
   ];
 }

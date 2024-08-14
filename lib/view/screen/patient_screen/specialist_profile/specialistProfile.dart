@@ -244,7 +244,7 @@ class _InfoCard extends StatelessWidget {
   final String label;
   final String value;
 
-  const _InfoCard({super.key, required this.label, required this.value});
+  const _InfoCard({required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {

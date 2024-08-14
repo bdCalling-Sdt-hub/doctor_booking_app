@@ -1,5 +1,7 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/core/dependency/dependency_injection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -9,13 +11,10 @@ void main() {
   DependencyInjection di = DependencyInjection();
   di.dependencies();
 
-  runApp(
-    // DevicePreview(
-    //   enabled: !kReleaseMode,
-    //   builder: (context) =>
-    const MyApp(), // Wrap your app
-  );
-  // const MyApp());
+  runApp(DevicePreview(
+    enabled: !kReleaseMode,
+    builder: (context) => const MyApp(), // Wrap your app
+  )); // const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -30,14 +29,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         defaultTransition: Transition.fadeIn,
         transitionDuration: const Duration(milliseconds: 200),
-        initialRoute: AppRoutes.doctorSignInScreen,
+        initialRoute: AppRoutes.doctorHomeScreen,
         navigatorKey: Get.key,
         getPages: AppRoutes.routes,
       ),
     );
   }
 }
-
-
-
-

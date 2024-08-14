@@ -40,90 +40,99 @@ class CustomDoctorCard extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: [
-              //===============image ============///
-              CustomNetworkImage(
-                imageUrl: imageUrl,
-                height: 84.h,
-                width: 81.w,
-                borderRadius: BorderRadius.circular(4),
-              ),
-              SizedBox(
-                width: 16.w,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //===============image ============///
+                  CustomNetworkImage(
+                    imageUrl: imageUrl,
+                    height: 84.h,
+                    width: 81.w,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  SizedBox(
+                    width: 16.w,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        ///==============name==========///
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ///==============name==========///
+                            CustomText(
+                              text: patentName,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.grayNormal,
+                            ),
+
+                            ///===============more icon =============
+
+                            // IconButton(
+                            //   onPressed:reScheduleButton ?? (){},
+                            //   icon: const Icon(Icons.more_vert),
+                            // ),
+                          ],
+                        ),
+                        //==============time=============//
                         CustomText(
-                          text: patentName,
-                          fontSize: 16.sp,
+                          text: time,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
-                          color: AppColors.grayNormal,
+                          color: timeTextColor ?? AppColors.grayNormal,
+                          bottom: 8,
                         ),
 
-                        ///===============more icon =============
-                        PopupMenuButton<int>(
-                          shadowColor: AppColors.white,
-                          surfaceTintColor: AppColors.white,
-                          color: AppColors.white,
-                          icon: const Icon(Icons.more_vert),
-                          itemBuilder: (context) => [
-                            // popupmenu item 1
-                            PopupMenuItem(
-                              value: 1,
-                              // row has two child icon and text.
-                              child: InkWell(
-                                onTap: reScheduleButton,
-                                child: const CustomText(
-                                  text: AppStrings.reschedule,
-                                ),
+                        //==================loactions=============//
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 16.h, // Ensure width and height are set
+                              child: const CustomImage(
+                                imageSrc: AppIcons.location,
+                                imageColor: AppColors.whiteDarker,
                               ),
+                            ),
+                            SizedBox(
+                                width: 4
+                                    .w), // Add spacing between location icon and text
+                            CustomText(
+                              text: loacation,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.whiteDarker,
                             ),
                           ],
                         ),
-                        // IconButton(
-                        //   onPressed:reScheduleButton ?? (){},
-                        //   icon: const Icon(Icons.more_vert),
-                        // ),
                       ],
                     ),
-                    //==============time=============//
-                    CustomText(
-                      text: time,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                      color: timeTextColor ?? AppColors.grayNormal,
-                      bottom: 8,
-                    ),
-
-                    //==================loactions=============//
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 16.h, // Ensure width and height are set
-                          child: const CustomImage(
-                            imageSrc: AppIcons.location,
-                            imageColor: AppColors.whiteDarker,
-                          ),
+                  ),
+                ],
+              ),
+              Positioned(
+                right: 0.h,
+                top: -4.h,
+                child: PopupMenuButton<int>(
+                  shadowColor: AppColors.white,
+                  surfaceTintColor: AppColors.white,
+                  color: AppColors.white,
+                  icon: const Icon(Icons.more_vert),
+                  itemBuilder: (context) => [
+                    // popupmenu item 1
+                    PopupMenuItem(
+                      value: 1,
+                      // row has two child icon and text.
+                      child: InkWell(
+                        onTap: reScheduleButton,
+                        child: const CustomText(
+                          text: AppStrings.reschedule,
                         ),
-                        SizedBox(
-                            width: 4
-                                .w), // Add spacing between location icon and text
-                        CustomText(
-                          text: loacation,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.whiteDarker,
-                        ),
-                      ],
+                      ),
                     ),
                   ],
                 ),

@@ -156,6 +156,7 @@ class DoctorHomeScreen extends StatelessWidget {
                   //=============== Patent List ===========////
                   Obx(
                     () {
+                      // ignore: unrelated_type_equality_checks
                       return controller.tabSelectedIndex == 0
                           ? Column(
                               children: List.generate(4, (index) {
