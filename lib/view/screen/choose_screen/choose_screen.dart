@@ -19,6 +19,7 @@ class ChooseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.whiteNormal,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 20),
         child: Obx(() {
@@ -32,7 +33,7 @@ class ChooseScreen extends StatelessWidget {
                 imageType: ImageType.png,
               ),
               const CustomText(
-                top: 32,
+                top: 50,
                 bottom: 98,
                 text: AppStrings.choseYourRole,
                 fontWeight: FontWeight.w500,
@@ -47,7 +48,7 @@ class ChooseScreen extends StatelessWidget {
                 },
               ),
               SizedBox(
-                height: 10.h,
+                height: 18.h,
               ),
               CustomRadioButton(
                 value: 'Health Professional',
@@ -57,7 +58,7 @@ class ChooseScreen extends StatelessWidget {
                 },
               ),
               SizedBox(
-                height: 30.h,
+                height: 70.h,
               ),
               CustomButton(
                 title: AppStrings.continues,
