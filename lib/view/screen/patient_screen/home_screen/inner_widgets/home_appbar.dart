@@ -3,6 +3,7 @@ import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_circle_container/custom_circle_container.dart';
+import 'package:doctor_booking/view/widgets/custom_filter/custom_filter.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text_field/custom_text_field.dart';
@@ -12,7 +13,7 @@ import 'package:get/get.dart';
 import '../../../../widgets/custom_text/custom_text.dart';
 
 class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({
+   HomeAppBar({
     super.key,
     required this.scaffoldKey,
     required this.image,
@@ -24,6 +25,8 @@ class HomeAppBar extends StatelessWidget {
   final String image;
   final String name;
   final String location;
+
+  final TextEditingController _locationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -146,6 +149,11 @@ class HomeAppBar extends StatelessWidget {
                 flex: 2,
                 child: InkWell(
                   onTap: () {
+                    Get.dialog(
+                      CustomFilter(
+                        locationController: _locationController,
+                      ),
+                    );
                     // Get.toNamed(AppRoute.filterSelectedGenresScreen);
                   },
                   child: Container(

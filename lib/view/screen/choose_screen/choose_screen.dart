@@ -62,7 +62,11 @@ class ChooseScreen extends StatelessWidget {
               CustomButton(
                 title: AppStrings.continues,
                 onTap: () {
-                  Get.toNamed(AppRoutes.signInScreen);
+                  if (_controller.selectedOption == 'Patient') {
+                    Get.toNamed(AppRoutes.signUpScreen);
+                  } else if (_controller.selectedOption== 'Health Professional') {
+                    Get.toNamed(AppRoutes.doctorSignUp);
+                  }
                 },
               ),
             ],

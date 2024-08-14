@@ -168,12 +168,19 @@ class HomeScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: List.generate(4, (index) {
-                          return CustomCard(
-                            imageSrc: AppIcons.favoriteUnselected,
-                            networkImageUrl: AppConstants.userNtr,
-                            name: 'Jenny Wilson',
-                            profession: 'Gynecologists',
-                            rating: 4.7,
+                          return GestureDetector(
+                            onTap: (){
+                              Get.toNamed(AppRoutes.specialistProfile);
+
+                            },
+                            child: CustomCard(
+
+                              imageSrc: AppIcons.favoriteUnselected,
+                              networkImageUrl: AppConstants.userNtr,
+                              name: 'Jenny Wilson',
+                              profession: 'Gynecologists',
+                              rating: 4.7,
+                            ),
                           );
                         }),
                       ),
@@ -197,12 +204,18 @@ class HomeScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: List.generate(4, (index) {
-                          return CustomCard(
-                            imageSrc: AppIcons.favoriteUnselected,
-                            networkImageUrl: AppConstants.userNtr,
-                            name: 'Jenny Wilson',
-                            profession: 'Gynecologists',
-                            rating: 4.7,
+                          return GestureDetector(
+                            onTap: (){
+                              Get.toNamed(AppRoutes.specialistProfile);
+
+                            },
+                            child: CustomCard(
+                              imageSrc: AppIcons.favoriteUnselected,
+                              networkImageUrl: AppConstants.userNtr,
+                              name: 'Jenny Wilson',
+                              profession: 'Gynecologists',
+                              rating: 4.7,
+                            ),
                           );
                         }),
                       ),

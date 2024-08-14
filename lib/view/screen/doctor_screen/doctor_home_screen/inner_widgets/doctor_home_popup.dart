@@ -9,8 +9,7 @@ import 'package:get/get.dart';
 class DoctorHomePopup extends StatelessWidget {
   DoctorHomePopup({super.key});
 
-  final DoctorHomeController doctorHomeController =
-      Get.find<DoctorHomeController>();
+  final String availableTime = '07 pm';
 
   @override
   Widget build(BuildContext context) {
@@ -20,27 +19,6 @@ class DoctorHomePopup extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          CustomText(
-            text: AppStrings.rescheduleDate,
-            fontSize: 15.sp,
-            fontWeight: FontWeight.w500,
-            color: AppColors.grayNormal,
-          ),
-          SizedBox(
-            height: 14.h,
-          ),
-          //====================== Reschudule Date ===================//
-          Obx(() {
-            return CustomReschuduleDate(
-              currentIndex:
-                  doctorHomeController.popupReschuduleCurrentIndex.value,
-              onChanged: (value) {
-                doctorHomeController.popupReschuduleCurrentIndex.value = value;
-              },
-              dateName: 'Sat',
-              dateNumber: '07',
-            );
-          }),
           SizedBox(
             height: 14.h,
           ),
@@ -53,33 +31,94 @@ class DoctorHomePopup extends StatelessWidget {
           SizedBox(
             height: 12.h,
           ),
-          //================================== Available Time ============================//
-          Obx(() {
-            return AvailableTimeContainer(
-              time: '9 PM',
-              currentIndex:
-                  doctorHomeController.popupAvailableTimeCurrentIndex.value,
-              onChanged: (value) {
-                doctorHomeController.popupAvailableTimeCurrentIndex.value =
-                    value;
-              },
-            );
-          }),
+          Row(
+            children: [
+              AvailableTimeContainer(
+                time: '09 AM',
+                onTap: () {},
+              ),
+              AvailableTimeContainer(
+                time: '10 AM',
+                onTap: () {},
+              ),
+              AvailableTimeContainer(
+                time: '11 AM',
+                onTap: () {},
+              ),
+              AvailableTimeContainer(
+                time: '12 AM',
+                onTap: () {},
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Row(
+            children: [
+              AvailableTimeContainer(
+                time: '01 PM',
+                onTap: () {},
+              ),
+              AvailableTimeContainer(
+                time: '02 PM',
+                onTap: () {},
+              ),
+              AvailableTimeContainer(
+                time: '03 PM',
+                onTap: () {},
+              ),
+              AvailableTimeContainer(
+                time: '04 PM',
+                onTap: () {},
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Row(
+            children: [
+              AvailableTimeContainer(
+                time: '01 PM',
+                onTap: () {},
+              ),
+              AvailableTimeContainer(
+                time: '02 PM',
+                onTap: () {},
+              ),
+              AvailableTimeContainer(
+                time: '03 PM',
+                onTap: () {},
+              ),
+              AvailableTimeContainer(
+                time: '04 PM',
+                onTap: () {},
+              ),
+            ],
+          ),
           SizedBox(
             height: 26.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              PopupButton(
-                buttonName: AppStrings.cancel,
-                onTap: () {
-                  Navigator.pop(context);
-                },
+              Expanded(
+                child: PopupButton(
+                  buttonName: AppStrings.cancel,
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
               ),
-              PopupButton(
-                buttonName: 'Confirm',
-                onTap: () {},
+              SizedBox(
+                width: 10.w,
+              ),
+              Expanded(
+                child: PopupButton(
+                  buttonName: 'Confirm',
+                  onTap: () {},
+                ),
               ),
             ],
           ),
@@ -107,113 +146,34 @@ class AvailableTimeContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-        shrinkWrap: true,
-        itemCount: 12,
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () => onChanged!(index),
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 1.h, vertical: 15),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  color: currentIndex == index
-                      ? AppColors.blackNormal
-                      : AppColors.white,
-                  border: Border.all(
-                    width: 1,
-                    color: AppColors.grayLightHover,
-                  )),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CustomText(
-                  text: time,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w400,
-                  color: currentIndex == index
-                      ? AppColors.white
-                      : AppColors.blackNormal,
-                ),
+    return Row(
+      children: [
+        InkWell(
+          onTap: onTap,
+          child: Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: AppColors.white,
+                border: Border.all(
+                  width: 1,
+                  color: AppColors.grayLightHover,
+                )),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomText(
+                text: time,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+                color: AppColors.blackNormal,
               ),
             ),
-          );
-        });
-  }
-}
-
-class CustomReschuduleDate extends StatelessWidget {
-  const CustomReschuduleDate(
-      {super.key,
-      required this.currentIndex,
-      required this.onChanged,
-      required this.dateName,
-      required this.dateNumber});
-
-  final int currentIndex;
-  final ValueChanged<int> onChanged;
-  final String dateName;
-  final String dateNumber;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          Row(
-            children: List.generate(7, (index) {
-              return InkWell(
-                onTap: () => onChanged(index),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 58.h,
-                      width: 42.w,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.h),
-                        color: currentIndex == index
-                            ? AppColors.blackNormal
-                            : AppColors.white,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(4.h),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomText(
-                              text: dateName,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w400,
-                              color: currentIndex == index
-                                  ? AppColors.white
-                                  : AppColors.grayNormal,
-                            ),
-                            CustomText(
-                              text: dateNumber,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w400,
-                              color: currentIndex == index
-                                  ? AppColors.white
-                                  : AppColors.grayNormal,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    )
-                  ],
-                ),
-              );
-            }),
           ),
-        ],
-      ),
+        ),
+        SizedBox(
+          width: 2.w,
+        ),
+      ],
     );
   }
 }

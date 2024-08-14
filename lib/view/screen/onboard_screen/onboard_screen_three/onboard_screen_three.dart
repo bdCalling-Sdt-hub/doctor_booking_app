@@ -1,3 +1,4 @@
+import 'package:doctor_booking/controller/home_controller/home_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_images/app_images.dart';
@@ -8,9 +9,11 @@ import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardScreenThree extends StatelessWidget {
-  const OnboardScreenThree({super.key});
+   OnboardScreenThree({super.key});
+  final HomeController homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +53,27 @@ class OnboardScreenThree extends StatelessWidget {
                 ),
                 CustomButton(
                   onTap: () {
-                    Get.toNamed(AppRoutes.chooseScreen);
+                    Get.toNamed(AppRoutes.signInScreen);
                   },
-                  title: AppStrings.next,
-                )
+                  title: AppStrings.getStart,
+                ),
+                SizedBox(
+                  height: 40.h,
+                ),
+                SmoothPageIndicator(
+                  controller: homeController.pageController.value,
+                  count: homeController.bannerImg.length,
+                  axisDirection: Axis.horizontal,
+                  effect: const ExpandingDotsEffect(
+                    expansionFactor: 3,
+                    spacing: 8.0,
+                    dotWidth: 10,
+                    dotHeight: 6.0,
+                    paintStyle: PaintingStyle.fill,
+                    dotColor: AppColors.blackLight,
+                    activeDotColor: AppColors.blackO,
+                  ),
+                ),
               ],
             ),
           )

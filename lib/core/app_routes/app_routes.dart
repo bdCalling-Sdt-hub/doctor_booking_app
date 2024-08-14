@@ -3,7 +3,6 @@ import 'package:doctor_booking/view/screen/doctor_screen/all_patient_list_screea
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/doctor_appointments_history.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_forget_password_screen/doctor_forget_password_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_reset_password_screen/doctor_reset_screen.dart';
-import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_in_screen/doctor_sign_in_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/doctor_sign_up.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/appointment_info_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/personal_info_screen/personal_info_screen.dart';
@@ -13,6 +12,7 @@ import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_professiona
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/patient_details/patient_details.dart';
+import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen.dart';
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_one/onboard_screen_one.dart';
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_three/onboard_screen_three.dart';
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_two/onboard_screen_two.dart';
@@ -21,6 +21,7 @@ import 'package:doctor_booking/view/screen/patient_screen/authentication/reset_p
 import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_in_screen/sign_in_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_up_otp_screen/sign_up_otp_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_up_screen/sign_up_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/book_appointment_patient_details/book_appointment_patient_details.dart';
 import 'package:doctor_booking/view/screen/patient_screen/call_history_screen/call_history_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/categories_screen/categories_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/categories_screen/sub_categories_screen/sub_categories_screen.dart';
@@ -49,6 +50,8 @@ class AppRoutes {
   static const String homeScreen = "/HomeScreen";
   static const String doctorProfileScreen = "/DoctorProfileScreen";
   static const String specialistProfile = "/SpecialistProfile";
+  static const String bookAppointmentPatientDetails =
+      "/BookAppointmentPatientDetails";
 
   ///==============================Profile section================
   static const String helpCenterScreen = "/HelpCenterScreen";
@@ -144,7 +147,8 @@ class AppRoutes {
         page: () => const PopularSpecialistsScreen()),
 
     ///================================patient Auth========================
-    GetPage(name: signInScreen, page: () => const SignInScreen()),
+    GetPage(name: signInScreen, page: () => SignInScreen()),
+    GetPage(name: onboardScreen, page: () => OnboardScreen()),
     GetPage(name: signUpScreen, page: () => const SignUpScreen()),
     GetPage(
         name: doctorForgetPasswordScreen,
@@ -158,9 +162,9 @@ class AppRoutes {
     GetPage(name: hospitalScreen, page: () => HospitalScreen()),
 
     ///===============================OnBord Section=====================
-    GetPage(name: onboardScreenOne, page: () => const OnboardScreenOne()),
-    GetPage(name: onboardScreenTwo, page: () => const OnboardScreenTwo()),
-    GetPage(name: onboardScreenThree, page: () => const OnboardScreenThree()),
+    GetPage(name: onboardScreenOne, page: () => OnboardScreenOne()),
+    GetPage(name: onboardScreenTwo, page: () => OnboardScreenTwo()),
+    GetPage(name: onboardScreenThree, page: () => OnboardScreenThree()),
     GetPage(name: chooseScreen, page: () => ChooseScreen()),
     GetPage(name: doctorProfileScreen, page: () => const DoctorProfileScreen()),
     GetPage(name: specialistProfile, page: () => const SpecialistProfile()),
@@ -178,7 +182,8 @@ class AppRoutes {
     GetPage(name: patientDetails, page: () => const PatientDetails()),
     GetPage(name: doctorSignUp, page: () => DoctorSignUp()),
     GetPage(name: doctorSignInScreen, page: () => const DoctorSignInScreen()),
-    GetPage(name: appointmentInfoScreen, page: () => AppointmentInfoScreen()),
+    GetPage(
+        name: appointmentInfoScreen, page: () => const AppointmentInfoScreen()),
     GetPage(name: personalInfoScreen, page: () => PersonalInfoScreen()),
     GetPage(name: professionalInfoScreen, page: () => ProfessionalInfoScreen()),
 

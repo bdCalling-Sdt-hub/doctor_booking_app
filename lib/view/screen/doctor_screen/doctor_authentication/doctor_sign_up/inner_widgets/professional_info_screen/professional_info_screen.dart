@@ -22,7 +22,7 @@ class ProfessionalInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.whiteLightActive,
+      backgroundColor: AppColors.whiteNormal,
       body: SingleChildScrollView(
         child: Obx(() {
           return Column(
@@ -38,7 +38,7 @@ class ProfessionalInfoScreen extends StatelessWidget {
               ///==================================specialization==========================
               CustomFormCard(
                   hasBackgroundColor: true,
-                  title: AppStrings.specialization,
+                  title: 'Specialisation',
                   controller: TextEditingController()),
 
               ///==================================yearsOfExperience==========================
@@ -190,7 +190,7 @@ class ProfessionalInfoScreen extends StatelessWidget {
           child: image.isNotEmpty
               ? Container(
                   height: 144.h,
-                  width: 159.w,
+                  width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     image: DecorationImage(

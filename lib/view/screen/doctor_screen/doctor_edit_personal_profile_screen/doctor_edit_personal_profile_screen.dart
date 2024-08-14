@@ -111,7 +111,9 @@ class DoctorEditPersonalProfileScreen extends StatelessWidget {
                   //================ update button =============//
                   CustomButton(
                     title: AppStrings.update,
-                    onTap: () {},
+                    onTap: () {
+                      Get.back();
+                    },
                   ),
                   SizedBox(
                     height: 24.h,

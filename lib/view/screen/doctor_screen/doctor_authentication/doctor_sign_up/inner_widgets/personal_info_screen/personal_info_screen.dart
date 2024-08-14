@@ -15,7 +15,7 @@ class PersonalInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          backgroundColor: AppColors.whiteLightActive,
+          backgroundColor: AppColors.whiteNormal,
       body: SingleChildScrollView(
         child: Column(
           children: [

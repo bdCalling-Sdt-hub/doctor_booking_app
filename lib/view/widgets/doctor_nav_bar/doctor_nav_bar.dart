@@ -27,7 +27,7 @@ class _DoctorNavBarState extends State<DoctorNavBar> {
   List<String> unselectedIcon = [
     AppIcons.homeUnselected,
     AppIcons.scheduleUnselected,
-    AppIcons.callUnselected,
+    AppIcons.callUnselectedIcon,
     AppIcons.notification,
     AppIcons.profileUnselected,
   ];

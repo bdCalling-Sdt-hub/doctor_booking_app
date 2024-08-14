@@ -74,6 +74,30 @@ class DoctorSideDrawer extends StatelessWidget {
                           Get.toNamed(AppRoutes.settingScreen);
 
                         }),
+
+                     SizedBox(height: 200.h,),
+                    ///====================== Log Out======================>
+                    GestureDetector(
+                      onTap: (){
+                        Get.toNamed(AppRoutes.signInScreen);
+                      },
+                      child: Row(
+                        children: [
+                          const CustomImage(
+                            imageSrc: AppIcons.logOut,
+                            imageType: ImageType.svg,
+                            imageColor: AppColors.whiteDarker,
+                          ),
+                          CustomText(
+                            color: AppColors.whiteDarker,
+                            left: 16.w,
+                            text: AppStrings.logOut,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),

@@ -26,17 +26,17 @@ class _PatientNavBarState extends State<PatientNavBar> {
 
   List<String> unselectedIcon = [
     AppIcons.homeUnselected,
-    AppIcons.favoriteUnselected,
+    AppIcons.unselectedFavoriteIcon,
     AppIcons.hospitalUnselected,
     AppIcons.appointmentUnselected,
     AppIcons.profileUnselected,
   ];
 
   List<String> selectedIcon = [
-    AppIcons.homeSelected,
+    AppIcons.homeSelectedIcon,
     AppIcons.favoriteSelected,
     AppIcons.hospitalSelected,
-    AppIcons.appointmentSelected,
+    AppIcons.selectedAppointmentIcon,
     AppIcons.profileSelected,
   ];
   final List<String> userNavText = [

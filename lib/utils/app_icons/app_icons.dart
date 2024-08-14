@@ -3,6 +3,10 @@ class AppIcons {
 
   static const String eye = "$basePath/eye.svg";
   static const String eyeOff = "$basePath/eyeOff.svg";
+  static const String callUnselectedIcon = "$basePath/call_unselected_icon.svg";
+  static const String homeSelectedIcon = "$basePath/home_selected_icon.svg";
+  static const String unselectedFavoriteIcon = "$basePath/unselected_favorite_icon.svg";
+  static const String selectedAppointmentIcon = "$basePath/selected_appointment_icon.svg";
   static const String vector = "$basePath/Vector.svg";
   static const String notification = "$basePath/notification.svg";
   static const String menu = "$basePath/menu.svg";

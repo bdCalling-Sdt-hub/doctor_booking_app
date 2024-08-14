@@ -50,7 +50,9 @@ class ScheduleScreen extends StatelessWidget {
                   // SizedBox(
                   //   height: 25.h,
                   // ),
-
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   SchedulePatientList(
                     patientImageList: const [],
                     onTap: () {

@@ -12,6 +12,9 @@ class DoctorHomeController extends GetxController {
   //   AppStrings.schedule,
   //   AppStrings.cancel
   // ];
+
+  RxInt popupAvailableTimeCurrentIndex = RxInt(0);
+  RxInt popupReschuduleCurrentIndex = RxInt(0);
   RxInt selectedIndex = RxInt(0);
 
   List<String> tabs = [AppStrings.schedule, AppStrings.cancel];

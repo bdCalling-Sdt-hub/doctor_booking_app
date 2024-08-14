@@ -27,18 +27,7 @@ class DoctorEditProfessionalProfileScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 7.h,
-            ),
-            ////============== Profile image ===========///
-            Center(
-              child: DoctorEditProfileImage(
-                imageSrc: AppConstants.userNtr,
-                onTap: () {
-                  generalController.showPopUpLoader();
-                },
-              ),
-            ),
+
             SizedBox(
               height: 24.h,
             ),
@@ -47,14 +36,7 @@ class DoctorEditProfessionalProfileScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CustomText(
-                    textAlign: TextAlign.start,
-                    text: AppStrings.professionalInfo,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.whiteDarker,
-                  ),
-                  const Divider(),
+
                   SizedBox(
                     height: 16.h,
                   ),
@@ -115,7 +97,9 @@ class DoctorEditProfessionalProfileScreen extends StatelessWidget {
                   //================ update button =============//
                   CustomButton(
                     title: AppStrings.update,
-                    onTap: () {},
+                    onTap: () {
+                      Get.back();
+                    },
                   ),
                   SizedBox(
                     height: 24.h,

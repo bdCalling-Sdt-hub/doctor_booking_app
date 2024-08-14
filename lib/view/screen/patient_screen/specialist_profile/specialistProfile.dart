@@ -1,8 +1,10 @@
+import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
+import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_card/custom_card.dart';
 import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_image.dart';
 import 'package:doctor_booking/view/widgets/custom_rating_card/custom_rating_card.dart';
@@ -10,6 +12,7 @@ import 'package:doctor_booking/view/widgets/custom_row/custom_row.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class SpecialistProfile extends StatefulWidget {
   const SpecialistProfile({super.key});
@@ -20,6 +23,7 @@ class SpecialistProfile extends StatefulWidget {
 
 class _DoctorProfileScreenState extends State<SpecialistProfile> {
   int _selectedDateIndex = 1;
+  int _selectedDateIndex2 = 1;
   bool _isExpanded = false;
 
   void _toggleExpanded() {
@@ -31,6 +35,12 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CustomButton(onTap: (){
+          Get.toNamed(AppRoutes.bookAppointmentPatientDetails);
+        },title: AppStrings.bookAppointment,),
+      ),
       backgroundColor: AppColors.whiteLightActive,
       ///================================Specialist Profile=====================
       appBar: const CustomAppBar(
@@ -127,7 +137,7 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                     'Sun\n13',
                     'Mon\n14',
                     'Tue\n15',
-                    'Wed\n16'
+                    'Wed\n16',
                   ];
                   return GestureDetector(
                     onTap: () {
@@ -159,7 +169,56 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                 height: 12.h,
               ),
              ///================================Available Time===================
-             const CustomRow(title: AppStrings.availAbleTime, subtitle: 'Online Appointment'),
+             const CustomRow(title: AppStrings.appointmentTime, subtitle: ''),
+              SizedBox(height: 10.h,),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: List.generate(6, (index) {
+                    final isSelected = index == _selectedDateIndex2;
+                    final days = [
+                      '10 Am',
+                      '11 Am',
+                      '12 Am',
+                      '2 pm',
+                      '4 pm',
+                      '6 pm'
+                    ];
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _selectedDateIndex2 = index;
+                        });
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: isSelected ? Colors.black : Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.grey),
+                        ),
+                        child: Text(
+                          days[index],
+                          style: TextStyle(
+                            color: isSelected ? Colors.white : Colors.black,
+                            fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.normal,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+              SizedBox(height: 10.h,),
+
+              const CustomRow(
+                  title: AppStrings.availableFor,
+                  subtitle: 'Online Appointment'),
+
               ///=================================Details===================
               const DetailsSection(title: AppStrings.details,
                 details: 'Dr. Ralph is the top most Cardiologist in Care Hospital New York. He is available for private consultation.',),

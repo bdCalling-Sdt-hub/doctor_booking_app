@@ -1,7 +1,6 @@
 import 'package:doctor_booking/controller/doctor_auth_controller/doctor_auth_controller.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
-import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/appointment_info_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/personal_info_screen/personal_info_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/professional_info_screen/professional_info_screen.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
@@ -23,7 +22,7 @@ class DoctorSignUp extends StatelessWidget {
 
       ///====================Set your profile appbar===============
       appBar: AppBar(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.whiteNormal,
         title: const CustomText(
           text: AppStrings.signUp,
           fontWeight: FontWeight.w500,
@@ -92,7 +91,7 @@ class DoctorSignUp extends StatelessWidget {
                   case 0:
                     return PersonalInfoScreen();
                   case 1:
-                    return AppointmentInfoScreen();
+                    return const AppointmentInfoScreen();
                   case 2:
                     return ProfessionalInfoScreen();
                   default:
