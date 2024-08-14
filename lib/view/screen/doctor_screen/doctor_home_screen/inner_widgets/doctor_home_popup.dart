@@ -11,110 +11,115 @@ class DoctorHomePopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 450,
-      width: MediaQuery.sizeOf(context).width,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 14.h,
-          ),
-          CustomText(
-            text: AppStrings.availAbleTime,
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w500,
-            color: AppColors.grayNormal,
-          ),
-          SizedBox(
-            height: 12.h,
-          ),
-          Row(
-            children: [
-              AvailableTimeContainer(
-                time: '09 AM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '10 AM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '11 AM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '12 AM',
-                onTap: () {},
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Row(
-            children: [
-              AvailableTimeContainer(
-                time: '01 PM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '02 PM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '03 PM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '04 PM',
-                onTap: () {},
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Row(
-            children: [
-              AvailableTimeContainer(
-                time: '01 PM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '02 PM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '03 PM',
-                onTap: () {},
-              ),
-              AvailableTimeContainer(
-                time: '04 PM',
-                onTap: () {},
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 26.h,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              PopupButton(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 14.h,
+        ),
+        CustomText(
+          text: AppStrings.availAbleTime,
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w500,
+          color: AppColors.grayNormal,
+        ),
+        SizedBox(
+          height: 12.h,
+        ),
+        Row(
+          children: [
+            AvailableTimeContainer(
+              time: '09 AM',
+              onTap: () {},
+            ),
+            AvailableTimeContainer(
+              time: '10 AM',
+              onTap: () {},
+            ),
+            AvailableTimeContainer(
+              time: '11 AM',
+              onTap: () {},
+            ),
+            AvailableTimeContainer(
+              time: '12 AM',
+              onTap: () {},
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10.h,
+        ),
+        Row(
+          children: [
+            AvailableTimeContainer(
+              time: '01 PM',
+              onTap: () {},
+            ),
+            AvailableTimeContainer(
+              time: '02 PM',
+              onTap: () {},
+            ),
+            AvailableTimeContainer(
+              time: '03 PM',
+              onTap: () {},
+            ),
+            AvailableTimeContainer(
+              time: '04 PM',
+              onTap: () {},
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10.h,
+        ),
+        Row(
+          children: [
+            AvailableTimeContainer(
+              time: '01 PM',
+              onTap: () {},
+            ),
+            AvailableTimeContainer(
+              time: '02 PM',
+              onTap: () {},
+            ),
+            AvailableTimeContainer(
+              time: '03 PM',
+              onTap: () {},
+            ),
+            AvailableTimeContainer(
+              time: '04 PM',
+              onTap: () {},
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 26.h,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: PopupButton(
                 buttonName: AppStrings.cancel,
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
-              PopupButton(
+            ),
+            SizedBox(width: 10.w,),
+            Expanded(
+              child: PopupButton(
                 buttonName: 'Confirm',
                 onTap: () {},
               ),
-            ],
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 18.h,
+        ),
+      ],
     );
   }
 }
