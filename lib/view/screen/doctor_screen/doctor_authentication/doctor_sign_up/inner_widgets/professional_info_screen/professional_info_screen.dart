@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:doctor_booking/controller/calls_controller.dart/calls_controller.dart';
 import 'package:doctor_booking/controller/doctor_auth_controller/doctor_auth_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
@@ -23,7 +22,7 @@ class ProfessionalInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.whiteLightActive,
+      backgroundColor: AppColors.whiteNormal,
       body: SingleChildScrollView(
         child: Obx(
            () {
@@ -188,7 +187,7 @@ class ProfessionalInfoScreen extends StatelessWidget {
            child: image.isNotEmpty
                ? Container(
              height: 144.h,
-             width: 159.w,
+             width: double.infinity,
              decoration: BoxDecoration(
                borderRadius: BorderRadius.circular(8),
                image: DecorationImage(

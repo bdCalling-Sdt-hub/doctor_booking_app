@@ -1,97 +1,70 @@
+import 'package:doctor_booking/controller/doctor_auth_controller/doctor_auth_controller.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
-import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
-import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/custom_appointment_info.dart';
+import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-class AppointmentInfoWidget extends StatelessWidget {
-  const AppointmentInfoWidget({
-    super.key,
-     this.dayName,
-     this.startTimeTap,
-     this.endTimeTap,
-     this.availableTab,
-  });
+class AppointmentInfoScreen extends StatelessWidget {
+   AppointmentInfoScreen({super.key});
 
-  final String? dayName;
-  final VoidCallback? startTimeTap;
-  final VoidCallback? endTimeTap;
-  final VoidCallback? availableTab;
-
+  final DoctorAuthController doctorAuthController = Get.find<DoctorAuthController>();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CustomText(
-          text: '${AppStrings.daysOfWeek}: $dayName',
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-          color: AppColors.grayNormal,
-        ),
-        SizedBox(
-          height: 16.h,
-        ),
-        CustomText(
-          text: AppStrings.availAbleTime,
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w400,
-          color: AppColors.grayNormal,
-        ),
-        SizedBox(
-          height: 12.h,
-        ),
-        Row(
+    return Scaffold(
+         backgroundColor: AppColors.whiteNormal,
+      body: SingleChildScrollView(
+        child: Column(
           children: [
-            Flexible(
-              child: CustomFormCard(
-                readOnly: true,
-                hintText: 'Input time',
-                hasBackgroundColor: true,
-                title:'Start Time',
-                controller: TextEditingController(),
-                onTap: () {},
-              ),
-            ),
-            SizedBox(
-              width: 5.h,
-            ),
-            Flexible(
-              child: CustomFormCard(
-                hintText: 'Input time',
-                hasBackgroundColor: true,
-                title:'End Time',
-                controller: TextEditingController(),
-                readOnly: true,
-                hasSuffixIcon: false,
-                onTap: () {},
-              ),
-            ),
+
+            CustomAppointmentInfo(
+                dayName: 'Sunday',
+                startTimeTap: (){},
+                endTimeTap: (){},
+                availableTab: (){}),
+
+            CustomAppointmentInfo(
+                dayName: 'Monday',
+                startTimeTap: (){},
+                endTimeTap: (){},
+                availableTab: (){}),
+
+            CustomAppointmentInfo(
+                dayName: 'Tuesday',
+                startTimeTap: (){},
+                endTimeTap: (){},
+                availableTab: (){}),
+
+            CustomAppointmentInfo(
+                dayName: 'Wednesday',
+                startTimeTap: (){},
+                endTimeTap: (){},
+                availableTab: (){}),
+
+            CustomAppointmentInfo(
+                dayName: 'Thursday',
+                startTimeTap: (){},
+                endTimeTap: (){},
+                availableTab: (){}),
+
+            CustomAppointmentInfo(
+                dayName: 'Friday',
+                startTimeTap: (){},
+                endTimeTap: (){},
+                availableTab: (){}),
+            CustomAppointmentInfo(
+                dayName: 'Saturday',
+                startTimeTap: (){},
+                endTimeTap: (){},
+                availableTab: (){}),
+            CustomButton(onTap: (){
+              doctorAuthController.updateStep(2);
+
+            },title: AppStrings.next,),
           ],
         ),
-        SizedBox(
-          height: 16.h,
-        ),
-        // CustomText(
-        //   text: AppStrings.availableFor,
-        //   fontSize: 16.sp,
-        //   fontWeight: FontWeight.w400,
-        //   color: AppColors.grayNormal,
-        // ),
-        CustomFormCard(
-          hintText: 'Online Appointment',
-          hasBackgroundColor: true,
-          title: AppStrings.availableFor,
-          controller: TextEditingController(),
-          readOnly: true,
-          hasSuffixIcon: true,
-          onTap: () {},
-        ),
-        SizedBox(
-          height: 24.h,
-        ),
-      ],
+      ),
     );
   }
 }

@@ -11,26 +11,25 @@ import 'package:get/get.dart';
 
 import 'inner_widgets/appointment_info_screen/appointment_info_screen.dart';
 
-
-
-
 class DoctorSignUp extends StatelessWidget {
   DoctorSignUp({super.key});
 
-  final DoctorAuthController doctorAuthController = Get.find<DoctorAuthController>();
+  final DoctorAuthController doctorAuthController =
+      Get.find<DoctorAuthController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.whiteLightActive,
+      backgroundColor: AppColors.whiteNormal,
+
       ///====================Set your profile appbar===============
       appBar: AppBar(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.whiteNormal,
         title: const CustomText(
           text: AppStrings.signUp,
           fontWeight: FontWeight.w500,
           fontSize: 20,
-          color:AppColors.grayNormal,
+          color: AppColors.grayNormal,
         ),
         centerTitle: true,
         leading: IconButton(
@@ -49,8 +48,10 @@ class DoctorSignUp extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Obx(
-                  () => EasyStepper(
-                    lineStyle: const LineStyle(defaultLineColor: AppColors.whiteDarkHover,lineType: LineType.normal),
+              () => EasyStepper(
+                lineStyle: const LineStyle(
+                    defaultLineColor: AppColors.whiteDarkHover,
+                    lineType: LineType.normal),
                 activeStep: doctorAuthController.currentStep.value,
                 stepShape: StepShape.circle,
                 stepBorderRadius: 15.r,
@@ -64,19 +65,19 @@ class DoctorSignUp extends StatelessWidget {
                 unreachedStepBorderColor: AppColors.grayLightHover,
                 steps: const [
                   EasyStep(
-                    customStep: CustomText(text: '1',color: AppColors.whiteLightActive,maxLines: 2,),
+                    customStep: CustomText(
+                      text: '1',
+                      color: AppColors.whiteLightActive,
+                      maxLines: 2,
+                    ),
                     title: 'Personal \n  Info',
-
                   ),
-
                   EasyStep(
                     customStep: CustomText(text: '2'),
-
                     title: 'Appointment  \n Info',
                   ),
                   EasyStep(
                     customStep: CustomText(text: '3'),
-
                     title: 'Professional  \n Info',
                   ),
                 ],
@@ -90,13 +91,14 @@ class DoctorSignUp extends StatelessWidget {
               child: Obx(() {
                 switch (doctorAuthController.currentStep.value) {
                   case 0:
-                    return  PersonalInfoScreen();
+                    return PersonalInfoScreen();
                   case 1:
-                    return const AppointmentInfoWidget();
+                    return  AppointmentInfoScreen(
+                    );
                   case 2:
-                    return  ProfessionalInfoScreen();
+                    return ProfessionalInfoScreen();
                   default:
-                    return  PersonalInfoScreen();
+                    return PersonalInfoScreen();
                 }
               }),
             ),
