@@ -28,4 +28,17 @@ class HomeController extends GetxController {
 
   RxInt bannerIndex = 0.obs;
   Rx<PageController> pageController = PageController().obs;
+
+
+
+
+  var selectedCategory = 'Cardiologist'.obs;
+
+  List<String> categories = ['Cardiologist', 'Neurologist', 'Dermatologist','Dentist'];
+
+  void updateCategory(String newCategory) {
+    selectedCategory.value = newCategory;
+  }
+
+
 }
