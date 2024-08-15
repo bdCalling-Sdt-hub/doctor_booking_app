@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/core/dependency/dependency_injection.dart';
+import 'package:doctor_booking/view/widgets/device_utils/device_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +10,8 @@ import 'package:get/get.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   DependencyInjection di = DependencyInjection();
+  DeviceUtils.lockDevicePortrait();
+
   di.dependencies();
 
   runApp(DevicePreview(
