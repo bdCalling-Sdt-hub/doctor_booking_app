@@ -9,10 +9,9 @@ import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardScreenThree extends StatelessWidget {
-   OnboardScreenThree({super.key});
+  OnboardScreenThree({super.key});
   final HomeController homeController = Get.find<HomeController>();
 
   @override
@@ -23,8 +22,20 @@ class OnboardScreenThree extends StatelessWidget {
           const CustomImage(
             imageSrc: AppImages.onBoardThree,
             imageType: ImageType.png,
-            fit: BoxFit.cover,
+            //  fit: BoxFit.cover,
+            fit: BoxFit.fitWidth,
           ),
+
+          // Container(
+          //   // height: double.maxFinite,
+          //   //  width: double.maxFinite,
+          //   decoration: BoxDecoration(
+          //       image: DecorationImage(
+          //           fit: BoxFit.cover,
+          //           image: AssetImage(
+          //             AppImages.onBoardThree,
+          //           ))),
+          // ),
 
           ///===========================Next Button==============
           SizedBox(
@@ -60,19 +71,29 @@ class OnboardScreenThree extends StatelessWidget {
                 SizedBox(
                   height: 40.h,
                 ),
-                SmoothPageIndicator(
-                  controller: homeController.pageController.value,
-                  count: homeController.bannerImg.length,
-                  axisDirection: Axis.horizontal,
-                  effect: const ExpandingDotsEffect(
-                    expansionFactor: 3,
-                    spacing: 8.0,
-                    dotWidth: 10,
-                    dotHeight: 6.0,
-                    paintStyle: PaintingStyle.fill,
-                    dotColor: AppColors.blackLight,
-                    activeDotColor: AppColors.blackO,
-                  ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CircleAvatar(
+                      radius: 5,
+                      backgroundColor: AppColors.grayLightHover,
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    const CircleAvatar(
+                      radius: 5,
+                      backgroundColor: AppColors.grayLightHover,
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    const CircleAvatar(
+                      radius: 7,
+                      backgroundColor: AppColors.blackNormal,
+                    ),
+                  ],
                 ),
               ],
             ),

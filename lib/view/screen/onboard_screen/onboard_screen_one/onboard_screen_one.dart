@@ -9,10 +9,9 @@ import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardScreenOne extends StatelessWidget {
-   OnboardScreenOne({super.key});
+  OnboardScreenOne({super.key});
 
   final HomeController homeController = Get.find<HomeController>();
   @override
@@ -60,21 +59,54 @@ class OnboardScreenOne extends StatelessWidget {
                 SizedBox(
                   height: 40.h,
                 ),
-                ///============================Dot indicator================
-                SmoothPageIndicator(
-                  controller: homeController.pageController.value,
-                  count: 3,
-                  axisDirection: Axis.horizontal,
-                  effect: const ExpandingDotsEffect(
-                    expansionFactor: 3,
-                    spacing: 8.0,
-                    dotWidth: 10,
-                    dotHeight: 6.0,
-                    paintStyle: PaintingStyle.fill,
-                    dotColor: AppColors.blackLight,
-                    activeDotColor: AppColors.blackO,
-                  ),
+
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CircleAvatar(
+                      radius: 7,
+                      backgroundColor: AppColors.blackNormal,
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    const CircleAvatar(
+                      radius: 5,
+                      backgroundColor: AppColors.grayLightHover,
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    const CircleAvatar(
+                      radius: 5,
+                      backgroundColor: AppColors.grayLightHover,
+                    ),
+                  ],
                 ),
+
+                ///============================Dot indicator================
+                ///
+                ///
+                ///
+
+                // Obx(() {
+                //   return SmoothPageIndicator(
+                //     controller: homeController.pageController.value,
+                //     count: 3,
+                //     axisDirection: Axis.horizontal,
+                //     effect: const ExpandingDotsEffect(
+                //       expansionFactor: 3,
+                //       spacing: 8.0,
+                //       dotWidth: 10,
+                //       dotHeight: 6.0,
+                //       paintStyle: PaintingStyle.fill,
+                //       dotColor: AppColors.blackLight,
+                //       activeDotColor: AppColors.blackO,
+                //     ),
+                //     onDotClicked: (index) {},
+                //   );
+                // }),
               ],
             ),
           )

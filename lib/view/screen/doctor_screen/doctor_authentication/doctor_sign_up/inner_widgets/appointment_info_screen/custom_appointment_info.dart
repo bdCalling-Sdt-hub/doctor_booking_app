@@ -14,12 +14,20 @@ class CustomAppointmentInfo extends StatelessWidget {
     required this.startTimeTap,
     required this.endTimeTap,
     required this.availableTab,
+    this.startTimeHintText,
+    this.endTimeHintText,
+    this.startController,
+    this.endController,
   });
 
   final String dayName;
   final VoidCallback startTimeTap;
   final VoidCallback endTimeTap;
   final VoidCallback availableTab;
+  final String? startTimeHintText;
+  final String? endTimeHintText;
+  final TextEditingController? startController;
+  final TextEditingController? endController;
 
   final DoctorAuthController doctorAuthController =
       Get.find<DoctorAuthController>();
@@ -29,7 +37,7 @@ class CustomAppointmentInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
-          text: '${AppStrings.daysOfWeek}: $dayName',
+          text: '${AppStrings.daysOfWeek} $dayName',
           fontSize: 16,
           fontWeight: FontWeight.w400,
           color: AppColors.grayNormal,
@@ -52,11 +60,11 @@ class CustomAppointmentInfo extends StatelessWidget {
               child: CustomFormCard(
                 hasSuffixIcon: false,
                 readOnly: true,
-                hintText: 'Input time',
+                hintText: startTimeHintText ?? 'Input time',
                 hasBackgroundColor: true,
                 title: 'Start Time',
-                controller: TextEditingController(),
-                onTap: () {},
+                controller: startController ?? TextEditingController(),
+                onTap: startTimeTap,
               ),
             ),
             SizedBox(
@@ -64,13 +72,13 @@ class CustomAppointmentInfo extends StatelessWidget {
             ),
             Flexible(
               child: CustomFormCard(
-                hintText: 'Input time',
+                hintText: endTimeHintText ?? 'Input time',
                 hasBackgroundColor: true,
                 title: 'End Time',
-                controller: TextEditingController(),
+                controller: endController ?? TextEditingController(),
                 readOnly: true,
                 hasSuffixIcon: false,
-                onTap: () {},
+                onTap: endTimeTap,
               ),
             ),
           ],
@@ -91,7 +99,7 @@ class CustomAppointmentInfo extends StatelessWidget {
           controller: TextEditingController(),
           readOnly: true,
           hasSuffixIcon: true,
-          onTap: () {},
+          onTap: availableTab,
         ),
 
         SizedBox(
