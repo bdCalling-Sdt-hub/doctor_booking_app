@@ -37,11 +37,15 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
     return Scaffold(
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: CustomButton(onTap: (){
-          Get.toNamed(AppRoutes.bookAppointmentPatientDetails);
-        },title: AppStrings.bookAppointment,),
+        child: CustomButton(
+          onTap: () {
+            Get.toNamed(AppRoutes.bookAppointmentPatientDetails);
+          },
+          title: AppStrings.bookAppointment,
+        ),
       ),
       backgroundColor: AppColors.whiteLightActive,
+
       ///================================Specialist Profile=====================
       appBar: const CustomAppBar(
         appBarContent: AppStrings.specialistProfile,
@@ -85,25 +89,45 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                       color: AppColors.grayNormal,
                       bottom: 22,
                     ),
+
                     ///==========================Info card======================
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: AppColors.blackLight,
-                        borderRadius: BorderRadius.circular(10)
-                      ),
-                      child: const Row(
+                          color: AppColors.blackLight,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          _InfoCard(
+                          const _InfoCard(
                             label: AppStrings.experience,
                             value: '10+ years',
                           ),
-                          _InfoCard(
-                            label: AppStrings.patientsChecked,
-                            value: '12,000+',
+                          Row(
+                            children: [
+                              Container(
+                                height: 60,
+                                width: 3.w,
+                                color: AppColors.white,
+                              ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              const _InfoCard(
+                                label: AppStrings.patientsChecked,
+                                value: '12,000+',
+                              ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              Container(
+                                height: 60,
+                                width: 3.w,
+                                color: AppColors.white,
+                              ),
+                            ],
                           ),
-                          _InfoCard(
+                          const _InfoCard(
                             label: AppStrings.overallRating,
                             value: '★ 4.6 ',
                           ),
@@ -114,18 +138,21 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                 ),
               ),
               SizedBox(height: 18.h),
+
               ///========================== Appointment Fee Section================
-       const CustomRow(title: AppStrings.appointmentFee, subtitle: '\$25.00'),
+              const CustomRow(
+                  title: AppStrings.appointmentFee, subtitle: '\$25.00'),
               const SizedBox(height: 8),
               const CustomText(
-               top: 18,
+                top: 18,
                 text: 'Schedule',
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
                 color: AppColors.grayNormal,
-                  bottom: 8,
+                bottom: 8,
               ),
               const SizedBox(height: 8),
+
               ///==============================Schedule Section=====================
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -168,9 +195,12 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
               SizedBox(
                 height: 12.h,
               ),
-             ///================================Available Time===================
-             const CustomRow(title: AppStrings.appointmentTime, subtitle: ''),
-              SizedBox(height: 10.h,),
+
+              ///================================Available Time===================
+              const CustomRow(title: AppStrings.appointmentTime, subtitle: ''),
+              SizedBox(
+                height: 10.h,
+              ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -203,8 +233,9 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                           days[index],
                           style: TextStyle(
                             color: isSelected ? Colors.white : Colors.black,
-                            fontWeight:
-                            isSelected ? FontWeight.bold : FontWeight.normal,
+                            fontWeight: isSelected
+                                ? FontWeight.bold
+                                : FontWeight.normal,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -213,15 +244,21 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                   }),
                 ),
               ),
-              SizedBox(height: 10.h,),
+              SizedBox(
+                height: 10.h,
+              ),
 
               const CustomRow(
                   title: AppStrings.availableFor,
                   subtitle: 'Online Appointment'),
 
               ///=================================Details===================
-              const DetailsSection(title: AppStrings.details,
-                details: 'Dr. Ralph is the top most Cardiologist in Care Hospital New York. He is available for private consultation.',),
+              const DetailsSection(
+                title: AppStrings.details,
+                details:
+                    'Dr. Ralph is the top most Cardiologist in Care Hospital New York. He is available for private consultation.',
+              ),
+
               ///==================================Review And Rating =======================
               const CustomText(
                 top: 24,
@@ -242,7 +279,8 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                           'Dr. Jane Smith is an exceptional doctor! She listened attentively to my concerns, provided clear explanations, and offered practical advice.');
                 }),
               ),
-           ///==================================View All Condition=================
+
+              ///==================================View All Condition=================
               Center(
                 child: GestureDetector(
                   onTap: _toggleExpanded,
@@ -268,9 +306,10 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
               SizedBox(
                 height: 12.h,
               ),
+
               ///==============================Similar Doctor=========================
               const CustomRow(
-                  title: AppStrings.similarDoctors,
+                  title: AppStrings.similarSpecialist,
                   subtitle: AppStrings.viewAll),
               SizedBox(
                 height: 12.h,
@@ -328,9 +367,6 @@ class _InfoCard extends StatelessWidget {
     );
   }
 }
-
-
-
 
 class DetailsSection extends StatelessWidget {
   final String title;

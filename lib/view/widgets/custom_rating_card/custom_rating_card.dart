@@ -4,7 +4,6 @@ import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class CustomRatingCard extends StatelessWidget {
   final String name;
   final String date;
@@ -76,7 +75,9 @@ class CustomRatingCard extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 10.w), // Add some space between the review and the date
+              SizedBox(
+                  width:
+                      10.w), // Add some space between the review and the date
               CustomText(
                 text: date,
                 fontWeight: FontWeight.w400,

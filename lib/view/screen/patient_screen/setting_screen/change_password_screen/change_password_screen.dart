@@ -40,20 +40,26 @@ class ChangePasswordScreen extends StatelessWidget {
               ///==========================EnterCurrentPassword==============
 
               CustomFormCard(
-                  title: AppStrings.enterCurrentPassword,
-                  controller: TextEditingController()),
+                title: AppStrings.enterCurrentPassword,
+                controller: TextEditingController(),
+                isPassword: true,
+              ),
 
               ///==========================enterNewPassword==============
 
               CustomFormCard(
-                  title: AppStrings.enterNewPassword,
-                  controller: TextEditingController()),
+                title: AppStrings.enterNewPassword,
+                controller: TextEditingController(),
+                isPassword: true,
+              ),
 
               ///==========================retypeNewPassword==============
 
               CustomFormCard(
-                  title: AppStrings.retypeNewPassword,
-                  controller: TextEditingController()),
+                title: AppStrings.retypeNewPassword,
+                controller: TextEditingController(),
+                isPassword: true,
+              ),
 
               SizedBox(
                 height: 45.h,

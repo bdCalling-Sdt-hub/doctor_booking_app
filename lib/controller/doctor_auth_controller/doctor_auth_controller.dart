@@ -39,7 +39,22 @@ class DoctorAuthController extends GetxController {
       documentImage.value = getImages.path;
     }
   }
-  //================== Appointment Time controller ==========================//
+
+  //===================== Doctor Personal info controller =======================
+  Rx<TextEditingController> doctorNameController = TextEditingController().obs;
+  Rx<TextEditingController> doctorDateOfBirthController =
+      TextEditingController().obs;
+  Rx<TextEditingController> doctorEmailController = TextEditingController().obs;
+  Rx<TextEditingController> doctorPhoneNumberController =
+      TextEditingController().obs;
+  Rx<TextEditingController> doctorLocationController =
+      TextEditingController().obs;
+  Rx<TextEditingController> doctorPasswordController =
+      TextEditingController().obs;
+  Rx<TextEditingController> doctorConfirmPasswordController =
+      TextEditingController().obs;
+
+  //================== Doctor Appointment Time controller ==========================//
 
   Rx<TextEditingController> sundayStartTimeController =
       TextEditingController().obs;

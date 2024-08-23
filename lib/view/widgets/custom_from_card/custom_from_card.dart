@@ -3,6 +3,7 @@ import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:doctor_booking/view/widgets/custom_text_field/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomFormCard extends StatelessWidget {
   final String title;
@@ -51,7 +52,7 @@ class CustomFormCard extends StatelessWidget {
           validator: validator,
           readOnly: readOnly,
           hintText: hintText,
-          hintStyle: const TextStyle(
+          hintStyle: GoogleFonts.poppins(
               fontWeight: FontWeight.w400,
               fontSize: 16,
               color: AppColors.whiteDarkHover),
@@ -64,7 +65,7 @@ class CustomFormCard extends StatelessWidget {
                   const Icon(Icons.alarm),
           isPassword: isPassword,
           textEditingController: controller,
-          inputTextStyle: const TextStyle(color: AppColors.grayNormal),
+          inputTextStyle: GoogleFonts.poppins(color: AppColors.grayNormal),
           fillColor: hasBackgroundColor
               ? AppColors.whiteLightActive
               : AppColors.whiteNormal,

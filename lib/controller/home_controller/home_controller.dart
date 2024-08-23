@@ -18,7 +18,7 @@ class HomeController extends GetxController {
     {"image": AppConstants.neurologist, "name": "Neurologist"},
     {"image": AppConstants.other, "name": "Cardiologist"},
   ];
-  final RxString _selectedOption = 'Health Professional'.obs;
+  final RxString _selectedOption = 'Patient'.obs;
 
   String get selectedOption => _selectedOption.value;
 

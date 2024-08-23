@@ -146,7 +146,7 @@ class AppRoutes {
     ///================================patient Auth========================
     GetPage(name: signInScreen, page: () => SignInScreen()),
     // GetPage(name: onboardScreen, page: () => OnboardScreen()),
-    GetPage(name: signUpScreen, page: () => const SignUpScreen()),
+    GetPage(name: signUpScreen, page: () => SignUpScreen()),
     GetPage(
         name: doctorForgetPasswordScreen,
         page: () => const DoctorForgetPasswordScreen()),

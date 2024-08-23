@@ -48,15 +48,19 @@ class ResetPasswordScreen extends StatelessWidget {
 
             ///============================New Password Field=================
             CustomFormCard(
-                hintText: AppStrings.enterNewPassword,
-                title: AppStrings.newPassword,
-                controller: TextEditingController()),
+              hintText: AppStrings.enterNewPassword,
+              title: AppStrings.newPassword,
+              controller: TextEditingController(),
+              isPassword: true,
+            ),
 
             ///============================Confirm Password Field=================
             CustomFormCard(
-                hintText: AppStrings.enterNewPassword,
-                title: AppStrings.confirmPassword,
-                controller: TextEditingController()),
+              hintText: AppStrings.enterNewPassword,
+              title: AppStrings.confirmPassword,
+              controller: TextEditingController(),
+              isPassword: true,
+            ),
 
             ///==============================Update Password button=============
             CustomButton(

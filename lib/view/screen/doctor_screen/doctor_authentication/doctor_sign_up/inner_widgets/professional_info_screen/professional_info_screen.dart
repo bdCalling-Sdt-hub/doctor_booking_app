@@ -86,7 +86,7 @@ class ProfessionalInfoScreen extends StatelessWidget {
 
                           ///==========================Terms of use=======================
                           TextSpan(
-                            text: "${AppStrings.termsAndConditions}  ",
+                            text: "\n${AppStrings.termsAndConditions}  ",
                             style: const TextStyle(
                               color: AppColors.blackNormal,
                               fontSize: 12,
@@ -199,10 +199,30 @@ class ProfessionalInfoScreen extends StatelessWidget {
                     ),
                   ),
                 )
-              : CustomImage(
-                  imageSrc: AppIcons.gallery,
-                  imageType: ImageType.svg,
-                  size: 144.sp,
+              : Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  height: 144,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomImage(
+                          imageSrc: AppIcons.gallery,
+                          imageType: ImageType.svg,
+                          size: 30.sp,
+                        ),
+                        CustomText(
+                          text: AppStrings.uploadPhoto,
+                          fontSize: 14.h,
+                          color: AppColors.whiteDarkHover,
+                          fontWeight: FontWeight.w400,
+                        )
+                      ],
+                    ),
+                  ),
                 ),
         ),
       ],

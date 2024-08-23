@@ -13,7 +13,7 @@ import 'package:get/get.dart';
 import '../../../../widgets/custom_text/custom_text.dart';
 
 class HomeAppBar extends StatelessWidget {
-   HomeAppBar({
+  HomeAppBar({
     super.key,
     required this.scaffoldKey,
     required this.image,
@@ -122,8 +122,10 @@ class HomeAppBar extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                flex: 8,
+                flex: 12,
                 child: CustomTextField(
+                  // isCollapsed: true,
+                  isDense: true,
                   fillColor: AppColors.white,
                   onTap: () {
                     Get.toNamed(AppRoutes.searchScreen);
@@ -138,6 +140,7 @@ class HomeAppBar extends StatelessWidget {
                     child: Icon(
                       Icons.search,
                       color: AppColors.whiteDarkActive,
+                      size: 30,
                     ),
                   ),
                 ),
@@ -159,11 +162,11 @@ class HomeAppBar extends StatelessWidget {
                   child: Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 15),
-                      height: 55,
-                      width: 54,
+                      height: 47,
+                      width: 45,
                       decoration: BoxDecoration(
                           color: AppColors.blackNormal,
-                          borderRadius: BorderRadius.circular(10)),
+                          borderRadius: BorderRadius.circular(4)),
                       child: const CustomImage(imageSrc: AppIcons.filterList)),
                 ),
               )

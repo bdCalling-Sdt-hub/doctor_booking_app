@@ -15,7 +15,8 @@ import 'package:get/get.dart';
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
 
-  final DoctorAuthController doctorAuthController = Get.find<DoctorAuthController>();
+  final DoctorAuthController doctorAuthController =
+      Get.find<DoctorAuthController>();
 
   // TextEditingControllers for managing form input
   final TextEditingController emailController = TextEditingController();
@@ -88,7 +89,7 @@ class SignInScreen extends StatelessWidget {
               CustomButton(
                 onTap: () {
                   // if (doctorAuthController.currentStep.value == 0) {
-                    Get.toNamed(AppRoutes.homeScreen);
+                  Get.toNamed(AppRoutes.homeScreen);
                   // } else if (doctorAuthController.currentStep.value == 1) {
                   //   Get.toNamed(AppRoutes.doctorHomeScreen);
                   // }
@@ -97,6 +98,8 @@ class SignInScreen extends StatelessWidget {
               ),
               SizedBox(height: 33.h),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const CustomText(
                     text: AppStrings.dontHaveAnAccount,

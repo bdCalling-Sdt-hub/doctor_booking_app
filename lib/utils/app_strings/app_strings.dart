@@ -67,7 +67,7 @@ class AppStrings {
   static const String verifyCode = "Verify code ";
   static const String updatePassword = "Update Password";
   static const String createANewPasswordEnsureIt =
-      "Create a new password. Ensure it differs from previous ones for security";
+      "Create a new password. Ensure it differs from \nprevious ones for security";
   static const String enterYourEmailAndWeWill =
       "Enter your email and we will send you a verification code";
   static const String weSentAResetLinkTO =

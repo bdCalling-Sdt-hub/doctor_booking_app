@@ -66,7 +66,6 @@ class DoctorSignUp extends StatelessWidget {
                   EasyStep(
                     customStep: CustomText(
                       text: '1',
-                      color: AppColors.whiteLightActive,
                       maxLines: 2,
                     ),
                     title: 'Personal \n  Info',

@@ -33,6 +33,8 @@ class CustomTextField extends StatefulWidget {
     super.key,
     this.prefixIcon,
     this.onTap,
+    this.isCollapsed,
+    this.isDense,
   });
 
   final TextEditingController? textEditingController;
@@ -60,6 +62,8 @@ class CustomTextField extends StatefulWidget {
   final bool isPrefixIcon;
   final bool readOnly;
   final int? maxLength;
+  final bool? isCollapsed;
+  final bool? isDense;
   final List<TextInputFormatter>? inputFormatters;
   final VoidCallback? onTap; // Callback function for onTap
 
@@ -90,6 +94,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
       obscureText: widget.isPassword ? obscureText : false,
       validator: widget.validator,
       decoration: InputDecoration(
+        isCollapsed: widget.isCollapsed,
+        isDense: widget.isDense,
         errorMaxLines: 2,
         hintText: widget.hintText,
         hintStyle: widget.hintStyle,
