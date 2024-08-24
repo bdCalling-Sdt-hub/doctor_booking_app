@@ -55,25 +55,25 @@ class CustomCard extends StatelessWidget {
             top: 165.h, // Adjust based on your layout
             left: 25.w,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
                   text: name,
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
                   color: Colors.black,
-                  top: 5,
+                  top: 3,
                 ),
                 CustomText(
                   text: profession,
                   fontWeight: FontWeight.w400,
                   fontSize: 12,
                   color: Colors.grey.shade600,
-                  top: 5,
+                  top: 3,
                 ),
-                SizedBox(
-                  height: 5.h,
-                ),
+                // SizedBox(
+                //   height: 5.h,
+                // ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,

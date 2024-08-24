@@ -1,4 +1,7 @@
+import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_notification_screen/doctor_notification_popup/doctor_notification_popup.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NotificationController extends GetxController {
@@ -40,4 +43,16 @@ class NotificationController extends GetxController {
       'icon': AppIcons.review
     },
   ];
+  //=================== Doctor Notification controller ===================//
+
+  showNotificationPopup() {
+    return showDialog(
+      context: Get.context!,
+      builder: (_) => AlertDialog(
+        backgroundColor: AppColors.whiteNormal,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        content: DoctorNotificationPopup(),
+      ),
+    );
+  }
 }

@@ -17,6 +17,7 @@ class CustomDoctorCard extends StatelessWidget {
     required this.onTap,
     this.reScheduleButton,
     this.timeTextColor,
+    this.showPopupButton = true,
   });
 
   final String imageUrl;
@@ -26,6 +27,7 @@ class CustomDoctorCard extends StatelessWidget {
   final VoidCallback onTap;
   final VoidCallback? reScheduleButton;
   final Color? timeTextColor;
+  final bool? showPopupButton;
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +71,7 @@ class CustomDoctorCard extends StatelessWidget {
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w400,
                               color: AppColors.grayNormal,
+                              bottom: 3,
                             ),
 
                             ///===============more icon =============
@@ -85,7 +88,7 @@ class CustomDoctorCard extends StatelessWidget {
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           color: timeTextColor ?? AppColors.grayNormal,
-                          bottom: 8,
+                          bottom: 3,
                         ),
 
                         //==================loactions=============//
@@ -114,29 +117,31 @@ class CustomDoctorCard extends StatelessWidget {
                   ),
                 ],
               ),
-              Positioned(
-                right: 0.h,
-                top: -4.h,
-                child: PopupMenuButton<int>(
-                  shadowColor: AppColors.white,
-                  surfaceTintColor: AppColors.white,
-                  color: AppColors.white,
-                  icon: const Icon(Icons.more_vert),
-                  itemBuilder: (context) => [
-                    // popupmenu item 1
-                    PopupMenuItem(
-                      value: 1,
-                      // row has two child icon and text.
-                      child: InkWell(
-                        onTap: reScheduleButton,
-                        child: const CustomText(
-                          text: AppStrings.reschedule,
-                        ),
+              showPopupButton!
+                  ? Positioned(
+                      right: -8.h,
+                      top: -8.h,
+                      child: PopupMenuButton<int>(
+                        shadowColor: AppColors.white,
+                        surfaceTintColor: AppColors.white,
+                        color: AppColors.white,
+                        icon: const Icon(Icons.more_vert),
+                        itemBuilder: (context) => [
+                          // popupmenu item 1
+                          PopupMenuItem(
+                            value: 1,
+                            // row has two child icon and text.
+                            child: InkWell(
+                              onTap: reScheduleButton,
+                              child: const CustomText(
+                                text: AppStrings.reschedule,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-              ),
+                    )
+                  : const SizedBox(),
             ],
           ),
         ),

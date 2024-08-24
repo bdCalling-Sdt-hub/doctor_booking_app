@@ -1,3 +1,4 @@
+import 'package:doctor_booking/controller/notification_controller/notification_controller.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
@@ -8,9 +9,13 @@ import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:doctor_booking/view/widgets/doctor_nav_bar/doctor_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class DoctorNotificationScreen extends StatelessWidget {
-  const DoctorNotificationScreen({super.key});
+  DoctorNotificationScreen({super.key});
+
+  final NotificationController notificationController =
+      Get.find<NotificationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +66,8 @@ class DoctorNotificationScreen extends StatelessWidget {
                   Column(
                     children: List.generate(
                       3,
-                      (index) => const DoctorNotificationCard(
-                        container: CircleAvatar(
+                      (index) => DoctorNotificationCard(
+                        container: const CircleAvatar(
                           radius: 30,
                           backgroundColor: AppColors.blackLight,
                           child: CustomImage(
@@ -74,6 +79,7 @@ class DoctorNotificationScreen extends StatelessWidget {
                         description:
                             'You have successfully cancelled your appointment with Dr. David Patel.',
                         time: '2h',
+                        onTap: () {},
                       ),
                     ),
                   ),
@@ -106,8 +112,8 @@ class DoctorNotificationScreen extends StatelessWidget {
                   Column(
                     children: List.generate(
                       2,
-                      (index) => const DoctorNotificationCard(
-                        container: CircleAvatar(
+                      (index) => DoctorNotificationCard(
+                        container: const CircleAvatar(
                           radius: 30,
                           backgroundColor: AppColors.blackLight,
                           child: CustomImage(
@@ -119,6 +125,9 @@ class DoctorNotificationScreen extends StatelessWidget {
                         description:
                             'You have successfully cancelled your appointment with Dr. David Patel.',
                         time: '2h',
+                        onTap: () {
+                          notificationController.showNotificationPopup();
+                        },
                       ),
                     ),
                   ),

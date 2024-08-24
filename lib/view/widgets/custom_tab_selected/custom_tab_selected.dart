@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomTabSelector extends StatelessWidget {
   final List<String> tabs;
@@ -52,7 +53,7 @@ class CustomTabSelector extends StatelessWidget {
               ),
               child: Text(
                 tabs[index],
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   color: selectedIndex == index
                       ? selectedColor
                       : isTextColorActive!

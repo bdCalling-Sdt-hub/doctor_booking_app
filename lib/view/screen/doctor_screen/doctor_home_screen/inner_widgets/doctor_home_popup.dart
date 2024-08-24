@@ -1,7 +1,9 @@
 import 'package:doctor_booking/controller/doctor_home_controller/doctor_home_controller.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
+import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
+import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,6 +24,27 @@ class DoctorHomePopup extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: const CustomImage(
+                  imageSrc: AppIcons.close,
+                  size: 16,
+                ),
+              ),
+            ),
+            Center(
+              child: CustomText(
+                text: AppStrings.reschedule,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: AppColors.blackNormal,
+                bottom: 10.h,
+              ),
+            ),
             CustomText(
               text: AppStrings.rescheduleDate,
               fontSize: 15.sp,
@@ -130,13 +153,18 @@ class AvailableTimeContainer extends StatelessWidget {
     return GridView.builder(
         shrinkWrap: true,
         itemCount: 12,
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
+            mainAxisSpacing: 8.w,
+            crossAxisSpacing: 12.w,
+            childAspectRatio: 2),
         itemBuilder: (context, index) {
-          return InkWell(
+          return GestureDetector(
             onTap: () => onChanged!(index),
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 1.h, vertical: 15),
+              //height: 30.h,
+              // width: 48.w,
+              // margin: EdgeInsets.symmetric(horizontal: 1.h, vertical: 15),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
@@ -147,16 +175,13 @@ class AvailableTimeContainer extends StatelessWidget {
                     width: 1,
                     color: AppColors.grayLightHover,
                   )),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CustomText(
-                  text: time,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w400,
-                  color: currentIndex == index
-                      ? AppColors.white
-                      : AppColors.blackNormal,
-                ),
+              child: CustomText(
+                text: time,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+                color: currentIndex == index
+                    ? AppColors.white
+                    : AppColors.blackNormal,
               ),
             ),
           );

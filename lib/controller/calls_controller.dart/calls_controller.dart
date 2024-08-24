@@ -35,4 +35,7 @@ class CallsController extends GetxController {
           );
         });
   }
+
+  List<String> callsTabList = [AppStrings.today, AppStrings.allCalls];
+  RxInt callsTabIndex = 0.obs;
 }

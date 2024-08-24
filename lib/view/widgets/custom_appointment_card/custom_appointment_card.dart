@@ -6,6 +6,7 @@ import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomAppointmentCard extends StatelessWidget {
   final String imageUrl;
@@ -64,15 +65,16 @@ class CustomAppointmentCard extends StatelessWidget {
                     children: [
                       Text(
                         name,
-                        style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.grayNormal),
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.grayNormal,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         profession,
-                        style: const TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
                           color: AppColors.whiteDarker,
@@ -100,6 +102,15 @@ class CustomAppointmentCard extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   fontSize: 12,
                   color: AppColors.grayNormal,
+                ),
+                SizedBox(
+                  width: 7.w,
+                ),
+                const CustomText(
+                  text: '.',
+                  fontSize: 20,
+                  color: AppColors.blackDarker,
+                  fontWeight: FontWeight.w800,
                 ),
                 CustomText(
                   left: 10,

@@ -33,6 +33,7 @@ import 'package:doctor_booking/view/screen/patient_screen/profile_screen/account
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/account_info_screen/account_info_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/appointment_history_screen/appointment_history_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/help_center_screen/help_center_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/reschedule_appointmet_screen/reschedule_appoinment_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/search_screen/search_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/setting_screen/change_password_screen/change_password_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/setting_screen/setting_screen.dart';
@@ -112,6 +113,10 @@ class AppRoutes {
 
   static const String allPatientListScreen = "/AllPatientListScreen";
   static const String patientDetails2 = "/PatientDetailsScreen";
+  //================= Reschedule Appointment Screen ===================//
+
+  static const String rescheduleAppointmentScreen =
+      "/RescheduleAppointmentScreen";
 
   static List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
@@ -165,6 +170,9 @@ class AppRoutes {
     GetPage(name: chooseScreen, page: () => ChooseScreen()),
     GetPage(name: doctorProfileScreen, page: () => const DoctorProfileScreen()),
     GetPage(name: specialistProfile, page: () => const SpecialistProfile()),
+    GetPage(
+        name: rescheduleAppointmentScreen,
+        page: () => const RescheduleAppoinmentScreen()),
 
     ///==============================>>>>>>Doctor Section<<<<<<<========================
     //===================================home Section====================

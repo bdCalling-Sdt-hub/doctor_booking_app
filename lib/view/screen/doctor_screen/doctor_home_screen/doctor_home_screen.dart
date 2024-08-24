@@ -9,6 +9,7 @@ import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/inne
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/inner_widgets/home_container.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/inner_widgets/home_small_container.dart';
 import 'package:doctor_booking/view/widgets/custom_tab_selected/custom_tab_selected.dart';
+import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:doctor_booking/view/widgets/doctor_nav_bar/doctor_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -175,24 +176,41 @@ class DoctorHomeScreen extends StatelessWidget {
                               }),
                             )
                           : Column(
-                              children: List.generate(
-                                4,
-                                (index) {
-                                  return CustomDoctorCard(
-                                    imageUrl: AppConstants.userNtr,
-                                    patentName: 'Heart Disease',
-                                    time: 'Today  ( 12 : 00 AM )',
-                                    loacation: 'Online Appointment',
-                                    onTap: () {
-                                      Get.toNamed(AppRoutes.patientDetails);
+                              children: [
+                                SizedBox(
+                                  height: 24.h,
+                                ),
+                                CustomText(
+                                  text: "${AppStrings.totalCancelation} 12",
+                                  fontSize: 14.w,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.blackNormal,
+                                ),
+                                SizedBox(
+                                  height: 16.h,
+                                ),
+                                Column(
+                                  children: List.generate(
+                                    4,
+                                    (index) {
+                                      return CustomDoctorCard(
+                                        showPopupButton: false,
+                                        imageUrl: AppConstants.userNtr,
+                                        patentName: 'Heart Disease',
+                                        time: 'Today  ( 12 : 00 AM )',
+                                        loacation: 'Online Appointment',
+                                        onTap: () {
+                                          Get.toNamed(AppRoutes.patientDetails);
+                                        },
+                                        reScheduleButton: () {
+                                          controller.showHomePopup();
+                                        },
+                                        timeTextColor: AppColors.red,
+                                      );
                                     },
-                                    reScheduleButton: () {
-                                      controller.showHomePopup();
-                                    },
-                                    timeTextColor: AppColors.red,
-                                  );
-                                },
-                              ),
+                                  ),
+                                ),
+                              ],
                             );
                     },
                   ),

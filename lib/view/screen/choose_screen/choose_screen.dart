@@ -3,7 +3,7 @@ import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_images/app_images.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
-import 'package:doctor_booking/view/screen/custom_radio_button/custom_radio_button.dart';
+import 'package:doctor_booking/view/widgets/custom_radio_button/custom_radio_button.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
@@ -65,7 +65,8 @@ class ChooseScreen extends StatelessWidget {
                 onTap: () {
                   if (_controller.selectedOption == 'Patient') {
                     Get.toNamed(AppRoutes.signUpScreen);
-                  } else if (_controller.selectedOption== 'Health Professional') {
+                  } else if (_controller.selectedOption ==
+                      'Health Professional') {
                     Get.toNamed(AppRoutes.doctorSignUp);
                   }
                 },

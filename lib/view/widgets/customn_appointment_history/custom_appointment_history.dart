@@ -107,7 +107,7 @@ class CustomAppointmentHistory extends StatelessWidget {
                     color: AppColors.grayNormal,
                   ),
                   CustomText(
-                    text: date,
+                    text: time,
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                     color: AppColors.grayNormal,

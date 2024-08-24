@@ -27,9 +27,11 @@ class CallHistoryScreen extends StatelessWidget {
               Column(
                 children: List.generate(10, (index) {
                   return CustomCallHistory(
-                      image: AppConstants.userNtr,
-                      name: 'Hasibur Rashid Mah',
-                      date: 'Today 08 : 30 PM');
+                    image: AppConstants.userNtr,
+                    name: 'Hasibur Rashid Mah',
+                    date: 'Today 08 : 30 PM',
+                    moreButton: () {},
+                  );
                 }),
               )
             ],

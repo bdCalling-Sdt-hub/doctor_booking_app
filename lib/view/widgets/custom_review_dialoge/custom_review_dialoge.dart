@@ -37,7 +37,8 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: AppColors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+      backgroundColor: AppColors.whiteNormal,
       content: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,9 +87,10 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
               allowHalfRating: true,
               itemCount: 5,
               itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-              itemBuilder: (context, _) => const Icon(
+              itemBuilder: (context, _) => Icon(
                 Icons.star,
                 color: Colors.amber,
+                size: 10.w,
               ),
               onRatingUpdate: (rating) {
                 setState(() {
@@ -110,10 +112,10 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
             ),
             CustomTextField(
               textEditingController: TextEditingController(),
-              hintText: 'Write Your Review Here',
+              //  hintText: 'Write Your Review Here',
               hintStyle: const TextStyle(fontSize: 10),
               fillColor: Colors.white,
-              maxLines: 4,
+              maxLines: 3,
             ),
 
             ///====================Submit Button===========

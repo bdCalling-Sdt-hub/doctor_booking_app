@@ -107,7 +107,7 @@ class AccountEditScreen extends StatelessWidget {
 
                 ///=====================Location================
                 CustomFormCard(
-                    title: AppStrings.location,
+                    title: AppStrings.gender,
                     controller: TextEditingController()),
 
                 ///===================Update Button===========

@@ -29,7 +29,7 @@ class AppStrings {
   static const String findAndBookAvailableSlots =
       "Find and book available slots with your preferred doctors in just a few taps.";
   static const String yourHealthRecords =
-      "Your Health Records, Always Accessible";
+      "Your Health Records, Always \nAccessible";
   static const String securelyAccessYourMedical =
       "Securely access your medical history and health records anytime, anywhere.";
 
@@ -52,6 +52,7 @@ class AppStrings {
   static const String yourNameHere = "Your name here";
   static const String dateOfBirth = "Date of birth";
   static const String email = "Email";
+  static const String confirm = "Confirm";
   static const String yourMailHere = "Your mail here";
   static const String phoneNumber = "Phone Number";
   static const String yourPhoneNumberHere = "Your phone number here";
@@ -209,4 +210,8 @@ class AppStrings {
   static const String dayOfWeek = 'Day of Week';
   static const String startTime = 'Start Time';
   static const String endTime = 'End Time';
+  static const String areYouSure =
+      'Are you sure want to cancel this appointment?';
+  static const String ifYouCancel =
+      'If you cancel this appointment 30% of the appointment fee will be deducted, rest of fee will be refunded within 48 Hours to your account.';
 }
