@@ -51,7 +51,7 @@ class NotificationController extends GetxController {
       builder: (_) => AlertDialog(
         backgroundColor: AppColors.whiteNormal,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-        content: DoctorNotificationPopup(),
+        content: const DoctorNotificationPopup(),
       ),
     );
   }

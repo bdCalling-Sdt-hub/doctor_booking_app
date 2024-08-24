@@ -95,7 +95,6 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
               onRatingUpdate: (rating) {
                 setState(() {
                   _rating = rating;
-                  print(_rating);
                 });
               },
             ),
