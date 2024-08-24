@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
+import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
@@ -53,8 +54,10 @@ class PatientAuthController extends GetxController {
     );
 
     if (response.statusCode == 200) {
-      AppConstants.bearerToken = response.body['token'];
-      print(AppConstants.bearerToken);
+
+          SharePrefsHelper.setString(
+          AppConstants.bearerToken, response.body["token"]);
+      
       if (response.body['data']['role'] == 'DOCTOR') {
         Get.offAllNamed(AppRoutes.doctorHomeScreen);
       } else {
