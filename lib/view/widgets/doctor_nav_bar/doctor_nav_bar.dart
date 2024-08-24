@@ -28,7 +28,7 @@ class _DoctorNavBarState extends State<DoctorNavBar> {
     AppIcons.homeUnselected,
     AppIcons.scheduleUnselected,
     AppIcons.callUnselectedIcon,
-    AppIcons.notification,
+    AppIcons.notificationUnselected,
     AppIcons.profileUnselected,
   ];
 
