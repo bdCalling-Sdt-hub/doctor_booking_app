@@ -4,7 +4,7 @@ import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/appointments_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/favorite_screen/favorite_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/home_screen.dart';
-import 'package:doctor_booking/view/screen/patient_screen/hospital_screen/hospital_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/hospital_screen/location_screen/location_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/profile_screen.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -12,31 +12,31 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class PatientNavBart extends StatefulWidget {
+class PatientNavBar extends StatefulWidget {
   final int currentIndex;
 
-  const PatientNavBart({required this.currentIndex, super.key});
+  const PatientNavBar({required this.currentIndex, super.key});
 
   @override
-  State<PatientNavBart> createState() => _PatientNavBartState();
+  State<PatientNavBar> createState() => _PatientNavBarState();
 }
 
-class _PatientNavBartState extends State<PatientNavBart> {
+class _PatientNavBarState extends State<PatientNavBar> {
   var bottomNavIndex = 0;
 
   List<String> unselectedIcon = [
     AppIcons.homeUnselected,
-    AppIcons.favoriteUnselected,
+    AppIcons.unselectedFavoriteIcon,
     AppIcons.hospitalUnselected,
     AppIcons.appointmentUnselected,
     AppIcons.profileUnselected,
   ];
 
   List<String> selectedIcon = [
-    AppIcons.homeSelected,
+    AppIcons.homeSelectedIcon,
     AppIcons.favoriteSelected,
     AppIcons.hospitalSelected,
-    AppIcons.appointmentSelected,
+    AppIcons.selectedAppointmentIcon,
     AppIcons.profileSelected,
   ];
   final List<String> userNavText = [
@@ -45,7 +45,6 @@ class _PatientNavBartState extends State<PatientNavBart> {
     AppStrings.hospitals,
     AppStrings.appointments,
     AppStrings.profile
-
   ];
   @override
   void initState() {
@@ -67,28 +66,27 @@ class _PatientNavBartState extends State<PatientNavBart> {
         children: List.generate(
           unselectedIcon.length,
           (index) => InkWell(
-            onTap: () => onTap(index),
-            child: Column(
-              children: [
-                SvgPicture.asset(
-                  index == bottomNavIndex
-                      ? selectedIcon[index]
-                      : unselectedIcon[index],
-                  height: 24.h,
-                  width: 24.w,
-                ),
-                CustomText(
-                  top: 6,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12,
-                  text: userNavText[index],
-                  color: index == bottomNavIndex
-                      ? AppColors.darkActive
-                      : AppColors.darkActive,
-                ),
-              ],
-            )
-          ),
+              onTap: () => onTap(index),
+              child: Column(
+                children: [
+                  SvgPicture.asset(
+                    index == bottomNavIndex
+                        ? selectedIcon[index]
+                        : unselectedIcon[index],
+                    height: 24.h,
+                    width: 24.w,
+                  ),
+                  CustomText(
+                    top: 6,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                    text: userNavText[index],
+                    color: index == bottomNavIndex
+                        ? AppColors.whiteDarkActive
+                        : AppColors.whiteDarkActive,
+                  ),
+                ],
+              )),
         ),
       ),
     );
@@ -100,10 +98,10 @@ class _PatientNavBartState extends State<PatientNavBart> {
     } else if (index == 1 && widget.currentIndex != 1) {
       Get.to(() => const FavoriteScreen());
     } else if (index == 2 && widget.currentIndex != 2) {
-      Get.to(() => const HospitalScreen());
+      Get.to(() => const LocationScreen());
     } else if (index == 3 && widget.currentIndex != 3) {
-      Get.to(() => const AppointmentsScreen());
-    }else if (index == 4 && widget.currentIndex != 4) {
+      Get.to(() => AppointmentsScreen());
+    } else if (index == 4 && widget.currentIndex != 4) {
       Get.to(() => const ProfileScreen());
     }
   }

@@ -3,6 +3,10 @@ class AppIcons {
 
   static const String eye = "$basePath/eye.svg";
   static const String eyeOff = "$basePath/eyeOff.svg";
+  static const String callUnselectedIcon = "$basePath/call_unselected_icon.svg";
+  static const String homeSelectedIcon = "$basePath/home_selected_icon.svg";
+  static const String unselectedFavoriteIcon = "$basePath/unselected_favorite_icon.svg";
+  static const String selectedAppointmentIcon = "$basePath/selected_appointment_icon.svg";
   static const String vector = "$basePath/Vector.svg";
   static const String notification = "$basePath/notification.svg";
   static const String menu = "$basePath/menu.svg";
@@ -35,17 +39,31 @@ class AppIcons {
   static const String myAppointment = "$basePath/myAppointment.svg";
   static const String tranjectionHistory = "$basePath/tranjection_history.svg";
   static const String arrowLeft = "$basePath/arrow_left_alt.svg";
+  static const String close = "$basePath/close_small.svg";
+  static const String edit = "$basePath/edit.png";
+  static const String gallary = "$basePath/gallary.png";
 
   ///==========================nav bar=================
 
   static const String favoriteSelected = "$basePath/favorite_selected.svg";
+  static const String scheduleUnselected = "$basePath/scheduleUnselected.svg";
+  static const String scheduleSelected = "$basePath/schedule.svg";
+  static const String notificationSelected =
+      "$basePath/notification_selected.svg";
+  static const String callUnselected = "$basePath/vediocall.svg";
+  static const String callSelected = "$basePath/call_selected.svg";
   static const String homeSelected = "$basePath/homeSelected.svg";
   static const String homeUnselected = "$basePath/home_unselected.svg";
   static const String favoriteUnselected = "$basePath/favorite_unselect.svg";
   static const String hospitalUnselected = "$basePath/hospital_unselected.svg";
   static const String hospitalSelected = "$basePath/hospital_selected.svg";
-  static const String appointmentSelected = "$basePath/appointment_selected.svg";
-  static const String appointmentUnselected = "$basePath/appointment_unselected.svg";
+  static const String appointmentSelected =
+      "$basePath/appointment_selected.svg";
+  static const String appointmentUnselected =
+      "$basePath/appointment_unselected.svg";
   static const String profileSelected = "$basePath/profile_selected.svg";
   static const String profileUnselected = "$basePath/profile_unselected.svg";
+  static const String star = "$basePath/star.svg";
+  static const String scearch = "$basePath/scearch.svg";
+  static const String videoCammera = "$basePath/videoCammera.svg";
 }
