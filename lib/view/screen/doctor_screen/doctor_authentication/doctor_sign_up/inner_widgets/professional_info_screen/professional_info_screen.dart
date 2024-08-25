@@ -39,25 +39,25 @@ class ProfessionalInfoScreen extends StatelessWidget {
               CustomFormCard(
                   hasBackgroundColor: true,
                   title: 'Specialisation',
-                  controller: TextEditingController()),
+                  controller: doctorAuthController.specialisController.value),
 
               ///==================================yearsOfExperience==========================
               CustomFormCard(
                   hasBackgroundColor: true,
                   title: AppStrings.yearsOfExperience,
-                  controller: TextEditingController()),
+                  controller: doctorAuthController.experienceController.value),
 
               ///==================================Educational Background==========================
               CustomFormCard(
                   hasBackgroundColor: true,
                   title: AppStrings.educationalBackground,
-                  controller: TextEditingController()),
+                  controller: doctorAuthController.educationController.value),
 
               ///==================================currentAffiliation==========================
               CustomFormCard(
                   hasBackgroundColor: true,
                   title: AppStrings.currentAffiliation,
-                  controller: TextEditingController()),
+                  controller: doctorAuthController.affiliationController.value),
 
               ///==============Checkbox============
               Row(
@@ -129,10 +129,13 @@ class ProfessionalInfoScreen extends StatelessWidget {
                 height: 10.h,
               ),
 
-              ///=============================Sign up Button===================
+              ///================================= Sign up Button ============================
+
               CustomButton(
                 onTap: () {
-                  Get.toNamed(AppRoutes.doctorHomeScreen);
+                  // Get.toNamed(AppRoutes.doctorHomeScreen);
+
+                  doctorAuthController.doctorSignUp();
                 },
                 title: AppStrings.signUp,
               ),

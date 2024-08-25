@@ -52,6 +52,8 @@ class AppStrings {
   static const String yourNameHere = "Your name here";
   static const String dateOfBirth = "Date of birth";
   static const String email = "Email";
+  static const String weekend = "Weekend";
+
   static const String confirm = "Confirm";
   static const String yourMailHere = "Your mail here";
   static const String phoneNumber = "Phone Number";

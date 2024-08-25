@@ -43,7 +43,6 @@ class CustomFormCard extends StatelessWidget {
           color: hintTextChangeColor!
               ? AppColors.whiteDarker
               : AppColors.grayNormal,
-          fontWeight: hintTextChangeColor! ? FontWeight.w400 : FontWeight.w500,
           fontSize: 16.sp,
           bottom: 12.h,
           maxLines: 2,

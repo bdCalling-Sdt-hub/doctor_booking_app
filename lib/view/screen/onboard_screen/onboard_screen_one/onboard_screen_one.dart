@@ -19,10 +19,13 @@ class OnboardScreenOne extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          const CustomImage(
-            imageSrc: AppImages.onboardOne,
-            imageType: ImageType.png,
-            fit: BoxFit.cover,
+          const Expanded(
+            flex: 5,
+            child: CustomImage(
+              imageSrc: AppImages.onboardOne,
+              imageType: ImageType.png,
+              fit: BoxFit.cover,
+            ),
           ),
 
           ///===========================Next Button==============
@@ -55,61 +58,41 @@ class OnboardScreenOne extends StatelessWidget {
                   },
                   title: AppStrings.next,
                 ),
-
                 SizedBox(
                   height: 40.h,
                 ),
-
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const CircleAvatar(
-                      radius: 7,
-                      backgroundColor: AppColors.blackNormal,
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    const CircleAvatar(
-                      radius: 5,
-                      backgroundColor: AppColors.grayLightHover,
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    const CircleAvatar(
-                      radius: 5,
-                      backgroundColor: AppColors.grayLightHover,
-                    ),
-                  ],
-                ),
-
-                ///============================Dot indicator================
-                ///
-                ///
-                ///
-
-                // Obx(() {
-                //   return SmoothPageIndicator(
-                //     controller: homeController.pageController.value,
-                //     count: 3,
-                //     axisDirection: Axis.horizontal,
-                //     effect: const ExpandingDotsEffect(
-                //       expansionFactor: 3,
-                //       spacing: 8.0,
-                //       dotWidth: 10,
-                //       dotHeight: 6.0,
-                //       paintStyle: PaintingStyle.fill,
-                //       dotColor: AppColors.blackLight,
-                //       activeDotColor: AppColors.blackO,
-                //     ),
-                //     onDotClicked: (index) {},
-                //   );
-                // }),
               ],
             ),
-          )
+          ),
+
+          ///============================Dot indicator================
+
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const CircleAvatar(
+                  radius: 7,
+                  backgroundColor: AppColors.blackNormal,
+                ),
+                SizedBox(
+                  width: 10.w,
+                ),
+                const CircleAvatar(
+                  radius: 5,
+                  backgroundColor: AppColors.grayLightHover,
+                ),
+                SizedBox(
+                  width: 10.w,
+                ),
+                const CircleAvatar(
+                  radius: 5,
+                  backgroundColor: AppColors.grayLightHover,
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

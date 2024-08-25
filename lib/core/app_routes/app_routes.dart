@@ -37,7 +37,7 @@ import 'package:doctor_booking/view/screen/patient_screen/reschedule_appointmet_
 import 'package:doctor_booking/view/screen/patient_screen/search_screen/search_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/setting_screen/change_password_screen/change_password_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/setting_screen/setting_screen.dart';
-import 'package:doctor_booking/view/screen/patient_screen/specialist_profile/specialistProfile.dart';
+import 'package:doctor_booking/view/screen/patient_screen/specialist_profile/specialist_profile.dart';
 import 'package:doctor_booking/view/screen/patient_screen/terms_and_condition_screen/terms_and_condition_screen.dart';
 import 'package:doctor_booking/view/screen/splash_screen/spalsh_screen.dart';
 import 'package:get/get.dart';

@@ -22,6 +22,7 @@ class CustomReviewDialog extends StatefulWidget {
       required this.commentController});
 
   @override
+  // ignore: library_private_types_in_public_api
   _CustomReviewDialogState createState() => _CustomReviewDialogState();
 }
 

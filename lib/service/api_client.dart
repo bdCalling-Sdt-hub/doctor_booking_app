@@ -35,7 +35,7 @@ class ApiClient extends GetxService {
 
       http.Response response = await client
           .get(
-            Uri.parse(ApiConstant.baseUrl + uri),
+            Uri.parse(ApiUrl.baseUrl + uri),
             headers: headers ?? mainHeaders,
           )
           .timeout(const Duration(seconds: timeoutInSeconds));
@@ -66,7 +66,7 @@ class ApiClient extends GetxService {
 
       http.Response response = await client
           .post(
-            Uri.parse(ApiConstant.baseUrl + uri),
+            Uri.parse(ApiUrl.baseUrl + uri),
             body: body,
             headers: headers ?? mainHeaders,
           )
@@ -94,7 +94,7 @@ class ApiClient extends GetxService {
 
       http.Response response = await client
           .patch(
-            Uri.parse(ApiConstant.baseUrl + uri),
+            Uri.parse(ApiUrl.baseUrl + uri),
             body: body,
             headers: headers ?? mainHeaders,
           )
@@ -121,7 +121,7 @@ class ApiClient extends GetxService {
 
       http.Response response = await http
           .put(
-            Uri.parse(ApiConstant.baseUrl + uri),
+            Uri.parse(ApiUrl.baseUrl + uri),
             body: jsonEncode(body),
             headers: headers ?? mainHeaders,
           )
@@ -147,7 +147,7 @@ class ApiClient extends GetxService {
       debugPrint('====> API Body: $body with ${multipartBody?.length} picture');
 
       var request =
-          http.MultipartRequest('POST', Uri.parse(ApiConstant.baseUrl + uri));
+          http.MultipartRequest('POST', Uri.parse(ApiUrl.baseUrl + uri));
       request.fields.addAll(body);
 
       if (multipartBody!.isNotEmpty) {
@@ -200,7 +200,7 @@ class ApiClient extends GetxService {
       debugPrint('====> API Body: $body with ${multipartBody?.length} picture');
 
       var request =
-          http.MultipartRequest('PATCH', Uri.parse(ApiConstant.baseUrl + uri));
+          http.MultipartRequest('PATCH', Uri.parse(ApiUrl.baseUrl + uri));
       request.fields.addAll(body);
 
       if (multipartBody!.isNotEmpty) {
@@ -267,7 +267,7 @@ class ApiClient extends GetxService {
       // }
 
       var request =
-          http.MultipartRequest('PUT', Uri.parse(ApiConstant.baseUrl + uri));
+          http.MultipartRequest('PUT', Uri.parse(ApiUrl.baseUrl + uri));
       request.fields.addAll(body);
 
       if (multipartBody!.isNotEmpty) {
@@ -327,7 +327,7 @@ class ApiClient extends GetxService {
       debugPrint('====> API Call: $uri\n Body: $body');
 
       http.Response response = await http
-          .delete(Uri.parse(ApiConstant.baseUrl + uri),
+          .delete(Uri.parse(ApiUrl.baseUrl + uri),
               headers: headers ?? mainHeaders, body: body)
           .timeout(const Duration(seconds: timeoutInSeconds));
       return handleResponse(response, uri);

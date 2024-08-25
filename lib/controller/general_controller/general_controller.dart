@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/inner_widget/appointments_history_dialog.dart';
 import 'package:doctor_booking/view/widgets/custom_image_picker_popup/custom_image_picker_popup.dart';
+import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,9 +13,9 @@ class GeneralController extends GetxController with GetxServiceMixin {
 
   RxString role = "".obs;
 
-  ///================== Show Loader ====================
+  ///================== Choose Camera or Gallery ====================
 
-  showPopUpLoader() {
+  popupCameraOrGallery() {
     return showDialog(
         barrierDismissible: true,
         barrierColor: Colors.transparent,
@@ -33,6 +34,25 @@ class GeneralController extends GetxController with GetxServiceMixin {
                   openGallery(source: ImageSource.camera);
                 },
               ),
+            ),
+          );
+        });
+  }
+
+  ///================== Show Loader ====================
+
+  showPopUpLoader() {
+    return showDialog(
+        barrierDismissible: false,
+        barrierColor: Colors.transparent,
+        context: Get.context!,
+        builder: (_) {
+          return const SizedBox(
+            height: 70,
+            child: AlertDialog(
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              content: CustomLoader(),
             ),
           );
         });
@@ -69,26 +89,6 @@ class GeneralController extends GetxController with GetxServiceMixin {
           );
         });
   }
-
-  ///================== Get User Id ====================
-  // getUserID() async {
-  //   profileID.value = await SharePrefsHelper.getString(AppConstants.profileID);
-  //   profileID.refresh();
-  // }
-
-  ///================== Get User Role ====================
-  // getRole() async {
-  //   role.value = await SharePrefsHelper.getString(AppConstants.role);
-  //   role.refresh();
-
-  //   debugPrint("User Role=================>>>>>>>>>>${role.value}");
-  // }
-
-  ///===================== Get All Info at once ===================
-  // getAllInfo() {
-  //   getUserID();
-  //   getRole();
-  // }
 
   ///================== Get Calender value ====================
 

@@ -16,11 +16,16 @@ class AppointmentInfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.whiteNormal,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Obx(() {
-              return CustomAppointmentInfo(
+      body: Obx(() {
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              ///================================= Sunday =============================
+
+              CustomAppointmentInfo(
+                isClosed:
+                    doctorAuthController.sundayTypeController.value.text ==
+                        AppStrings.weekend,
                 dayName: 'Sunday',
                 startTimeTap: () async {
                   await doctorAuthController.getTime(day: 1, num: 1);
@@ -28,106 +33,174 @@ class AppointmentInfoScreen extends StatelessWidget {
                 endTimeTap: () async {
                   await doctorAuthController.getTime(day: 1, num: 2);
                 },
-                availableTab: () {},
+                availableTab: (value) {
+                  doctorAuthController.sundayTypeController.value.text =
+                      value ?? "";
+                  doctorAuthController.sundayTypeController.refresh();
+                },
                 startController:
                     doctorAuthController.sundayStartTimeController.value,
                 endController:
                     doctorAuthController.sundayEndTimeController.value,
-              );
-            }),
-            CustomAppointmentInfo(
-              dayName: 'Monday',
-              startTimeTap: () async {
-                await doctorAuthController.getTime(day: 2, num: 1);
-              },
-              endTimeTap: () async {
-                await doctorAuthController.getTime(day: 2, num: 2);
-              },
-              availableTab: () {},
-              startController:
-                  doctorAuthController.mondayStartTimeController.value,
-              endController: doctorAuthController.mondayEndTimeController.value,
-            ),
-            CustomAppointmentInfo(
-              dayName: 'Tuesday',
-              startTimeTap: () async {
-                await doctorAuthController.getTime(day: 3, num: 1);
-              },
-              endTimeTap: () async {
-                await doctorAuthController.getTime(day: 3, num: 2);
-              },
-              availableTab: () {},
-              startController:
-                  doctorAuthController.tuesdayStartTimeController.value,
-              endController:
-                  doctorAuthController.tuesdayEndTimeController.value,
-            ),
-            CustomAppointmentInfo(
-              dayName: 'Wednesday',
-              startTimeTap: () async {
-                await doctorAuthController.getTime(day: 4, num: 1);
-              },
-              endTimeTap: () async {
-                await doctorAuthController.getTime(day: 4, num: 2);
-              },
-              availableTab: () {},
-              startController:
-                  doctorAuthController.weddayStartTimeController.value,
-              endController: doctorAuthController.weddayEndTimeController.value,
-            ),
-            CustomAppointmentInfo(
-              dayName: 'Thursday',
-              startTimeTap: () async {
-                await doctorAuthController.getTime(day: 5, num: 1);
-              },
-              endTimeTap: () async {
-                await doctorAuthController.getTime(day: 5, num: 2);
-              },
-              availableTab: () {},
-              startController:
-                  doctorAuthController.thursdayStartTimeController.value,
-              endController:
-                  doctorAuthController.thursdayEndTimeController.value,
-            ),
-            CustomAppointmentInfo(
-              dayName: 'Friday',
-              startTimeTap: () async {
-                await doctorAuthController.getTime(day: 6, num: 1);
-              },
-              endTimeTap: () async {
-                await doctorAuthController.getTime(day: 6, num: 2);
-              },
-              availableTab: () {},
-              startController:
-                  doctorAuthController.frydayStartTimeController.value,
-              endController: doctorAuthController.frydayEndTimeController.value,
-            ),
-            CustomAppointmentInfo(
-              dayName: 'Saturday',
-              startTimeTap: () async {
-                await doctorAuthController.getTime(day: 7, num: 1);
-              },
-              endTimeTap: () async {
-                await doctorAuthController.getTime(day: 7, num: 2);
-              },
-              availableTab: () {},
-              startController:
-                  doctorAuthController.satardayStartTimeController.value,
-              endController:
-                  doctorAuthController.satardayEndTimeController.value,
-            ),
-            CustomButton(
-              onTap: () {
-                doctorAuthController.updateStep(2);
-              },
-              title: AppStrings.next,
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-          ],
-        ),
-      ),
+              ),
+
+              ///================================= Monday =============================
+
+              CustomAppointmentInfo(
+                isClosed:
+                    doctorAuthController.mondayTypeController.value.text ==
+                        AppStrings.weekend,
+                dayName: 'Monday',
+                startTimeTap: () async {
+                  await doctorAuthController.getTime(day: 2, num: 1);
+                },
+                endTimeTap: () async {
+                  await doctorAuthController.getTime(day: 2, num: 2);
+                },
+                availableTab: (value) {
+                  doctorAuthController.mondayTypeController.value.text =
+                      value ?? "";
+                  doctorAuthController.mondayTypeController.refresh();
+                },
+                startController:
+                    doctorAuthController.mondayStartTimeController.value,
+                endController:
+                    doctorAuthController.mondayEndTimeController.value,
+              ),
+
+              ///================================= Tuesday =============================
+
+              CustomAppointmentInfo(
+                isClosed:
+                    doctorAuthController.tuesdayTypeController.value.text ==
+                        AppStrings.weekend,
+                dayName: 'Tuesday',
+                startTimeTap: () async {
+                  await doctorAuthController.getTime(day: 3, num: 1);
+                },
+                endTimeTap: () async {
+                  await doctorAuthController.getTime(day: 3, num: 2);
+                },
+                availableTab: (value) {
+                  doctorAuthController.tuesdayTypeController.value.text =
+                      value ?? "";
+                  doctorAuthController.tuesdayTypeController.refresh();
+                },
+                startController:
+                    doctorAuthController.tuesdayStartTimeController.value,
+                endController:
+                    doctorAuthController.tuesdayEndTimeController.value,
+              ),
+
+              ///================================= Wednesday =============================
+
+              CustomAppointmentInfo(
+                isClosed:
+                    doctorAuthController.weddayTypeController.value.text ==
+                        AppStrings.weekend,
+                dayName: 'Wednesday',
+                startTimeTap: () async {
+                  await doctorAuthController.getTime(day: 4, num: 1);
+                },
+                endTimeTap: () async {
+                  await doctorAuthController.getTime(day: 4, num: 2);
+                },
+                availableTab: (value) {
+                  doctorAuthController.weddayTypeController.value.text =
+                      value ?? "";
+                  doctorAuthController.weddayTypeController.refresh();
+                },
+                startController:
+                    doctorAuthController.weddayStartTimeController.value,
+                endController:
+                    doctorAuthController.weddayEndTimeController.value,
+              ),
+
+              ///================================= Thursday =============================
+
+              CustomAppointmentInfo(
+                isClosed:
+                    doctorAuthController.thursdayTypeController.value.text ==
+                        AppStrings.weekend,
+                dayName: 'Thursday',
+                startTimeTap: () async {
+                  await doctorAuthController.getTime(day: 5, num: 1);
+                },
+                endTimeTap: () async {
+                  await doctorAuthController.getTime(day: 5, num: 2);
+                },
+                availableTab: (value) {
+                  doctorAuthController.thursdayTypeController.value.text =
+                      value ?? "";
+
+                  doctorAuthController.thursdayTypeController.refresh();
+                },
+                startController:
+                    doctorAuthController.thursdayStartTimeController.value,
+                endController:
+                    doctorAuthController.thursdayEndTimeController.value,
+              ),
+
+              ///================================= Friday =============================
+
+              CustomAppointmentInfo(
+                isClosed:
+                    doctorAuthController.fridayTypeController.value.text ==
+                        AppStrings.weekend,
+                dayName: 'Friday',
+                startTimeTap: () async {
+                  await doctorAuthController.getTime(day: 6, num: 1);
+                },
+                endTimeTap: () async {
+                  await doctorAuthController.getTime(day: 6, num: 2);
+                },
+                availableTab: (value) {
+                  doctorAuthController.fridayTypeController.value.text =
+                      value ?? "";
+                  doctorAuthController.fridayTypeController.refresh();
+                },
+                startController:
+                    doctorAuthController.fridayStartTimeController.value,
+                endController:
+                    doctorAuthController.fridayEndTimeController.value,
+              ),
+
+              ///================================= Saturday =============================
+
+              CustomAppointmentInfo(
+                isClosed:
+                    doctorAuthController.saturdayTypeController.value.text ==
+                        AppStrings.weekend,
+                dayName: 'Saturday',
+                startTimeTap: () async {
+                  await doctorAuthController.getTime(day: 7, num: 1);
+                },
+                endTimeTap: () async {
+                  await doctorAuthController.getTime(day: 7, num: 2);
+                },
+                availableTab: (value) {
+                  doctorAuthController.saturdayTypeController.value.text =
+                      value ?? "";
+                  doctorAuthController.saturdayTypeController.refresh();
+                },
+                startController:
+                    doctorAuthController.saturdayStartTimeController.value,
+                endController:
+                    doctorAuthController.saturdayEndTimeController.value,
+              ),
+              CustomButton(
+                onTap: () {
+                  doctorAuthController.updateStep(2);
+                },
+                title: AppStrings.next,
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+            ],
+          ),
+        );
+      }),
     );
   }
 }

@@ -16,6 +16,7 @@ class OnboardScreen extends StatelessWidget {
     return Scaffold(
       body: Obx(() {
         return PageView(
+          clipBehavior: Clip.none,
           controller: homeController.pageController.value,
           children: [
             OnboardScreenOne(), // First onboarding screen

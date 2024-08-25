@@ -1,4 +1,4 @@
-import 'package:doctor_booking/global/general_controller.dart';
+import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
@@ -37,7 +37,7 @@ class DoctorEditPersonalProfileScreen extends StatelessWidget {
               child: DoctorEditProfileImage(
                 imageSrc: AppConstants.userNtr,
                 onTap: () {
-                  generalController.showPopUpLoader();
+                  generalController.popupCameraOrGallery();
                 },
               ),
             ),

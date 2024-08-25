@@ -48,16 +48,15 @@ class PatientAuthController extends GetxController {
     };
 
     var response = await ApiClient.postData(
-      ApiConstant.login,
+      ApiUrl.login,
       jsonEncode(body),
       headers: {'Content-Type': 'application/json'},
     );
 
     if (response.statusCode == 200) {
-
-          SharePrefsHelper.setString(
+      SharePrefsHelper.setString(
           AppConstants.bearerToken, response.body["token"]);
-      
+
       if (response.body['data']['role'] == 'DOCTOR') {
         Get.offAllNamed(AppRoutes.doctorHomeScreen);
       } else {
