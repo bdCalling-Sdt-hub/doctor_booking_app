@@ -47,19 +47,18 @@ class ApiClient extends GetxService {
   }
 
   static Future<Response> postData(String uri, dynamic body,
-      {Map<String, String>? headers, bool applicationJson = false}) async {
+      {Map<String, String>? headers, bool isContentType = true}) async {
     bearerToken = await SharePrefsHelper.getString(AppConstants.bearerToken);
 
-    var mainHeaders = {
-      'Content-Type': applicationJson
-          ? 'application/json'
-          : 'application/x-www-form-urlencoded',
-      //'Accept': 'application/json',
-      'Authorization': 'Bearer $bearerToken'
-      /* 'Content-Type': 'application/json',
-      //'Accept': 'application/json',
-      'Authorization': 'Bearer $bearerToken'*/
-    };
+    var mainHeaders = isContentType
+        ? {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $bearerToken'
+          }
+        : {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer $bearerToken'
+          };
     try {
       debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
       debugPrint('====> API Body: $body');

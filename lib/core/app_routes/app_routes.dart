@@ -17,6 +17,7 @@ import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_three/o
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_two/onboard_screen_two.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/forget_password_screen/forget_password_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/reset_password_screen/reset_password_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/authentication/select_interest/select_interest.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_in_screen/sign_in_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_up_otp_screen/sign_up_otp_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_up_screen/sign_up_screen.dart';
@@ -77,6 +78,7 @@ class AppRoutes {
   static const String signUpOtpScreen = "/SignUpOtpScreen";
   static const String forgetPasswordScreen = "/ForgetPasswordScreen";
   static const String resetPasswordScreen = "/ResetPasswordScreen";
+  static const String selectInterest = "/selectInterest";
 
   ///===================Hospital Section====================
   static const String hospitalScreen = "/HospitalScreen";
@@ -159,6 +161,7 @@ class AppRoutes {
     GetPage(
         name: forgetPasswordScreen, page: () => const ForgetPasswordScreen()),
     GetPage(name: resetPasswordScreen, page: () => const ResetPasswordScreen()),
+    GetPage(name: selectInterest, page: () =>  SelectInterest()),
 
     ///=============================Hospital Section======================
     GetPage(name: hospitalScreen, page: () => HospitalScreen()),

@@ -77,38 +77,43 @@ class SignUpScreen extends StatelessWidget {
                 CustomFormCard(
                     hintText: AppStrings.yourMailHere,
                     title: AppStrings.email,
-                    controller: TextEditingController()),
+                    controller:
+                        patientAuthController.patientEmailController.value),
 
                 ///===============================Phone number=====================
                 CustomFormCard(
                     hintText: AppStrings.yourPhoneNumberHere,
                     title: AppStrings.phoneNumber,
-                    controller: TextEditingController()),
+                    controller: patientAuthController
+                        .patientPhoneNumberController.value),
 
                 ///===============================Location=====================
                 CustomFormCard(
                     hintText: AppStrings.typeYourLocationHere,
                     title: AppStrings.location,
-                    controller: TextEditingController()),
+                    controller:
+                        patientAuthController.patientLoactionController.value),
 
                 ///===============================Password=====================
                 CustomFormCard(
                     hintText: AppStrings.enterPassword,
                     title: AppStrings.password,
-                    controller: TextEditingController()),
+                    controller:
+                        patientAuthController.patientPasswordController.value),
 
                 ///===============================confirmPassword=====================
                 CustomFormCard(
                     hintText: AppStrings.enterPassword,
                     title: AppStrings.confirmPassword,
-                    controller: TextEditingController()),
+                    controller: patientAuthController
+                        .patientConfirmPasswordController.value),
 
                 ///==========================Continue Button=========================
 
                 CustomButton(
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
-                      Get.toNamed(AppRoutes.signUpOtpScreen);
+                      patientAuthController.signUpUser();
                     }
                   },
                   title: AppStrings.continues,

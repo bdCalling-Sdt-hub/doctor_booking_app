@@ -1,44 +1,65 @@
 import 'dart:convert';
 
+import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class PatientAuthController extends GetxController {
+  GeneralController generalController = Get.find<GeneralController>();
 // ============================ Sign in text Editing controller ======================
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  ///============================================= sign in method =====================///
+  ///=================== Update Interest ===================
+  RxList<String> interestList = [
+    "Cardiologists",
+    "Endocrinologists",
+    "Nephrologists",
+    "Dermatologist",
+    "Gynecologists",
+    "Hematologists",
+    "Neurologist",
+  ].obs;
+
+  RxList<bool> isSelectedList = <bool>[
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ].obs;
+  RxList<String> selectedInterested = <String>[].obs;
+  updateInterest({required int index}) async {
+    isSelectedList[index] = !isSelectedList[index];
+    isSelectedList.refresh();
+
+    String selectedItem = interestList[index]; // Safely retrieve the item
+
+    if (selectedInterested.contains(selectedItem)) {
+      selectedInterested.remove(selectedItem);
+    } else {
+      selectedInterested.add(selectedItem);
+    }
+    selectedInterested.refresh();
+    interestList.refresh();
+  }
+
+  ///======================== sign in method =====================///
 
   bool signinLoading = false;
-
-  // Future<void> userSignin() async {
-  //   signinLoading = true;
-  //   update();
-
-  //   Map<String, String> body = {
-  //     "email": emailController.text,
-  //     "password": passwordController.text,
-  //   };
-
-  //   var response = await ApiClient.postData(ApiConstant.login, body);
-
-  //   if (response.statusCode == 200) {
-  //     Get.to(AppRoutes.homeScreen);
-  //   }
-
-  // }
-  bool get isLoding => signinLoading;
-
   RxBool signInLoading = false.obs;
+
   signInUser() async {
     signInLoading.value = true;
     refresh();
@@ -69,6 +90,35 @@ class PatientAuthController extends GetxController {
     refresh();
   }
 
+  ///============================= Sign Up ===========================
+
+  signUpUser() async {
+    generalController.showPopUpLoader();
+
+    var body = {
+      "name": patientNameController.value.text,
+      "email": patientEmailController.value.text,
+      "date_of_birth": patientDateOfBirthController.value.text,
+      "location": patientLoactionController.value.text,
+      "phone": patientPhoneNumberController.value.text,
+      "confirm_password": patientConfirmPasswordController.value.text,
+      "password": patientPasswordController.value.text,
+      //"role": "USER"
+    };
+
+    var response = await ApiClient.postData(
+      ApiUrl.paitentSignUp,
+      jsonEncode(body),
+    );
+
+    if (response.statusCode == 200) {
+      navigator?.pop();
+      Get.toNamed(AppRoutes.signUpOtpScreen);
+    } else {
+      ApiChecker.checkApi(response);
+      navigator?.pop();
+    }
+  }
 //====================== Get Patient Date of birth Method =================
 
   getPatientDateOfBirth() async {
@@ -84,13 +134,25 @@ class PatientAuthController extends GetxController {
   }
 
   //=============================== Patient Sing up Controller ======================//
-  TextEditingController patientNameController = TextEditingController();
+  TextEditingController patientNameController =
+      TextEditingController(text: kDebugMode ? "Rafsan" : "");
+
   Rx<TextEditingController> patientDateOfBirthController =
-      TextEditingController().obs;
-  TextEditingController patientEmailController = TextEditingController();
-  TextEditingController patientPhoneNumberController = TextEditingController();
-  TextEditingController patientLoactionController = TextEditingController();
-  TextEditingController patientPasswordController = TextEditingController();
-  TextEditingController patientConfirmPasswordController =
-      TextEditingController();
+      TextEditingController(text: kDebugMode ? "August 10, 2024" : "").obs;
+
+  Rx<TextEditingController> patientEmailController =
+      TextEditingController(text: kDebugMode ? "nababej364@kwalah.com" : "")
+          .obs;
+
+  Rx<TextEditingController> patientPhoneNumberController =
+      TextEditingController(text: kDebugMode ? "1234567" : "").obs;
+
+  Rx<TextEditingController> patientLoactionController =
+      TextEditingController(text: kDebugMode ? "Badda, Dhaka" : "").obs;
+
+  Rx<TextEditingController> patientPasswordController =
+      TextEditingController(text: kDebugMode ? "1234567Rr" : "").obs;
+
+  Rx<TextEditingController> patientConfirmPasswordController =
+      TextEditingController(text: kDebugMode ? "1234567Rr" : "").obs;
 }
