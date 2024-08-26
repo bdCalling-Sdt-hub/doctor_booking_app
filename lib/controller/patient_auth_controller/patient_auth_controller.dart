@@ -133,6 +133,7 @@ class PatientAuthController extends GetxController {
     }
   }
 
+//
   //=============================== Patient Sing up Controller ======================//
   TextEditingController patientNameController =
       TextEditingController(text: kDebugMode ? "Rafsan" : "");
