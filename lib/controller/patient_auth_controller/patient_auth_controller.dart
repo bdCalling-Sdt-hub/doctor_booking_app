@@ -69,6 +69,30 @@ class PatientAuthController extends GetxController {
     refresh();
   }
 
+  saveInformationInit({required Response<dynamic> response}) async {
+    SharePrefsHelper.setString(
+        AppConstants.bearerToken, response.body["token"]);
+    //PrefsHelper.setBool(AppConstants.isSocialLogIn, false);
+    SharePrefsHelper.setString(
+      AppConstants.profileID,
+      response.body["user"]["id"].toString(),
+    );
+    SharePrefsHelper.setString(
+      AppConstants.role,
+      response.body["user"]["role"].toString(),
+    );
+
+    debugPrint(
+        'Role ==========================>>>>>>${response.body["user"]["role"]}');
+
+    emailController.clear();
+    passwordController.clear();
+
+    // GeneralController generalController = Get.find<GeneralController>();
+
+    // generalController.getAllInfo();
+  }
+
 //====================== Get Patient Date of birth Method =================
 
   getPatientDateOfBirth() async {

@@ -5,4 +5,6 @@ class ApiUrl {
 
   static const login = '/auth/sign-in';
   static const doctorSignUp = '/auth/doctor-sign-up';
+  static const profile = '/auth/profile';
+  static const doctorAppointment = '/appointment/get-my-appointments';
 }
