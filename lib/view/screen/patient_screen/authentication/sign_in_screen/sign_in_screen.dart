@@ -84,7 +84,7 @@ class SignInScreen extends StatelessWidget {
                   validator: (value) {
                     if (value.isEmpty) {
                       return AppStrings.fieldCantBeEmpty.tr;
-                    } else if (value.length < 8 &&
+                    } else if (value.length < 7 &&
                         !AppStrings.passRegexp.hasMatch(value)) {
                       return AppStrings.passwordMustHaveEightWith.tr;
                     } else {
