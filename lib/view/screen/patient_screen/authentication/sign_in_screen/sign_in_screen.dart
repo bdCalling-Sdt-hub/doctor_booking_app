@@ -123,9 +123,10 @@ class SignInScreen extends StatelessWidget {
                         )
                       : CustomButton(
                           onTap: () {
-                            if (formKey.currentState!.validate()) {
-                              patientAuthController.signInUser();
-                            }
+                            // if (formKey.currentState!.validate()) {
+                            //   patientAuthController.signInUser();
+                            // }
+                            patientAuthController.signInUser();
                           },
                           title: AppStrings.continues,
                         );
