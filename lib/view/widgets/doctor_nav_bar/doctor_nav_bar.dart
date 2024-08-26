@@ -102,7 +102,7 @@ class _DoctorNavBarState extends State<DoctorNavBar> {
     } else if (index == 3 && widget.currentIndex != 3) {
       Get.to(() => DoctorNotificationScreen());
     } else if (index == 4 && widget.currentIndex != 4) {
-      Get.to(() => const DoctorProfileScreen());
+      Get.to(() => DoctorProfileScreen());
     }
   }
 }

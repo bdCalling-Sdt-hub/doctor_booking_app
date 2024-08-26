@@ -1,3 +1,4 @@
+import 'package:doctor_booking/controller/doctor_profile_controller/doctor_profile_controller.dart';
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
@@ -14,6 +15,8 @@ import 'package:get/get.dart';
 class DoctorEditProfessionalProfileScreen extends StatelessWidget {
   DoctorEditProfessionalProfileScreen({super.key});
   final GeneralController generalController = Get.find<GeneralController>();
+  final DoctorProfileController doctorProfileController =
+      Get.find<DoctorProfileController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +29,6 @@ class DoctorEditProfessionalProfileScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             SizedBox(
               height: 24.h,
             ),
@@ -35,7 +37,6 @@ class DoctorEditProfessionalProfileScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   SizedBox(
                     height: 16.h,
                   ),
@@ -61,14 +62,16 @@ class DoctorEditProfessionalProfileScreen extends StatelessWidget {
                   CustomFormCard(
                     hasBackgroundColor: true,
                     title: AppStrings.specialization,
-                    controller: TextEditingController(),
+                    controller: doctorProfileController
+                        .doctorSpecializationController.value,
                     hintTextChangeColor: true,
                     hintText: 'Cardiologist.',
                   ),
                   CustomFormCard(
                     hasBackgroundColor: true,
                     title: AppStrings.yearsOfExperience,
-                    controller: TextEditingController(),
+                    controller: doctorProfileController
+                        .doctorYearOfExperienceController.value,
                     hintTextChangeColor: true,
                     hintText: '4 years',
                   ),
@@ -78,7 +81,8 @@ class DoctorEditProfessionalProfileScreen extends StatelessWidget {
                   CustomFormCard(
                     hasBackgroundColor: true,
                     title: AppStrings.educationalBackground,
-                    controller: TextEditingController(),
+                    controller: doctorProfileController
+                        .doctorEducationalBackgroundController.value,
                     hintTextChangeColor: true,
                     hintText: 'type here',
                   ),
@@ -86,7 +90,8 @@ class DoctorEditProfessionalProfileScreen extends StatelessWidget {
                   CustomFormCard(
                     hasBackgroundColor: true,
                     title: AppStrings.currentAffiliation,
-                    controller: TextEditingController(),
+                    controller: doctorProfileController
+                        .doctorCurrentAlliliationController.value,
                     hintTextChangeColor: true,
                     hintText: 'hospital clinic name',
                   ),

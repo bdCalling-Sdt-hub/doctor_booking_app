@@ -1,8 +1,9 @@
+import 'package:doctor_booking/controller/doctor_profile_controller/doctor_profile_controller.dart';
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
-import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_personal_profile_screen/inner_widget.dart/doctor_edit_profile_image.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_edit_personal_profile_screen/inner_widget.dart/doctor_edit_profile_image.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
@@ -15,6 +16,8 @@ class DoctorEditPersonalProfileScreen extends StatelessWidget {
   DoctorEditPersonalProfileScreen({super.key});
 
   final GeneralController generalController = Get.find<GeneralController>();
+  final DoctorProfileController doctorProfileController =
+      Get.find<DoctorProfileController>();
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +69,8 @@ class DoctorEditPersonalProfileScreen extends StatelessWidget {
                   CustomFormCard(
                     hasBackgroundColor: true,
                     title: AppStrings.yourName,
-                    controller: TextEditingController(),
+                    controller:
+                        doctorProfileController.doctorNameController.value,
                     hintTextChangeColor: true,
                     hintText: 'Dr. Hassan',
                   ),
@@ -74,7 +78,8 @@ class DoctorEditPersonalProfileScreen extends StatelessWidget {
                   CustomFormCard(
                     hasBackgroundColor: true,
                     title: AppStrings.dateOfBirth,
-                    controller: TextEditingController(),
+                    controller: doctorProfileController
+                        .doctorDateOfBirthController.value,
                     hintTextChangeColor: true,
                     hintText: '05-12-2001',
                   ),
@@ -82,7 +87,8 @@ class DoctorEditPersonalProfileScreen extends StatelessWidget {
                   CustomFormCard(
                     hasBackgroundColor: true,
                     title: AppStrings.email,
-                    controller: TextEditingController(),
+                    controller:
+                        doctorProfileController.doctorEmailController.value,
                     hintTextChangeColor: true,
                     hintText: 'info@gmail.com',
                   ),
@@ -91,7 +97,8 @@ class DoctorEditPersonalProfileScreen extends StatelessWidget {
                   CustomFormCard(
                     hasBackgroundColor: true,
                     title: AppStrings.phoneNumber,
-                    controller: TextEditingController(),
+                    controller:
+                        doctorProfileController.doctorPhoneController.value,
                     hintTextChangeColor: true,
                     hintText: '(00)+5452 125 36',
                   ),
@@ -101,7 +108,8 @@ class DoctorEditPersonalProfileScreen extends StatelessWidget {
                   CustomFormCard(
                     hasBackgroundColor: true,
                     title: AppStrings.location,
-                    controller: TextEditingController(),
+                    controller:
+                        doctorProfileController.doctorLoactionController.value,
                     hintTextChangeColor: true,
                     hintText: '775 Rolling Green Rd.',
                   ),

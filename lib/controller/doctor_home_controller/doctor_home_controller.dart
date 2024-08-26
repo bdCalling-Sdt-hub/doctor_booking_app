@@ -1,3 +1,4 @@
+import 'package:doctor_booking/controller/doctor_profile_controller/doctor_profile_controller.dart';
 import 'package:doctor_booking/model/doctor_appointment_model/appointment_model.dart';
 import 'package:doctor_booking/model/doctor_profile_model/doctor_profile_model.dart';
 import 'package:doctor_booking/service/api_check.dart';
@@ -11,6 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DoctorHomeController extends GetxController {
+  final DoctorProfileController doctorProfileController =
+      Get.find<DoctorProfileController>();
+
   RxString scheduleTime = RxString(AppStrings.today);
 
   // final RxList<String> scheduleOrCancel = [
@@ -49,6 +53,7 @@ class DoctorHomeController extends GetxController {
     if (response.statusCode == 200) {
       setRxRequestStatus(Status.completed);
       profileModel.value = ProfileModel.fromJson(response.body['data']);
+      doctorProfileController.textControllerValueAdd(profileModel.value);
       debugPrint(profileModel.value.name);
     } else {
       if (response.statusText == ApiClient.noInternetMessage) {
@@ -65,7 +70,6 @@ class DoctorHomeController extends GetxController {
   RxList<AppointmentModel> appointMentList = <AppointmentModel>[].obs;
 
   getAllDoctorAppointment() async {
-    setRxRequestStatus(Status.loading);
     var response = await ApiClient.getData(ApiUrl.doctorAppointment);
 
     if (response.statusCode == 200) {
@@ -81,6 +85,45 @@ class DoctorHomeController extends GetxController {
         setRxRequestStatus(Status.error);
       }
       ApiChecker.checkApi(response);
+    }
+  }
+  //==================== Get Doctor appoint ment weekly and monthly ======================//
+
+  getAllDoctorAppointmentWeeklyAndMonthy(String type) async {
+    if (type == AppStrings.weekly) {
+      var response =
+          await ApiClient.getData("${ApiUrl.doctorAppointment}?type=weekly");
+      if (response.statusCode == 200) {
+        setRxRequestStatus(Status.completed);
+        // appointMentList.add(AppointmentModel.fromJson(response.body['data']));
+
+        appointMentList.value = List<AppointmentModel>.from(
+            response.body["data"].map((x) => AppointmentModel.fromJson(x)));
+      } else {
+        if (response.statusText == ApiClient.noInternetMessage) {
+          setRxRequestStatus(Status.internetError);
+        } else {
+          setRxRequestStatus(Status.error);
+        }
+        ApiChecker.checkApi(response);
+      }
+    } else {
+      var response =
+          await ApiClient.getData("${ApiUrl.doctorAppointment}?type=monthly");
+      if (response.statusCode == 200) {
+        setRxRequestStatus(Status.completed);
+        // appointMentList.add(AppointmentModel.fromJson(response.body['data']));
+
+        appointMentList.value = List<AppointmentModel>.from(
+            response.body["data"].map((x) => AppointmentModel.fromJson(x)));
+      } else {
+        if (response.statusText == ApiClient.noInternetMessage) {
+          setRxRequestStatus(Status.internetError);
+        } else {
+          setRxRequestStatus(Status.error);
+        }
+        ApiChecker.checkApi(response);
+      }
     }
   }
 
