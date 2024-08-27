@@ -1,4 +1,7 @@
+import 'dart:convert';
 import 'dart:io';
+import 'package:doctor_booking/service/api_client.dart';
+import 'package:doctor_booking/service/api_url.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -59,6 +62,31 @@ class ProfileController extends GetxController {
       await launchUrl(phoneUri);
     } else {
       throw 'Could not launch $phoneNumber';
+    }
+  }
+
+  // =========================== Change Password ======================//
+
+  Rx<TextEditingController> currentPassController = TextEditingController().obs;
+  Rx<TextEditingController> newPassController = TextEditingController().obs;
+  Rx<TextEditingController> reTypeNewPassController =
+      TextEditingController().obs;
+
+  RxBool loading = false.obs;
+
+  changePassword() async {
+    Map<String, dynamic> body = {
+      "old_Password": currentPassController.value.text,
+      "password": newPassController.value.text,
+    };
+
+    loading.value = true;
+
+    var resposns =
+        await ApiClient.patchData(ApiUrl.changePassword, jsonEncode(body));
+    if (resposns.statusCode == 200) {
+      Get.back();
+      print('sussces');
     }
   }
 }

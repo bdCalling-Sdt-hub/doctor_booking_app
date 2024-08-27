@@ -16,8 +16,10 @@ class PatientAuthController extends GetxController {
   GeneralController generalController = Get.find<GeneralController>();
 // ============================ Sign in text Editing controller ======================
 
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController =
+      TextEditingController(text: kDebugMode ? "joliy19407@avashost.com" : "");
+  final TextEditingController passwordController =
+      TextEditingController(text: kDebugMode ? "1234567" : "");
 
   ///=================== Update Interest ===================
   RxList<String> interestList = [
@@ -156,4 +158,9 @@ class PatientAuthController extends GetxController {
 
   Rx<TextEditingController> patientConfirmPasswordController =
       TextEditingController(text: kDebugMode ? "1234567Rr" : "").obs;
+
+  //================================================ Forgot password Controller ===============================///
+
+  Rx<TextEditingController> forgotEmailController = TextEditingController().obs;
+  //Rx<TextEditingController> forgotPasswordController = TextEditingController().obs;
 }

@@ -7,9 +7,13 @@ class ApiUrl {
   static const doctorSignUp = '/auth/doctor-sign-up';
   static const paitentSignUp = '/auth/sign-up';
 
-
-
   ///=============================== Doctor Section ==============================
   static const profile = '/auth/profile';
+  //=============================== Appointment ===========================//
   static const doctorAppointment = '/appointment/get-my-appointments';
+  //======================= Notification ===============================//
+  static const doctorNotification = '/notification/get-notifications';
+
+  //============================= Change password ====================//
+  static const changePassword = '/auth/change-password';
 }
