@@ -4,6 +4,7 @@ import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
+import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -99,16 +100,18 @@ class ChangePasswordScreen extends StatelessWidget {
                 ),
 
                 ///==========================changePassword==============
-                CustomButton(
-                  onTap: () {
-                    if (formKey.currentState!.validate() &&
-                        profileController.newPassController.value ==
-                            profileController.reTypeNewPassController.value) {
-                      profileController.changePassword();
-                    }
-                  },
-                  title: AppStrings.changePassword.tr,
-                )
+                Obx(() {
+                  return profileController.loading.value
+                      ? const CustomLoader()
+                      : CustomButton(
+                          onTap: () {
+                            if (formKey.currentState!.validate()) {
+                              profileController.changePassword();
+                            }
+                          },
+                          title: AppStrings.changePassword.tr,
+                        );
+                })
               ],
             ),
           ),

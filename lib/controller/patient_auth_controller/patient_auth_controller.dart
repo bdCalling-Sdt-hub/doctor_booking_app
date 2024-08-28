@@ -19,7 +19,7 @@ class PatientAuthController extends GetxController {
   final TextEditingController emailController =
       TextEditingController(text: kDebugMode ? "joliy19407@avashost.com" : "");
   final TextEditingController passwordController =
-      TextEditingController(text: kDebugMode ? "1234567" : "");
+      TextEditingController(text: kDebugMode ? "12345678" : "");
 
   ///=================== Update Interest ===================
   RxList<String> interestList = [
@@ -79,6 +79,7 @@ class PatientAuthController extends GetxController {
     if (response.statusCode == 200) {
       SharePrefsHelper.setString(
           AppConstants.bearerToken, response.body["token"]);
+      SharePrefsHelper.setString(AppConstants.id, response.body["data"]['_id']);
 
       if (response.body['data']['role'] == 'DOCTOR') {
         Get.offAllNamed(AppRoutes.doctorHomeScreen);

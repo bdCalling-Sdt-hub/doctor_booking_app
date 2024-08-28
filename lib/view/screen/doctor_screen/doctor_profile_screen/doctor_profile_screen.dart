@@ -1,4 +1,4 @@
-import 'package:doctor_booking/controller/doctor_home_controller/doctor_home_controller.dart';
+import 'package:doctor_booking/controller/doctor_profile_controller/doctor_profile_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
@@ -15,13 +15,14 @@ import 'package:doctor_booking/view/widgets/general_error.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
   DoctorProfileScreen({super.key});
 
-  final DoctorHomeController doctorHomeController =
-      Get.find<DoctorHomeController>();
+  final DoctorProfileController doctorProfileController =
+      Get.find<DoctorProfileController>();
+
+  final String imageBaseUrl = "http://192.168.10.6:5000/";
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class DoctorProfileScreen extends StatelessWidget {
       ),
       //=================== body ==============//
       body: Obx(() {
-        switch (doctorHomeController.rxRequestStatus.value) {
+        switch (doctorProfileController.rxRequestStatus.value) {
           case Status.loading:
             return const CustomLoader();
           case Status.internetError:
@@ -42,7 +43,7 @@ class DoctorProfileScreen extends StatelessWidget {
           case Status.error:
             return GeneralErrorScreen(
               onTap: () {
-                doctorHomeController.allMethod();
+                doctorProfileController.getDoctorProfile();
               },
             );
           case Status.completed:
@@ -53,9 +54,12 @@ class DoctorProfileScreen extends StatelessWidget {
                     SizedBox(
                       height: 6.h,
                     ),
+                    //=========================== Doctor profile image ====================//
                     CustomNetworkImage(
-                      imageUrl:
-                          doctorHomeController.profileModel.value.img ?? '',
+                      imageUrl: doctorProfileController.profileModel.value.img!
+                              .startsWith('http')
+                          ? doctorProfileController.profileModel.value.img ?? ""
+                          : '$imageBaseUrl${doctorProfileController.profileModel.value.img ?? ""}',
                       height: 90.h,
                       width: 90.w,
                       boxShape: BoxShape.circle,
@@ -80,8 +84,9 @@ class DoctorProfileScreen extends StatelessWidget {
                               // ================= personal info screen button ==========//
                               InkWell(
                                 onTap: () {
-                                  Get.toNamed(AppRoutes
-                                      .doctorEditPersonalProfileScreen);
+                                  Get.toNamed(
+                                    AppRoutes.doctorEditPersonalProfileScreen,
+                                  );
                                 },
                                 child: const CustomImage(
                                   imageSrc: AppIcons.edit,
@@ -110,24 +115,21 @@ class DoctorProfileScreen extends StatelessWidget {
                             controller: TextEditingController(),
                             hintTextChangeColor: true,
                             readOnly: true,
-                            hintText:
-                                doctorHomeController.profileModel.value.name ??
-                                    '',
+                            hintText: doctorProfileController
+                                    .profileModel.value.name ??
+                                '',
                           ),
                           //============== doctor date of birth =============\\
                           CustomFormCard(
-                              hasBackgroundColor: true,
-                              title: AppStrings.dateOfBirth,
-                              controller: TextEditingController(),
-                              hintTextChangeColor: true,
-                              readOnly: true,
-                              hintText: doctorHomeController
-                                          .profileModel.value.dateOfBirth !=
-                                      null
-                                  ? DateFormat.yMMMMd().format(
-                                      doctorHomeController
-                                          .profileModel.value.dateOfBirth!)
-                                  : ''),
+                            hasBackgroundColor: true,
+                            title: AppStrings.dateOfBirth,
+                            controller: TextEditingController(),
+                            hintTextChangeColor: true,
+                            readOnly: true,
+                            hintText: doctorProfileController
+                                    .profileModel.value.dateOfBirth ??
+                                '',
+                          ),
                           //============ doctor email ==============//
                           CustomFormCard(
                             hasBackgroundColor: true,
@@ -135,8 +137,8 @@ class DoctorProfileScreen extends StatelessWidget {
                             controller: TextEditingController(),
                             hintTextChangeColor: true,
                             readOnly: true,
-                            hintText:
-                                doctorHomeController.profileModel.value.email,
+                            hintText: doctorProfileController
+                                .profileModel.value.email,
                           ),
                           //============ doctor phnoe number ===========//
                           CustomFormCard(
@@ -145,8 +147,8 @@ class DoctorProfileScreen extends StatelessWidget {
                             controller: TextEditingController(),
                             hintTextChangeColor: true,
                             readOnly: true,
-                            hintText:
-                                doctorHomeController.profileModel.value.phone,
+                            hintText: doctorProfileController
+                                .profileModel.value.phone,
                           ),
 
                           ///=============== doctor loaction ============//
@@ -156,7 +158,7 @@ class DoctorProfileScreen extends StatelessWidget {
                             controller: TextEditingController(),
                             hintTextChangeColor: true,
                             readOnly: true,
-                            hintText: doctorHomeController
+                            hintText: doctorProfileController
                                 .profileModel.value.location,
                           ),
                           SizedBox(
@@ -205,7 +207,7 @@ class DoctorProfileScreen extends StatelessWidget {
                           ),
 
                           CustomNetworkImage(
-                            imageUrl: doctorHomeController
+                            imageUrl: doctorProfileController
                                     .profileModel.value.license ??
                                 '',
                             height: 120.h,
@@ -221,7 +223,7 @@ class DoctorProfileScreen extends StatelessWidget {
                             controller: TextEditingController(),
                             hintTextChangeColor: true,
                             readOnly: true,
-                            hintText: doctorHomeController
+                            hintText: doctorProfileController
                                     .profileModel.value.specialization ??
                                 '',
                           ),
@@ -231,7 +233,7 @@ class DoctorProfileScreen extends StatelessWidget {
                             controller: TextEditingController(),
                             hintTextChangeColor: true,
                             readOnly: true,
-                            hintText: doctorHomeController
+                            hintText: doctorProfileController
                                     .profileModel.value.experience ??
                                 '',
                           ),
@@ -244,7 +246,7 @@ class DoctorProfileScreen extends StatelessWidget {
                             controller: TextEditingController(),
                             hintTextChangeColor: true,
                             readOnly: true,
-                            hintText: doctorHomeController
+                            hintText: doctorProfileController
                                     .profileModel.value.educationalBackground ??
                                 '',
                           ),
@@ -255,7 +257,7 @@ class DoctorProfileScreen extends StatelessWidget {
                             controller: TextEditingController(),
                             hintTextChangeColor: true,
                             readOnly: true,
-                            hintText: doctorHomeController
+                            hintText: doctorProfileController
                                     .profileModel.value.currentAffiliation ??
                                 '',
                           ),

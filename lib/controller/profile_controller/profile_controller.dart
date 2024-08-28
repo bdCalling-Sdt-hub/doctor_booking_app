@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
+import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -78,15 +80,39 @@ class ProfileController extends GetxController {
     Map<String, dynamic> body = {
       "old_Password": currentPassController.value.text,
       "password": newPassController.value.text,
+      "confirm_password": reTypeNewPassController.value.text,
     };
 
     loading.value = true;
+    refresh();
 
-    var resposns =
+    var response =
         await ApiClient.patchData(ApiUrl.changePassword, jsonEncode(body));
-    if (resposns.statusCode == 200) {
+    if (response.statusCode == 200) {
+      loading.value = false;
+      refresh();
+      showCustomSnackBar(
+        response.body['message'],
+        getXSnackBar: false,
+        isError: false,
+      );
+      removeDataFormField();
+
       Get.back();
-      print('sussces');
+    } else {
+      loading.value = false;
+      refresh();
+      if (response.statusText == ApiClient.noInternetMessage) {
+      } else {}
+      loading.value = false;
+      refresh();
+      ApiChecker.checkApi(response);
     }
+  }
+
+  removeDataFormField() {
+    currentPassController.value.clear();
+    newPassController.value.clear();
+    reTypeNewPassController.value.clear();
   }
 }

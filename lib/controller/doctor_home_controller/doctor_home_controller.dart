@@ -1,6 +1,5 @@
-import 'package:doctor_booking/controller/doctor_profile_controller/doctor_profile_controller.dart';
 import 'package:doctor_booking/model/doctor_appointment_model/appointment_model.dart';
-import 'package:doctor_booking/model/doctor_profile_model/doctor_profile_model.dart';
+
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
@@ -12,9 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DoctorHomeController extends GetxController {
-  final DoctorProfileController doctorProfileController =
-      Get.find<DoctorProfileController>();
-
   RxString scheduleTime = RxString(AppStrings.today);
 
   // final RxList<String> scheduleOrCancel = [
@@ -41,29 +37,6 @@ class DoctorHomeController extends GetxController {
 
   final rxRequestStatus = Status.loading.obs;
   void setRxRequestStatus(Status value) => rxRequestStatus.value = value;
-
-  ///================================ Get doctor profile =========================//
-
-  Rx<ProfileModel> profileModel = ProfileModel().obs;
-
-  getDoctorProfile() async {
-    setRxRequestStatus(Status.loading);
-    var response = await ApiClient.getData(ApiUrl.profile);
-
-    if (response.statusCode == 200) {
-      setRxRequestStatus(Status.completed);
-      profileModel.value = ProfileModel.fromJson(response.body['data']);
-      doctorProfileController.textControllerValueAdd(profileModel.value);
-      debugPrint(profileModel.value.name);
-    } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
-        setRxRequestStatus(Status.internetError);
-      } else {
-        setRxRequestStatus(Status.error);
-      }
-      ApiChecker.checkApi(response);
-    }
-  }
 
   //======================= Get doctor appointment list ==============
 
@@ -128,13 +101,11 @@ class DoctorHomeController extends GetxController {
   }
 
   allMethod() {
-    getDoctorProfile();
     getAllDoctorAppointment();
   }
 
   @override
   void onInit() {
-    getDoctorProfile();
     getAllDoctorAppointment();
     super.onInit();
   }

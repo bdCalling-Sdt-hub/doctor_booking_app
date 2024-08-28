@@ -16,4 +16,8 @@ class ApiUrl {
 
   //============================= Change password ====================//
   static const changePassword = '/auth/change-password';
+
+  //========================= update Doctor Profile =====================//
+
+  static const updateDoctorProfile = '/auth/update-doctor/';
 }

@@ -51,7 +51,7 @@ class SchedulePatientList extends StatelessWidget {
   }
 
   listLength(int length, VoidCallback onTap) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
       child: Container(
         height: 54.h,

@@ -1,4 +1,5 @@
 import 'package:doctor_booking/controller/doctor_home_controller/doctor_home_controller.dart';
+import 'package:doctor_booking/controller/doctor_profile_controller/doctor_profile_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
@@ -21,6 +22,8 @@ class DoctorHomeScreen extends StatelessWidget {
   DoctorHomeScreen({super.key});
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final DoctorHomeController controller = Get.find<DoctorHomeController>();
+  final DoctorProfileController doctorProfileController =
+      Get.find<DoctorProfileController>();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +49,8 @@ class DoctorHomeScreen extends StatelessWidget {
                 children: [
                   HomeAppbarDoctor(
                     name: AppStrings.currentLocation,
-                    loacation: controller.profileModel.value.location!,
+                    loacation:
+                        doctorProfileController.profileModel.value.location!,
                     scaffoldKey: scaffoldKey,
                   ),
                   SizedBox(height: 12.h),

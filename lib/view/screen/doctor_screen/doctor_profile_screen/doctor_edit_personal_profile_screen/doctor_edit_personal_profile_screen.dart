@@ -1,7 +1,7 @@
+import 'package:doctor_booking/controller/doctor_home_controller/doctor_home_controller.dart';
 import 'package:doctor_booking/controller/doctor_profile_controller/doctor_profile_controller.dart';
-import 'package:doctor_booking/controller/general_controller/general_controller.dart';
+import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
-import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_edit_personal_profile_screen/inner_widget.dart/doctor_edit_profile_image.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
@@ -11,13 +11,15 @@ import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class DoctorEditPersonalProfileScreen extends StatelessWidget {
   DoctorEditPersonalProfileScreen({super.key});
 
-  final GeneralController generalController = Get.find<GeneralController>();
   final DoctorProfileController doctorProfileController =
       Get.find<DoctorProfileController>();
+  final DoctorHomeController doctorHomeController =
+      Get.find<DoctorHomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,112 +27,148 @@ class DoctorEditPersonalProfileScreen extends StatelessWidget {
       backgroundColor: AppColors.whiteNormal,
 
       /// =================== appbar ===============//
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
+        buttonHare: true,
+        onTap: () {
+          Get.back();
+          doctorProfileController.proImage.value = null;
+        },
         appBarContent: AppStrings.editPersonalInformation,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 7.h,
-            ),
-            ////============== Profile image ===========///
-            Center(
-              child: DoctorEditProfileImage(
-                imageSrc: AppConstants.userNtr,
-                onTap: () {
-                  generalController.popupCameraOrGallery();
-                },
+        child: Obx(() {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 7.h,
               ),
-            ),
-            SizedBox(
-              height: 24.h,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  //============== personal info =============//
-                  const CustomText(
-                    textAlign: TextAlign.start,
-                    text: AppStrings.personalInfo,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.whiteDarker,
-                  ),
-                  const Divider(),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-
-                  /// ============== doctor name ==========//
-                  CustomFormCard(
-                    hasBackgroundColor: true,
-                    title: AppStrings.yourName,
-                    controller:
-                        doctorProfileController.doctorNameController.value,
-                    hintTextChangeColor: true,
-                    hintText: 'Dr. Hassan',
-                  ),
-                  //=============== doctor date of birth =========//
-                  CustomFormCard(
-                    hasBackgroundColor: true,
-                    title: AppStrings.dateOfBirth,
-                    controller: doctorProfileController
-                        .doctorDateOfBirthController.value,
-                    hintTextChangeColor: true,
-                    hintText: '05-12-2001',
-                  ),
-                  // ================ doctor email ============//
-                  CustomFormCard(
-                    hasBackgroundColor: true,
-                    title: AppStrings.email,
-                    controller:
-                        doctorProfileController.doctorEmailController.value,
-                    hintTextChangeColor: true,
-                    hintText: 'info@gmail.com',
-                  ),
-
-                  /// ================== doctor phone number ==========//
-                  CustomFormCard(
-                    hasBackgroundColor: true,
-                    title: AppStrings.phoneNumber,
-                    controller:
-                        doctorProfileController.doctorPhoneController.value,
-                    hintTextChangeColor: true,
-                    hintText: '(00)+5452 125 36',
-                  ),
-
-                  /// ============== doctor loactions ==================//
-
-                  CustomFormCard(
-                    hasBackgroundColor: true,
-                    title: AppStrings.location,
-                    controller:
-                        doctorProfileController.doctorLoactionController.value,
-                    hintTextChangeColor: true,
-                    hintText: '775 Rolling Green Rd.',
-                  ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  //================ update button =============//
-                  CustomButton(
-                    title: AppStrings.update,
-                    onTap: () {
-                      Get.back();
-                    },
-                  ),
-                  SizedBox(
-                    height: 24.h,
-                  ),
-                ],
+              ////============== Profile image ===========///
+              doctorProfileController.proImage.value == null
+                  ? Center(
+                      child: DoctorEditProfileImageNetwork(
+                        imageSrc: doctorProfileController
+                                .profileModel.value.img!
+                                .startsWith('https')
+                            ? doctorProfileController.profileModel.value.img ??
+                                ""
+                            : '${ApiUrl.baseUrl}${doctorProfileController.profileModel.value.img ?? ""}',
+                        onTap: () {
+                          doctorProfileController.getDoctorProfileImage();
+                        },
+                      ),
+                    )
+                  : Center(
+                      child: DoctorEditProfileImageFile(
+                        imageSrc: doctorProfileController.proImage.value!.path,
+                        onTap: () {
+                          doctorProfileController.getDoctorProfileImage();
+                        },
+                      ),
+                    ),
+              SizedBox(
+                height: 24.h,
               ),
-            ),
-          ],
-        ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //============== personal info =============//
+                    const CustomText(
+                      textAlign: TextAlign.start,
+                      text: AppStrings.personalInfo,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.whiteDarker,
+                    ),
+                    const Divider(),
+                    SizedBox(
+                      height: 16.h,
+                    ),
+
+                    /// ============== doctor name ==========//
+                    CustomFormCard(
+                      hasBackgroundColor: true,
+                      title: AppStrings.yourName,
+                      controller:
+                          doctorProfileController.doctorNameController.value,
+                      hintTextChangeColor: true,
+                      hintText: 'Dr. Hassan',
+                    ),
+                    //=============== doctor date of birth =========//
+                    CustomFormCard(
+                      readOnly: true,
+                      hasBackgroundColor: true,
+                      title: AppStrings.dateOfBirth,
+                      controller: doctorProfileController
+                          .doctorDateOfBirthController.value,
+                      hintTextChangeColor: true,
+                      hintText: '05-12-2001',
+                      onTap: () async {
+                        final DateTime? pickDate = await showDatePicker(
+                            context: Get.context!,
+                            firstDate: DateTime(1970),
+                            lastDate: DateTime.now());
+
+                        if (pickDate != null) {
+                          final formatDate =
+                              DateFormat.yMMMMd().format(pickDate);
+
+                          doctorProfileController.doctorDateOfBirthController
+                              .value.text = formatDate;
+                        }
+                      },
+                    ),
+                    // ================ doctor email ============//
+                    CustomFormCard(
+                      hasBackgroundColor: true,
+                      title: AppStrings.email,
+                      controller:
+                          doctorProfileController.doctorEmailController.value,
+                      hintTextChangeColor: true,
+                      hintText: 'info@gmail.com',
+                    ),
+
+                    /// ================== doctor phone number ==========//
+                    CustomFormCard(
+                      hasBackgroundColor: true,
+                      title: AppStrings.phoneNumber,
+                      controller:
+                          doctorProfileController.doctorPhoneController.value,
+                      hintTextChangeColor: true,
+                      hintText: '(00)+5452 125 36',
+                    ),
+
+                    /// ============== doctor loactions ==================//
+
+                    CustomFormCard(
+                      hasBackgroundColor: true,
+                      title: AppStrings.location,
+                      controller: doctorProfileController
+                          .doctorLoactionController.value,
+                      hintTextChangeColor: true,
+                      hintText: '775 Rolling Green Rd.',
+                    ),
+                    SizedBox(
+                      height: 16.h,
+                    ),
+                    //================ update button =============//
+                    CustomButton(
+                      title: AppStrings.update,
+                      onTap: () {
+                        doctorProfileController.updateDoctorPersonalProfile();
+                      },
+                    ),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }
