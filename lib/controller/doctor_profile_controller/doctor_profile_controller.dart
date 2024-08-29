@@ -76,8 +76,6 @@ class DoctorProfileController extends GetxController {
   }
   //====================================================== update doctor profile =========================================//
 
-  Future<void> updateDoctorProfile() async {}
-
   getDoctorProfileImage() {
     return showDialog(
         barrierDismissible: true,
@@ -140,7 +138,7 @@ class DoctorProfileController extends GetxController {
     if (response.statusCode == 200) {
       getDoctorProfile();
       updatePersonalLoading.value = false;
-      // doctorHomeController.getDoctorProfile();
+
       refresh();
       showCustomSnackBar(
         response.body['message'],
@@ -159,8 +157,89 @@ class DoctorProfileController extends GetxController {
       ApiChecker.checkApi(response);
     }
   }
+//================================== Update doctor professional profile ===============================//
 
-  Future<void> updateDoctorProfessionalProfile() async {}
+  getDoctorLicenseImage() {
+    return showDialog(
+        barrierDismissible: true,
+        barrierColor: Colors.transparent,
+        context: Get.context!,
+        builder: (_) {
+          return SizedBox(
+            height: 70,
+            child: AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4)),
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              content: CustomImagePickerPopup(
+                galleryButton: () {
+                  Navigator.pop(Get.context!);
+                  getLicenseImage(source: ImageSource.gallery);
+                },
+                cammeraButton: () {
+                  Navigator.pop(Get.context!);
+                  getLicenseImage(source: ImageSource.camera);
+                },
+              ),
+            ),
+          );
+        });
+  }
+
+  Rx<File?> licenseImage = Rx<File?>(null);
+
+  Future<void> getLicenseImage({required ImageSource source}) async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: source, imageQuality: 10);
+    if (pickedFile != null) {
+      licenseImage.value = File(pickedFile.path);
+    }
+  }
+
+  //======================== update Professional profile ================//
+  RxBool updateProfessionalLoading = false.obs;
+  Future<void> updateDoctorProfessionalProfile() async {
+    String id = await SharePrefsHelper.getString(AppConstants.id);
+    updateProfessionalLoading.value = true;
+    refresh();
+    Map<String, String> body = {
+      'specialization': doctorSpecializationController.value.text,
+      'experience': doctorYearOfExperienceController.value.text,
+      'educational_background':
+          doctorEducationalBackgroundController.value.text,
+      'current_affiliation': doctorCurrentAlliliationController.value.text,
+    };
+
+    var response = licenseImage.value != null
+        ? await ApiClient.patchMultipartData(
+            "${ApiUrl.updateDoctorProfile}$id", body,
+            multipartBody: [MultipartBody("img", licenseImage.value!)])
+        : await ApiClient.patchData(
+            "${ApiUrl.updateDoctorProfile}$id", jsonEncode(body));
+
+    if (response.statusCode == 200) {
+      getDoctorProfile();
+      updateProfessionalLoading.value = false;
+
+      refresh();
+      showCustomSnackBar(
+        response.body['message'],
+        getXSnackBar: false,
+        isError: false,
+      );
+
+      Get.back();
+    } else {
+      updateProfessionalLoading.value = false;
+      refresh();
+      if (response.statusText == ApiClient.noInternetMessage) {
+      } else {}
+      updateProfessionalLoading.value = false;
+      refresh();
+      ApiChecker.checkApi(response);
+    }
+  }
 
   @override
   void onInit() {

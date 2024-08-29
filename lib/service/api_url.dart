@@ -20,4 +20,6 @@ class ApiUrl {
   //========================= update Doctor Profile =====================//
 
   static const updateDoctorProfile = '/auth/update-doctor/';
+
+  static const imageBaseUrl = 'http://192.168.10.6:5000/';
 }

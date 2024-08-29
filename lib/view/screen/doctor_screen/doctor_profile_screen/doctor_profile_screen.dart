@@ -208,8 +208,12 @@ class DoctorProfileScreen extends StatelessWidget {
 
                           CustomNetworkImage(
                             imageUrl: doctorProfileController
-                                    .profileModel.value.license ??
-                                '',
+                                    .profileModel.value.img!
+                                    .startsWith('http')
+                                ? doctorProfileController
+                                        .profileModel.value.license ??
+                                    ""
+                                : '$imageBaseUrl${doctorProfileController.profileModel.value.license ?? ""}',
                             height: 120.h,
                             width: 335.w,
                           ),

@@ -21,6 +21,8 @@ class DoctorEditPersonalProfileScreen extends StatelessWidget {
   final DoctorHomeController doctorHomeController =
       Get.find<DoctorHomeController>();
 
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +54,7 @@ class DoctorEditPersonalProfileScreen extends StatelessWidget {
                                 .startsWith('https')
                             ? doctorProfileController.profileModel.value.img ??
                                 ""
-                            : '${ApiUrl.baseUrl}${doctorProfileController.profileModel.value.img ?? ""}',
+                            : '${ApiUrl.imageBaseUrl}${doctorProfileController.profileModel.value.img ?? ""}',
                         onTap: () {
                           doctorProfileController.getDoctorProfileImage();
                         },
@@ -71,99 +73,140 @@ class DoctorEditPersonalProfileScreen extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //============== personal info =============//
-                    const CustomText(
-                      textAlign: TextAlign.start,
-                      text: AppStrings.personalInfo,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.whiteDarker,
-                    ),
-                    const Divider(),
-                    SizedBox(
-                      height: 16.h,
-                    ),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //============== personal info =============//
+                      const CustomText(
+                        textAlign: TextAlign.start,
+                        text: AppStrings.personalInfo,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.whiteDarker,
+                      ),
+                      const Divider(),
+                      SizedBox(
+                        height: 16.h,
+                      ),
 
-                    /// ============== doctor name ==========//
-                    CustomFormCard(
-                      hasBackgroundColor: true,
-                      title: AppStrings.yourName,
-                      controller:
-                          doctorProfileController.doctorNameController.value,
-                      hintTextChangeColor: true,
-                      hintText: 'Dr. Hassan',
-                    ),
-                    //=============== doctor date of birth =========//
-                    CustomFormCard(
-                      readOnly: true,
-                      hasBackgroundColor: true,
-                      title: AppStrings.dateOfBirth,
-                      controller: doctorProfileController
-                          .doctorDateOfBirthController.value,
-                      hintTextChangeColor: true,
-                      hintText: '05-12-2001',
-                      onTap: () async {
-                        final DateTime? pickDate = await showDatePicker(
-                            context: Get.context!,
-                            firstDate: DateTime(1970),
-                            lastDate: DateTime.now());
+                      /// ============== doctor name ==========//
+                      CustomFormCard(
+                        hasBackgroundColor: true,
+                        title: AppStrings.yourName,
+                        controller:
+                            doctorProfileController.doctorNameController.value,
+                        hintTextChangeColor: true,
+                        hintText: 'Dr. Hassan',
+                        validator: (value) {
+                          if (value == null || value.toString().isEmpty) {
+                            return AppStrings.fieldCantBeEmpty.tr;
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      //=============== doctor date of birth =========//
+                      CustomFormCard(
+                        readOnly: true,
+                        hasBackgroundColor: true,
+                        title: AppStrings.dateOfBirth,
+                        controller: doctorProfileController
+                            .doctorDateOfBirthController.value,
+                        hintTextChangeColor: true,
+                        hintText: '05-12-2001',
+                        onTap: () async {
+                          final DateTime? pickDate = await showDatePicker(
+                              context: Get.context!,
+                              firstDate: DateTime(1970),
+                              lastDate: DateTime.now());
 
-                        if (pickDate != null) {
-                          final formatDate =
-                              DateFormat.yMMMMd().format(pickDate);
+                          if (pickDate != null) {
+                            final formatDate =
+                                DateFormat.yMMMMd().format(pickDate);
 
-                          doctorProfileController.doctorDateOfBirthController
-                              .value.text = formatDate;
-                        }
-                      },
-                    ),
-                    // ================ doctor email ============//
-                    CustomFormCard(
-                      hasBackgroundColor: true,
-                      title: AppStrings.email,
-                      controller:
-                          doctorProfileController.doctorEmailController.value,
-                      hintTextChangeColor: true,
-                      hintText: 'info@gmail.com',
-                    ),
+                            doctorProfileController.doctorDateOfBirthController
+                                .value.text = formatDate;
+                          }
+                        },
+                        validator: (value) {
+                          if (value == null || value.toString().isEmpty) {
+                            return AppStrings.fieldCantBeEmpty.tr;
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      // ================ doctor email ============//
+                      CustomFormCard(
+                        hasBackgroundColor: true,
+                        title: AppStrings.email,
+                        controller:
+                            doctorProfileController.doctorEmailController.value,
+                        hintTextChangeColor: true,
+                        hintText: 'info@gmail.com',
+                        validator: (value) {
+                          if (value == null || value.toString().isEmpty) {
+                            return AppStrings.fieldCantBeEmpty.tr;
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
 
-                    /// ================== doctor phone number ==========//
-                    CustomFormCard(
-                      hasBackgroundColor: true,
-                      title: AppStrings.phoneNumber,
-                      controller:
-                          doctorProfileController.doctorPhoneController.value,
-                      hintTextChangeColor: true,
-                      hintText: '(00)+5452 125 36',
-                    ),
+                      /// ================== doctor phone number ==========//
+                      CustomFormCard(
+                        hasBackgroundColor: true,
+                        title: AppStrings.phoneNumber,
+                        controller:
+                            doctorProfileController.doctorPhoneController.value,
+                        hintTextChangeColor: true,
+                        hintText: '(00)+5452 125 36',
+                        validator: (value) {
+                          if (value == null || value.toString().isEmpty) {
+                            return AppStrings.fieldCantBeEmpty.tr;
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
 
-                    /// ============== doctor loactions ==================//
+                      /// ============== doctor loactions ==================//
 
-                    CustomFormCard(
-                      hasBackgroundColor: true,
-                      title: AppStrings.location,
-                      controller: doctorProfileController
-                          .doctorLoactionController.value,
-                      hintTextChangeColor: true,
-                      hintText: '775 Rolling Green Rd.',
-                    ),
-                    SizedBox(
-                      height: 16.h,
-                    ),
-                    //================ update button =============//
-                    CustomButton(
-                      title: AppStrings.update,
-                      onTap: () {
-                        doctorProfileController.updateDoctorPersonalProfile();
-                      },
-                    ),
-                    SizedBox(
-                      height: 24.h,
-                    ),
-                  ],
+                      CustomFormCard(
+                        hasBackgroundColor: true,
+                        title: AppStrings.location,
+                        controller: doctorProfileController
+                            .doctorLoactionController.value,
+                        hintTextChangeColor: true,
+                        hintText: '775 Rolling Green Rd.',
+                        validator: (value) {
+                          if (value == null || value.toString().isEmpty) {
+                            return AppStrings.fieldCantBeEmpty.tr;
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                      //================ update button =============//
+                      CustomButton(
+                        title: AppStrings.update,
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            doctorProfileController
+                                .updateDoctorPersonalProfile();
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 24.h,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
