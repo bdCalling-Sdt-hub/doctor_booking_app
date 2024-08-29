@@ -14,7 +14,7 @@ class ProfileModel {
   String? img;
   String? name;
   String? email;
-  DateTime? dateOfBirth;
+  String? dateOfBirth;
   String? location;
   String? phone;
   String? password;
@@ -71,9 +71,7 @@ class ProfileModel {
         img: json["img"],
         name: json["name"],
         email: json["email"],
-        dateOfBirth: json["date_of_birth"] == null
-            ? null
-            : DateTime.parse(json["date_of_birth"]),
+        dateOfBirth: json["date_of_birth"],
         location: json["location"],
         phone: json["phone"],
         password: json["password"],
@@ -110,8 +108,7 @@ class ProfileModel {
         "img": img,
         "name": name,
         "email": email,
-        "date_of_birth":
-            "${dateOfBirth!.year.toString().padLeft(4, '0')}-${dateOfBirth!.month.toString().padLeft(2, '0')}-${dateOfBirth!.day.toString().padLeft(2, '0')}",
+        "date_of_birth": dateOfBirth,
         "location": location,
         "phone": phone,
         "password": password,
@@ -137,12 +134,12 @@ class ProfileModel {
 }
 
 class AvailableDays {
-  List<dynamic>? monday;
+  List<String>? monday;
   List<String>? tuesday;
-  List<dynamic>? wednesday;
-  List<dynamic>? thursday;
-  List<dynamic>? friday;
-  List<dynamic>? saturday;
+  List<String>? wednesday;
+  List<String>? thursday;
+  List<String>? friday;
+  List<String>? saturday;
   List<dynamic>? sunday;
 
   AvailableDays({
@@ -158,22 +155,22 @@ class AvailableDays {
   factory AvailableDays.fromJson(Map<String, dynamic> json) => AvailableDays(
         monday: json["monday"] == null
             ? []
-            : List<dynamic>.from(json["monday"]!.map((x) => x)),
+            : List<String>.from(json["monday"]!.map((x) => x)),
         tuesday: json["tuesday"] == null
             ? []
             : List<String>.from(json["tuesday"]!.map((x) => x)),
         wednesday: json["wednesday"] == null
             ? []
-            : List<dynamic>.from(json["wednesday"]!.map((x) => x)),
+            : List<String>.from(json["wednesday"]!.map((x) => x)),
         thursday: json["thursday"] == null
             ? []
-            : List<dynamic>.from(json["thursday"]!.map((x) => x)),
+            : List<String>.from(json["thursday"]!.map((x) => x)),
         friday: json["friday"] == null
             ? []
-            : List<dynamic>.from(json["friday"]!.map((x) => x)),
+            : List<String>.from(json["friday"]!.map((x) => x)),
         saturday: json["saturday"] == null
             ? []
-            : List<dynamic>.from(json["saturday"]!.map((x) => x)),
+            : List<String>.from(json["saturday"]!.map((x) => x)),
         sunday: json["sunday"] == null
             ? []
             : List<dynamic>.from(json["sunday"]!.map((x) => x)),

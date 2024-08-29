@@ -26,9 +26,9 @@ class PatientCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20.5.h),
+        padding: EdgeInsets.symmetric(vertical: 20.5.h, horizontal: 20.w),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CustomNetworkImage(
               imageUrl: imageUrl,

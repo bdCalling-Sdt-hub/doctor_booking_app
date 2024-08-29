@@ -3,6 +3,8 @@ class AppConstants {
 
   static String bearerToken = "BearerToken";
   static String role = "Role";
+  static String id = "Id";
+
   static String onBoard = "Onboard";
   static String successfull = "Request Successfull";
   static String error = "Oops, something went wrong";

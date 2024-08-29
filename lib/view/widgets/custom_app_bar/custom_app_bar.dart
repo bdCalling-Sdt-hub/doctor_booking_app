@@ -11,6 +11,8 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final Color appBarBgColor;
   final String? appBarContent;
   final IconData? iconData;
+  final bool? buttonHare;
+  final VoidCallback? onTap;
 
   const CustomAppBar({
     this.appBarHeight = 64,
@@ -19,6 +21,8 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.appBarContent,
     super.key,
     this.iconData,
+    this.buttonHare = false,
+    this.onTap,
   });
 
   @override
@@ -43,9 +47,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
             IconButton(
               icon: const CustomImage(imageSrc: AppIcons.arrowLeft),
               color: AppColors.grayNormal,
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              onPressed: widget.buttonHare!
+                  ? widget.onTap
+                  : () {
+                      Navigator.of(context).pop();
+                    },
             ),
             if (widget.appBarContent != null)
               CustomText(

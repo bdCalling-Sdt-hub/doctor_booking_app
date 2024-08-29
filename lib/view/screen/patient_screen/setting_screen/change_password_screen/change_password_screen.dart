@@ -4,6 +4,7 @@ import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
+import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,8 +12,9 @@ import 'package:get/get.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   ChangePasswordScreen({super.key});
-
   final ProfileController profileController = Get.find<ProfileController>();
+
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,53 +28,92 @@ class ChangePasswordScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomText(
-                text: AppStrings.setYourNewPassword.tr,
-                fontWeight: FontWeight.w500,
-                fontSize: 18,
-                color: AppColors.grayNormal,
-                bottom: 10,
-              ),
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomText(
+                  text: AppStrings.setYourNewPassword.tr,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                  color: AppColors.grayNormal,
+                  bottom: 10,
+                ),
 
-              ///==========================EnterCurrentPassword==============
+                ///==========================EnterCurrentPassword==============
 
-              CustomFormCard(
-                title: AppStrings.enterCurrentPassword,
-                controller: TextEditingController(),
-                isPassword: true,
-              ),
+                CustomFormCard(
+                  title: AppStrings.enterCurrentPassword,
+                  controller: profileController.currentPassController.value,
+                  isPassword: true,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return AppStrings.fieldCantBeEmpty.tr;
+                    } else if (value.length < 7 &&
+                        !AppStrings.passRegexp.hasMatch(value)) {
+                      return AppStrings.passwordMustHaveEightWith.tr;
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
 
-              ///==========================enterNewPassword==============
+                ///==========================enterNewPassword==============
 
-              CustomFormCard(
-                title: AppStrings.enterNewPassword,
-                controller: TextEditingController(),
-                isPassword: true,
-              ),
+                CustomFormCard(
+                  title: AppStrings.enterNewPassword,
+                  controller: profileController.newPassController.value,
+                  isPassword: true,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return AppStrings.fieldCantBeEmpty.tr;
+                    } else if (value.length < 8 &&
+                        !AppStrings.passRegexp.hasMatch(value)) {
+                      return AppStrings.passwordMustHaveEightWith.tr;
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
 
-              ///==========================retypeNewPassword==============
+                ///==========================retypeNewPassword==============
 
-              CustomFormCard(
-                title: AppStrings.retypeNewPassword,
-                controller: TextEditingController(),
-                isPassword: true,
-              ),
+                CustomFormCard(
+                  title: AppStrings.retypeNewPassword,
+                  controller: profileController.reTypeNewPassController.value,
+                  isPassword: true,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return AppStrings.fieldCantBeEmpty.tr;
+                    } else if (value.length < 8 &&
+                        !AppStrings.passRegexp.hasMatch(value)) {
+                      return AppStrings.passwordMustHaveEightWith.tr;
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
 
-              SizedBox(
-                height: 45.h,
-              ),
+                SizedBox(
+                  height: 45.h,
+                ),
 
-              ///==========================changePassword==============
-              CustomButton(
-                onTap: () {
-                  Get.back();
-                },
-                title: AppStrings.changePassword.tr,
-              )
-            ],
+                ///==========================changePassword==============
+                Obx(() {
+                  return profileController.loading.value
+                      ? const CustomLoader()
+                      : CustomButton(
+                          onTap: () {
+                            if (formKey.currentState!.validate()) {
+                              profileController.changePassword();
+                            }
+                          },
+                          title: AppStrings.changePassword.tr,
+                        );
+                })
+              ],
+            ),
           ),
         ),
       ),

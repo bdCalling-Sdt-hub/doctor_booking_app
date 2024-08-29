@@ -21,6 +21,7 @@ class AppointmentModel {
   String? day;
   String? status;
   String? reason;
+  String? appointmentType;
   String? desc;
   List<dynamic>? prescription;
   bool? review;
@@ -38,6 +39,7 @@ class AppointmentModel {
     this.day,
     this.status,
     this.reason,
+    this.appointmentType,
     this.desc,
     this.prescription,
     this.review,
@@ -57,6 +59,7 @@ class AppointmentModel {
         day: json["day"],
         status: json["status"],
         reason: json["reason"],
+        appointmentType: json["appointment_type"],
         desc: json["desc"],
         prescription: json["prescription"] == null
             ? []
@@ -81,6 +84,7 @@ class AppointmentModel {
         "day": day,
         "status": status,
         "reason": reason,
+        "appointment_type": appointmentType,
         "desc": desc,
         "prescription": prescription == null
             ? []
@@ -98,6 +102,7 @@ class UserId {
   String? email;
   String? location;
   String? phone;
+  dynamic age;
 
   UserId({
     this.id,
@@ -105,6 +110,7 @@ class UserId {
     this.email,
     this.location,
     this.phone,
+    this.age,
   });
 
   factory UserId.fromJson(Map<String, dynamic> json) => UserId(
@@ -113,6 +119,7 @@ class UserId {
         email: json["email"],
         location: json["location"],
         phone: json["phone"],
+        age: json["age"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -121,5 +128,6 @@ class UserId {
         "email": email,
         "location": location,
         "phone": phone,
+        "age": age,
       };
 }

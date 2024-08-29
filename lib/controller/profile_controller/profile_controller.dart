@@ -1,4 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
+import 'package:doctor_booking/service/api_check.dart';
+import 'package:doctor_booking/service/api_client.dart';
+import 'package:doctor_booking/service/api_url.dart';
+import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -60,5 +65,54 @@ class ProfileController extends GetxController {
     } else {
       throw 'Could not launch $phoneNumber';
     }
+  }
+
+  // =========================== Change Password ======================//
+
+  Rx<TextEditingController> currentPassController = TextEditingController().obs;
+  Rx<TextEditingController> newPassController = TextEditingController().obs;
+  Rx<TextEditingController> reTypeNewPassController =
+      TextEditingController().obs;
+
+  RxBool loading = false.obs;
+
+  changePassword() async {
+    Map<String, dynamic> body = {
+      "old_Password": currentPassController.value.text,
+      "password": newPassController.value.text,
+      "confirm_password": reTypeNewPassController.value.text,
+    };
+
+    loading.value = true;
+    refresh();
+
+    var response =
+        await ApiClient.patchData(ApiUrl.changePassword, jsonEncode(body));
+    if (response.statusCode == 200) {
+      loading.value = false;
+      refresh();
+      showCustomSnackBar(
+        response.body['message'],
+        getXSnackBar: false,
+        isError: false,
+      );
+      removeDataFormField();
+
+      Get.back();
+    } else {
+      loading.value = false;
+      refresh();
+      if (response.statusText == ApiClient.noInternetMessage) {
+      } else {}
+      loading.value = false;
+      refresh();
+      ApiChecker.checkApi(response);
+    }
+  }
+
+  removeDataFormField() {
+    currentPassController.value.clear();
+    newPassController.value.clear();
+    reTypeNewPassController.value.clear();
   }
 }

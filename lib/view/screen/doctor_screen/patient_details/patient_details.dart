@@ -1,3 +1,4 @@
+import 'package:doctor_booking/model/doctor_appointment_model/appointment_model.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
@@ -9,9 +10,13 @@ import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class PatientDetails extends StatelessWidget {
-  const PatientDetails({super.key});
+  PatientDetails({super.key});
+
+  AppointmentModel model = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +39,10 @@ class PatientDetails extends StatelessWidget {
                   ),
                   //===================== patient card ==================//
                   PatientCard(
-                    imageUrl: AppConstants.userNtr,
-                    patientName: 'Mohammad Rakib',
-                    patientAge: '25 years',
-                    patientGender: 'Male',
-                  ),
+                      imageUrl: '',
+                      patientName: model.userId!.name!,
+                      patientAge: model.userId?.age ?? '25',
+                      patientGender: 'Male'),
                   SizedBox(
                     height: 15.h,
                   ),
@@ -60,7 +64,7 @@ class PatientDetails extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                           vertical: 10.0.h, horizontal: 10.h),
                       child: CustomText(
-                        text: 'Chronic pain issue- back pain',
+                        text: model.reason ?? 'Reason not available',
                         fontSize: 13.sp,
                         fontWeight: FontWeight.w400,
                         color: AppColors.grayNormal,
@@ -91,8 +95,7 @@ class PatientDetails extends StatelessWidget {
                       child: CustomText(
                         maxLines: 200,
                         textAlign: TextAlign.justify,
-                        text:
-                            'Ive been experiencing chronic back pain for the past six months. The pain started gradually without any clear injury or incident. It began as a dull ache in my lower back.',
+                        text: model.desc ?? 'Describe not available',
                         fontSize: 13.sp,
                         fontWeight: FontWeight.w400,
                         color: AppColors.grayNormal,
@@ -115,14 +118,22 @@ class PatientDetails extends StatelessWidget {
                     height: 9.h,
                   ),
                   //================= reports image ==============//
-                  Center(
-                    child: CustomNetworkImage(
-                      imageUrl: AppConstants.prescribtion,
-                      height: 173.h,
-                      width: 173.w,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
+                  model.prescription!.isEmpty
+                      ? const SizedBox()
+                      : SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: List.generate(
+                              model.prescription!.length,
+                              (index) => CustomNetworkImage(
+                                imageUrl: AppConstants.prescribtion,
+                                height: 173.h,
+                                width: 173.w,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                          ),
+                        ),
                   SizedBox(
                     height: 60.h,
                   ),

@@ -15,5 +15,17 @@ class ApiUrl {
 
   ///=============================== Doctor Section ==============================
   static const profile = '/auth/profile';
+  //=============================== Appointment ===========================//
   static const doctorAppointment = '/appointment/get-my-appointments';
+  //======================= Notification ===============================//
+  static const doctorNotification = '/notification/get-notifications';
+
+  //============================= Change password ====================//
+  static const changePassword = '/auth/change-password';
+
+  //========================= update Doctor Profile =====================//
+
+  static const updateDoctorProfile = '/auth/update-doctor/';
+
+  static const imageBaseUrl = 'http://192.168.10.6:5000/';
 }

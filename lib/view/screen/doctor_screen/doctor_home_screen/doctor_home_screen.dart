@@ -1,4 +1,5 @@
 import 'package:doctor_booking/controller/doctor_home_controller/doctor_home_controller.dart';
+import 'package:doctor_booking/controller/doctor_profile_controller/doctor_profile_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
@@ -21,6 +22,8 @@ class DoctorHomeScreen extends StatelessWidget {
   DoctorHomeScreen({super.key});
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final DoctorHomeController controller = Get.find<DoctorHomeController>();
+  final DoctorProfileController doctorProfileController =
+      Get.find<DoctorProfileController>();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +49,8 @@ class DoctorHomeScreen extends StatelessWidget {
                 children: [
                   HomeAppbarDoctor(
                     name: AppStrings.currentLocation,
-                    loacation: controller.profileModel.value.location!,
+                    loacation:
+                        doctorProfileController.profileModel.value.location!,
                     scaffoldKey: scaffoldKey,
                   ),
                   SizedBox(height: 12.h),
@@ -106,6 +110,7 @@ class DoctorHomeScreen extends StatelessWidget {
                                       onTap: () {
                                         controller.scheduleTime.value =
                                             AppStrings.today;
+                                        controller.getAllDoctorAppointment();
                                       },
                                       isActive: controller.scheduleTime.value ==
                                           AppStrings.today,
@@ -117,6 +122,9 @@ class DoctorHomeScreen extends StatelessWidget {
                                       onTap: () {
                                         controller.scheduleTime.value =
                                             AppStrings.weekly;
+                                        controller
+                                            .getAllDoctorAppointmentWeeklyAndMonthy(
+                                                AppStrings.weekly);
                                       },
                                       isActive: controller.scheduleTime.value ==
                                           AppStrings.weekly,
@@ -128,6 +136,9 @@ class DoctorHomeScreen extends StatelessWidget {
                                       onTap: () {
                                         controller.scheduleTime.value =
                                             AppStrings.monthly;
+                                        controller
+                                            .getAllDoctorAppointmentWeeklyAndMonthy(
+                                                AppStrings.monthly);
                                       },
                                       isActive: controller.scheduleTime.value ==
                                           AppStrings.monthly,
@@ -140,43 +151,134 @@ class DoctorHomeScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 16.h),
-                        Obx(() {
-                          final isTabSelected =
-                              controller.tabSelectedIndex.value == 0;
-                          return Column(
+                        //====================================== Schedule List ====================================//
+                        if (controller.tabSelectedIndex.value == 0)
+                          //======================= To Day List ========================
+                          if (controller.scheduleTime.value == AppStrings.today)
+                            Column(
+                              children: List.generate(
+                                  controller.appointMentList.length, (index) {
+                                return CustomDoctorCard(
+                                  imageUrl: '',
+                                  patentName: controller.appointMentList[index]
+                                          .userId?.name ??
+                                      '',
+                                  time:
+                                      'Today (${controller.appointMentList[index].time ?? ''})',
+                                  loacation: controller.appointMentList[index]
+                                          .appointmentType ??
+                                      '',
+                                  onTap: () {
+                                    var userdetails =
+                                        controller.appointMentList[index];
+                                    Get.toNamed(AppRoutes.patientDetails,
+                                        arguments: userdetails);
+                                  },
+                                  reScheduleButton: () {
+                                    controller.showHomePopup();
+                                  },
+                                  timeTextColor: AppColors.blackO,
+                                );
+                              }),
+                            ),
+                        //======================= Weekly List =====================
+                        if (controller.scheduleTime.value == AppStrings.weekly)
+                          Column(
+                            children: List.generate(
+                                controller.appointMentList.length, (index) {
+                              return CustomDoctorCard(
+                                imageUrl: '',
+                                patentName: controller
+                                        .appointMentList[index].userId?.name ??
+                                    '',
+                                time:
+                                    'Today (${controller.appointMentList[index].time ?? ''})',
+                                loacation: controller.appointMentList[index]
+                                        .appointmentType ??
+                                    '',
+                                onTap: () {
+                                  var userdetails =
+                                      controller.appointMentList[index];
+                                  Get.toNamed(AppRoutes.patientDetails,
+                                      arguments: userdetails);
+                                },
+                                reScheduleButton: () {
+                                  controller.showHomePopup();
+                                },
+                                timeTextColor: AppColors.blackO,
+                              );
+                            }),
+                          ),
+                        //======================= monthly List =====================
+                        if (controller.scheduleTime.value == AppStrings.monthly)
+                          Column(
+                            children: List.generate(
+                                controller.appointMentList.length, (index) {
+                              return CustomDoctorCard(
+                                imageUrl: '',
+                                patentName: controller
+                                        .appointMentList[index].userId?.name ??
+                                    '',
+                                time:
+                                    'Today (${controller.appointMentList[index].time ?? ''})',
+                                loacation: controller.appointMentList[index]
+                                        .appointmentType ??
+                                    '',
+                                onTap: () {
+                                  var userdetails =
+                                      controller.appointMentList[index];
+                                  Get.toNamed(AppRoutes.patientDetails,
+                                      arguments: userdetails);
+                                },
+                                reScheduleButton: () {
+                                  controller.showHomePopup();
+                                },
+                                timeTextColor: AppColors.blackO,
+                              );
+                            }),
+                          ),
+                        //======================================= Cancel List =================================
+                        if (controller.tabSelectedIndex.value == 1)
+                          Column(
                             children: [
-                              if (!isTabSelected) ...[
-                                SizedBox(height: 24.h),
-                                CustomText(
-                                  text: "${AppStrings.totalCancelation} 12",
-                                  fontSize: 14.w,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.blackNormal,
-                                ),
-                                SizedBox(height: 16.h),
-                              ],
+                              SizedBox(height: 24.h),
+                              CustomText(
+                                text: "${AppStrings.totalCancelation} 12",
+                                fontSize: 14.w,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.blackNormal,
+                              ),
+                              SizedBox(height: 16.h),
                               Column(
                                 children: List.generate(
                                     controller.appointMentList.length, (index) {
                                   return CustomDoctorCard(
                                     imageUrl: '',
-                                    patentName: 'Heart Disease',
-                                    time: 'Today  ( 12 : 00 AM )',
-                                    loacation: 'Online Appointment',
+                                    patentName: controller
+                                            .appointMentList[index]
+                                            .userId
+                                            ?.name ??
+                                        '',
+                                    time:
+                                        'Today (${controller.appointMentList[index].time ?? ''})',
+                                    loacation: controller.appointMentList[index]
+                                            .appointmentType ??
+                                        '',
                                     onTap: () {
-                                      Get.toNamed(AppRoutes.patientDetails);
+                                      var userdetails =
+                                          controller.appointMentList[index];
+                                      Get.toNamed(AppRoutes.patientDetails,
+                                          arguments: userdetails);
                                     },
                                     reScheduleButton: () {
                                       controller.showHomePopup();
                                     },
-                                    timeTextColor:
-                                        isTabSelected ? null : AppColors.red,
+                                    timeTextColor: AppColors.red,
                                   );
                                 }),
                               ),
                             ],
-                          );
-                        }),
+                          ),
                       ],
                     ),
                   ),
@@ -189,278 +291,3 @@ class DoctorHomeScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// class DoctorHomeScreen extends StatelessWidget {
-//   DoctorHomeScreen({super.key});
-//   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-//   final DoctorHomeController controller = Get.find<DoctorHomeController>();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       drawer: const DoctorSideDrawer(),
-//       key: scaffoldKey,
-//       backgroundColor: AppColors.whiteLightActive,
-//       body: Obx(() {
-//         switch (controller.rxRequestStatus) {
-//           // ignore: constant_pattern_never_matches_value_type
-//           case Status.loading:
-//             return const CustomLoader();
-//           // ignore: constant_pattern_never_matches_value_type
-//           case Status.internetError:
-//             return const CustomLoader();
-//           // ignore: constant_pattern_never_matches_value_type
-//           case Status.error:
-//             return GeneralErrorScreen(
-//               onTap: () {
-//                 controller.allMethod();
-//               },
-//             );
-//           // ignore: constant_pattern_never_matches_value_type
-//           case Status.completed:
-//             return SingleChildScrollView(
-//               child: Column(
-//                 children: [
-//                   ///==================================Home Appbar=======================
-//                   HomeAppbarDoctor(
-//                     name: AppStrings.currentLocation,
-//                     loacation: AppStrings.californiaUsa,
-//                     scaffoldKey: scaffoldKey,
-//                   ),
-//                   SizedBox(
-//                     height: 12.h,
-//                   ),
-//                   Padding(
-//                     padding: const EdgeInsets.symmetric(
-//                         horizontal: 17.0, vertical: 8),
-//                     child: Column(
-//                       children: [
-//                         ///===============================Total Card==========================
-//                         Row(
-//                           children: [
-//                             const Flexible(
-//                               child: HomeContainer(
-//                                 title: AppStrings.totalBalance,
-//                                 subTitle: '\$4,520',
-//                               ),
-//                             ),
-//                             SizedBox(
-//                               width: 23.5.h,
-//                             ),
-//                             const Flexible(
-//                               child: HomeContainer(
-//                                 title: AppStrings.totalAppointment,
-//                                 subTitle: '1000',
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                         SizedBox(
-//                           height: 24.h,
-//                         ),
-
-//                         ///============= Schedule or Cancel tab view ========///
-
-//                         Obx(() {
-//                           return CustomTabSelector(
-//                             tabs: controller.tabs,
-//                             selectedIndex: controller.tabSelectedIndex.value,
-//                             onTabSelected: (value) {
-//                               controller.tabSelectedIndex.value = value;
-//                             },
-//                             selectedColor: AppColors.grayNormal,
-//                             unselectedColor: AppColors.whiteNormalHover,
-//                             isTextColorActive: true,
-//                             textColor: AppColors.grayNormal,
-//                           );
-//                         }),
-
-//                         SizedBox(
-//                           height: 24.h,
-//                         ),
-//                         Container(
-//                           width: MediaQuery.sizeOf(context).width,
-//                           height: 56.h,
-//                           decoration: BoxDecoration(
-//                             color: AppColors.whiteNormal,
-//                             borderRadius: BorderRadius.circular(30),
-//                           ),
-//                           child: Padding(
-//                             padding: EdgeInsets.all(8.0.h),
-//                             child: Obx(
-//                               () {
-//                                 return Row(
-//                                   mainAxisAlignment:
-//                                       MainAxisAlignment.spaceBetween,
-//                                   children: [
-//                                     ///============= To Day Container ===========//
-//                                     Flexible(
-//                                       child: HomeSmallContainer(
-//                                         onTap: () {
-//                                           controller.scheduleTime.value =
-//                                               AppStrings.today;
-//                                         },
-//                                         isActive:
-//                                             controller.scheduleTime.value ==
-//                                                     AppStrings.today
-//                                                 ? true
-//                                                 : false,
-//                                         title: AppStrings.today,
-//                                       ),
-//                                     ),
-//                                     //=============== Weekly Container ==========////
-
-//                                     Flexible(
-//                                       child: HomeSmallContainer(
-//                                         onTap: () {
-//                                           controller.scheduleTime.value =
-//                                               AppStrings.weekly;
-//                                         },
-//                                         isActive:
-//                                             controller.scheduleTime.value ==
-//                                                     AppStrings.weekly
-//                                                 ? true
-//                                                 : false,
-//                                         title: AppStrings.weekly,
-//                                       ),
-//                                     ),
-
-//                                     ///================== Monthly Container ============///
-//                                     Flexible(
-//                                       child: HomeSmallContainer(
-//                                         onTap: () {
-//                                           controller.scheduleTime.value =
-//                                               AppStrings.monthly;
-//                                         },
-//                                         isActive:
-//                                             controller.scheduleTime.value ==
-//                                                     AppStrings.monthly
-//                                                 ? true
-//                                                 : false,
-//                                         title: AppStrings.monthly,
-//                                       ),
-//                                     ),
-//                                   ],
-//                                 );
-//                               },
-//                             ),
-//                           ),
-//                         ),
-//                         SizedBox(
-//                           height: 16.h,
-//                         ),
-//                         //=============== Patent List ===========////
-//                         Obx(
-//                           () {
-//                             // ignore: unrelated_type_equality_checks
-//                             return controller.tabSelectedIndex == 0
-//                                 ? Column(
-//                                     children: List.generate(4, (index) {
-//                                       return CustomDoctorCard(
-//                                         imageUrl: AppConstants.userNtr,
-//                                         patentName: 'Heart Disease',
-//                                         time: 'Today  ( 12 : 00 AM )',
-//                                         loacation: 'Online Appointment',
-//                                         onTap: () {
-//                                           Get.toNamed(AppRoutes.patientDetails);
-//                                         },
-//                                         reScheduleButton: () {
-//                                           controller.showHomePopup();
-//                                         },
-//                                       );
-//                                     }),
-//                                   )
-//                                 : Column(
-//                                     children: [
-//                                       SizedBox(
-//                                         height: 24.h,
-//                                       ),
-//                                       CustomText(
-//                                         text:
-//                                             "${AppStrings.totalCancelation} 12",
-//                                         fontSize: 14.w,
-//                                         fontWeight: FontWeight.w500,
-//                                         color: AppColors.blackNormal,
-//                                       ),
-//                                       SizedBox(
-//                                         height: 16.h,
-//                                       ),
-//                                       Column(
-//                                         children: List.generate(
-//                                           4,
-//                                           (index) {
-//                                             return CustomDoctorCard(
-//                                               showPopupButton: false,
-//                                               imageUrl: AppConstants.userNtr,
-//                                               patentName: 'Heart Disease',
-//                                               time: 'Today  ( 12 : 00 AM )',
-//                                               loacation: 'Online Appointment',
-//                                               onTap: () {
-//                                                 Get.toNamed(
-//                                                     AppRoutes.patientDetails);
-//                                               },
-//                                               reScheduleButton: () {
-//                                                 controller.showHomePopup();
-//                                               },
-//                                               timeTextColor: AppColors.red,
-//                                             );
-//                                           },
-//                                         ),
-//                                       ),
-//                                     ],
-//                                   );
-//                           },
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             );
-//         }
-//       }),
-//       // ignore: prefer_const_constructors
-//       bottomNavigationBar: DoctorNavBar(currentIndex: 0),
-//     );
-//   }
-// }

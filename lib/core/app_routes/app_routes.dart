@@ -7,8 +7,8 @@ import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/d
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/appointment_info_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/personal_info_screen/personal_info_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/professional_info_screen/professional_info_screen.dart';
-import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_personal_profile_screen/doctor_edit_personal_profile_screen.dart';
-import 'package:doctor_booking/view/screen/doctor_screen/doctor_edit_professional_profile_screen/doctor_edit_professional_profile_screen.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_edit_personal_profile_screen/doctor_edit_personal_profile_screen.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_edit_professional_profile_screen/doctor_edit_professional_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/patient_details/patient_details.dart';
@@ -160,8 +160,10 @@ class AppRoutes {
     GetPage(name: signUpOtpScreen, page: () =>  SignUpOtpScreen()),
     GetPage(
         name: forgetPasswordScreen, page: () => const ForgetPasswordScreen()),
+    GetPage(name: signUpOtpScreen, page: () => const SignUpOtpScreen()),
+    GetPage(name: forgetPasswordScreen, page: () => ForgetPasswordScreen()),
     GetPage(name: resetPasswordScreen, page: () => const ResetPasswordScreen()),
-    GetPage(name: selectInterest, page: () =>  SelectInterest()),
+    GetPage(name: selectInterest, page: () => SelectInterest()),
 
     ///=============================Hospital Section======================
     GetPage(name: hospitalScreen, page: () => HospitalScreen()),
@@ -171,7 +173,7 @@ class AppRoutes {
     GetPage(name: onboardScreenTwo, page: () => OnboardScreenTwo()),
     GetPage(name: onboardScreenThree, page: () => OnboardScreenThree()),
     GetPage(name: chooseScreen, page: () => ChooseScreen()),
-    GetPage(name: doctorProfileScreen, page: () => const DoctorProfileScreen()),
+    GetPage(name: doctorProfileScreen, page: () => DoctorProfileScreen()),
     GetPage(name: specialistProfile, page: () => const SpecialistProfile()),
     GetPage(
         name: rescheduleAppointmentScreen,
@@ -187,7 +189,7 @@ class AppRoutes {
     GetPage(
         name: doctorEditProfessinalProfileScreen,
         page: () => DoctorEditProfessionalProfileScreen()),
-    GetPage(name: patientDetails, page: () => const PatientDetails()),
+    GetPage(name: patientDetails, page: () => PatientDetails()),
     GetPage(name: doctorSignUp, page: () => DoctorSignUp()),
     GetPage(name: appointmentInfoScreen, page: () => AppointmentInfoScreen()),
     GetPage(name: personalInfoScreen, page: () => PersonalInfoScreen()),

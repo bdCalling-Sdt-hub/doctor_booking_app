@@ -7,6 +7,7 @@ import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
+import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
 import 'package:doctor_booking/view/widgets/custom_spacer_widget/custom_spacer_widget.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -113,20 +114,13 @@ class SignInScreen extends StatelessWidget {
                 //======================================= Sign in button ===========================//
                 Obx(() {
                   return patientAuthController.signInLoading.value
-                      ? SizedBox(
-                          height: 48.h,
-                          width: 48.w,
-                          child: const Center(
-                              child: CircularProgressIndicator(
-                            color: AppColors.blackNormal,
-                          )),
-                        )
+                      ? const CustomLoader()
                       : CustomButton(
                           onTap: () {
-                            // if (formKey.currentState!.validate()) {
-                            //   patientAuthController.signInUser();
-                            // }
-                            patientAuthController.signInUser();
+                            if (formKey.currentState!.validate()) {
+                              patientAuthController.signInUser();
+                            }
+                            //  patientAuthController.signInUser();
                           },
                           title: AppStrings.continues,
                         );
