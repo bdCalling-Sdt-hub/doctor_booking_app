@@ -60,7 +60,7 @@ class ForgetPasswordScreen extends StatelessWidget {
               CustomFormCard(
                 hintText: AppStrings.enterEmailAddress,
                 title: AppStrings.email,
-                controller: patientAuthController.forgotEmailController.value,
+                controller: TextEditingController(),
                 validator: (value) {
                   if (value == null || value.toString().isEmpty) {
                     return AppStrings.fieldCantBeEmpty.tr;
