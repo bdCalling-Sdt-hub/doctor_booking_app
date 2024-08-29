@@ -16,34 +16,36 @@ class DoctorEditLicenseNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      CustomNetworkImage(
-        imageUrl: imageSrc,
-        height: 160.h,
-        width: MediaQuery.sizeOf(context).width,
-        borderRadius: BorderRadius.circular(8),
-        // borderRadius: BorderRadius.circular(45),
-      ),
-      Positioned(
-        bottom: 0,
-        right: 0,
-        child: InkWell(
-          onTap: onTap,
-          child: const CircleAvatar(
-            radius: 17,
-            backgroundColor: AppColors.blackNormal,
-            child: Center(
-              child: CustomImage(
-                imageType: ImageType.png,
-                imageSrc: AppIcons.gallary,
-                sizeWidth: 18,
-                imageColor: AppColors.white,
+    return Stack(
+      children: [
+        CustomNetworkImage(
+          imageUrl: imageSrc,
+          height: 160.h,
+          width: MediaQuery.sizeOf(context).width,
+          borderRadius: BorderRadius.circular(8),
+          // borderRadius: BorderRadius.circular(45),
+        ),
+        Positioned(
+          top: 65.h,
+          right: 160.w,
+          child: InkWell(
+            onTap: onTap,
+            child: const CircleAvatar(
+              radius: 17,
+              backgroundColor: AppColors.blackNormal,
+              child: Center(
+                child: CustomImage(
+                  imageType: ImageType.png,
+                  imageSrc: AppIcons.gallary,
+                  sizeWidth: 18,
+                  imageColor: AppColors.white,
+                ),
               ),
             ),
           ),
         ),
-      )
-    ]);
+      ],
+    );
   }
 }
 
@@ -74,8 +76,8 @@ class DoctorEditLicenseFileImage extends StatelessWidget {
         ),
       ),
       Positioned(
-        bottom: 0,
-        right: 0,
+        top: 65.h,
+        right: 160.w,
         child: InkWell(
           onTap: onTap,
           child: const CircleAvatar(
