@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
@@ -6,6 +7,7 @@ import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
+import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +18,10 @@ class PatientAuthController extends GetxController {
   GeneralController generalController = Get.find<GeneralController>();
 // ============================ Sign in text Editing controller ======================
 
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController =
+      TextEditingController(text: kDebugMode ? "powide4919@daypey.com" : "");
+  final TextEditingController passwordController =
+      TextEditingController(text: kDebugMode ? "1234567" : "");
 
   ///=================== Update Interest ===================
   RxList<String> interestList = [
@@ -75,12 +79,11 @@ class PatientAuthController extends GetxController {
     );
 
     if (response.statusCode == 200) {
-      SharePrefsHelper.setString(
-          AppConstants.bearerToken, response.body["token"]);
-
       if (response.body['data']['role'] == 'DOCTOR') {
+        saveInfo(response: response);
         Get.offAllNamed(AppRoutes.doctorHomeScreen);
       } else {
+        saveInfo(response: response);
         Get.offAllNamed(AppRoutes.homeScreen);
       }
     } else {
@@ -119,7 +122,45 @@ class PatientAuthController extends GetxController {
       navigator?.pop();
     }
   }
-//====================== Get Patient Date of birth Method =================
+
+  ///======================== Verify OTP Paitent ====================
+  ///=============================== Verify OTP Sign Up =============================
+  RxInt secondsRemaining = 3.obs;
+  late Timer timer;
+
+  void startTimer() {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (secondsRemaining > 0) {
+        secondsRemaining--;
+        secondsRemaining.refresh();
+      } else {
+        timer.cancel();
+      }
+    });
+  }
+
+  RxString otp = "".obs;
+  Future<void> verifyOTPSignUp() async {
+    generalController.showPopUpLoader();
+    var body = {
+      "email": patientEmailController.value.text,
+      "code": otp.value,
+    };
+    var response =
+        await ApiClient.postData(ApiUrl.varifyCode, body, isContentType: false);
+
+    if (response.statusCode == 200) {
+      navigator?.pop();
+      SharePrefsHelper.setString(
+          AppConstants.bearerToken, response.body["accessToken"]);
+      Get.offAllNamed(AppRoutes.homeScreen);
+    } else {
+      navigator?.pop();
+      toastMessage(message: response.body["message"]);
+    }
+  }
+
+//====================== Get Patient Date of birth Method ===================
 
   getPatientDateOfBirth() async {
     final DateTime? pickDate = await showDatePicker(
@@ -133,8 +174,8 @@ class PatientAuthController extends GetxController {
     }
   }
 
-//
-  //=============================== Patient Sing up Controller ======================//
+  //=============================== Patient Sing up Controller =========================//
+
   TextEditingController patientNameController =
       TextEditingController(text: kDebugMode ? "Rafsan" : "");
 
@@ -156,4 +197,21 @@ class PatientAuthController extends GetxController {
 
   Rx<TextEditingController> patientConfirmPasswordController =
       TextEditingController(text: kDebugMode ? "1234567Rr" : "").obs;
+
+  ////=========================== Save Info =============================
+  saveInfo({required Response<dynamic> response}) {
+    SharePrefsHelper.setString(
+        AppConstants.bearerToken, response.body["token"]);
+
+    SharePrefsHelper.setString(
+        AppConstants.userName, response.body["data"]["name"]);
+
+    SharePrefsHelper.setString(
+        AppConstants.userLocation, response.body["data"]["location"]);
+
+    SharePrefsHelper.setString(
+        AppConstants.userImage, response.body["data"]["image"] ?? "");
+
+    generalController.getSavedInfo();
+  }
 }

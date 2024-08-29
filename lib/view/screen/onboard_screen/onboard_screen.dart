@@ -1,4 +1,5 @@
-import 'package:doctor_booking/controller/home_controller/home_controller.dart';
+
+import 'package:doctor_booking/view/screen/patient_screen/home_screen/controller/paitent_home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,7 +8,7 @@ import 'onboard_screen_three/onboard_screen_three.dart';
 import 'onboard_screen_two/onboard_screen_two.dart';
 
 class OnboardScreen extends StatelessWidget {
-  final HomeController homeController = Get.find<HomeController>();
+  final PaitentHomeController homeController = Get.find<PaitentHomeController>();
 
   OnboardScreen({super.key});
 

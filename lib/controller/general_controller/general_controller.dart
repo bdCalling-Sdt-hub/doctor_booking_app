@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
+import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/inner_widget/appointments_history_dialog.dart';
 import 'package:doctor_booking/view/widgets/custom_image_picker_popup/custom_image_picker_popup.dart';
 import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
@@ -179,5 +181,18 @@ class GeneralController extends GetxController with GetxServiceMixin {
       // Notify listeners of changes
       update();
     }
+  }
+
+  ///========================= Get User Info =========================
+  RxString userImg = "".obs;
+  RxString userName = "".obs;
+  RxString userLocation = "".obs;
+
+  getSavedInfo() async {
+    userImg.value = await SharePrefsHelper.getString(AppConstants.userImage);
+    userName.value = await SharePrefsHelper.getString(AppConstants.userName);
+    userLocation.value =
+        await SharePrefsHelper.getString(AppConstants.userLocation);
+    refresh();
   }
 }

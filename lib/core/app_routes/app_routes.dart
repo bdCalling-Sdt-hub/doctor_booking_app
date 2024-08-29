@@ -157,7 +157,7 @@ class AppRoutes {
     GetPage(
         name: doctorForgetPasswordScreen,
         page: () => const DoctorForgetPasswordScreen()),
-    GetPage(name: signUpOtpScreen, page: () => const SignUpOtpScreen()),
+    GetPage(name: signUpOtpScreen, page: () =>  SignUpOtpScreen()),
     GetPage(
         name: forgetPasswordScreen, page: () => const ForgetPasswordScreen()),
     GetPage(name: resetPasswordScreen, page: () => const ResetPasswordScreen()),
