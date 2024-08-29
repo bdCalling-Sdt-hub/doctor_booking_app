@@ -138,6 +138,8 @@ class DoctorProfileController extends GetxController {
     if (response.statusCode == 200) {
       getDoctorProfile();
       updatePersonalLoading.value = false;
+      Get.back();
+      proImage.value = null;
 
       refresh();
       showCustomSnackBar(
@@ -221,6 +223,7 @@ class DoctorProfileController extends GetxController {
     if (response.statusCode == 200) {
       getDoctorProfile();
       updateProfessionalLoading.value = false;
+      licenseImage.value = null;
 
       refresh();
       showCustomSnackBar(

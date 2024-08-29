@@ -139,10 +139,9 @@ class AppRoutes {
     GetPage(name: notificationScreen, page: () => NotificationScreen()),
     GetPage(name: settingScreen, page: () => SettingScreen()),
     GetPage(name: changePasswordScreen, page: () => ChangePasswordScreen()),
-    GetPage(name: privacyPolicyScreen, page: () => const PrivacyPolicyScreen()),
+    GetPage(name: privacyPolicyScreen, page: () => PrivacyPolicyScreen()),
     GetPage(
-        name: termsAndConditionScreen,
-        page: () => const TermsAndConditionScreen()),
+        name: termsAndConditionScreen, page: () => TermsAndConditionScreen()),
     GetPage(name: callHistoryScreen, page: () => const CallHistoryScreen()),
     GetPage(name: categoriesScreen, page: () => CategoriesScreen()),
     GetPage(name: subCategoriesScreen, page: () => const SubCategoriesScreen()),

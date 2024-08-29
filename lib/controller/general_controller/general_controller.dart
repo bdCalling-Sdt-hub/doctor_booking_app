@@ -1,6 +1,10 @@
 import 'dart:io';
 
 import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
+import 'package:doctor_booking/model/terms_model/terms_model.dart';
+import 'package:doctor_booking/service/api_check.dart';
+import 'package:doctor_booking/service/api_client.dart';
+import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/inner_widget/appointments_history_dialog.dart';
 import 'package:doctor_booking/view/widgets/custom_image_picker_popup/custom_image_picker_popup.dart';
@@ -194,5 +198,54 @@ class GeneralController extends GetxController with GetxServiceMixin {
     userLocation.value =
         await SharePrefsHelper.getString(AppConstants.userLocation);
     refresh();
+  }
+
+  //================================== Get Terms And Condition =============================
+  final rxRequestStatus = Status.loading.obs;
+  void setRxRequestStatus(Status value) => rxRequestStatus.value = value;
+  Rx<TermsModel> termsModel = TermsModel().obs;
+
+  Future<void> getTerms() async {
+    setRxRequestStatus(Status.loading);
+    var response = await ApiClient.getData(ApiUrl.termsAndCondition);
+
+    if (response.statusCode == 200) {
+      setRxRequestStatus(Status.completed);
+      termsModel.value = TermsModel.fromJson(response.body['data']);
+    } else {
+      if (response.statusText == ApiClient.noInternetMessage) {
+        setRxRequestStatus(Status.internetError);
+      } else {
+        setRxRequestStatus(Status.error);
+      }
+      ApiChecker.checkApi(response);
+    }
+  }
+  //=================================== Privacy & Policy ===========================//
+
+  Rx<TermsModel> privacyModel = TermsModel().obs;
+
+  Future<void> getPrivacyPolicy() async {
+    setRxRequestStatus(Status.loading);
+    var response = await ApiClient.getData(ApiUrl.privacyPolicy);
+
+    if (response.statusCode == 200) {
+      setRxRequestStatus(Status.completed);
+      privacyModel.value = TermsModel.fromJson(response.body['data']);
+    } else {
+      if (response.statusText == ApiClient.noInternetMessage) {
+        setRxRequestStatus(Status.internetError);
+      } else {
+        setRxRequestStatus(Status.error);
+      }
+      ApiChecker.checkApi(response);
+    }
+  }
+
+  @override
+  void onInit() {
+    getTerms();
+    getPrivacyPolicy();
+    super.onInit();
   }
 }

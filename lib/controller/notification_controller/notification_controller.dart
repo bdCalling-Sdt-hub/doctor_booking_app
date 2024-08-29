@@ -61,7 +61,7 @@ class NotificationController extends GetxController {
     );
   }
 
-  ///======================== Doctor Notification Method =============================//
+  ///======================== Get Doctor Notification Method =============================//
   RxList<DoctorNotificationModel> doctorNotificationList =
       <DoctorNotificationModel>[].obs;
 

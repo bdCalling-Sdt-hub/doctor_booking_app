@@ -1,6 +1,9 @@
 class ApiUrl {
   static const baseUrl = "http://192.168.10.6:5000";
 
+  //============================ Image base url ===========
+  static const imageBaseUrl = 'http://192.168.10.6:5000/';
+
   ///=============================== Auth Section ==============================
 
   static const login = '/auth/sign-in';
@@ -26,6 +29,14 @@ class ApiUrl {
   //========================= update Doctor Profile =====================//
 
   static const updateDoctorProfile = '/auth/update-doctor/';
+  //======================== Doctor Over view ========================//
 
-  static const imageBaseUrl = 'http://192.168.10.6:5000/';
+  static const doctorOverveiw = '/overview/doctor-overview';
+
+  // ================================= Terms & Conditions ================
+
+  static const termsAndCondition = '/settings/get-settings/terms';
+
+  //============================ privacy & policy =======================//
+  static const privacyPolicy = '/settings/get-settings/privacy';
 }
