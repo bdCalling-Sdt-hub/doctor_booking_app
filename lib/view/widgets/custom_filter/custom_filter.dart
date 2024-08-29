@@ -1,12 +1,12 @@
-import 'package:doctor_booking/controller/home_controller/home_controller.dart';
+
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/home_screen/controller/paitent_home_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 
 class CustomFilter extends StatelessWidget {
   final TextEditingController locationController;
@@ -18,8 +18,8 @@ class CustomFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final HomeController searchListController =
-    Get.find<HomeController>();
+    final PaitentHomeController searchListController =
+        Get.find<PaitentHomeController>();
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
       child: Padding(
@@ -46,12 +46,11 @@ class CustomFilter extends StatelessWidget {
             ),
             SizedBox(height: 20.h),
             Obx(() => _buildDropdown(
-              label: AppStrings.categories.tr,
-              value: searchListController.selectedCategory.value,
-              items: searchListController.categories,
-              onChanged: searchListController.updateCategory,
-            )),
-
+                  label: AppStrings.categories.tr,
+                  value: searchListController.selectedCategory.value,
+                  items: searchListController.categories,
+                  onChanged: searchListController.updateCategory,
+                )),
             SizedBox(height: 20.h),
             _buildTextField(
               label: 'Location',
@@ -62,7 +61,7 @@ class CustomFilter extends StatelessWidget {
             ),
             CustomButton(
                 title: AppStrings.search,
-                onTap: (){
+                onTap: () {
                   Get.back();
                 })
           ],

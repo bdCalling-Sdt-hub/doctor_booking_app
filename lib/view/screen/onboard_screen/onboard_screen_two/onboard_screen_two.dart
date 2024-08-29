@@ -1,8 +1,8 @@
-import 'package:doctor_booking/controller/home_controller/home_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_images/app_images.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/home_screen/controller/paitent_home_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
@@ -12,7 +12,8 @@ import 'package:get/get.dart';
 
 class OnboardScreenTwo extends StatelessWidget {
   OnboardScreenTwo({super.key});
-  final HomeController homeController = Get.find<HomeController>();
+  final PaitentHomeController homeController =
+      Get.find<PaitentHomeController>();
 
   @override
   Widget build(BuildContext context) {

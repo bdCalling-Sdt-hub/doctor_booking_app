@@ -71,10 +71,10 @@ void showDialogBox(
                 Expanded(
                   flex: 5,
                   child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStateProperty.all<Color>(AppColors.red),
-                    ),
+                    // style: ButtonStyle(
+                    //   backgroundColor:
+                    //       WidgetStateProperty.all<Color>(AppColors.red),
+                    // ),
                     onPressed: () {
                       // Handle "Yes" action
                       Get.back();
@@ -91,10 +91,10 @@ void showDialogBox(
                 Expanded(
                   flex: 5,
                   child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStateProperty.all<Color>(AppColors.green),
-                    ),
+                    // style: ButtonStyle(
+                    //   backgroundColor:
+                    //       WidgetStateProperty.all<Color>(AppColors.green),
+                    // ),
                     onPressed: () {
                       // Handle "Cancel" action
                       Get.back();

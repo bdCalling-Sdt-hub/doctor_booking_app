@@ -1,10 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:doctor_booking/controller/home_controller/home_controller.dart';
+import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
+import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/home_screen/controller/paitent_home_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_card/custom_card.dart';
 import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_image.dart';
 import 'package:doctor_booking/view/widgets/custom_row/custom_row.dart';
@@ -14,7 +16,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import 'inner_widgets/home_appbar.dart';
 import 'inner_widgets/side_drawer.dart';
 
@@ -22,7 +23,9 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final HomeController homeController = Get.find<HomeController>();
+  final PaitentHomeController homeController =
+      Get.find<PaitentHomeController>();
+  final GeneralController generalController = Get.find<GeneralController>();
 
   @override
   Widget build(BuildContext context) {
@@ -41,20 +44,21 @@ class HomeScreen extends StatelessWidget {
               ///====================== Home AppBar and banner =======================
               HomeAppBar(
                 scaffoldKey: scaffoldKey,
-                image: AppConstants.userNtr,
-                name: 'Hi, Robert Smith',
-                location: 'California, USA',
+                image: generalController.userImg.value,
+                name: generalController.userName.value,
+                location: generalController.userLocation.value,
               ),
               SizedBox(
                 height: 12.h,
               ),
 
-              ///============================This is banner=================
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 17, vertical: 8),
                 child: Column(
                   children: [
+                    ///============================This is banner=================
+
                     CarouselSlider(
                       options: CarouselOptions(
                         autoPlay: true,
@@ -119,8 +123,8 @@ class HomeScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: List.generate(
-                            homeController.categoriesList.length, (index) {
-                          var data = homeController.categoriesList[index];
+                            homeController.categoryList.length, (index) {
+                          var data = homeController.categoryList[index];
                           return Column(
                             children: [
                               GestureDetector(
@@ -130,8 +134,8 @@ class HomeScreen extends StatelessWidget {
                                 },
                                 child: CustomNetworkImage(
                                   boxShape: BoxShape.circle,
-                                  imageUrl: homeController.categoriesList[index]
-                                      ['image']!,
+                                  imageUrl:
+                                      "${ApiUrl.baseUrl}/${homeController.categoryList[index].img ?? ""}",
                                   height: 54,
                                   width: 54,
                                 ),
@@ -139,8 +143,7 @@ class HomeScreen extends StatelessWidget {
                               const SizedBox(height: 6),
                               CustomText(
                                 left: 20,
-                                text: homeController.categoriesList[index]
-                                    ['name']!,
+                                text: data.name ?? "",
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -169,12 +172,10 @@ class HomeScreen extends StatelessWidget {
                       child: Row(
                         children: List.generate(4, (index) {
                           return GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               Get.toNamed(AppRoutes.specialistProfile);
-
                             },
                             child: CustomCard(
-
                               imageSrc: AppIcons.favoriteUnselected,
                               networkImageUrl: AppConstants.userNtr,
                               name: 'Jenny Wilson',
@@ -205,9 +206,8 @@ class HomeScreen extends StatelessWidget {
                       child: Row(
                         children: List.generate(4, (index) {
                           return GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               Get.toNamed(AppRoutes.specialistProfile);
-
                             },
                             child: CustomCard(
                               imageSrc: AppIcons.favoriteUnselected,

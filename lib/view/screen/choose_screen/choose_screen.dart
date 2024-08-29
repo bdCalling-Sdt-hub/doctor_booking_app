@@ -1,8 +1,8 @@
-import 'package:doctor_booking/controller/home_controller/home_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_images/app_images.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/home_screen/controller/paitent_home_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_radio_button/custom_radio_button.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
@@ -12,7 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ChooseScreen extends StatelessWidget {
-  final HomeController _controller = Get.find<HomeController>();
+  final PaitentHomeController _controller = Get.find<PaitentHomeController>();
 
   ChooseScreen({super.key});
 

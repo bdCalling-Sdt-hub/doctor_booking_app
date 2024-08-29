@@ -1,4 +1,5 @@
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
+import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
@@ -34,7 +35,7 @@ class HomeAppBar extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       color: AppColors.whiteLightActive,
       margin: EdgeInsets.only(
-        top: 32.h,
+        top: 44.h,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 8),
       child: Column(
@@ -48,7 +49,7 @@ class HomeAppBar extends StatelessWidget {
                   ///==================== Profile =====================
                   CustomNetworkImage(
                       boxShape: BoxShape.circle,
-                      imageUrl: image,
+                      imageUrl: "${ApiUrl.baseUrl}$image",
                       height: 60,
                       width: 60),
 
