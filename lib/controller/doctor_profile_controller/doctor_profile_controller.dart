@@ -64,6 +64,7 @@ class DoctorProfileController extends GetxController {
       setRxRequestStatus(Status.completed);
       profileModel.value = ProfileModel.fromJson(response.body['data']);
       textControllerValueAdd(profileModel.value);
+      initAvalibleDayList(profileModel.value);
       debugPrint(profileModel.value.name);
     } else {
       if (response.statusText == ApiClient.noInternetMessage) {
@@ -242,6 +243,25 @@ class DoctorProfileController extends GetxController {
       refresh();
       ApiChecker.checkApi(response);
     }
+  }
+
+  ///=============================== Doctor Avalible day list init ===================================///
+
+  RxList<String> sundayAvailableList = <String>[].obs;
+  RxList<String> mondayAvailableList = <String>[].obs;
+  RxList<String> tuedayAvailableList = <String>[].obs;
+  RxList<String> weddayAvailableList = <String>[].obs;
+  RxList<String> thudayAvailableList = <String>[].obs;
+  RxList<String> fridayAvailableList = <String>[].obs;
+  RxList<String> satdayAvailableList = <String>[].obs;
+  initAvalibleDayList(ProfileModel model) {
+    sundayAvailableList.value = model.availableDays?.sunday ?? [];
+    mondayAvailableList.value = model.availableDays?.monday ?? [];
+    tuedayAvailableList.value = model.availableDays?.tuesday ?? [];
+    weddayAvailableList.value = model.availableDays?.wednesday ?? [];
+    thudayAvailableList.value = model.availableDays?.thursday ?? [];
+    fridayAvailableList.value = model.availableDays?.friday ?? [];
+    satdayAvailableList.value = model.availableDays?.saturday ?? [];
   }
 
   @override

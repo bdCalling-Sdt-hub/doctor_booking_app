@@ -1,13 +1,16 @@
 import 'package:doctor_booking/controller/doctor_home_controller/doctor_home_controller.dart';
+import 'package:doctor_booking/controller/doctor_profile_controller/doctor_profile_controller.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/widgets/custom_calender/custom_calender.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class DoctorHomePopup extends StatelessWidget {
   DoctorHomePopup({super.key});
@@ -15,118 +18,249 @@ class DoctorHomePopup extends StatelessWidget {
   final DoctorHomeController doctorHomeController =
       Get.find<DoctorHomeController>();
 
+  final DoctorProfileController doctorProfileController =
+      Get.find<DoctorProfileController>();
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.sizeOf(context).width,
       child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const CustomImage(
-                  imageSrc: AppIcons.close,
-                  size: 16,
+        child: Obx(() {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const CustomImage(
+                    imageSrc: AppIcons.close,
+                    size: 16,
+                  ),
                 ),
               ),
-            ),
-            Center(
-              child: CustomText(
-                text: AppStrings.reschedule,
-                fontSize: 16,
+              Center(
+                child: CustomText(
+                  text: AppStrings.reschedule,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.blackNormal,
+                  bottom: 10.h,
+                ),
+              ),
+              CustomText(
+                text: AppStrings.rescheduleDate,
+                fontSize: 15.sp,
                 fontWeight: FontWeight.w500,
-                color: AppColors.blackNormal,
-                bottom: 10.h,
+                color: AppColors.grayNormal,
               ),
-            ),
-            CustomText(
-              text: AppStrings.rescheduleDate,
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w500,
-              color: AppColors.grayNormal,
-            ),
-            SizedBox(
-              height: 14.h,
-            ),
-            //====================== Reschudule Date ===================//
-            Obx(() {
-              return CustomReschuduleDate(
-                currentIndex:
-                    doctorHomeController.popupReschuduleCurrentIndex.value,
-                onChanged: (value) {
-                  doctorHomeController.popupReschuduleCurrentIndex.value =
-                      value;
+              SizedBox(
+                height: 14.h,
+              ),
+              //====================== Reschudule Date ===================//
+              CustomCalender(
+                minDate: DateTime.now(),
+                maxDate: DateTime(2090),
+                initialDate: DateTime.now(),
+                onDateChange: (date) {
+                  doctorHomeController.doctorRescheduleDate.value =
+                      DateFormat('yMd').format(date).toLowerCase();
+                  doctorHomeController.doctorRescheduleDay.value =
+                      DateFormat('EEEE').format(date).toLowerCase();
+
+                  print(
+                      "==============${doctorHomeController.doctorRescheduleDate.value}===============");
+                  print(
+                      "==============${doctorHomeController.doctorRescheduleDay.value}===============");
                 },
-                dateName: 'Sat',
-                dateNumber: '07',
-              );
-            }),
-            SizedBox(
-              height: 14.h,
-            ),
-            CustomText(
-              text: AppStrings.availAbleTime,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-              color: AppColors.grayNormal,
-            ),
-            SizedBox(
-              height: 12.h,
-            ),
-            //================================== Available Time ============================//
-            Obx(() {
-              return AvailableTimeContainer(
-                time: '9 PM',
-                currentIndex:
-                    doctorHomeController.popupAvailableTimeCurrentIndex.value,
-                onChanged: (value) {
-                  doctorHomeController.popupAvailableTimeCurrentIndex.value =
-                      value;
-                },
-              );
-            }),
-            SizedBox(
-              height: 18.w,
-            ),
-            CustomFormCard(
-              title: 'Note',
-              controller: TextEditingController(),
-              hintText: 'Why Chaange the schedule?',
-              // isMultiLine: true,
-            ),
-            SizedBox(
-              height: 18.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: PopupButton(
-                    buttonName: AppStrings.cancel,
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
+                activeBackgroundColor: AppColors.blackNormal,
+                monthColor: AppColors.blackNormal,
+                showNavigationButtons: false,
+                inactiveBackgroundColor: AppColors.whiteDarkHover,
+                weekStartFrom: WeekStartFrom.sunday,
+                horizontalPadding: 6.w,
+              ),
+              SizedBox(
+                height: 14.h,
+              ),
+              CustomText(
+                text: AppStrings.availAbleTime,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
+                color: AppColors.grayNormal,
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
+              //================================== Available Time ============================//
+              //================================ Fri Day ===========================
+              if (doctorHomeController.doctorRescheduleDay.value ==
+                  AppStrings.friday)
+                doctorProfileController.fridayAvailableList.isNotEmpty
+                    ? AvailableTimeContainer(
+                        selectedTime:
+                            doctorProfileController.fridayAvailableList,
+                        time: '9 PM',
+                        currentIndex: doctorHomeController
+                            .popupAvailableTimeCurrentIndex.value,
+                        onChanged: (value) {
+                          doctorHomeController
+                              .popupAvailableTimeCurrentIndex.value = value;
+                        },
+                      )
+                    : Center(
+                        child: Text(
+                            'No Time Avaible for ${doctorHomeController.doctorRescheduleDay.value}')),
+              //================================ Tues Day ===========================
+              if (doctorHomeController.doctorRescheduleDay.value ==
+                  AppStrings.tuesday)
+                doctorProfileController.tuedayAvailableList.isNotEmpty
+                    ? AvailableTimeContainer(
+                        selectedTime:
+                            doctorProfileController.tuedayAvailableList,
+                        currentIndex: doctorHomeController
+                            .popupAvailableTimeCurrentIndex.value,
+                        onChanged: (value) {
+                          doctorHomeController
+                              .popupAvailableTimeCurrentIndex.value = value;
+                        },
+                      )
+                    : Center(
+                        child: Text(
+                            'No Time Avaible for ${doctorHomeController.doctorRescheduleDay.value}')),
+              //================================ Satar Day ================================
+              if (doctorHomeController.doctorRescheduleDay.value ==
+                  AppStrings.saturday)
+                doctorProfileController.satdayAvailableList.isNotEmpty
+                    ? AvailableTimeContainer(
+                        selectedTime:
+                            doctorProfileController.satdayAvailableList,
+                        currentIndex: doctorHomeController
+                            .popupAvailableTimeCurrentIndex.value,
+                        onChanged: (value) {
+                          doctorHomeController
+                              .popupAvailableTimeCurrentIndex.value = value;
+                        },
+                      )
+                    : Center(
+                        child: Text(
+                            'No Time Avaible for ${doctorHomeController.doctorRescheduleDay.value}')),
+
+              //================================ Sun Day ================================
+              if (doctorHomeController.doctorRescheduleDay.value ==
+                  AppStrings.sunday)
+                doctorProfileController.sundayAvailableList.isNotEmpty
+                    ? AvailableTimeContainer(
+                        selectedTime:
+                            doctorProfileController.sundayAvailableList,
+                        currentIndex: doctorHomeController
+                            .popupAvailableTimeCurrentIndex.value,
+                        onChanged: (value) {
+                          doctorHomeController
+                              .popupAvailableTimeCurrentIndex.value = value;
+                        },
+                      )
+                    : Center(
+                        child: Text(
+                            'No Time Avaible for ${doctorHomeController.doctorRescheduleDay.value}')),
+
+              //================================ Mon Day ================================
+              if (doctorHomeController.doctorRescheduleDay.value ==
+                  AppStrings.monday)
+                doctorProfileController.mondayAvailableList.isNotEmpty
+                    ? AvailableTimeContainer(
+                        selectedTime:
+                            doctorProfileController.mondayAvailableList,
+                        currentIndex: doctorHomeController
+                            .popupAvailableTimeCurrentIndex.value,
+                        onChanged: (value) {
+                          doctorHomeController
+                              .popupAvailableTimeCurrentIndex.value = value;
+                        },
+                      )
+                    : Center(
+                        child: Text(
+                            'No Time Avaible for ${doctorHomeController.doctorRescheduleDay.value}')),
+
+              //================================ Wed Day ================================
+              if (doctorHomeController.doctorRescheduleDay.value ==
+                  AppStrings.wednesday)
+                doctorProfileController.weddayAvailableList.isNotEmpty
+                    ? AvailableTimeContainer(
+                        selectedTime:
+                            doctorProfileController.weddayAvailableList,
+                        currentIndex: doctorHomeController
+                            .popupAvailableTimeCurrentIndex.value,
+                        onChanged: (value) {
+                          doctorHomeController
+                              .popupAvailableTimeCurrentIndex.value = value;
+                        },
+                      )
+                    : Center(
+                        child: Text(
+                            'No Time Avaible for ${doctorHomeController.doctorRescheduleDay.value}')),
+
+              //================================ Thurs Day ================================
+              if (doctorHomeController.doctorRescheduleDay.value ==
+                  AppStrings.thursday)
+                doctorProfileController.thudayAvailableList.isNotEmpty
+                    ? AvailableTimeContainer(
+                        selectedTime:
+                            doctorProfileController.thudayAvailableList,
+                        currentIndex: doctorHomeController
+                            .popupAvailableTimeCurrentIndex.value,
+                        onChanged: (value) {
+                          doctorHomeController
+                              .popupAvailableTimeCurrentIndex.value = value;
+                        },
+                      )
+                    : Center(
+                        child: Text(
+                            'No Time Avaible for ${doctorHomeController.doctorRescheduleDay.value}')),
+
+              SizedBox(
+                height: 18.w,
+              ),
+              CustomFormCard(
+                title: 'Note',
+                controller: TextEditingController(),
+                hintText: 'Why Chaange the schedule?',
+                // isMultiLine: true,
+              ),
+              SizedBox(
+                height: 18.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  //======================== Cancel button =================//
+                  Expanded(
+                    child: PopupButton(
+                      buttonName: AppStrings.cancel,
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 10.w,
-                ),
-                Expanded(
-                  child: PopupButton(
-                    buttonName: 'Confirm',
-                    onTap: () {},
+                  SizedBox(
+                    width: 10.w,
                   ),
-                ),
-              ],
-            ),
-          ],
-        ),
+                  //=========================== Confirm buttons ========================//
+                  Expanded(
+                    child: PopupButton(
+                      buttonName: 'Confirm',
+                      onTap: () {},
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        }),
       ),
     );
   }
@@ -136,23 +270,23 @@ class DoctorHomePopup extends StatelessWidget {
 class AvailableTimeContainer extends StatelessWidget {
   const AvailableTimeContainer({
     super.key,
-    required this.time,
+    this.time,
     this.onChanged,
     required this.currentIndex,
     this.selectedTime,
   });
 
-  final String time;
+  final String? time;
 
   final ValueChanged<int>? onChanged;
   final int currentIndex;
-  final List<int>? selectedTime;
+  final List<String>? selectedTime;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
         shrinkWrap: true,
-        itemCount: 12,
+        itemCount: selectedTime?.length ?? 0,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4,
             mainAxisSpacing: 8.w,
@@ -176,9 +310,9 @@ class AvailableTimeContainer extends StatelessWidget {
                     color: AppColors.grayLightHover,
                   )),
               child: CustomText(
-                text: time,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
+                text: selectedTime?[index] ?? '',
+                fontSize: 10.sp,
+                fontWeight: FontWeight.w600,
                 color: currentIndex == index
                     ? AppColors.white
                     : AppColors.blackNormal,

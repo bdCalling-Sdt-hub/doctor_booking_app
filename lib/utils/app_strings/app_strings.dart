@@ -215,6 +215,14 @@ class AppStrings {
   static const String dayOfWeek = 'Day of Week';
   static const String startTime = 'Start Time';
   static const String endTime = 'End Time';
+  static const String saturday = 'saturday';
+  static const String friday = 'friday';
+  static const String thursday = 'thursday';
+  static const String wednesday = 'wednesday';
+  static const String tuesday = 'tuesday';
+  static const String monday = 'monday';
+  static const String sunday = 'sunday';
+
   static const String areYouSure =
       'Are you sure want to cancel this appointment?';
   static const String ifYouCancel =

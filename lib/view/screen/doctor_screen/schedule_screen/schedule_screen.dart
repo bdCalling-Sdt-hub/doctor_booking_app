@@ -1,4 +1,3 @@
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:doctor_booking/controller/doctor_schedule_controller/doctor_schedule_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
@@ -6,6 +5,7 @@ import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/inner_widget.dart/schedule_patient_list.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
+import 'package:doctor_booking/view/widgets/custom_calender/custom_calender.dart';
 import 'package:doctor_booking/view/widgets/custom_doctor_card.dart';
 import 'package:doctor_booking/view/widgets/custom_tab_selected/custom_tab_selected.dart';
 import 'package:doctor_booking/view/widgets/doctor_nav_bar/doctor_nav_bar.dart';
@@ -31,25 +31,28 @@ class ScheduleScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            //===================== Calender ====================//
-            Container(
-              color: AppColors.whiteNormal,
-              child: CalendarDatePicker2(
-                config: CalendarDatePicker2Config(
-                  calendarType: CalendarDatePicker2Type.multi,
-                ),
-                value: const [],
-                onValueChanged: (dates) {},
-              ),
-            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0.h),
               child: Column(
                 children: [
+                  //========================== Calender =========================
+
+                  CustomCalender(
+                    minDate: DateTime.now(),
+                    maxDate: DateTime(2090),
+                    initialDate: DateTime.now(),
+                    onDateChange: (date) {},
+                    activeBackgroundColor: AppColors.blackNormal,
+                    monthColor: AppColors.blackNormal,
+                    showNavigationButtons: false,
+                    inactiveBackgroundColor: AppColors.whiteDarkHover,
+                    weekStartFrom: WeekStartFrom.sunday,
+                    inactiveTextColor: AppColors.blackNormal,
+                    horizontalPadding: 10.w,
+                  ),
+
 //================= patient liat ================//
-                  // SizedBox(
-                  //   height: 25.h,
-                  // ),
+
                   SizedBox(
                     height: 10.h,
                   ),

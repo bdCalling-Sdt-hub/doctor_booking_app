@@ -149,6 +149,12 @@ class DoctorHomeController extends GetxController {
     }
   }
 
+//============================== Resudule Appointment ======================//
+
+  RxString doctorRescheduleDate = ''.obs;
+  RxString doctorRescheduleDay = 'Sunday'.obs;
+  RxString doctorRescheduleTime = ''.obs;
+
   allMethod() {
     getDoctorOverview();
     getAllDoctorAppointment();
