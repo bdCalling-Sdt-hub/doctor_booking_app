@@ -275,9 +275,9 @@ class GeneralController extends GetxController with GetxServiceMixin {
   void onInit() {
     getTerms();
     getPrivacyPolicy();
+    sevenDaysInfo();
     super.onInit();
   }
-}
 
   RxList<String> getAvailableTimesForSelectedDay(
       {AvailableDays? availableDays,
@@ -287,11 +287,5 @@ class GeneralController extends GetxController with GetxServiceMixin {
         "$selectedDay>>>>>>>>>>>>>>>>>>>>${availableDays!.getTimesForDay(selectedDay)}");
     refresh();
     return RxList<String>.from(availableDays.getTimesForDay(selectedDay));
-  }
-
-  @override
-  void onInit() {
-    sevenDaysInfo();
-    super.onInit();
   }
 }

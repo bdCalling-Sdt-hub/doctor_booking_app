@@ -75,9 +75,9 @@ class DoctorHomePopup extends StatelessWidget {
                   doctorHomeController.doctorRescheduleDay.value =
                       DateFormat('EEEE').format(date).toLowerCase();
 
-                  print(
+                  debugPrint(
                       "==============${doctorHomeController.doctorRescheduleDate.value}===============");
-                  print(
+                  debugPrint(
                       "==============${doctorHomeController.doctorRescheduleDay.value}===============");
                 },
                 activeBackgroundColor: AppColors.blackNormal,
