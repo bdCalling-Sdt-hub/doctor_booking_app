@@ -4,6 +4,7 @@ import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/custom_appointment_info.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
@@ -265,9 +266,125 @@ class DoctorProfileScreen extends StatelessWidget {
                                     .profileModel.value.currentAffiliation ??
                                 '',
                           ),
+                          //========================= Appointment info ===============================
+                          SizedBox(
+                            height: 12.h,
+                          ),
+                          //=========== Appointment info ==========//
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const CustomText(
+                                text: AppStrings.appointmentInfo,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.whiteDarker,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Get.toNamed(AppRoutes
+                                      .doctorEditProfessinalProfileScreen);
+                                },
+                                child: const CustomImage(
+                                  imageSrc: AppIcons.edit,
+                                  imageType: ImageType.png,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 8.h,
+                          ),
+                          Center(
+                            child: Container(
+                              width: 335.w,
+                              height: 2,
+                              color: AppColors.whiteNormalHover,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 12.h,
+                          ),
+
+                          ///================================= Sunday =============================
+
+                          CustomAppointmentInfo(
+                            dayName: 'Sunday',
+                            startTimeTap: () async {},
+                            endTimeTap: () async {},
+                            availableTab: (value) {},
+                            startController: TextEditingController(),
+                            endController: TextEditingController(),
+                          ),
+
+                          ///================================= Monday =============================
+
+                          CustomAppointmentInfo(
+                            dayName: 'Monday',
+                            startTimeTap: () async {},
+                            endTimeTap: () async {},
+                            availableTab: (value) {},
+                            startController: TextEditingController(),
+                            endController: TextEditingController(),
+                          ),
+
+                          ///================================= Tuesday =============================
+
+                          CustomAppointmentInfo(
+                            dayName: 'Tuesday',
+                            startTimeTap: () async {},
+                            endTimeTap: () async {},
+                            availableTab: (value) {},
+                            startController: TextEditingController(),
+                            endController: TextEditingController(),
+                          ),
+
+                          ///================================= Wednesday =============================
+
+                          CustomAppointmentInfo(
+                            dayName: 'Wednesday',
+                            startTimeTap: () async {},
+                            endTimeTap: () async {},
+                            availableTab: (value) {},
+                            startController: TextEditingController(),
+                            endController: TextEditingController(),
+                          ),
+
+                          ///================================= Thursday =============================
+
+                          CustomAppointmentInfo(
+                            dayName: 'Thursday',
+                            startTimeTap: () async {},
+                            endTimeTap: () async {},
+                            availableTab: (value) {},
+                            startController: TextEditingController(),
+                            endController: TextEditingController(),
+                          ),
+
+                          ///================================= Friday =============================
+
+                          CustomAppointmentInfo(
+                            dayName: 'Friday',
+                            startTimeTap: () async {},
+                            endTimeTap: () async {},
+                            availableTab: (value) {},
+                            startController: TextEditingController(),
+                            endController: TextEditingController(),
+                          ),
+
+                          ///================================= Saturday =============================
+
+                          CustomAppointmentInfo(
+                            dayName: 'Saturday',
+                            startTimeTap: () async {},
+                            endTimeTap: () async {},
+                            availableTab: (value) {},
+                            startController: TextEditingController(),
+                            endController: TextEditingController(),
+                          ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

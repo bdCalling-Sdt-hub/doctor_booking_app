@@ -20,6 +20,7 @@ class CustomAppointmentInfo extends StatelessWidget {
     this.startController,
     this.endController,
     this.isClosed = false,
+    this.readOnly = false,
   });
 
   final String dayName;
@@ -33,6 +34,8 @@ class CustomAppointmentInfo extends StatelessWidget {
   final bool isClosed;
   final DoctorAuthController doctorAuthController =
       Get.find<DoctorAuthController>();
+
+  final bool? readOnly;
 
   final List<String> genderItems = ['OFFLINE', 'ONLINE', "WEEKEND"];
   @override
@@ -84,7 +87,7 @@ class CustomAppointmentInfo extends StatelessWidget {
             }
             return null;
           },
-          onChanged: availableTab,
+          onChanged: !readOnly! ? availableTab : (value) {},
           buttonStyleData: const ButtonStyleData(
             padding: EdgeInsets.only(right: 8),
           ),

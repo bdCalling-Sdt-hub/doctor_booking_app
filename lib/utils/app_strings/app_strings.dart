@@ -110,6 +110,8 @@ class AppStrings {
   static const String appointmentFee = 'Appointment Fee';
   static const String editPersonalInformation = 'Edit Personal Info';
   static const String editProfessinalInformation = 'Edit Professional Info';
+  static const String editAppointmentInformation = 'Edit Appointment Info';
+  static const String appointmentInfo = 'Appointment Info';
 
   ///==========================Schedule=================
   static const String schedule = 'Schedule';
