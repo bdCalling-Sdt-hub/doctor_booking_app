@@ -200,11 +200,10 @@ class PatientAuthController extends GetxController {
 
   ////=========================== Save Info =============================
   saveInfo({required Response<dynamic> response}) {
-    SharePrefsHelper.setString(
-        AppConstants.bearerToken, response.body["token"]);
+    SharePrefsHelper.setString( AppConstants.bearerToken, response.body["token"]);
 
-    SharePrefsHelper.setString(
-        AppConstants.userName, response.body["data"]["name"]);
+    SharePrefsHelper.setString(AppConstants.userName, response.body["data"]["name"]);
+     SharePrefsHelper.setString(AppConstants.id, response.body["data"]["_id"]);
 
     SharePrefsHelper.setString(
         AppConstants.userLocation, response.body["data"]["location"]);

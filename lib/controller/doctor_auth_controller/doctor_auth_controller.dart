@@ -116,6 +116,9 @@ class DoctorAuthController extends GetxController {
   Rx<TextEditingController> specialisController =
       TextEditingController(text: kDebugMode ? "Teeth" : "").obs;
 
+  Rx<TextEditingController> appointmentFeeController =
+      TextEditingController(text: kDebugMode ? "50" : "").obs;
+
   Rx<TextEditingController> experienceController =
       TextEditingController(text: kDebugMode ? "8" : "").obs;
 
@@ -251,6 +254,7 @@ class DoctorAuthController extends GetxController {
       "experience": experienceController.value.text,
       "educational_background": educationController.value.text,
       "current_affiliation": affiliationController.value.text,
+      "appointment_fee": appointmentFeeController.value.text,
     };
 
     var response = await ApiClient.postMultipartData(ApiUrl.doctorSignUp, body,

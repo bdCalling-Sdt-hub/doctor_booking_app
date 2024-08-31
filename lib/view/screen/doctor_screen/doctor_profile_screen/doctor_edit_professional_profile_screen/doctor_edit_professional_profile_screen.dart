@@ -27,148 +27,150 @@ class DoctorEditProfessionalProfileScreen extends StatelessWidget {
         appBarContent: AppStrings.editProfessinalInformation,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 24.h,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.0.h),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 16.h,
-                    ),
-                    //===================== doctor medical image ================//
-                    CustomText(
-                      top: 8.h,
-                      bottom: 8.h,
-                      text: AppStrings.medicalLicenceImage,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.whiteDarker,
-                    ),
-
-                    // CustomNetworkImage(
-                    //   imageUrl: AppConstants.medicalLicence,
-                    //   height: 160.h,
-                    //   width: 335.w,
-                    //   borderRadius: BorderRadius.circular(8),
-                    // ),
-                    doctorProfileController.licenseImage.value == null
-                        ? DoctorEditLicenseNetworkImage(
-                            imageSrc: doctorProfileController
-                                    .profileModel.value.license!
-                                    .startsWith('http')
-                                ? doctorProfileController
-                                        .profileModel.value.license ??
-                                    ''
-                                : "${ApiUrl.imageBaseUrl}${doctorProfileController.profileModel.value.license}",
-                            onTap: () {
-                              doctorProfileController.getDoctorLicenseImage();
-                            },
-                          )
-                        : DoctorEditLicenseFileImage(
-                            imageSrc: doctorProfileController
-                                .licenseImage.value!.path,
-                            onTap: () {
-                              doctorProfileController.getDoctorLicenseImage();
-                            },
-                          ),
-                    SizedBox(
-                      height: 8.h,
-                    ),
-                    //============ doctor specilization ============//
-                    CustomFormCard(
-                      hasBackgroundColor: true,
-                      title: AppStrings.specialization,
-                      controller: doctorProfileController
-                          .doctorSpecializationController.value,
-                      hintTextChangeColor: true,
-                      hintText: 'Cardiologist.',
-                      validator: (value) {
-                        if (value == null || value.toString().isEmpty) {
-                          return AppStrings.fieldCantBeEmpty.tr;
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
-                    CustomFormCard(
-                      hasBackgroundColor: true,
-                      title: AppStrings.yearsOfExperience,
-                      controller: doctorProfileController
-                          .doctorYearOfExperienceController.value,
-                      hintTextChangeColor: true,
-                      hintText: '4 years',
-                      validator: (value) {
-                        if (value == null || value.toString().isEmpty) {
-                          return AppStrings.fieldCantBeEmpty.tr;
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
-
-                    ///============================= Education Background ===============================
-
-                    CustomFormCard(
-                      hasBackgroundColor: true,
-                      title: AppStrings.educationalBackground,
-                      controller: doctorProfileController
-                          .doctorEducationalBackgroundController.value,
-                      hintTextChangeColor: true,
-                      hintText: 'type here',
-                      validator: (value) {
-                        if (value == null || value.toString().isEmpty) {
-                          return AppStrings.fieldCantBeEmpty.tr;
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
-                    //================= doctor currentAffiliation =============//
-                    CustomFormCard(
-                      hasBackgroundColor: true,
-                      title: AppStrings.currentAffiliation,
-                      controller: doctorProfileController
-                          .doctorCurrentAlliliationController.value,
-                      hintTextChangeColor: true,
-                      hintText: 'hospital clinic name',
-                      validator: (value) {
-                        if (value == null || value.toString().isEmpty) {
-                          return AppStrings.fieldCantBeEmpty.tr;
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
-                    SizedBox(
-                      height: 16.h,
-                    ),
-                    //================ update button =============//
-                    CustomButton(
-                      title: AppStrings.update,
-                      onTap: () {
-                        if (formKey.currentState!.validate()) {
-                          doctorProfileController
-                              .updateDoctorProfessionalProfile();
-                        }
-                      },
-                    ),
-                    SizedBox(
-                      height: 24.h,
-                    ),
-                  ],
-                ),
+        child: Obx(() {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 24.h,
               ),
-            )
-          ],
-        ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0.h),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                      //===================== doctor medical image ================//
+                      CustomText(
+                        top: 8.h,
+                        bottom: 8.h,
+                        text: AppStrings.medicalLicenceImage,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.whiteDarker,
+                      ),
+
+                      // CustomNetworkImage(
+                      //   imageUrl: AppConstants.medicalLicence,
+                      //   height: 160.h,
+                      //   width: 335.w,
+                      //   borderRadius: BorderRadius.circular(8),
+                      // ),
+                      doctorProfileController.licenseImage.value == null
+                          ? DoctorEditLicenseNetworkImage(
+                              imageSrc: doctorProfileController
+                                      .profileModel.value.license!
+                                      .startsWith('http')
+                                  ? doctorProfileController
+                                          .profileModel.value.license ??
+                                      ''
+                                  : "${ApiUrl.imageBaseUrl}${doctorProfileController.profileModel.value.license}",
+                              onTap: () {
+                                doctorProfileController.getDoctorLicenseImage();
+                              },
+                            )
+                          : DoctorEditLicenseFileImage(
+                              imageSrc: doctorProfileController
+                                  .licenseImage.value!.path,
+                              onTap: () {
+                                doctorProfileController.getDoctorLicenseImage();
+                              },
+                            ),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      //============ doctor specilization ============//
+                      CustomFormCard(
+                        hasBackgroundColor: true,
+                        title: AppStrings.specialization,
+                        controller: doctorProfileController
+                            .doctorSpecializationController.value,
+                        hintTextChangeColor: true,
+                        hintText: 'Cardiologist.',
+                        validator: (value) {
+                          if (value == null || value.toString().isEmpty) {
+                            return AppStrings.fieldCantBeEmpty.tr;
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      CustomFormCard(
+                        hasBackgroundColor: true,
+                        title: AppStrings.yearsOfExperience,
+                        controller: doctorProfileController
+                            .doctorYearOfExperienceController.value,
+                        hintTextChangeColor: true,
+                        hintText: '4 years',
+                        validator: (value) {
+                          if (value == null || value.toString().isEmpty) {
+                            return AppStrings.fieldCantBeEmpty.tr;
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+
+                      ///============================= Education Background ===============================
+
+                      CustomFormCard(
+                        hasBackgroundColor: true,
+                        title: AppStrings.educationalBackground,
+                        controller: doctorProfileController
+                            .doctorEducationalBackgroundController.value,
+                        hintTextChangeColor: true,
+                        hintText: 'type here',
+                        validator: (value) {
+                          if (value == null || value.toString().isEmpty) {
+                            return AppStrings.fieldCantBeEmpty.tr;
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      //================= doctor currentAffiliation =============//
+                      CustomFormCard(
+                        hasBackgroundColor: true,
+                        title: AppStrings.currentAffiliation,
+                        controller: doctorProfileController
+                            .doctorCurrentAlliliationController.value,
+                        hintTextChangeColor: true,
+                        hintText: 'hospital clinic name',
+                        validator: (value) {
+                          if (value == null || value.toString().isEmpty) {
+                            return AppStrings.fieldCantBeEmpty.tr;
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                      //================ update button =============//
+                      CustomButton(
+                        title: AppStrings.update,
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            doctorProfileController
+                                .updateDoctorProfessionalProfile();
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 24.h,
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          );
+        }),
       ),
     );
   }

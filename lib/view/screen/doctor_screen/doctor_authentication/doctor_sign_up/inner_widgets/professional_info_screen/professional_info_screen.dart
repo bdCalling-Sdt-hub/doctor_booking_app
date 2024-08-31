@@ -34,18 +34,28 @@ class ProfessionalInfoScreen extends StatelessWidget {
                 image: doctorAuthController.documentImage,
                 onSelectImage: () => doctorAuthController.documentImages(),
               ),
+              SizedBox(
+                height: 10.h,
+              ),
+              //=========================== Appointment fee ========================//
+              CustomFormCard(
+                  hintText: 'Enter your fee',
+                  hasBackgroundColor: true,
+                  title: 'Appointment Fee',
+                  controller:
+                      doctorAuthController.appointmentFeeController.value,),
 
               ///==================================specialization==========================
               CustomFormCard(
                   hasBackgroundColor: true,
                   title: 'Specialisation',
-                  controller: doctorAuthController.specialisController.value),
+                  controller: doctorAuthController.specialisController.value,),
 
               ///==================================yearsOfExperience==========================
               CustomFormCard(
                   hasBackgroundColor: true,
                   title: AppStrings.yearsOfExperience,
-                  controller: doctorAuthController.experienceController.value),
+                  controller: doctorAuthController.experienceController.value,),
 
               ///==================================Educational Background==========================
               CustomFormCard(
@@ -75,8 +85,10 @@ class ProfessionalInfoScreen extends StatelessWidget {
                       maxLines: 4,
                       text: TextSpan(
                         children: <TextSpan>[
-                          const TextSpan(
+                        
+                            const TextSpan(
                             text: AppStrings.byContinueYouAccept,
+                          
                             style: TextStyle(
                               color: AppColors.blackNormal,
                               fontWeight: FontWeight.w400,

@@ -140,7 +140,7 @@ class AvailableDays {
   List<String>? thursday;
   List<String>? friday;
   List<String>? saturday;
-  List<dynamic>? sunday;
+  List<String>? sunday;
 
   AvailableDays({
     this.monday,
@@ -173,7 +173,7 @@ class AvailableDays {
             : List<String>.from(json["saturday"]!.map((x) => x)),
         sunday: json["sunday"] == null
             ? []
-            : List<dynamic>.from(json["sunday"]!.map((x) => x)),
+            : List<String>.from(json["sunday"]!.map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
