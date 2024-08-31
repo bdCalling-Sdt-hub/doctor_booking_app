@@ -39,23 +39,32 @@ class ProfessionalInfoScreen extends StatelessWidget {
               ),
               //=========================== Appointment fee ========================//
               CustomFormCard(
-                  hintText: 'Enter your fee',
-                  hasBackgroundColor: true,
-                  title: 'Appointment Fee',
-                  controller:
-                      doctorAuthController.appointmentFeeController.value,),
+                hintText: 'Enter your fee',
+                hasBackgroundColor: true,
+                title: 'Appointment Fee',
+                controller: doctorAuthController.appointmentFeeController.value,
+              ),
 
               ///==================================specialization==========================
               CustomFormCard(
-                  hasBackgroundColor: true,
-                  title: 'Specialisation',
-                  controller: doctorAuthController.specialisController.value,),
+                hasBackgroundColor: true,
+                title: 'Specialisation',
+                controller: doctorAuthController.specialisController.value,
+              ),
+              //============================= Discription ================
+              CustomFormCard(
+                hasBackgroundColor: true,
+                title: 'Professional Discription',
+                controller: TextEditingController(),
+                hintText: 'Enter discription',
+              ),
 
               ///==================================yearsOfExperience==========================
               CustomFormCard(
-                  hasBackgroundColor: true,
-                  title: AppStrings.yearsOfExperience,
-                  controller: doctorAuthController.experienceController.value,),
+                hasBackgroundColor: true,
+                title: AppStrings.yearsOfExperience,
+                controller: doctorAuthController.experienceController.value,
+              ),
 
               ///==================================Educational Background==========================
               CustomFormCard(
@@ -85,10 +94,8 @@ class ProfessionalInfoScreen extends StatelessWidget {
                       maxLines: 4,
                       text: TextSpan(
                         children: <TextSpan>[
-                        
-                            const TextSpan(
+                          const TextSpan(
                             text: AppStrings.byContinueYouAccept,
-                          
                             style: TextStyle(
                               color: AppColors.blackNormal,
                               fontWeight: FontWeight.w400,
