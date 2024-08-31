@@ -39,7 +39,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
       preferredSize: widget.preferredSize,
       child: Container(
         width: MediaQuery.of(context).size.width,
-        padding: EdgeInsetsDirectional.only(start: 20.h, top: 24.h, end: 20.h),
+        padding: EdgeInsetsDirectional.only(top: 24.h, end: 20.h),
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(color: widget.appBarBgColor),
         child: Row(

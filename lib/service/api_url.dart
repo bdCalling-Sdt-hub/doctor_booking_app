@@ -17,6 +17,8 @@ class ApiUrl {
   static const category = '/category';
   static const banner = '/banner/get-banners';
   static const popularDoc = '/doctors/popular-doctors';
+  static const recomendedDoc = '/doctors/recommended-doctors';
+  static reviews({required String id}) => '/review/get-reviews?receiverId=$id';
 
   ///=============================== Doctor Section ==============================
   static const profile = '/auth/profile';
@@ -40,8 +42,7 @@ class ApiUrl {
   static const termsAndCondition = '/settings/get-settings/terms';
 
   //============================ privacy & policy =======================//
-  static const privacyPolicy = '/settings/get-settings/privacy';   
+  static const privacyPolicy = '/settings/get-settings/privacy';
   //=============================== Update Appointment ===================================//
-  static const updateAppointment = '/appointment/update-appointment/';  
-
+  static const updateAppointment = '/appointment/update-appointment/';
 }

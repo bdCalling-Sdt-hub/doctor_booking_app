@@ -6,6 +6,7 @@ import 'package:doctor_booking/utils/app_images/app_images.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/banner_model.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/category_model.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/popular_doctor.dart';
+import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/review_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +19,10 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
 
   final popularDocLoading = Status.loading.obs;
   void popularDocLoadingMethod(Status value) => popularDocLoading.value = value;
+
+  final recomemdedDocLoading = Status.loading.obs;
+  void recomemdedDocLoadingMethod(Status value) =>
+      recomemdedDocLoading.value = value;
 
   RxInt bannerIndex = 0.obs;
   final List<String> bannerImg = [
@@ -101,12 +106,52 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
     if (response.statusCode == 200) {
       popularDoctorList.value = List<PopularDoctorDatum>.from(
           response.body["data"].map((x) => PopularDoctorDatum.fromJson(x)));
+
+      popularDocLoadingMethod(Status.completed);
     } else {
       if (response.statusText == ApiClient.noInternetMessage) {
-        categoryLoadingMethod(Status.internetError);
+        popularDocLoadingMethod(Status.internetError);
       } else {
-        categoryLoadingMethod(Status.error);
+        popularDocLoadingMethod(Status.error);
       }
+      ApiChecker.checkApi(response);
+    }
+  }
+
+  ///==================== Get recomemded Doctors ====================
+
+  RxList<PopularDoctorDatum> recomemdedDoctorList = <PopularDoctorDatum>[].obs;
+
+  getrecomendedDoc() async {
+    recomemdedDocLoadingMethod(Status.loading);
+
+    var response = await ApiClient.getData(ApiUrl.recomendedDoc);
+
+    if (response.statusCode == 200) {
+      recomemdedDoctorList.value = List<PopularDoctorDatum>.from(
+          response.body["data"].map((x) => PopularDoctorDatum.fromJson(x)));
+
+      recomemdedDocLoadingMethod(Status.completed);
+    } else {
+      if (response.statusText == ApiClient.noInternetMessage) {
+        recomemdedDocLoadingMethod(Status.internetError);
+      } else {
+        recomemdedDocLoadingMethod(Status.error);
+      }
+      ApiChecker.checkApi(response);
+    }
+  }
+
+  ///======================= Get review ======================
+  RxList<ReviewDatum> reviewList = <ReviewDatum>[].obs;
+  getReview({required String id}) async {
+    var response = await ApiClient.getData(ApiUrl.reviews(id: id));
+
+    if (response.statusCode == 200) {
+      reviewList.value = List<ReviewDatum>.from(
+          response.body["data"]["data"].map((x) => ReviewDatum.fromJson(x)));
+      reviewList.refresh();
+    } else {
       ApiChecker.checkApi(response);
     }
   }
@@ -116,6 +161,7 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
     getCategory();
     getBanner();
     getPopularDoctor();
+    getrecomendedDoc();
   }
 
   @override

@@ -2,13 +2,14 @@ import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomRatingCard extends StatelessWidget {
   final String name;
   final String date;
   final String imageUrl;
-  final int rating;
+  final double rating;
   final String review;
 
   const CustomRatingCard({
@@ -54,14 +55,28 @@ class CustomRatingCard extends StatelessWidget {
                       color: AppColors.grayNormal,
                     ),
                     SizedBox(height: 2.h),
-                    Row(
-                      children: List.generate(5, (index) {
-                        return Icon(
-                          index < rating ? Icons.star : Icons.star_border,
-                          color: Colors.amber,
-                          size: 16.h,
-                        );
-                      }),
+                    // Row(
+                    //   children: List.generate(5, (index) {
+                    //     return Icon(
+                    //       index < rating ? Icons.star : Icons.star_border,
+                    //       color: Colors.amber,
+                    //       size: 16.h,
+                    //     );
+                    //   }),
+                    // ),
+                    RatingBar.builder(
+                      initialRating: rating,
+                      minRating: 0,
+                      ignoreGestures: true,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemBuilder: (context, _) => const Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      itemSize: 16.h,
+                      onRatingUpdate: (rating) {},
                     ),
                     SizedBox(height: 10.h),
                     CustomText(

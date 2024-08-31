@@ -1,10 +1,12 @@
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
+import 'package:doctor_booking/helper/time_converter/time_converter.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/home_screen/controller/paitent_home_controller.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/popular_doctor.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
@@ -27,6 +29,7 @@ class SpecialistProfile extends StatefulWidget {
 
 class _DoctorProfileScreenState extends State<SpecialistProfile> {
   GeneralController generalController = Get.find<GeneralController>();
+  PaitentHomeController homeController = Get.find<PaitentHomeController>();
   int _selectedDateIndex = 0;
   int _selectedDateIndex2 = 0;
   bool _isExpanded = false;
@@ -46,6 +49,8 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
             generalController.next7Days[_selectedDateIndex]["Day"] ?? "",
         availableDays: data.availableDays!,
         selectedDateIndex: _selectedDateIndex2);
+
+    homeController.getReview(id: "66cbf796bbca6f1b088cdf6f");
     super.initState();
   }
 
@@ -289,9 +294,12 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                 height: 10.h,
               ),
 
-              const CustomRow(
+              CustomRow(
                   title: AppStrings.availableFor,
-                  subtitle: 'Online Appointment'),
+                  subtitle: generalController.getAvailableFor(
+                      generalController.next7Days[_selectedDateIndex]["Day"] ??
+                          "",
+                      data.availableFor!)),
 
               ///=================================Details===================
               const DetailsSection(
@@ -310,14 +318,16 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                 bottom: 10,
               ),
               Column(
-                children: List.generate(_isExpanded ? 10 : 3, (index) {
+                children:
+                    List.generate(homeController.reviewList.length, (index) {
+                  var data = homeController.reviewList[index];
                   return CustomRatingCard(
-                      name: 'Masum raj',
-                      date: '10/10/2023',
-                      imageUrl: AppConstants.userNtr,
-                      rating: 4,
-                      review:
-                          'Dr. Jane Smith is an exceptional doctor! She listened attentively to my concerns, provided clear explanations, and offered practical advice.');
+                      name: data.sender?.name ?? "",
+                      date: DateConverter.estimatedDate(
+                          data.createdAt ?? DateTime.now()),
+                      imageUrl: "${ApiUrl.baseUrl}/${data.sender?.img ?? ""}",
+                      rating: data.rating ?? 0.0,
+                      review: data.comment ?? "");
                 }),
               ),
 

@@ -4,8 +4,6 @@ import 'package:doctor_booking/controller/general_controller/general_controller.
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
-import 'package:doctor_booking/utils/app_const/app_const.dart';
-import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/controller/paitent_home_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_card/custom_card.dart';
@@ -167,7 +165,8 @@ class HomeScreen extends StatelessWidget {
                     ///=================================PopularSpecialist Section==================
                     CustomRow(
                       onTap: () {
-                        Get.toNamed(AppRoutes.popularSpecialistsScreen);
+                        Get.toNamed(AppRoutes.popularSpecialistsScreen,
+                            arguments: AppStrings.popularSpecialist);
                       },
                       title: AppStrings.popularSpecialist,
                       subtitle: AppStrings.viewAll,
@@ -205,7 +204,8 @@ class HomeScreen extends StatelessWidget {
                     ///=================================recommendedSpecialist Section==================
                     CustomRow(
                       onTap: () {
-                        Get.toNamed(AppRoutes.popularSpecialistsScreen);
+                        Get.toNamed(AppRoutes.popularSpecialistsScreen,
+                            arguments: AppStrings.recommendedSpecialist);
                       },
                       title: AppStrings.recommendedSpecialist,
                       subtitle: AppStrings.viewAll,
@@ -216,17 +216,22 @@ class HomeScreen extends StatelessWidget {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: List.generate(4, (index) {
+                        children: List.generate(
+                            homeController.recomemdedDoctorList.length,
+                            (index) {
+                          var data = homeController.recomemdedDoctorList[index];
                           return GestureDetector(
                             onTap: () {
-                              Get.toNamed(AppRoutes.specialistProfile);
+                              Get.toNamed(AppRoutes.specialistProfile,
+                                  arguments: data);
                             },
                             child: CustomCard(
-                              imageSrc: AppIcons.favoriteUnselected,
-                              networkImageUrl: AppConstants.userNtr,
-                              name: 'Jenny Wilson',
-                              profession: 'Gynecologists',
-                              rating: "4.7",
+                              imageSrc: "",
+                              networkImageUrl:
+                                  "${ApiUrl.baseUrl}/${data.img ?? ""}",
+                              name: data.name ?? "",
+                              profession: data.specialization ?? "",
+                              rating: data.rating.toString(),
                             ),
                           );
                         }),

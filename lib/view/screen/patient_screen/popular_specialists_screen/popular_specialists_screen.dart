@@ -1,7 +1,6 @@
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
-import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/controller/paitent_home_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_card/custom_card.dart';
@@ -14,12 +13,14 @@ class PopularSpecialistsScreen extends StatelessWidget {
   final PaitentHomeController homeController =
       Get.find<PaitentHomeController>();
 
+  final String title = Get.arguments;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColors.whiteLightActive,
-        appBar: const CustomAppBar(
-          appBarContent: AppStrings.popularSpecialist,
+        appBar: CustomAppBar(
+          appBarContent: title,
         ),
         body: Obx(() {
           return GridView.builder(
@@ -31,7 +32,7 @@ class PopularSpecialistsScreen extends StatelessWidget {
               var data = homeController.popularDoctorList[index];
               return GestureDetector(
                 onTap: () {
-                  Get.toNamed(AppRoutes.specialistProfile);
+                  Get.toNamed(AppRoutes.specialistProfile, arguments: data);
                 },
                 child: CustomCard(
                   imageSrc: "",

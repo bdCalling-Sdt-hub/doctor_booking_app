@@ -271,13 +271,7 @@ class GeneralController extends GetxController with GetxServiceMixin {
     }
   }
 
-  @override
-  void onInit() {
-    getTerms();
-    getPrivacyPolicy();
-    sevenDaysInfo();
-    super.onInit();
-  }
+  ///===================== Get Appointment Time ========================
 
   RxList<String> getAvailableTimesForSelectedDay(
       {AvailableDays? availableDays,
@@ -287,5 +281,35 @@ class GeneralController extends GetxController with GetxServiceMixin {
         "$selectedDay>>>>>>>>>>>>>>>>>>>>${availableDays!.getTimesForDay(selectedDay)}");
     refresh();
     return RxList<String>.from(availableDays.getTimesForDay(selectedDay));
+  }
+
+  ///====================== Get Available For ========================
+  String getAvailableFor(String day, AvailableFor availableFor) {
+    switch (day.toLowerCase()) {
+      case 'mon':
+        return availableFor.monday ?? "";
+      case 'tue':
+        return availableFor.tuesday ?? "";
+      case 'wed':
+        return availableFor.wednesday ?? "";
+      case 'thu':
+        return availableFor.thursday ?? "";
+      case 'fri':
+        return availableFor.friday ?? "";
+      case 'sat':
+        return availableFor.saturday ?? "";
+      case 'sun':
+        return availableFor.sunday ?? "";
+      default:
+        return "Not Found";
+    }
+  }
+
+  @override
+  void onInit() {
+    getTerms();
+    getPrivacyPolicy();
+    sevenDaysInfo();
+    super.onInit();
   }
 }
