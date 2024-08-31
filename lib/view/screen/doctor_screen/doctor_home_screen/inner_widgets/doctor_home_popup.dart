@@ -1,5 +1,6 @@
 import 'package:doctor_booking/controller/doctor_home_controller/doctor_home_controller.dart';
 import 'package:doctor_booking/controller/doctor_profile_controller/doctor_profile_controller.dart';
+import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
@@ -13,7 +14,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class DoctorHomePopup extends StatelessWidget {
-  DoctorHomePopup({super.key});
+  DoctorHomePopup({super.key, required this.id});
+
+  final String id;
 
   final DoctorHomeController doctorHomeController =
       Get.find<DoctorHomeController>();
@@ -80,9 +83,11 @@ class DoctorHomePopup extends StatelessWidget {
                 activeBackgroundColor: AppColors.blackNormal,
                 monthColor: AppColors.blackNormal,
                 showNavigationButtons: false,
-                inactiveBackgroundColor: AppColors.whiteDarkHover,
+                inactiveBackgroundColor: AppColors.grayLightHover,
+                inactiveTextColor: AppColors.blackNormal,
                 weekStartFrom: WeekStartFrom.sunday,
                 horizontalPadding: 6.w,
+                disabledBackgroundColor: AppColors.red.withOpacity(.3),
               ),
               SizedBox(
                 height: 14.h,
@@ -107,9 +112,13 @@ class DoctorHomePopup extends StatelessWidget {
                         time: '9 PM',
                         currentIndex: doctorHomeController
                             .popupAvailableTimeCurrentIndex.value,
-                        onChanged: (value) {
+                        onChanged: (index) {
                           doctorHomeController
-                              .popupAvailableTimeCurrentIndex.value = value;
+                              .popupAvailableTimeCurrentIndex.value = index;
+                          //======================== Reschedule Time =============//
+                          doctorHomeController.doctorRescheduleTime.value =
+                              doctorProfileController
+                                  .fridayAvailableList[index];
                         },
                       )
                     : Center(
@@ -124,9 +133,14 @@ class DoctorHomePopup extends StatelessWidget {
                             doctorProfileController.tuedayAvailableList,
                         currentIndex: doctorHomeController
                             .popupAvailableTimeCurrentIndex.value,
-                        onChanged: (value) {
+                        onChanged: (index) {
                           doctorHomeController
-                              .popupAvailableTimeCurrentIndex.value = value;
+                              .popupAvailableTimeCurrentIndex.value = index;
+                          //======================== Reschedule Time =============//
+                          doctorHomeController.doctorRescheduleTime.value =
+                              doctorProfileController.tuedayAvailableList[
+                                  doctorHomeController
+                                      .popupAvailableTimeCurrentIndex.value];
                         },
                       )
                     : Center(
@@ -141,9 +155,13 @@ class DoctorHomePopup extends StatelessWidget {
                             doctorProfileController.satdayAvailableList,
                         currentIndex: doctorHomeController
                             .popupAvailableTimeCurrentIndex.value,
-                        onChanged: (value) {
+                        onChanged: (index) {
                           doctorHomeController
-                              .popupAvailableTimeCurrentIndex.value = value;
+                              .popupAvailableTimeCurrentIndex.value = index;
+                          //======================== Reschedule Time =============//
+                          doctorHomeController.doctorRescheduleTime.value =
+                              doctorProfileController
+                                  .satdayAvailableList[index];
                         },
                       )
                     : Center(
@@ -159,9 +177,13 @@ class DoctorHomePopup extends StatelessWidget {
                             doctorProfileController.sundayAvailableList,
                         currentIndex: doctorHomeController
                             .popupAvailableTimeCurrentIndex.value,
-                        onChanged: (value) {
+                        onChanged: (index) {
                           doctorHomeController
-                              .popupAvailableTimeCurrentIndex.value = value;
+                              .popupAvailableTimeCurrentIndex.value = index;
+                          //======================== Reschedule Time =============//
+                          doctorHomeController.doctorRescheduleTime.value =
+                              doctorProfileController
+                                  .sundayAvailableList[index];
                         },
                       )
                     : Center(
@@ -177,9 +199,13 @@ class DoctorHomePopup extends StatelessWidget {
                             doctorProfileController.mondayAvailableList,
                         currentIndex: doctorHomeController
                             .popupAvailableTimeCurrentIndex.value,
-                        onChanged: (value) {
+                        onChanged: (index) {
                           doctorHomeController
-                              .popupAvailableTimeCurrentIndex.value = value;
+                              .popupAvailableTimeCurrentIndex.value = index;
+                          //======================== Reschedule Time =============//
+                          doctorHomeController.doctorRescheduleTime.value =
+                              doctorProfileController
+                                  .mondayAvailableList[index];
                         },
                       )
                     : Center(
@@ -195,9 +221,13 @@ class DoctorHomePopup extends StatelessWidget {
                             doctorProfileController.weddayAvailableList,
                         currentIndex: doctorHomeController
                             .popupAvailableTimeCurrentIndex.value,
-                        onChanged: (value) {
+                        onChanged: (index) {
                           doctorHomeController
-                              .popupAvailableTimeCurrentIndex.value = value;
+                              .popupAvailableTimeCurrentIndex.value = index;
+                          //======================== Reschedule Time =============//
+                          doctorHomeController.doctorRescheduleTime.value =
+                              doctorProfileController
+                                  .weddayAvailableList[index];
                         },
                       )
                     : Center(
@@ -213,9 +243,13 @@ class DoctorHomePopup extends StatelessWidget {
                             doctorProfileController.thudayAvailableList,
                         currentIndex: doctorHomeController
                             .popupAvailableTimeCurrentIndex.value,
-                        onChanged: (value) {
+                        onChanged: (index) {
                           doctorHomeController
-                              .popupAvailableTimeCurrentIndex.value = value;
+                              .popupAvailableTimeCurrentIndex.value = index;
+                          //======================== Reschedule Time =============//
+                          doctorHomeController.doctorRescheduleTime.value =
+                              doctorProfileController
+                                  .thudayAvailableList[index];
                         },
                       )
                     : Center(
@@ -227,8 +261,9 @@ class DoctorHomePopup extends StatelessWidget {
               ),
               CustomFormCard(
                 title: 'Note',
-                controller: TextEditingController(),
-                hintText: 'Why Chaange the schedule?',
+                controller:
+                    doctorHomeController.appointmentRescheduleNote.value,
+                hintText: 'Why change the schedule?',
                 // isMultiLine: true,
               ),
               SizedBox(
@@ -253,7 +288,20 @@ class DoctorHomePopup extends StatelessWidget {
                   Expanded(
                     child: PopupButton(
                       buttonName: 'Confirm',
-                      onTap: () {},
+                      onTap: () {
+                        if (doctorHomeController
+                            .doctorRescheduleTime.value.isNotEmpty) {
+                          doctorHomeController.doctorRescheduleAppointment(
+                              appointmentId: id);
+                        } else {
+                          Navigator.pop(context);
+                          showCustomSnackBar(
+                            "Select your available time",
+                            getXSnackBar: false,
+                            isError: true,
+                          );
+                        }
+                      },
                     ),
                   ),
                 ],

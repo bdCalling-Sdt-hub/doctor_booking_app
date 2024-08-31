@@ -198,7 +198,11 @@ class DoctorHomeScreen extends StatelessWidget {
                                         },
                                         reScheduleButton: () {
                                           Navigator.pop(context);
-                                          controller.showHomePopup();
+                                          controller.showHomePopup(
+                                              id: controller
+                                                  .appointMentListToday[index]
+                                                  .id
+                                                  .toString());
                                         },
                                         timeTextColor: AppColors.blackO,
                                       );
@@ -236,7 +240,10 @@ class DoctorHomeScreen extends StatelessWidget {
                                             arguments: userdetails);
                                       },
                                       reScheduleButton: () {
-                                        controller.showHomePopup();
+                                        controller.showHomePopup(
+                                            id: controller
+                                                .appointMentListWeekly[index].id
+                                                .toString());
                                       },
                                       timeTextColor: AppColors.blackO,
                                     );
@@ -274,7 +281,11 @@ class DoctorHomeScreen extends StatelessWidget {
                                             arguments: userdetails);
                                       },
                                       reScheduleButton: () {
-                                        controller.showHomePopup();
+                                        controller.showHomePopup(
+                                            id: controller
+                                                .appointMentListMonthly[index]
+                                                .id
+                                                .toString());
                                       },
                                       timeTextColor: AppColors.blackO,
                                     );
@@ -321,9 +332,7 @@ class DoctorHomeScreen extends StatelessWidget {
                                       Get.toNamed(AppRoutes.patientDetails,
                                           arguments: userdetails);
                                     },
-                                    reScheduleButton: () {
-                                      controller.showHomePopup();
-                                    },
+                                    reScheduleButton: () {},
                                     timeTextColor: AppColors.red,
                                   );
                                 }),

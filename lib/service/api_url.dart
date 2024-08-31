@@ -38,5 +38,8 @@ class ApiUrl {
   static const termsAndCondition = '/settings/get-settings/terms';
 
   //============================ privacy & policy =======================//
-  static const privacyPolicy = '/settings/get-settings/privacy';
+  static const privacyPolicy = '/settings/get-settings/privacy';   
+  //=============================== Update Appointment ===================================//
+  static const updateAppointment = '/appointment/update-appointment/';  
+
 }
