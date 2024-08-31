@@ -5,6 +5,7 @@ import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_images/app_images.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/banner_model.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/category_model.dart';
+import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/popular_doctor.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +15,9 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
 
   final bannerLoading = Status.loading.obs;
   void bannerLoadingMethod(Status value) => bannerLoading.value = value;
+
+  final popularDocLoading = Status.loading.obs;
+  void popularDocLoadingMethod(Status value) => popularDocLoading.value = value;
 
   RxInt bannerIndex = 0.obs;
   final List<String> bannerImg = [
@@ -85,10 +89,33 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
     }
   }
 
+  ///================= Get Popular Doctor ===============
+
+  RxList<PopularDoctorDatum> popularDoctorList = <PopularDoctorDatum>[].obs;
+
+  getPopularDoctor() async {
+    popularDocLoadingMethod(Status.loading);
+
+    var response = await ApiClient.getData(ApiUrl.popularDoc);
+
+    if (response.statusCode == 200) {
+      popularDoctorList.value = List<PopularDoctorDatum>.from(
+          response.body["data"].map((x) => PopularDoctorDatum.fromJson(x)));
+    } else {
+      if (response.statusText == ApiClient.noInternetMessage) {
+        categoryLoadingMethod(Status.internetError);
+      } else {
+        categoryLoadingMethod(Status.error);
+      }
+      ApiChecker.checkApi(response);
+    }
+  }
+
   ///============ All Methods ============
   allMethods() {
     getCategory();
     getBanner();
+    getPopularDoctor();
   }
 
   @override

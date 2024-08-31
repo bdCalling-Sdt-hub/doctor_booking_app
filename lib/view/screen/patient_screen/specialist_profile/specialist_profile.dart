@@ -1,8 +1,11 @@
+import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
+import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/popular_doctor.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_card/custom_card.dart';
@@ -23,8 +26,9 @@ class SpecialistProfile extends StatefulWidget {
 }
 
 class _DoctorProfileScreenState extends State<SpecialistProfile> {
-  int _selectedDateIndex = 1;
-  int _selectedDateIndex2 = 1;
+  GeneralController generalController = Get.find<GeneralController>();
+  int _selectedDateIndex = 0;
+  int _selectedDateIndex2 = 0;
   bool _isExpanded = false;
 
   void _toggleExpanded() {
@@ -33,11 +37,24 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
     });
   }
 
+  PopularDoctorDatum data = Get.arguments;
+
+  @override
+  void initState() {
+    generalController.getAvailableTimesForSelectedDay(
+        selectedDay:
+            generalController.next7Days[_selectedDateIndex]["Day"] ?? "",
+        availableDays: data.availableDays!,
+        selectedDateIndex: _selectedDateIndex2);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(24.r),
         child: CustomButton(
           onTap: () {
             Get.toNamed(AppRoutes.bookAppointmentPatientDetails);
@@ -61,30 +78,41 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
               Center(
                 child: Column(
                   children: [
+                    ///==================== Doctor Image ====================
+
                     CustomNetworkImage(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(10)),
-                        imageUrl: AppConstants.userNtr,
+                        imageUrl: "${ApiUrl.baseUrl}/${data.img ?? ""}",
                         height: 256,
                         width: 243),
                     const SizedBox(height: 16),
-                    const CustomText(
-                      text: 'Ralph Edwards',
+
+                    ///==================== Doctor Name ====================
+
+                    CustomText(
+                      text: data.name ?? "",
                       fontWeight: FontWeight.w600,
                       fontSize: 24,
                       color: AppColors.grayNormal,
                       bottom: 8,
                     ),
-                    const CustomText(
-                      text: 'Cardiologist',
+
+                    ///==================== Doctor Specialization ====================
+
+                    CustomText(
+                      text: data.specialization ?? "",
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       color: AppColors.whiteDarker,
                       bottom: 8,
                     ),
-                    const CustomText(
+
+                    ///==================== Doctor Location ====================
+
+                    CustomText(
                       left: 10,
-                      text: 'Heart Guard Hospital, New York',
+                      text: data.location ?? "",
                       fontWeight: FontWeight.w500,
                       fontSize: 12,
                       color: AppColors.grayNormal,
@@ -100,9 +128,11 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          const InfoCard(
+                          ///===================== Experience ===================
+
+                          InfoCard(
                             label: AppStrings.experience,
-                            value: '10+ years',
+                            value: data.experience ?? "",
                           ),
                           Row(
                             children: [
@@ -114,6 +144,9 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                               SizedBox(
                                 width: 10.w,
                               ),
+
+                              ///================= Total Checked Paitients =================
+
                               const InfoCard(
                                 label: AppStrings.patientsChecked,
                                 value: '12,000+',
@@ -128,9 +161,12 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                               ),
                             ],
                           ),
-                          const InfoCard(
+
+                          ///================= Rattings =================
+
+                          InfoCard(
                             label: AppStrings.overallRating,
-                            value: '★ 4.6 ',
+                            value: "${data.rating}/5",
                           ),
                         ],
                       ),
@@ -155,43 +191,42 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
               const SizedBox(height: 8),
 
               ///==============================Schedule Section=====================
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: List.generate(6, (index) {
-                  final isSelected = index == _selectedDateIndex;
-                  final days = [
-                    'Fri\n11',
-                    'Sat\n12',
-                    'Sun\n13',
-                    'Mon\n14',
-                    'Tue\n15',
-                    'Wed\n16',
-                  ];
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedDateIndex = index;
-                      });
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: isSelected ? Colors.black : Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.grey),
-                      ),
-                      child: Text(
-                        days[index],
-                        style: TextStyle(
-                          color: isSelected ? Colors.white : Colors.black,
-                          fontWeight:
-                              isSelected ? FontWeight.bold : FontWeight.normal,
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: List.generate(generalController.next7Days.length,
+                      (index) {
+                    final isSelected = index == _selectedDateIndex;
+
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _selectedDateIndex = index;
+                        });
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(right: 8.w),
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: isSelected ? Colors.black : Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.grey),
                         ),
-                        textAlign: TextAlign.center,
+                        child: Text(
+                          "${generalController.next7Days[index]["Day"]} ${generalController.next7Days[index]["Date"]}",
+                          style: TextStyle(
+                            color: isSelected ? Colors.white : Colors.black,
+                            fontWeight: isSelected
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                    ),
-                  );
-                }),
+                    );
+                  }),
+                ),
               ),
               SizedBox(
                 height: 12.h,
@@ -206,16 +241,16 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: List.generate(6, (index) {
+                  children: List.generate(
+                      generalController
+                          .getAvailableTimesForSelectedDay(
+                              selectedDay: generalController
+                                      .next7Days[_selectedDateIndex]["Day"] ??
+                                  "",
+                              availableDays: data.availableDays,
+                              selectedDateIndex: _selectedDateIndex2)
+                          .length, (index) {
                     final isSelected = index == _selectedDateIndex2;
-                    final days = [
-                      '10 Am',
-                      '11 Am',
-                      '12 Am',
-                      '2 pm',
-                      '4 pm',
-                      '6 pm'
-                    ];
                     return GestureDetector(
                       onTap: () {
                         setState(() {
@@ -224,14 +259,19 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                       },
                       child: Container(
                         padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.all(10),
+                        margin: EdgeInsets.only(right: 8.w),
                         decoration: BoxDecoration(
                           color: isSelected ? Colors.black : Colors.white,
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(color: Colors.grey),
                         ),
                         child: Text(
-                          days[index],
+                          generalController.getAvailableTimesForSelectedDay(
+                              selectedDay: generalController
+                                      .next7Days[_selectedDateIndex]["Day"] ??
+                                  "",
+                              availableDays: data.availableDays,
+                              selectedDateIndex: _selectedDateIndex2)[index],
                           style: TextStyle(
                             color: isSelected ? Colors.white : Colors.black,
                             fontWeight: isSelected
@@ -324,12 +364,12 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                         networkImageUrl: AppConstants.userNtr,
                         name: 'Bessie Cooper',
                         profession: 'Cardiologist',
-                        rating: 4);
+                        rating: "4");
                   }),
                 ),
               ),
               SizedBox(
-                height: 12.h,
+                height: 70.h,
               ),
             ],
           ),

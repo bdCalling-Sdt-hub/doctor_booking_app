@@ -13,6 +13,7 @@ class ApiUrl {
 
   static const category = '/category';
   static const banner = '/banner/get-banners';
+  static const popularDoc = '/doctors/popular-doctors';
 
   ///=============================== Doctor Section ==============================
   static const profile = '/auth/profile';

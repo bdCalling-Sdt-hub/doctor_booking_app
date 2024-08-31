@@ -178,17 +178,21 @@ class HomeScreen extends StatelessWidget {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: List.generate(4, (index) {
+                        children: List.generate(
+                            homeController.popularDoctorList.length, (index) {
+                          var data = homeController.popularDoctorList[index];
                           return GestureDetector(
                             onTap: () {
-                              Get.toNamed(AppRoutes.specialistProfile);
+                              Get.toNamed(AppRoutes.specialistProfile,
+                                  arguments: data);
                             },
                             child: CustomCard(
-                              imageSrc: AppIcons.favoriteUnselected,
-                              networkImageUrl: AppConstants.userNtr,
-                              name: 'Jenny Wilson',
-                              profession: 'Gynecologists',
-                              rating: 4.7,
+                              imageSrc: "",
+                              networkImageUrl:
+                                  "${ApiUrl.baseUrl}/${data.img ?? ""}",
+                              name: data.name ?? "",
+                              profession: data.specialization ?? "",
+                              rating: data.rating.toString(),
                             ),
                           );
                         }),
@@ -222,7 +226,7 @@ class HomeScreen extends StatelessWidget {
                               networkImageUrl: AppConstants.userNtr,
                               name: 'Jenny Wilson',
                               profession: 'Gynecologists',
-                              rating: 4.7,
+                              rating: "4.7",
                             ),
                           );
                         }),

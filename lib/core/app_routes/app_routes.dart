@@ -147,8 +147,7 @@ class AppRoutes {
     GetPage(name: categoriesScreen, page: () => CategoriesScreen()),
     GetPage(name: subCategoriesScreen, page: () => const SubCategoriesScreen()),
     GetPage(
-        name: popularSpecialistsScreen,
-        page: () => const PopularSpecialistsScreen()),
+        name: popularSpecialistsScreen, page: () => PopularSpecialistsScreen()),
 
     ///================================patient Auth========================
     GetPage(name: signInScreen, page: () => SignInScreen()),

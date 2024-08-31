@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/inner_widget/appointments_history_dialog.dart';
+import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/popular_doctor.dart';
 import 'package:doctor_booking/view/widgets/custom_image_picker_popup/custom_image_picker_popup.dart';
 import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class GeneralController extends GetxController with GetxServiceMixin {
   RxString profileID = "".obs;
@@ -194,5 +196,48 @@ class GeneralController extends GetxController with GetxServiceMixin {
     userLocation.value =
         await SharePrefsHelper.getString(AppConstants.userLocation);
     refresh();
+  }
+
+  ///================= 7 Days Info ===================
+
+  RxList<Map<String, String>> next7Days = <Map<String, String>>[].obs;
+
+  sevenDaysInfo() async {
+    DateTime today = DateTime.now();
+
+    // Initialize a list to store the next 7 days' data in a Map
+
+    // Loop to get the next 7 days
+    for (int i = 0; i < 7; i++) {
+      DateTime nextDay = today.add(Duration(days: i));
+      String day = DateFormat('EEE').format(nextDay); // Get the day (e.g., Fri)
+      String date = DateFormat('d').format(nextDay); // Get the date (e.g., 12)
+
+      // Add the day and date to the map
+      Map<String, String> dayMap = {
+        'Day': day,
+        'Date': date,
+      };
+
+      // Add the map to the list
+      next7Days.add(dayMap);
+      refresh();
+    }
+  }
+
+  RxList<String> getAvailableTimesForSelectedDay(
+      {AvailableDays? availableDays,
+      int selectedDateIndex = 0,
+      required String selectedDay}) {
+    debugPrint(
+        "$selectedDay>>>>>>>>>>>>>>>>>>>>${availableDays!.getTimesForDay(selectedDay)}");
+    refresh();
+    return RxList<String>.from(availableDays.getTimesForDay(selectedDay));
+  }
+
+  @override
+  void onInit() {
+    sevenDaysInfo();
+    super.onInit();
   }
 }
