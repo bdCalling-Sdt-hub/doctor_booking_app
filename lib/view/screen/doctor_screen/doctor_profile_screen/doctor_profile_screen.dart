@@ -4,6 +4,7 @@ import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/custom_appointment_info.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
@@ -265,9 +266,279 @@ class DoctorProfileScreen extends StatelessWidget {
                                     .profileModel.value.currentAffiliation ??
                                 '',
                           ),
+                          //========================= Appointment info ===============================
+                          SizedBox(
+                            height: 12.h,
+                          ),
+                          //=========== Appointment info ==========//
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const CustomText(
+                                text: AppStrings.appointmentInfo,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.whiteDarker,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Get.toNamed(
+                                      AppRoutes.appointmentEditInfoScreen);
+                                },
+                                child: const CustomImage(
+                                  imageSrc: AppIcons.edit,
+                                  imageType: ImageType.png,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 8.h,
+                          ),
+                          Center(
+                            child: Container(
+                              width: 335.w,
+                              height: 2,
+                              color: AppColors.whiteNormalHover,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 12.h,
+                          ),
+
+                          ///================================= Sunday =============================
+                          doctorProfileController.sundayAvailableList.isNotEmpty
+                              ? CustomAppointmentInfo(
+                                  dayName: 'Sunday',
+                                  startTimeTap: () async {},
+                                  endTimeTap: () async {},
+                                  availableTab: (value) {},
+                                  startController: TextEditingController(),
+                                  endController: TextEditingController(),
+                                  readOnly: true,
+                                  startTimeHintText: doctorProfileController
+                                          .profileModel
+                                          .value
+                                          .availableDays
+                                          ?.sunday?[0] ??
+                                      '',
+                                  endTimeHintText: doctorProfileController
+                                          .profileModel
+                                          .value
+                                          .availableDays
+                                          ?.sunday?[doctorProfileController
+                                              .profileModel
+                                              .value
+                                              .availableDays!
+                                              .sunday!
+                                              .length -
+                                          1] ??
+                                      '',
+                                  typeHintText:
+                                      "Appointment type: ${doctorProfileController.profileModel.value.availableFor?.sunday ?? ''}",
+                                )
+                              : const SizedBox(),
+
+                          ///================================= Monday =============================
+                          doctorProfileController.mondayAvailableList.isNotEmpty
+                              ? CustomAppointmentInfo(
+                                  dayName: 'Monday',
+                                  startTimeTap: () async {},
+                                  endTimeTap: () async {},
+                                  availableTab: (value) {},
+                                  startController: TextEditingController(),
+                                  endController: TextEditingController(),
+                                  readOnly: true,
+                                  startTimeHintText: doctorProfileController
+                                          .profileModel
+                                          .value
+                                          .availableDays
+                                          ?.monday?[0] ??
+                                      '',
+                                  endTimeHintText: doctorProfileController
+                                          .profileModel
+                                          .value
+                                          .availableDays
+                                          ?.monday?[doctorProfileController
+                                              .profileModel
+                                              .value
+                                              .availableDays!
+                                              .monday!
+                                              .length -
+                                          1] ??
+                                      '',
+                                  typeHintText:
+                                      "Appointment type: ${doctorProfileController.profileModel.value.availableFor?.monday ?? ''}",
+                                )
+                              : const SizedBox(),
+
+                          ///================================= Tuesday =============================
+                          doctorProfileController.tuedayAvailableList.isNotEmpty
+                              ? CustomAppointmentInfo(
+                                  dayName: 'Tuesday',
+                                  startTimeTap: () async {},
+                                  endTimeTap: () async {},
+                                  availableTab: (value) {},
+                                  startController: TextEditingController(),
+                                  endController: TextEditingController(),
+                                  readOnly: true,
+                                  startTimeHintText: doctorProfileController
+                                          .profileModel
+                                          .value
+                                          .availableDays
+                                          ?.tuesday?[0] ??
+                                      '',
+                                  endTimeHintText: doctorProfileController
+                                          .profileModel
+                                          .value
+                                          .availableDays
+                                          ?.tuesday?[doctorProfileController
+                                              .profileModel
+                                              .value
+                                              .availableDays!
+                                              .tuesday!
+                                              .length -
+                                          1] ??
+                                      '',
+                                  typeHintText:
+                                      "Appointment type: ${doctorProfileController.profileModel.value.availableFor?.tuesday ?? ''}",
+                                )
+                              : const SizedBox(),
+
+                          ///================================= Wednesday =============================
+                          doctorProfileController.weddayAvailableList.isNotEmpty
+                              ? CustomAppointmentInfo(
+                                  dayName: 'Wednesday',
+                                  startTimeTap: () async {},
+                                  endTimeTap: () async {},
+                                  availableTab: (value) {},
+                                  startController: TextEditingController(),
+                                  endController: TextEditingController(),
+                                  readOnly: true,
+                                  startTimeHintText: doctorProfileController
+                                          .profileModel
+                                          .value
+                                          .availableDays
+                                          ?.wednesday?[0] ??
+                                      '',
+                                  endTimeHintText: doctorProfileController
+                                          .profileModel
+                                          .value
+                                          .availableDays
+                                          ?.wednesday?[doctorProfileController
+                                              .profileModel
+                                              .value
+                                              .availableDays!
+                                              .wednesday!
+                                              .length -
+                                          1] ??
+                                      '',
+                                  typeHintText:
+                                      "Appointment type: ${doctorProfileController.profileModel.value.availableFor?.wednesday ?? ''}",
+                                )
+                              : const SizedBox(),
+
+                          ///================================= Thursday =============================
+                          doctorProfileController.thudayAvailableList.isNotEmpty
+                              ? CustomAppointmentInfo(
+                                  dayName: 'Thursday',
+                                  startTimeTap: () async {},
+                                  endTimeTap: () async {},
+                                  availableTab: (value) {},
+                                  startController: TextEditingController(),
+                                  endController: TextEditingController(),
+                                  readOnly: true,
+                                  startTimeHintText: doctorProfileController
+                                          .profileModel
+                                          .value
+                                          .availableDays
+                                          ?.thursday?[0] ??
+                                      '',
+                                  endTimeHintText: doctorProfileController
+                                          .profileModel
+                                          .value
+                                          .availableDays
+                                          ?.thursday?[doctorProfileController
+                                              .profileModel
+                                              .value
+                                              .availableDays!
+                                              .thursday!
+                                              .length -
+                                          1] ??
+                                      '',
+                                  typeHintText:
+                                      "Appointment type: ${doctorProfileController.profileModel.value.availableFor?.thursday ?? ''}",
+                                )
+                              : const SizedBox(),
+
+                          ///================================= Friday =============================
+                          doctorProfileController.fridayAvailableList.isNotEmpty
+                              ? CustomAppointmentInfo(
+                                  dayName: 'Friday',
+                                  startTimeTap: () async {},
+                                  endTimeTap: () async {},
+                                  availableTab: (value) {},
+                                  startController: TextEditingController(),
+                                  endController: TextEditingController(),
+                                  readOnly: true,
+                                  startTimeHintText: doctorProfileController
+                                          .profileModel
+                                          .value
+                                          .availableDays
+                                          ?.friday?[0] ??
+                                      '',
+                                  endTimeHintText: doctorProfileController
+                                          .profileModel
+                                          .value
+                                          .availableDays
+                                          ?.friday?[doctorProfileController
+                                              .profileModel
+                                              .value
+                                              .availableDays!
+                                              .friday!
+                                              .length -
+                                          1] ??
+                                      '',
+                                  typeHintText:
+                                      "Appointment type: ${doctorProfileController.profileModel.value.availableFor?.friday ?? ''}",
+                                )
+                              : const SizedBox(),
+
+                          ///================================= Saturday =============================
+                          doctorProfileController.satdayAvailableList.isNotEmpty
+                              ? CustomAppointmentInfo(
+                                  dayName: 'Saturday',
+                                  startTimeTap: () async {},
+                                  endTimeTap: () async {},
+                                  availableTab: (value) {},
+                                  startController: TextEditingController(),
+                                  endController: TextEditingController(),
+                                  readOnly: true,
+                                  startTimeHintText: doctorProfileController
+                                          .profileModel
+                                          .value
+                                          .availableDays
+                                          ?.saturday?[0] ??
+                                      '',
+                                  endTimeHintText: doctorProfileController
+                                          .profileModel
+                                          .value
+                                          .availableDays
+                                          ?.saturday?[doctorProfileController
+                                              .profileModel
+                                              .value
+                                              .availableDays!
+                                              .saturday!
+                                              .length -
+                                          1] ??
+                                      '',
+                                  typeHintText:
+                                      "Appointment type: ${doctorProfileController.profileModel.value.availableFor?.saturday ?? ''}",
+                                )
+                              : const SizedBox(),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

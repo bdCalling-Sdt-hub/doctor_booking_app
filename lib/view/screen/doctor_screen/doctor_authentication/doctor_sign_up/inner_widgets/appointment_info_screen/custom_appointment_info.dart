@@ -7,6 +7,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomAppointmentInfo extends StatelessWidget {
   CustomAppointmentInfo({
@@ -20,6 +21,8 @@ class CustomAppointmentInfo extends StatelessWidget {
     this.startController,
     this.endController,
     this.isClosed = false,
+    this.readOnly = false,
+    this.typeHintText,
   });
 
   final String dayName;
@@ -33,6 +36,10 @@ class CustomAppointmentInfo extends StatelessWidget {
   final bool isClosed;
   final DoctorAuthController doctorAuthController =
       Get.find<DoctorAuthController>();
+
+  final String? typeHintText;
+
+  final bool? readOnly;
 
   final List<String> genderItems = ['OFFLINE', 'ONLINE', "WEEKEND"];
   @override
@@ -63,21 +70,23 @@ class CustomAppointmentInfo extends StatelessWidget {
             ),
             // Add more decoration..
           ),
-          hint: const Text(
-            'Select Your Appointment Type',
-            style: TextStyle(fontSize: 14),
+          hint: Text(
+            typeHintText ?? 'Select Your Appointment Type',
+            style: GoogleFonts.poppins(fontSize: 14),
           ),
-          items: genderItems
-              .map((item) => DropdownMenuItem<String>(
-                    value: item,
-                    child: Text(
-                      item,
-                      style: const TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
-                  ))
-              .toList(),
+          items: readOnly!
+              ? []
+              : genderItems
+                  .map((item) => DropdownMenuItem<String>(
+                        value: item,
+                        child: Text(
+                          item,
+                          style: const TextStyle(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ))
+                  .toList(),
           validator: (value) {
             if (value == null) {
               return 'Please select gender.';
@@ -88,10 +97,10 @@ class CustomAppointmentInfo extends StatelessWidget {
           buttonStyleData: const ButtonStyleData(
             padding: EdgeInsets.only(right: 8),
           ),
-          iconStyleData: const IconStyleData(
+          iconStyleData: IconStyleData(
             icon: Icon(
               Icons.arrow_drop_down,
-              color: Colors.black45,
+              color: readOnly! ? Colors.transparent : Colors.black45,
             ),
             iconSize: 24,
           ),
@@ -122,7 +131,7 @@ class CustomAppointmentInfo extends StatelessWidget {
                   hasBackgroundColor: true,
                   title: 'Start Time',
                   controller: startController ?? TextEditingController(),
-                  onTap: startTimeTap,
+                  onTap: readOnly! ? () {} : startTimeTap,
                 ),
               ),
               SizedBox(
@@ -136,7 +145,7 @@ class CustomAppointmentInfo extends StatelessWidget {
                   controller: endController ?? TextEditingController(),
                   readOnly: true,
                   hasSuffixIcon: false,
-                  onTap: endTimeTap,
+                  onTap: readOnly! ? () {} : endTimeTap,
                 ),
               ),
             ],
