@@ -168,7 +168,7 @@ class AppRoutes {
     GetPage(name: hospitalScreen, page: () => HospitalScreen()),
 
     ///===============================OnBord Section=====================
-    GetPage(name: onboardScreenOne, page: () => OnboardScreenOne()),
+    GetPage(name: onboardScreenOne, page: () => const OnboardScreenOne()),
     GetPage(name: onboardScreenTwo, page: () => OnboardScreenTwo()),
     GetPage(name: onboardScreenThree, page: () => OnboardScreenThree()),
     GetPage(name: chooseScreen, page: () => ChooseScreen()),

@@ -1,4 +1,5 @@
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
+import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/controller/paitent_home_controller.dart';
@@ -25,62 +26,62 @@ class CategoriesScreen extends StatelessWidget {
       appBar: const CustomAppBar(
         appBarContent: AppStrings.categories,
       ),
-      // body: GridView.builder(
-      //   scrollDirection: Axis.vertical,
-      //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-      //     crossAxisCount: 3, // Number of columns
-      //     crossAxisSpacing: 10.0, // Space between columns
-      //     mainAxisSpacing: 10.0, // Space between rows
-      //     childAspectRatio: 0.8, // Adjust this ratio to fit the height
-      //   ),
-      //   itemCount: homeController.categoriesList.length,
-      //   itemBuilder: (context, index) {
-      //     var data = homeController.categoriesList[index];
-      //     return LayoutBuilder(
-      //       builder: (context, constraints) {
-      //         return Column(
-      //           children: [
-      //             ///================================Image===================
-      //             GestureDetector(
-      //               onTap: () {
-      //                 Get.toNamed(AppRoutes.subCategoriesScreen,
-      //                     arguments: data);
-      //               },
-      //               child: Container(
-      //                 padding: const EdgeInsets.all(12), // Adjusted padding
-      //                 decoration: const BoxDecoration(
-      //                   color: AppColors.blackLight,
-      //                   borderRadius: BorderRadius.all(Radius.circular(4)),
-      //                 ),
-      //                 child: CustomNetworkImage(
-      //                   borderRadius:
-      //                       const BorderRadius.all(Radius.circular(10)),
-      //                   imageUrl: homeController.categoriesList[index]
-      //                       ['image']!,
-      //                   height: constraints.maxHeight *
-      //                       0.5, // Adjusted height to fit within grid
-      //                   width: constraints.maxHeight * 0.5,
-      //                 ),
-      //               ),
-      //             ),
-      //             SizedBox(height: 8.h),
+      body: GridView.builder(
+        scrollDirection: Axis.vertical,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3, // Number of columns
+          crossAxisSpacing: 10.0, // Space between columns
+          mainAxisSpacing: 10.0, // Space between rows
+          childAspectRatio: 0.8, // Adjust this ratio to fit the height
+        ),
+        itemCount: homeController.categoryList.length,
+        itemBuilder: (context, index) {
+          var data = homeController.categoryList[index];
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              return Column(
+                children: [
+                  ///================================Image===================
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.subCategoriesScreen,
+                          arguments: data);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(12), // Adjusted padding
+                      decoration: const BoxDecoration(
+                        color: AppColors.blackLight,
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                      ),
+                      child: CustomNetworkImage(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                        imageUrl:
+                            "${ApiUrl.baseUrl}/${homeController.categoryList[index].img ?? ""}",
+                        height: constraints.maxHeight *
+                            0.5, // Adjusted height to fit within grid
+                        width: constraints.maxHeight * 0.5,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
 
-      //             ///===============================name================
-      //             CustomText(
-      //               text: homeController.categoriesList[index]['name']!,
-      //               color: AppColors.grayNormal,
-      //               fontWeight: FontWeight.w500,
-      //               fontSize: 14,
-      //             ),
-      //             SizedBox(
-      //               height: 8.h, // Adjusted bottom space
-      //             )
-      //           ],
-      //         );
-      //       },
-      //     );
-      //   },
-      // ),
+                  ///===============================name================
+                  CustomText(
+                    text: data.name ?? "",
+                    color: AppColors.grayNormal,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                  ),
+                  SizedBox(
+                    height: 8.h, // Adjusted bottom space
+                  )
+                ],
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

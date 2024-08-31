@@ -12,6 +12,7 @@ class ApiUrl {
 //=============== Home ================
 
   static const category = '/category';
+  static const banner = '/banner/get-banners';
 
   ///=============================== Doctor Section ==============================
   static const profile = '/auth/profile';

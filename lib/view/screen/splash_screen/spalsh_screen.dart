@@ -1,4 +1,6 @@
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
+import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
+import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_images/app_images.dart';
 import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
 
@@ -13,9 +15,18 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  navigate() {
+  navigate() async {
+    bool isOnboarding =
+        await SharePrefsHelper.getBool(AppConstants.onBoard) ?? false;
+
+    String token = await SharePrefsHelper.getString(AppConstants.bearerToken);
+
     Future.delayed(const Duration(seconds: 2), () {
-      Get.offAllNamed(AppRoutes.onboardScreenOne);
+      if (isOnboarding || token.isEmpty || token == "null") {
+        Get.offAllNamed(AppRoutes.signInScreen);
+      } else {
+        Get.offAllNamed(AppRoutes.onboardScreenOne);
+      }
     });
   }
 

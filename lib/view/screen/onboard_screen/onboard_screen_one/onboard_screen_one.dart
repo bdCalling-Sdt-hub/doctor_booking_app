@@ -1,5 +1,7 @@
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
+import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
+import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_images/app_images.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/controller/paitent_home_controller.dart';
@@ -10,11 +12,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class OnboardScreenOne extends StatelessWidget {
-  OnboardScreenOne({super.key});
+class OnboardScreenOne extends StatefulWidget {
+  const OnboardScreenOne({super.key});
+
+  @override
+  State<OnboardScreenOne> createState() => _OnboardScreenOneState();
+}
+
+class _OnboardScreenOneState extends State<OnboardScreenOne> {
+  @override
+  void initState() {
+    SharePrefsHelper.setBool(AppConstants.onBoard, true);
+    super.initState();
+  }
 
   final PaitentHomeController homeController =
       Get.find<PaitentHomeController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

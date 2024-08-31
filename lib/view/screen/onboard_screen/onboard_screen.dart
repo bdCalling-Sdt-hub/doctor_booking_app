@@ -1,4 +1,3 @@
-
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/controller/paitent_home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +7,8 @@ import 'onboard_screen_three/onboard_screen_three.dart';
 import 'onboard_screen_two/onboard_screen_two.dart';
 
 class OnboardScreen extends StatelessWidget {
-  final PaitentHomeController homeController = Get.find<PaitentHomeController>();
+  final PaitentHomeController homeController =
+      Get.find<PaitentHomeController>();
 
   OnboardScreen({super.key});
 
@@ -20,7 +20,7 @@ class OnboardScreen extends StatelessWidget {
           clipBehavior: Clip.none,
           controller: homeController.pageController.value,
           children: [
-            OnboardScreenOne(), // First onboarding screen
+            const OnboardScreenOne(), // First onboarding screen
             OnboardScreenTwo(), // Second onboarding screen
             OnboardScreenThree(),
             // Third onboarding screen
