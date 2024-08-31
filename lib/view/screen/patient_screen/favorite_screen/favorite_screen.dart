@@ -28,7 +28,7 @@ class FavoriteScreen extends StatelessWidget {
           itemCount: 4,
           itemBuilder: (context, index) {
             return GestureDetector(
-              onTap: (){
+              onTap: () {
                 Get.toNamed(AppRoutes.specialistProfile);
               },
               child: CustomCard(
@@ -36,7 +36,7 @@ class FavoriteScreen extends StatelessWidget {
                 networkImageUrl: AppConstants.userNtr,
                 name: 'Jenny Wilson',
                 profession: 'Gynecologists',
-                rating: 4.7,
+                rating: "4.7",
               ),
             );
           },

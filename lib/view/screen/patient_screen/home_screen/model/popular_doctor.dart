@@ -1,20 +1,9 @@
-// To parse this JSON data, do
-//
-//     final profileModel = profileModelFromJson(jsonString);
-
-import 'dart:convert';
-
-ProfileModel profileModelFromJson(String str) =>
-    ProfileModel.fromJson(json.decode(str));
-
-String profileModelToJson(ProfileModel data) => json.encode(data.toJson());
-
-class ProfileModel {
+class PopularDoctorDatum {
   String? id;
   String? img;
   String? name;
   String? email;
-  String? dateOfBirth;
+  DateTime? dateOfBirth;
   String? location;
   String? phone;
   String? password;
@@ -31,13 +20,13 @@ class ProfileModel {
   String? experience;
   String? educationalBackground;
   String? currentAffiliation;
-  int? rating;
+  num? rating;
   int? totalRated;
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
 
-  ProfileModel({
+  PopularDoctorDatum({
     this.id,
     this.img,
     this.name,
@@ -66,12 +55,15 @@ class ProfileModel {
     this.v,
   });
 
-  factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
+  factory PopularDoctorDatum.fromJson(Map<String, dynamic> json) =>
+      PopularDoctorDatum(
         id: json["_id"],
         img: json["img"],
         name: json["name"],
         email: json["email"],
-        dateOfBirth: json["date_of_birth"],
+        dateOfBirth: json["date_of_birth"] == null
+            ? null
+            : DateTime.parse(json["date_of_birth"]),
         location: json["location"],
         phone: json["phone"],
         password: json["password"],
@@ -108,7 +100,8 @@ class ProfileModel {
         "img": img,
         "name": name,
         "email": email,
-        "date_of_birth": dateOfBirth,
+        "date_of_birth":
+            "${dateOfBirth!.year.toString().padLeft(4, '0')}-${dateOfBirth!.month.toString().padLeft(2, '0')}-${dateOfBirth!.day.toString().padLeft(2, '0')}",
         "location": location,
         "phone": phone,
         "password": password,
@@ -134,13 +127,13 @@ class ProfileModel {
 }
 
 class AvailableDays {
-  List<String>? monday;
+  List<dynamic>? monday;
   List<String>? tuesday;
-  List<String>? wednesday;
-  List<String>? thursday;
-  List<String>? friday;
-  List<String>? saturday;
-  List<String>? sunday;
+  List<dynamic>? wednesday;
+  List<dynamic>? thursday;
+  List<dynamic>? friday;
+  List<dynamic>? saturday;
+  List<dynamic>? sunday;
 
   AvailableDays({
     this.monday,
@@ -155,25 +148,25 @@ class AvailableDays {
   factory AvailableDays.fromJson(Map<String, dynamic> json) => AvailableDays(
         monday: json["monday"] == null
             ? []
-            : List<String>.from(json["monday"]!.map((x) => x)),
+            : List<dynamic>.from(json["monday"]!.map((x) => x)),
         tuesday: json["tuesday"] == null
             ? []
             : List<String>.from(json["tuesday"]!.map((x) => x)),
         wednesday: json["wednesday"] == null
             ? []
-            : List<String>.from(json["wednesday"]!.map((x) => x)),
+            : List<dynamic>.from(json["wednesday"]!.map((x) => x)),
         thursday: json["thursday"] == null
             ? []
-            : List<String>.from(json["thursday"]!.map((x) => x)),
+            : List<dynamic>.from(json["thursday"]!.map((x) => x)),
         friday: json["friday"] == null
             ? []
-            : List<String>.from(json["friday"]!.map((x) => x)),
+            : List<dynamic>.from(json["friday"]!.map((x) => x)),
         saturday: json["saturday"] == null
             ? []
-            : List<String>.from(json["saturday"]!.map((x) => x)),
+            : List<dynamic>.from(json["saturday"]!.map((x) => x)),
         sunday: json["sunday"] == null
             ? []
-            : List<String>.from(json["sunday"]!.map((x) => x)),
+            : List<dynamic>.from(json["sunday"]!.map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
@@ -194,7 +187,26 @@ class AvailableDays {
             sunday == null ? [] : List<dynamic>.from(sunday!.map((x) => x)),
       };
 
-  // Method to get available times for a specific day
+  List<dynamic> getTimesForDay(String day) {
+    switch (day.toLowerCase()) {
+      case 'mon':
+        return monday ?? [];
+      case 'tue':
+        return tuesday ?? [];
+      case 'wed':
+        return wednesday ?? [];
+      case 'thu':
+        return thursday ?? [];
+      case 'fri':
+        return friday ?? [];
+      case 'sat':
+        return saturday ?? [];
+      case 'sun':
+        return sunday ?? [];
+      default:
+        return [];
+    }
+  }
 }
 
 class AvailableFor {

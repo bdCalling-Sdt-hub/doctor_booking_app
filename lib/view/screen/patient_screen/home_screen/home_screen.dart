@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
@@ -68,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                           homeController.bannerIndex.value = index;
                         },
                       ),
-                      items: homeController.bannerImg.map((imagePath) {
+                      items: homeController.bannerList.map((imagePath) {
                         return Builder(
                           builder: (BuildContext context) {
                             return Container(
@@ -76,7 +77,11 @@ class HomeScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 image: DecorationImage(
-                                  image: AssetImage(imagePath),
+                                  image: CachedNetworkImageProvider(
+                                      "${ApiUrl.baseUrl}/${imagePath.img}"),
+
+                                  // AssetImage(
+                                  //     "${ApiUrl.baseUrl}/${imagePath.img}"),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -125,29 +130,32 @@ class HomeScreen extends StatelessWidget {
                         children: List.generate(
                             homeController.categoryList.length, (index) {
                           var data = homeController.categoryList[index];
-                          return Column(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Get.toNamed(AppRoutes.subCategoriesScreen,
-                                      arguments: data);
-                                },
-                                child: CustomNetworkImage(
-                                  boxShape: BoxShape.circle,
-                                  imageUrl:
-                                      "${ApiUrl.baseUrl}/${homeController.categoryList[index].img ?? ""}",
-                                  height: 54,
-                                  width: 54,
+                          return Padding(
+                            padding: EdgeInsets.only(right: 20.w),
+                            child: Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed(AppRoutes.subCategoriesScreen,
+                                        arguments: data);
+                                  },
+                                  child: CustomNetworkImage(
+                                    boxShape: BoxShape.circle,
+                                    imageUrl:
+                                        "${ApiUrl.baseUrl}/${homeController.categoryList[index].img ?? ""}",
+                                    height: 54,
+                                    width: 54,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 6),
-                              CustomText(
-                                left: 20,
-                                text: data.name ?? "",
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ],
+                                const SizedBox(height: 6),
+                                CustomText(
+                                  left: 0,
+                                  text: data.name ?? "",
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ],
+                            ),
                           );
                         }),
                       ),
@@ -170,17 +178,21 @@ class HomeScreen extends StatelessWidget {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: List.generate(4, (index) {
+                        children: List.generate(
+                            homeController.popularDoctorList.length, (index) {
+                          var data = homeController.popularDoctorList[index];
                           return GestureDetector(
                             onTap: () {
-                              Get.toNamed(AppRoutes.specialistProfile);
+                              Get.toNamed(AppRoutes.specialistProfile,
+                                  arguments: data);
                             },
                             child: CustomCard(
-                              imageSrc: AppIcons.favoriteUnselected,
-                              networkImageUrl: AppConstants.userNtr,
-                              name: 'Jenny Wilson',
-                              profession: 'Gynecologists',
-                              rating: 4.7,
+                              imageSrc: "",
+                              networkImageUrl:
+                                  "${ApiUrl.baseUrl}/${data.img ?? ""}",
+                              name: data.name ?? "",
+                              profession: data.specialization ?? "",
+                              rating: data.rating.toString(),
                             ),
                           );
                         }),
@@ -214,7 +226,7 @@ class HomeScreen extends StatelessWidget {
                               networkImageUrl: AppConstants.userNtr,
                               name: 'Jenny Wilson',
                               profession: 'Gynecologists',
-                              rating: 4.7,
+                              rating: "4.7",
                             ),
                           );
                         }),

@@ -7,6 +7,7 @@ import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/d
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/appointment_info_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/personal_info_screen/personal_info_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/professional_info_screen/professional_info_screen.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_edit_appointment_screen/doctor_edit_appointment_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_edit_personal_profile_screen/doctor_edit_personal_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_edit_professional_profile_screen/doctor_edit_professional_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_screen.dart';
@@ -101,7 +102,8 @@ class AppRoutes {
   static const String doctorResetScreen = "/DoctorResetScreen";
   static const String appointmentInfoScreen = "/AppointmentInfoScreen";
   static const String personalInfoScreen = "/PersonalInfoScreen";
-  static const String professionalInfoScreen = "/ProfessionalInfoScreen";
+  static const String professionalInfoScreen = "/ProfessionalInfoScreen"; 
+  static const String appointmentEditInfoScreen = "/appointmentEditInfoScreen"; 
   static const String doctorEditPersonalProfileScreen =
       "/DoctorEditPersonalProfileScreen";
   static const String doctorEditProfessinalProfileScreen =
@@ -146,8 +148,7 @@ class AppRoutes {
     GetPage(name: categoriesScreen, page: () => CategoriesScreen()),
     GetPage(name: subCategoriesScreen, page: () => const SubCategoriesScreen()),
     GetPage(
-        name: popularSpecialistsScreen,
-        page: () => const PopularSpecialistsScreen()),
+        name: popularSpecialistsScreen, page: () => PopularSpecialistsScreen()),
 
     ///================================patient Auth========================
     GetPage(name: signInScreen, page: () => SignInScreen()),
@@ -167,7 +168,7 @@ class AppRoutes {
     GetPage(name: hospitalScreen, page: () => HospitalScreen()),
 
     ///===============================OnBord Section=====================
-    GetPage(name: onboardScreenOne, page: () => OnboardScreenOne()),
+    GetPage(name: onboardScreenOne, page: () => const OnboardScreenOne()),
     GetPage(name: onboardScreenTwo, page: () => OnboardScreenTwo()),
     GetPage(name: onboardScreenThree, page: () => OnboardScreenThree()),
     GetPage(name: chooseScreen, page: () => ChooseScreen()),
@@ -207,5 +208,6 @@ class AppRoutes {
     //========================== patient details =================///
 
     GetPage(name: patientDetails2, page: () => PatientDetailsScreen()),
+    GetPage(name: appointmentEditInfoScreen, page: () => DoctorEditAppointmentScreen()),
   ];
 }

@@ -13,6 +13,7 @@ import 'package:doctor_booking/view/widgets/custom_image_picker_popup/custom_ima
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class DoctorProfileController extends GetxController {
   final DoctorHomeController doctorHomeController =
@@ -262,7 +263,120 @@ class DoctorProfileController extends GetxController {
     thudayAvailableList.value = model.availableDays?.thursday ?? [];
     fridayAvailableList.value = model.availableDays?.friday ?? [];
     satdayAvailableList.value = model.availableDays?.saturday ?? [];
+  } 
+  ///=============================================== Doctor appointment edit ==================================//    
+       
+    
+  //================== Doctor Appointment Time controller ==========================//
+  Rx<TextEditingController> sundayTypeController = TextEditingController().obs;
+  Rx<TextEditingController> sundayStartTimeController =
+      TextEditingController().obs;
+  Rx<TextEditingController> sundayEndTimeController =
+      TextEditingController().obs;
+
+  Rx<TextEditingController> mondayStartTimeController =
+      TextEditingController().obs;
+  Rx<TextEditingController> mondayEndTimeController =
+      TextEditingController().obs;
+  Rx<TextEditingController> mondayTypeController = TextEditingController().obs;
+
+  Rx<TextEditingController> tuesdayStartTimeController =
+      TextEditingController().obs;
+  Rx<TextEditingController> tuesdayEndTimeController =
+      TextEditingController().obs;
+  Rx<TextEditingController> tuesdayTypeController = TextEditingController().obs;
+
+  Rx<TextEditingController> weddayStartTimeController =
+      TextEditingController().obs;
+  Rx<TextEditingController> weddayEndTimeController =
+      TextEditingController().obs;
+  Rx<TextEditingController> weddayTypeController = TextEditingController().obs;
+
+  Rx<TextEditingController> thursdayStartTimeController =
+      TextEditingController().obs;
+  Rx<TextEditingController> thursdayEndTimeController =
+      TextEditingController().obs;
+  Rx<TextEditingController> thursdayTypeController =
+      TextEditingController().obs;
+
+  Rx<TextEditingController> fridayStartTimeController =
+      TextEditingController().obs;
+  Rx<TextEditingController> fridayEndTimeController =
+      TextEditingController().obs;
+  Rx<TextEditingController> fridayTypeController = TextEditingController().obs;
+
+  Rx<TextEditingController> saturdayStartTimeController =
+      TextEditingController().obs;
+  Rx<TextEditingController> saturdayEndTimeController =
+      TextEditingController().obs;
+  Rx<TextEditingController> saturdayTypeController =
+      TextEditingController().obs;
+ 
+ 
+  getTime({
+    required int day,
+    required int num,
+  }) async {
+    final picTime = await showTimePicker(
+        context: Get.context!, initialTime: TimeOfDay.now());
+
+    if (picTime != null) {
+      DateTime dateTimeNow = DateTime.now();
+
+      DateTime picDate = DateTime(
+        dateTimeNow.year,
+        dateTimeNow.month,
+        dateTimeNow.day,
+        picTime.hour,
+        picTime.minute,
+      );
+
+      String formatDateTime = DateFormat.jm().format(picDate);
+      //=================== Sun Day ================
+      if (day == 1 && num == 1) {
+        sundayStartTimeController.value.text = formatDateTime;
+      } else if (day == 1 && num == 2) {
+        sundayEndTimeController.value.text = formatDateTime;
+        //=================== Mon Day ====================//
+      } else if (day == 2 && num == 1) {
+        mondayStartTimeController.value.text = formatDateTime;
+      } else if (day == 2 && num == 2) {
+        mondayEndTimeController.value.text = formatDateTime;
+
+        //=================== TuesDay ===================//
+      } else if (day == 3 && num == 1) {
+        tuesdayStartTimeController.value.text = formatDateTime;
+      } else if (day == 3 && num == 2) {
+        tuesdayEndTimeController.value.text = formatDateTime;
+        //======================== Wednesday ================//
+      } else if (day == 4 && num == 1) {
+        weddayStartTimeController.value.text = formatDateTime;
+      } else if (day == 4 && num == 2) {
+        weddayEndTimeController.value.text = formatDateTime;
+        //======================= ThursDay==================//
+      } else if (day == 5 && num == 1) {
+        thursdayStartTimeController.value.text = formatDateTime;
+      } else if (day == 5 && num == 2) {
+        thursdayEndTimeController.value.text = formatDateTime;
+        //======================== Fryday =====================//
+      } else if (day == 6 && num == 1) {
+        fridayStartTimeController.value.text = formatDateTime;
+      } else if (day == 6 && num == 2) {
+        fridayEndTimeController.value.text = formatDateTime;
+        //========================= Saturday ===================//
+      } else if (day == 7 && num == 1) {
+        saturdayStartTimeController.value.text = formatDateTime;
+      } else if (day == 7 && num == 2) {
+        saturdayEndTimeController.value.text = formatDateTime;
+      }
+    }
   }
+
+
+
+
+
+
 
   @override
   void onInit() {

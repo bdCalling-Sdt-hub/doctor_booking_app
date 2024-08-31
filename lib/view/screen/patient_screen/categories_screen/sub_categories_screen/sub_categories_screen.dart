@@ -27,7 +27,7 @@ class SubCategoriesScreen extends StatelessWidget {
           itemCount: 4,
           itemBuilder: (context, index) {
             return GestureDetector(
-              onTap: (){
+              onTap: () {
                 Get.toNamed(AppRoutes.specialistProfile);
               },
               child: CustomCard(
@@ -35,7 +35,7 @@ class SubCategoriesScreen extends StatelessWidget {
                 networkImageUrl: AppConstants.userNtr,
                 name: 'Jenny Wilson',
                 profession: 'Gynecologists',
-                rating: 4.7,
+                rating: "4.7",
               ),
             );
           },
