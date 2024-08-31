@@ -330,7 +330,7 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                       review: data.comment ?? "");
                 }),
               ),
-
+//
               ///==================================View All Condition=================
               Center(
                 child: GestureDetector(
