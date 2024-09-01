@@ -20,6 +20,10 @@ class ApiUrl {
   static const recomendedDoc = '/doctors/recommended-doctors';
   static reviews({required String id}) => '/review/get-reviews?receiverId=$id';
 
+  //============ Profile ==========
+  static const getProfile = '/auth/profile';
+  static const updateProfile = '/auth/update-user';
+
   ///=============================== Doctor Section ==============================
   static const profile = '/auth/profile';
   //=============================== Appointment ===========================//
