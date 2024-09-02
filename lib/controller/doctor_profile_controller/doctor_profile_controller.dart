@@ -263,10 +263,52 @@ class DoctorProfileController extends GetxController {
     thudayAvailableList.value = model.availableDays?.thursday ?? [];
     fridayAvailableList.value = model.availableDays?.friday ?? [];
     satdayAvailableList.value = model.availableDays?.saturday ?? [];
-  } 
-  ///=============================================== Doctor appointment edit ==================================//    
-       
-    
+    //========================= Sun day start time and end time init =====================
+    if (sundayAvailableList.isNotEmpty) {
+      sundayStartTimeController.value.text = sundayAvailableList[0];
+      sundayEndTimeController.value.text =
+          sundayAvailableList[sundayAvailableList.length - 1];
+    }
+    //========================= Mon day start time and end time init =====================
+    if (mondayAvailableList.isNotEmpty) {
+      mondayStartTimeController.value.text = mondayAvailableList[0];
+      mondayEndTimeController.value.text =
+          mondayAvailableList[mondayAvailableList.length - 1];
+    }
+    //========================= tue day start time and end time init =====================
+    if (tuedayAvailableList.isNotEmpty) {
+      tuesdayStartTimeController.value.text = tuedayAvailableList[0];
+      tuesdayEndTimeController.value.text =
+          mondayAvailableList[mondayAvailableList.length - 1];
+    }
+    //========================= Wed day start time and end time init =====================
+    if (weddayAvailableList.isNotEmpty) {
+      weddayStartTimeController.value.text = weddayAvailableList[0];
+      weddayEndTimeController.value.text =
+          weddayAvailableList[weddayAvailableList.length - 1];
+    }
+    //========================= Thurs day start time and end time init =====================
+    if (thudayAvailableList.isNotEmpty) {
+      thursdayStartTimeController.value.text = thudayAvailableList[0];
+      thursdayEndTimeController.value.text =
+          thudayAvailableList[thudayAvailableList.length - 1];
+    }
+    //========================= Fri day start time and end time init =====================
+    if (fridayAvailableList.isNotEmpty) {
+      fridayStartTimeController.value.text = fridayAvailableList[0];
+      fridayEndTimeController.value.text =
+          fridayAvailableList[fridayAvailableList.length - 1];
+    }
+    //========================= Satar day start time and end time init =====================
+    if (satdayAvailableList.isNotEmpty) {
+      saturdayStartTimeController.value.text = satdayAvailableList[0];
+      saturdayEndTimeController.value.text =
+          satdayAvailableList[satdayAvailableList.length - 1];
+    }
+  }
+
+  ///=============================================== Doctor appointment edit ==================================//
+
   //================== Doctor Appointment Time controller ==========================//
   Rx<TextEditingController> sundayTypeController = TextEditingController().obs;
   Rx<TextEditingController> sundayStartTimeController =
@@ -311,8 +353,7 @@ class DoctorProfileController extends GetxController {
       TextEditingController().obs;
   Rx<TextEditingController> saturdayTypeController =
       TextEditingController().obs;
- 
- 
+
   getTime({
     required int day,
     required int num,
@@ -371,12 +412,6 @@ class DoctorProfileController extends GetxController {
       }
     }
   }
-
-
-
-
-
-
 
   @override
   void onInit() {
