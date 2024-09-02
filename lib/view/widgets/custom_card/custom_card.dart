@@ -1,4 +1,6 @@
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
+import 'package:doctor_booking/utils/app_icons/app_icons.dart';
+import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -32,16 +34,15 @@ class CustomCard extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          // Positioned(
-          //     top: 10.h, // Positioning from the top
-          //     left: 120.w, // Positioning from the left
-          //     right: 0.w, // Positioning from the right
-          //     child:
-
-          //         // CustomImage(
-          //         //   imageSrc: imageSrc,
-          //         //   imageType: ImageType.svg,
-          //         // ),
+          Positioned(
+            top: 10.h, // Positioning from the top
+            left: 120.w, // Positioning from the left
+            right: 0.w, // Positioning from the right
+            child: const CustomImage(
+              imageSrc: AppIcons.favoriteUnselected,
+              imageType: ImageType.svg,
+            ),
+          ),
           //         CustomNetworkImage(
           //             imageUrl: imageSrc, height: 120, width: 120)),
           Positioned(

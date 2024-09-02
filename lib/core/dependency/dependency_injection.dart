@@ -6,8 +6,8 @@ import 'package:doctor_booking/controller/doctor_schedule_controller/doctor_sche
 import 'package:doctor_booking/controller/hospital_controller/hospital_controller.dart';
 import 'package:doctor_booking/controller/notification_controller/notification_controller.dart';
 import 'package:doctor_booking/controller/patient_appointment_controller/patient_appointment_controller.dart';
-import 'package:doctor_booking/controller/patient_auth_controller/patient_auth_controller.dart';
-import 'package:doctor_booking/controller/profile_controller/profile_controller.dart';
+import 'package:doctor_booking/view/screen/patient_screen/authentication/patient_auth_controller/patient_auth_controller.dart';
+import 'package:doctor_booking/view/screen/patient_screen/profile_screen/controller/profile_controller.dart';
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/controller/paitent_home_controller.dart';
 import 'package:get/get.dart';

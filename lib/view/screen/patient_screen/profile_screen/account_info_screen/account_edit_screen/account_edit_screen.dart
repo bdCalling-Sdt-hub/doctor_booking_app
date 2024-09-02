@@ -1,14 +1,10 @@
 import 'dart:io';
-
-import 'package:doctor_booking/controller/profile_controller/profile_controller.dart';
+import 'package:doctor_booking/view/screen/patient_screen/profile_screen/controller/profile_controller.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
-import 'package:doctor_booking/utils/app_const/app_const.dart';
-import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
-import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:doctor_booking/view/widgets/patient_nav_bar/patient_nav_bar.dart';
@@ -49,7 +45,7 @@ class AccountEditScreen extends StatelessWidget {
                       onTap: () {
                         profileController.selectImage();
                       },
-                      child: profileController.image.isNotEmpty
+                      child: profileController.imageFile.value.path.isNotEmpty
                           ? Container(
                               height: 100.h,
                               width: 100.w,
@@ -66,7 +62,7 @@ class AccountEditScreen extends StatelessWidget {
                               children: [
                                 CustomNetworkImage(
                                   boxShape: BoxShape.circle,
-                                  imageUrl: AppConstants.userNtr,
+                                  imageUrl: profileController.image.value,
                                   height: 100.h,
                                   width: 100.w,
                                 ),
@@ -74,13 +70,15 @@ class AccountEditScreen extends StatelessWidget {
                                     right: 0,
                                     bottom: 0,
                                     child: Container(
-                                      padding: const EdgeInsets.all(2),
-                                      decoration: const BoxDecoration(
-                                          color: AppColors.grayNormal,
-                                          shape: BoxShape.circle),
-                                      child: const CustomImage(
-                                          imageSrc: AppIcons.photoCamera),
-                                    ))
+                                        padding: const EdgeInsets.all(4),
+                                        decoration: const BoxDecoration(
+                                            color: AppColors.eyeColor,
+                                            shape: BoxShape.circle),
+                                        child: const Icon(Icons.photo)
+                                        // const CustomImage(
+                                        //     imageSrc: AppIcons.photoCamera),
+
+                                        ))
                               ],
                             )),
                 ),
@@ -88,33 +86,33 @@ class AccountEditScreen extends StatelessWidget {
                 ///=====================Full Name ================
                 CustomFormCard(
                     title: AppStrings.fullName,
-                    controller: TextEditingController()),
+                    controller: profileController.fullNameController.value),
 
                 ///=====================Email ================
                 CustomFormCard(
                     title: AppStrings.email,
-                    controller: TextEditingController()),
+                    controller: profileController.emailController.value),
 
                 ///=====================Phone Number ================
                 CustomFormCard(
                     title: AppStrings.phoneNumber,
-                    controller: TextEditingController()),
+                    controller: profileController.phoneNumberController.value),
 
                 ///=====================Date Of Birth================
                 CustomFormCard(
                     title: AppStrings.dateOfBirth,
-                    controller: TextEditingController()),
+                    controller: profileController.dateOfBirthController.value),
 
                 ///=====================Location================
                 CustomFormCard(
                     title: AppStrings.gender,
-                    controller: TextEditingController()),
+                    controller: profileController.ganderController.value),
 
                 ///===================Update Button===========
                 CustomButton(
                   title: AppStrings.update,
                   onTap: () {
-                    Get.back();
+                    profileController.editProfile();
                   },
                 )
               ],

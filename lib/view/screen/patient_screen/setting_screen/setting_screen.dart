@@ -1,4 +1,4 @@
-import 'package:doctor_booking/controller/profile_controller/profile_controller.dart';
+import 'package:doctor_booking/view/screen/patient_screen/profile_screen/controller/profile_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
@@ -42,8 +42,8 @@ class SettingScreen extends StatelessWidget {
                 text: AppStrings.deleteAccount,
                 leadingIcon: AppIcons.frame,
                 onTap: () {
-                  showDialogBox(
-                      context, profileController.retypePasswordController);
+                  showDialogBox(context,
+                      profileController.retypePasswordController.value);
                 },
                 isCevron: false),
           ],
@@ -53,6 +53,6 @@ class SettingScreen extends StatelessWidget {
   }
 
   void openDialog(context) {
-    showDialogBox(context, profileController.retypePasswordController);
+    showDialogBox(context, profileController.retypePasswordController.value);
   }
 }

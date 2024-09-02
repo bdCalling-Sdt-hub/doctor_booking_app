@@ -102,8 +102,8 @@ class AppRoutes {
   static const String doctorResetScreen = "/DoctorResetScreen";
   static const String appointmentInfoScreen = "/AppointmentInfoScreen";
   static const String personalInfoScreen = "/PersonalInfoScreen";
-  static const String professionalInfoScreen = "/ProfessionalInfoScreen"; 
-  static const String appointmentEditInfoScreen = "/appointmentEditInfoScreen"; 
+  static const String professionalInfoScreen = "/ProfessionalInfoScreen";
+  static const String appointmentEditInfoScreen = "/appointmentEditInfoScreen";
   static const String doctorEditPersonalProfileScreen =
       "/DoctorEditPersonalProfileScreen";
   static const String doctorEditProfessinalProfileScreen =
@@ -133,7 +133,7 @@ class AppRoutes {
     GetPage(
         name: appointmentHistoryScreen,
         page: () => const AppointmentHistoryScreen()),
-    GetPage(name: accountInfoScreen, page: () => const AccountInfoScreen()),
+    GetPage(name: accountInfoScreen, page: () => AccountInfoScreen()),
     GetPage(name: accountEditScreen, page: () => AccountEditScreen()),
 
     ///============================Home section================
@@ -208,6 +208,8 @@ class AppRoutes {
     //========================== patient details =================///
 
     GetPage(name: patientDetails2, page: () => PatientDetailsScreen()),
-    GetPage(name: appointmentEditInfoScreen, page: () => DoctorEditAppointmentScreen()),
+    GetPage(
+        name: appointmentEditInfoScreen,
+        page: () => DoctorEditAppointmentScreen()),
   ];
 }

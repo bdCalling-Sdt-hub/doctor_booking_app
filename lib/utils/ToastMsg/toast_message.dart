@@ -39,10 +39,10 @@ void showCustomSnackBar(String? message,
   }
 }
 
-void toastMessage({required String message}) {
+void toastMessage({required String message, Color colors = Colors.red}) {
   Fluttertoast.showToast(
     msg: message,
-    backgroundColor: Colors.red,
+    backgroundColor: colors,
     textColor: Colors.white,
     gravity: ToastGravity.BOTTOM,
     toastLength: Toast.LENGTH_LONG,
