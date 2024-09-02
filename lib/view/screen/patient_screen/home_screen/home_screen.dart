@@ -186,7 +186,18 @@ class HomeScreen extends StatelessWidget {
                                   arguments: data);
                             },
                             child: CustomCard(
-                              imageSrc: "",
+                              favouriteOntap: () {
+                                generalController
+                                    .makeFavourite(docID: data.id ?? "")
+                                    .then((value) {
+                                  if (value) {
+                                    homeController.popuDocFavouList[index] =
+                                        !homeController.popuDocFavouList[index];
+                                  }
+                                });
+                              },
+                              isFavourite:
+                                  homeController.popuDocFavouList[index],
                               networkImageUrl:
                                   "${ApiUrl.baseUrl}/${data.img ?? ""}",
                               name: data.name ?? "",
@@ -226,7 +237,20 @@ class HomeScreen extends StatelessWidget {
                                   arguments: data);
                             },
                             child: CustomCard(
-                              imageSrc: "",
+                              isFavourite:
+                                  homeController.recomemdedDocFavouList[index],
+                              favouriteOntap: () {
+                                generalController
+                                    .makeFavourite(docID: data.id ?? "")
+                                    .then((value) {
+                                  if (value) {
+                                    homeController
+                                            .recomemdedDocFavouList[index] =
+                                        !homeController
+                                            .recomemdedDocFavouList[index];
+                                  }
+                                });
+                              },
                               networkImageUrl:
                                   "${ApiUrl.baseUrl}/${data.img ?? ""}",
                               name: data.name ?? "",

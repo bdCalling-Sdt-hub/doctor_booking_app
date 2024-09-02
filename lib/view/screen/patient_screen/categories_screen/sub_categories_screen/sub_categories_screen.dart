@@ -1,7 +1,6 @@
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
-import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_card/custom_card.dart';
@@ -31,7 +30,10 @@ class SubCategoriesScreen extends StatelessWidget {
                 Get.toNamed(AppRoutes.specialistProfile);
               },
               child: CustomCard(
-                imageSrc: AppIcons.favoriteUnselected,
+                favouriteOntap: () {
+                                
+                              },
+            
                 networkImageUrl: AppConstants.userNtr,
                 name: 'Jenny Wilson',
                 profession: 'Gynecologists',

@@ -1,4 +1,48 @@
-class PopularDoctorDatum {
+class FavouriteDocDatum {
+  String? id;
+  DoctorId? doctorId;
+  String? userId;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  int? v;
+
+  FavouriteDocDatum({
+    this.id,
+    this.doctorId,
+    this.userId,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
+
+  factory FavouriteDocDatum.fromJson(Map<String, dynamic> json) =>
+      FavouriteDocDatum(
+        id: json["_id"],
+        doctorId: json["doctorId"] == null
+            ? null
+            : DoctorId.fromJson(json["doctorId"]),
+        userId: json["userId"],
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
+        v: json["__v"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "doctorId": doctorId?.toJson(),
+        "userId": userId,
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
+        "__v": v,
+      };
+}
+
+class DoctorId {
+  int? appointmentFee;
   String? id;
   String? img;
   String? name;
@@ -12,8 +56,6 @@ class PopularDoctorDatum {
   bool? block;
   String? role;
   bool? verified;
-  bool? isFavorite;
-
   int? access;
   AvailableDays? availableDays;
   AvailableFor? availableFor;
@@ -28,7 +70,8 @@ class PopularDoctorDatum {
   DateTime? updatedAt;
   int? v;
 
-  PopularDoctorDatum({
+  DoctorId({
+    this.appointmentFee,
     this.id,
     this.img,
     this.name,
@@ -38,7 +81,6 @@ class PopularDoctorDatum {
     this.phone,
     this.password,
     this.provider,
-    this.isFavorite,
     this.gender,
     this.block,
     this.role,
@@ -58,8 +100,8 @@ class PopularDoctorDatum {
     this.v,
   });
 
-  factory PopularDoctorDatum.fromJson(Map<String, dynamic> json) =>
-      PopularDoctorDatum(
+  factory DoctorId.fromJson(Map<String, dynamic> json) => DoctorId(
+        appointmentFee: json["appointment_fee"],
         id: json["_id"],
         img: json["img"],
         name: json["name"],
@@ -75,7 +117,6 @@ class PopularDoctorDatum {
         block: json["block"],
         role: json["role"],
         verified: json["verified"],
-        isFavorite: json["isFavorite"],
         access: json["access"],
         availableDays: json["available_days"] == null
             ? null
@@ -100,6 +141,7 @@ class PopularDoctorDatum {
       );
 
   Map<String, dynamic> toJson() => {
+        "appointment_fee": appointmentFee,
         "_id": id,
         "img": img,
         "name": name,
@@ -190,27 +232,6 @@ class AvailableDays {
         "sunday":
             sunday == null ? [] : List<dynamic>.from(sunday!.map((x) => x)),
       };
-
-  List<dynamic> getTimesForDay(String day) {
-    switch (day.toLowerCase()) {
-      case 'mon':
-        return monday ?? [];
-      case 'tue':
-        return tuesday ?? [];
-      case 'wed':
-        return wednesday ?? [];
-      case 'thu':
-        return thursday ?? [];
-      case 'fri':
-        return friday ?? [];
-      case 'sat':
-        return saturday ?? [];
-      case 'sun':
-        return sunday ?? [];
-      default:
-        return [];
-    }
-  }
 }
 
 class AvailableFor {
