@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
@@ -5,6 +6,7 @@ import 'package:doctor_booking/model/terms_model/terms_model.dart';
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
+import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/inner_widget/appointments_history_dialog.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/popular_doctor.dart';
@@ -302,6 +304,27 @@ class GeneralController extends GetxController with GetxServiceMixin {
         return availableFor.sunday ?? "";
       default:
         return "Not Found";
+    }
+  }
+
+  ///==================== Make Favourite ====================
+
+  Future<bool> makeFavourite({required String docID}) async {
+    showPopUpLoader();
+
+    var response = await ApiClient.postData(
+      ApiUrl.favourite,
+      jsonEncode({"doctorId": docID}),
+    );
+
+    if (response.statusCode == 200) {
+      toastMessage(message: response.body["message"], colors: Colors.green);
+      navigator?.pop();
+      return true;
+    } else {
+      navigator?.pop();
+      ApiChecker.checkApi(response);
+      return false;
     }
   }
 

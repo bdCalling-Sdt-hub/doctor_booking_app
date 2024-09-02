@@ -3,8 +3,6 @@ import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/helper/time_converter/time_converter.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
-import 'package:doctor_booking/utils/app_const/app_const.dart';
-import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/controller/paitent_home_controller.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/popular_doctor.dart';
@@ -44,6 +42,7 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
 
   @override
   void initState() {
+    homeController.getAllDoc(query: data.specialization ?? "");
     generalController.getAvailableTimesForSelectedDay(
         selectedDay:
             generalController.next7Days[_selectedDateIndex]["Day"] ?? "",
@@ -358,7 +357,7 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                 height: 12.h,
               ),
 
-              ///==============================Similar Doctor=========================
+              ///============================== Similar Doctor =========================
               const CustomRow(
                   title: AppStrings.similarSpecialist,
                   subtitle: AppStrings.viewAll),
@@ -368,13 +367,15 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: List.generate(4, (index) {
+                  children: List.generate(homeController.allDoctorList.length,
+                      (index) {
+                    var data = homeController.allDoctorList[index];
                     return CustomCard(
-                        imageSrc: AppIcons.favoriteUnselected,
-                        networkImageUrl: AppConstants.userNtr,
-                        name: 'Bessie Cooper',
-                        profession: 'Cardiologist',
-                        rating: "4");
+                        favouriteOntap: () {},
+                        networkImageUrl: "${ApiUrl.baseUrl}/${data.img ?? ""}",
+                        name: data.name ?? "",
+                        profession: data.specialization ?? "",
+                        rating: data.rating.toString());
                   }),
                 ),
               ),

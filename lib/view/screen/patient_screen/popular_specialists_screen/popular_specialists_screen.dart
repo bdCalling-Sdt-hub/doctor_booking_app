@@ -35,7 +35,8 @@ class PopularSpecialistsScreen extends StatelessWidget {
                   Get.toNamed(AppRoutes.specialistProfile, arguments: data);
                 },
                 child: CustomCard(
-                  imageSrc: "",
+                  favouriteOntap: () {},
+                
                   networkImageUrl: "${ApiUrl.baseUrl}/${data.img ?? ""}",
                   name: data.name ?? "",
                   profession: data.specialization ?? "",

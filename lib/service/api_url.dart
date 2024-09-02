@@ -1,8 +1,8 @@
 class ApiUrl {
-  static const baseUrl = "http://192.168.10.6:5000";
+  static const baseUrl = "http://115.127.156.13:5000";
 
   //============================ Image base url ===========
-  static const imageBaseUrl = 'http://192.168.10.6:5000/';
+  static const imageBaseUrl = 'http://115.127.156.13:5000';
 
   ///=============================== Auth Section ==============================
 
@@ -12,7 +12,8 @@ class ApiUrl {
   static const varifyCode = '/auth/verify-code';
 
   ///========================== Paitent Section ============================
-//=============== Home ================
+
+  //=============== Home ================
 
   static const category = '/category';
   static const banner = '/banner/get-banners';
@@ -20,9 +21,19 @@ class ApiUrl {
   static const recomendedDoc = '/doctors/recommended-doctors';
   static reviews({required String id}) => '/review/get-reviews?receiverId=$id';
 
+  //=========== All Doctors ==========
+  static allDoctors({required String specialization}) =>
+      '/doctors?specialization=$specialization';
+
+  //=========== Single Doctors ==========
+  static singleDoctors({required String docID}) =>
+      '/doctors/single-doctor/$docID';
+
   //============ Profile ==========
   static const getProfile = '/auth/profile';
   static const updateProfile = '/auth/update-user';
+  static const favourite = '/favorite/add-remove-favorite';
+  static const getFavourite = '/favorite/get-favorite-doctors';
 
   ///=============================== Doctor Section ==============================
   static const profile = '/auth/profile';

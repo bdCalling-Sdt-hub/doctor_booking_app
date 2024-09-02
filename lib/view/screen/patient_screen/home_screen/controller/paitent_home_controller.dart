@@ -5,6 +5,7 @@ import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_images/app_images.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/banner_model.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/category_model.dart';
+import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/favourite_doc_model.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/popular_doctor.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/review_model.dart';
 import 'package:flutter/widgets.dart';
@@ -23,6 +24,12 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
   final recomemdedDocLoading = Status.loading.obs;
   void recomemdedDocLoadingMethod(Status value) =>
       recomemdedDocLoading.value = value;
+
+  final favouriteLoading = Status.loading.obs;
+  void favouriteLoadingMethod(Status value) => favouriteLoading.value = value;
+
+  final allDocLoading = Status.loading.obs;
+  void allDocLoadingMethod(Status value) => allDocLoading.value = value;
 
   RxInt bannerIndex = 0.obs;
   final List<String> bannerImg = [
@@ -97,6 +104,7 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
   ///================= Get Popular Doctor ===============
 
   RxList<PopularDoctorDatum> popularDoctorList = <PopularDoctorDatum>[].obs;
+  RxList<bool> popuDocFavouList = <bool>[].obs;
 
   getPopularDoctor() async {
     popularDocLoadingMethod(Status.loading);
@@ -106,6 +114,10 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
     if (response.statusCode == 200) {
       popularDoctorList.value = List<PopularDoctorDatum>.from(
           response.body["data"].map((x) => PopularDoctorDatum.fromJson(x)));
+
+      for (int i = 0; i < popularDoctorList.length; i++) {
+        popuDocFavouList.add(popularDoctorList[i].isFavorite ?? false);
+      }
 
       popularDocLoadingMethod(Status.completed);
     } else {
@@ -121,6 +133,7 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
   ///==================== Get recomemded Doctors ====================
 
   RxList<PopularDoctorDatum> recomemdedDoctorList = <PopularDoctorDatum>[].obs;
+  RxList<bool> recomemdedDocFavouList = <bool>[].obs;
 
   getrecomendedDoc() async {
     recomemdedDocLoadingMethod(Status.loading);
@@ -130,6 +143,10 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
     if (response.statusCode == 200) {
       recomemdedDoctorList.value = List<PopularDoctorDatum>.from(
           response.body["data"].map((x) => PopularDoctorDatum.fromJson(x)));
+
+      for (int i = 0; i < recomemdedDoctorList.length; i++) {
+        recomemdedDocFavouList.add(recomemdedDoctorList[i].isFavorite ?? false);
+      }
 
       recomemdedDocLoadingMethod(Status.completed);
     } else {
@@ -156,12 +173,64 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
     }
   }
 
+  ///================= Get favourite Doctor ===============
+  RxList<FavouriteDocDatum> favouriteDocList = <FavouriteDocDatum>[].obs;
+
+  getFavouriteDocList() async {
+    favouriteLoadingMethod(Status.loading);
+
+    var response = await ApiClient.getData(ApiUrl.getFavourite);
+
+    if (response.statusCode == 200) {
+      favouriteDocList.value = List<FavouriteDocDatum>.from(
+          response.body["data"].map((x) => FavouriteDocDatum.fromJson(x)));
+      favouriteLoadingMethod(Status.completed);
+    } else {
+      if (response.statusText == ApiClient.noInternetMessage) {
+        favouriteLoadingMethod(Status.internetError);
+      } else {
+        favouriteLoadingMethod(Status.error);
+      }
+      ApiChecker.checkApi(response);
+    }
+  }
+
+  ///==================== All Doctor List ====================
+  RxList<PopularDoctorDatum> allDoctorList = <PopularDoctorDatum>[].obs;
+  RxList<bool> allDocFavouList = <bool>[].obs;
+
+  getAllDoc({required String query}) async {
+    allDocLoadingMethod(Status.loading);
+
+    var response =
+        await ApiClient.getData(ApiUrl.allDoctors(specialization: query));
+
+    if (response.statusCode == 200) {
+      allDoctorList.value = List<PopularDoctorDatum>.from(
+          response.body["data"].map((x) => PopularDoctorDatum.fromJson(x)));
+
+      for (int i = 0; i < allDoctorList.length; i++) {
+        allDocFavouList.add(allDoctorList[i].isFavorite ?? false);
+      }
+
+      allDocLoadingMethod(Status.completed);
+    } else {
+      if (response.statusText == ApiClient.noInternetMessage) {
+        allDocLoadingMethod(Status.internetError);
+      } else {
+        allDocLoadingMethod(Status.error);
+      }
+      ApiChecker.checkApi(response);
+    }
+  }
+
   ///============ All Methods ============
   allMethods() {
     getCategory();
     getBanner();
     getPopularDoctor();
     getrecomendedDoc();
+    getFavouriteDocList();
   }
 
   @override
