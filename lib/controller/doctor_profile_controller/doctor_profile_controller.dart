@@ -244,21 +244,7 @@ class DoctorProfileController extends GetxController {
       refresh();
       ApiChecker.checkApi(response);
     }
-  } 
-
-         //====================================== Updater Doctor Appointment ==================================//       
-
-
-      Future<void> updateDoctorAppointment()async{ 
-
-        
-         
-
-       }
-
-
-
-
+  }
 
   ///=============================== Doctor Avalible day list init ===================================///
 
@@ -293,7 +279,7 @@ class DoctorProfileController extends GetxController {
     if (tuedayAvailableList.isNotEmpty) {
       tuesdayStartTimeController.value.text = tuedayAvailableList[0];
       tuesdayEndTimeController.value.text =
-          mondayAvailableList[mondayAvailableList.length - 1];
+          tuedayAvailableList[tuedayAvailableList.length - 1];
     }
     //========================= Wed day start time and end time init =====================
     if (weddayAvailableList.isNotEmpty) {
@@ -319,6 +305,14 @@ class DoctorProfileController extends GetxController {
       saturdayEndTimeController.value.text =
           satdayAvailableList[satdayAvailableList.length - 1];
     }
+
+    sundayTypeController.value.text = model.availableFor?.sunday ?? '';
+    mondayTypeController.value.text = model.availableFor?.monday ?? '';
+    tuesdayTypeController.value.text = model.availableFor?.tuesday ?? '';
+    weddayTypeController.value.text = model.availableFor?.wednesday ?? '';
+    thursdayTypeController.value.text = model.availableFor?.thursday ?? '';
+    fridayTypeController.value.text = model.availableFor?.friday ?? '';
+    saturdayTypeController.value.text = model.availableFor?.saturday ?? '';
   }
 
   ///=============================================== Doctor appointment edit ==================================//
@@ -367,7 +361,7 @@ class DoctorProfileController extends GetxController {
       TextEditingController().obs;
   Rx<TextEditingController> saturdayTypeController =
       TextEditingController().obs;
-//============================ Appoint get start time and end time get =====================//    
+//============================ Appoint get start time and end time get =====================//
   getTime({
     required int day,
     required int num,
@@ -424,6 +418,80 @@ class DoctorProfileController extends GetxController {
       } else if (day == 7 && num == 2) {
         saturdayEndTimeController.value.text = formatDateTime;
       }
+    }
+  }
+
+  //====================================== Updater Doctor Appointment ==================================//
+  RxBool updateAppointmentLoading = false.obs;
+  Future<void> updateDoctorAppointment() async {
+    String id = await SharePrefsHelper.getString(AppConstants.id);
+    updateAppointmentLoading.value = true;
+    refresh();
+    Map<String, String> body = {
+      "available_days": jsonEncode({
+        "monday": {
+          "startTime": mondayStartTimeController.value.text,
+          "endTime": mondayEndTimeController.value.text
+        },
+        "tuesday": {
+          "startTime": tuesdayStartTimeController.value.text,
+          "endTime": tuesdayEndTimeController.value.text
+        },
+        "wednesday": {
+          "startTime": weddayStartTimeController.value.text,
+          "endTime": weddayEndTimeController.value.text
+        },
+        "thursday": {
+          "startTime": thursdayStartTimeController.value.text,
+          "endTime": thursdayEndTimeController.value.text
+        },
+        "friday": {
+          "startTime": fridayStartTimeController.value.text,
+          "endTime": fridayEndTimeController.value.text
+        },
+        "saturday": {
+          "startTime": saturdayStartTimeController.value.text,
+          "endTime": saturdayEndTimeController.value.text
+        },
+        "sunday": {
+          "startTime": sundayStartTimeController.value.text,
+          "endTime": sundayEndTimeController.value.text
+        }
+      }),
+      "available_for": jsonEncode({
+        "monday": mondayTypeController.value.text,
+        "tuesday": tuesdayTypeController.value.text,
+        "wednesday": weddayTypeController.value.text,
+        "thursday": thursdayTypeController.value.text,
+        "friday": fridayTypeController.value.text,
+        "saturday": saturdayTypeController.value.text,
+        "sunday": saturdayTypeController.value.text,
+      })
+    };
+
+    var response = await ApiClient.patchData(
+        "${ApiUrl.updateDoctorProfile}$id", jsonEncode(body));
+
+    if (response.statusCode == 200) {
+      getDoctorProfile();
+      updateAppointmentLoading.value = false;
+
+      refresh();
+      showCustomSnackBar(
+        response.body['message'],
+        getXSnackBar: false,
+        isError: false,
+      );
+
+      Get.back();
+    } else {
+      updateAppointmentLoading.value = false;
+      refresh();
+      if (response.statusText == ApiClient.noInternetMessage) {
+      } else {}
+      updateAppointmentLoading.value = false;
+      refresh();
+      ApiChecker.checkApi(response);
     }
   }
 
