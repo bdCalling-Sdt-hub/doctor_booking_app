@@ -19,7 +19,7 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: const CustomAppBar(
-        appBarContent: 'Appointment Info',
+        appBarContent: 'Edit Appointment Info',
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -27,6 +27,8 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
           child: Column(
             children: [
               CustomAppointmentInfo(
+                startTimeHintText: AppStrings.updateTime,
+                endTimeHintText: AppStrings.updateTime,
                 isClosed: profileController.sundayTypeController.value.text ==
                     AppStrings.weekend,
                 dayName: 'Sunday',
@@ -49,6 +51,8 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
               ///================================= Monday =============================
 
               CustomAppointmentInfo(
+                startTimeHintText: AppStrings.updateTime,
+                endTimeHintText: AppStrings.updateTime,
                 isClosed: profileController.mondayTypeController.value.text ==
                     AppStrings.weekend,
                 dayName: 'Monday',
@@ -71,6 +75,8 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
               ///================================= Tuesday =============================
 
               CustomAppointmentInfo(
+                startTimeHintText: AppStrings.updateTime,
+                endTimeHintText: AppStrings.updateTime,
                 isClosed: profileController.tuesdayTypeController.value.text ==
                     AppStrings.weekend,
                 dayName: 'Tuesday',
@@ -93,6 +99,8 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
               ///================================= Wednesday =============================
 
               CustomAppointmentInfo(
+                startTimeHintText: AppStrings.updateTime,
+                endTimeHintText: AppStrings.updateTime,
                 isClosed: profileController.weddayTypeController.value.text ==
                     AppStrings.weekend,
                 dayName: 'Wednesday',
@@ -115,6 +123,8 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
               ///================================= Thursday =============================
 
               CustomAppointmentInfo(
+                startTimeHintText: AppStrings.updateTime,
+                endTimeHintText: AppStrings.updateTime,
                 isClosed: profileController.thursdayTypeController.value.text ==
                     AppStrings.weekend,
                 dayName: 'Thursday',
@@ -139,6 +149,8 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
               ///================================= Friday =============================
 
               CustomAppointmentInfo(
+                startTimeHintText: AppStrings.updateTime,
+                endTimeHintText: AppStrings.updateTime,
                 isClosed: profileController.fridayTypeController.value.text ==
                     AppStrings.weekend,
                 dayName: 'Friday',
@@ -161,6 +173,8 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
               ///================================= Saturday =============================
 
               CustomAppointmentInfo(
+                startTimeHintText: AppStrings.updateTime,
+                endTimeHintText: AppStrings.updateTime,
                 isClosed: profileController.saturdayTypeController.value.text ==
                     AppStrings.weekend,
                 dayName: 'Saturday',

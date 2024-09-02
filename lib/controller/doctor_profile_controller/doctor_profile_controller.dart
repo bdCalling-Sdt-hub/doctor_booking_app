@@ -244,7 +244,21 @@ class DoctorProfileController extends GetxController {
       refresh();
       ApiChecker.checkApi(response);
     }
-  }
+  } 
+
+         //====================================== Updater Doctor Appointment ==================================//       
+
+
+      Future<void> updateDoctorAppointment()async{ 
+
+        
+         
+
+       }
+
+
+
+
 
   ///=============================== Doctor Avalible day list init ===================================///
 
@@ -353,7 +367,7 @@ class DoctorProfileController extends GetxController {
       TextEditingController().obs;
   Rx<TextEditingController> saturdayTypeController =
       TextEditingController().obs;
-
+//============================ Appoint get start time and end time get =====================//    
   getTime({
     required int day,
     required int num,

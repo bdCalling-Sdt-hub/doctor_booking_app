@@ -166,6 +166,7 @@ class AppStrings {
   static const String favorite = 'Favorite';
   static const String appointments = 'Appointments';
   static const String update = 'Update';
+  static const String updateTime = 'Update time';
 
   ///================================Doctor Section ========================
   static const String personalInfo = 'Personal Info';
