@@ -60,11 +60,32 @@ class DoctorScheduleController extends GetxController {
       ApiChecker.checkApi(response);
     }
   }
+  //============================== Past Appointment ===============================//
+
+  final String pastAppointmentUrl = "${ApiUrl.doctorAppointment}?type=past";
+  RxList<AppointmentModel> pastAppointment = <AppointmentModel>[].obs;
+
+  Future<void> getPastDoctorAppointment() async {
+    var response = await ApiClient.getData(pastAppointmentUrl);
+
+    if (response.statusCode == 200) {
+      pastAppointment.value = List<AppointmentModel>.from(
+          response.body["data"].map((x) => AppointmentModel.fromJson(x)));
+    } else {
+      if (response.statusText == ApiClient.noInternetMessage) {
+        setRxRequestStatus(Status.internetError);
+      } else {
+        setRxRequestStatus(Status.error);
+      }
+      ApiChecker.checkApi(response);
+    }
+  }
 
   @override
   void onInit() {
     getAllDoctorAppointment();
     getPendingDoctorAppointment();
+    getPastDoctorAppointment();
     super.onInit();
   }
 }
