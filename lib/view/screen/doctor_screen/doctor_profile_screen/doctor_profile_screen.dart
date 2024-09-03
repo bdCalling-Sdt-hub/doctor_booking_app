@@ -4,7 +4,7 @@ import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
-import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/custom_appointment_info.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/widget/custom_appointment_info.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
@@ -406,7 +406,9 @@ class DoctorProfileScreen extends StatelessWidget {
                               : const SizedBox(),
 
                           ///================================= Wednesday =============================
-                          doctorProfileController.weddayAvailableList.isNotEmpty
+                          doctorProfileController
+                                      .weddayTypeController.value.text !=
+                                  AppStrings.weekend
                               ? CustomAppointmentInfo(
                                   dayName: 'Wednesday',
                                   startTimeTap: () async {},

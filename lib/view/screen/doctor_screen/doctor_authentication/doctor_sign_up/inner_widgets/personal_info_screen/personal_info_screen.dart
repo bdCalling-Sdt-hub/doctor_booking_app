@@ -13,22 +13,32 @@ class PersonalInfoScreen extends StatelessWidget {
 
   final DoctorAuthController doctorAuthController =
       Get.find<DoctorAuthController>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.whiteNormal,
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ///==============================Your Name ======================
-            CustomFormCard(
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: [
+              ///==============================Your Name ======================
+              CustomFormCard(
                 hasBackgroundColor: true,
                 hintText: AppStrings.yourNameHere,
                 title: AppStrings.yourName,
-                controller: doctorAuthController.doctorNameController.value),
+                controller: doctorAuthController.doctorNameController.value,
+                validator: (value) {
+                  if (value == null) {
+                    return AppStrings.fieldCantBeEmpty;
+                  }
+                  return null;
+                },
+              ),
 
-            ///==============================Date of birth ======================
-            CustomFormCard(
+              ///==============================Date of birth ======================
+              CustomFormCard(
                 readOnly: true,
                 onTap: () async {
                   final DateTime? pickDate = await showDatePicker(
@@ -47,58 +57,101 @@ class PersonalInfoScreen extends StatelessWidget {
                 hintText: 'MM/DD/YYYY',
                 title: AppStrings.dateOfBirth,
                 controller:
-                    doctorAuthController.doctorDateOfBirthController.value),
+                    doctorAuthController.doctorDateOfBirthController.value,
+                validator: (value) {
+                  if (value == null) {
+                    return AppStrings.fieldCantBeEmpty;
+                  }
+                  return null;
+                },
+              ),
 
-            ///==============================Email ======================
-            CustomFormCard(
+              ///==============================Email ======================
+              CustomFormCard(
                 hasBackgroundColor: true,
                 hintText: AppStrings.yourMailHere,
                 title: AppStrings.email,
-                controller: doctorAuthController.doctorEmailController.value),
+                controller: doctorAuthController.doctorEmailController.value,
+                validator: (value) {
+                  if (value == null) {
+                    return AppStrings.fieldCantBeEmpty;
+                  }
+                  return null;
+                },
+              ),
 
-            ///==============================phone Number ======================
-            CustomFormCard(
+              ///==============================phone Number ======================
+              CustomFormCard(
                 hasBackgroundColor: true,
                 hintText: AppStrings.yourPhoneNumberHere,
                 title: AppStrings.phoneNumber,
                 controller:
-                    doctorAuthController.doctorPhoneNumberController.value),
+                    doctorAuthController.doctorPhoneNumberController.value,
+                validator: (value) {
+                  if (value == null) {
+                    return AppStrings.fieldCantBeEmpty;
+                  }
+                  return null;
+                },
+              ),
 
-            ///==============================Location ======================
-            CustomFormCard(
+              ///==============================Location ======================
+              CustomFormCard(
                 hasBackgroundColor: true,
                 hintText: AppStrings.typeYourLocationHere,
                 title: AppStrings.location,
-                controller:
-                    doctorAuthController.doctorLocationController.value),
+                controller: doctorAuthController.doctorLocationController.value,
+                validator: (value) {
+                  if (value == null) {
+                    return AppStrings.fieldCantBeEmpty;
+                  }
+                  return null;
+                },
+              ),
 
-            ///==============================password ======================
-            CustomFormCard(
+              ///==============================password ======================
+              CustomFormCard(
                 hasBackgroundColor: true,
                 hintText: AppStrings.enterPassword,
                 title: AppStrings.password,
-                controller:
-                    doctorAuthController.doctorPasswordController.value),
+                controller: doctorAuthController.doctorPasswordController.value,
+                validator: (value) {
+                  if (value == null) {
+                    return AppStrings.fieldCantBeEmpty;
+                  }
+                  return null;
+                },
+              ),
 
-            ///==============================Confirm Password  ======================
-            CustomFormCard(
+              ///==============================Confirm Password  ======================
+              CustomFormCard(
                 hasBackgroundColor: true,
                 hintText: AppStrings.enterPassword,
                 title: AppStrings.confirmPassword,
                 controller:
-                    doctorAuthController.doctorConfirmPasswordController.value),
+                    doctorAuthController.doctorConfirmPasswordController.value,
+                validator: (value) {
+                  if (value == null) {
+                    return AppStrings.fieldCantBeEmpty;
+                  }
+                  return null;
+                },
+              ),
 
-            ///================================Next button====================
-            CustomButton(
-              onTap: () {
-                doctorAuthController.updateStep(1);
-              },
-              title: AppStrings.next,
-            ),
-            SizedBox(
-              height: 20.h,
-            )
-          ],
+              ///================================Next button====================
+              CustomButton(
+                onTap: () {
+                  if (formKey.currentState!.validate()) {
+                    doctorAuthController.updateStep(1);
+                  }
+                },
+                title: AppStrings.next,
+              ),
+              SizedBox(
+                height: 20.h,
+              )
+            ],
+          ),
         ),
       ),
     );

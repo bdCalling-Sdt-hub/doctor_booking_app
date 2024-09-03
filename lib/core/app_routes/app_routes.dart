@@ -2,6 +2,7 @@ import 'package:doctor_booking/view/screen/choose_screen/choose_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/all_patient_list_screean/all_patient_list_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/doctor_appointments_history.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_forget_password_screen/doctor_forget_password_screen.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_otp_screen/doctor_otp_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_reset_password_screen/doctor_reset_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/doctor_sign_up.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/appointment_info_screen.dart';
@@ -95,6 +96,7 @@ class AppRoutes {
   //===================================home Section====================
   static const String doctorHomeScreen = "/DoctorHomeScreen";
   static const String patientDetails = "/PatientDetails";
+  static const String doctorSignupOtpScreen = "/DoctorSignupOtpScreen";
 
   //=============== Doctor edit profile section ===========-===//
   static const String doctorSignUp = "/DoctorSignUp";
@@ -213,6 +215,7 @@ class AppRoutes {
     //========================== patient details =================///
 
     GetPage(name: patientDetails2, page: () => PatientDetailsScreen()),
+    GetPage(name: doctorSignupOtpScreen, page: () => SignUpDoctorOtpScreen()),
     GetPage(
         name: appointmentEditInfoScreen,
         page: () => DoctorEditAppointmentScreen()),

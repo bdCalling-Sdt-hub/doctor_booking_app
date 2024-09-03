@@ -259,7 +259,10 @@ class DoctorProfileController extends GetxController {
     sundayAvailableList.value = model.availableDays?.sunday ?? [];
     mondayAvailableList.value = model.availableDays?.monday ?? [];
     tuedayAvailableList.value = model.availableDays?.tuesday ?? [];
-    weddayAvailableList.value = model.availableDays?.wednesday ?? [];
+    if (model.availableDays?.wednesday != null) {
+      weddayAvailableList.value = model.availableDays?.wednesday ?? [];
+    }
+
     thudayAvailableList.value = model.availableDays?.thursday ?? [];
     fridayAvailableList.value = model.availableDays?.friday ?? [];
     satdayAvailableList.value = model.availableDays?.saturday ?? [];

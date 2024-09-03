@@ -1,7 +1,7 @@
 import 'package:doctor_booking/controller/doctor_profile_controller/doctor_profile_controller.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
-import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/custom_appointment_info.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/widget/custom_appointment_info.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
@@ -48,6 +48,7 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
                     if (value == AppStrings.weekend) {
                       profileController.sundayStartTimeController.value.clear();
                       profileController.sundayEndTimeController.value.clear();
+                      profileController.sundayAvailableList.clear();
                     }
                   },
                   typeHintText:
@@ -79,12 +80,15 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
                     if (value == AppStrings.weekend) {
                       profileController.mondayStartTimeController.value.clear();
                       profileController.mondayEndTimeController.value.clear();
+                      profileController.mondayAvailableList.clear();
                     }
                   },
                   startController:
                       profileController.mondayStartTimeController.value,
                   endController:
                       profileController.mondayEndTimeController.value,
+                  typeHintText:
+                      profileController.mondayTypeController.value.text,
                 ),
 
                 ///================================= Tuesday =============================
@@ -110,12 +114,15 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
                       profileController.tuesdayStartTimeController.value
                           .clear();
                       profileController.tuesdayEndTimeController.value.clear();
+                      profileController.tuedayAvailableList.clear();
                     }
                   },
                   startController:
                       profileController.tuesdayStartTimeController.value,
                   endController:
                       profileController.tuesdayEndTimeController.value,
+                  typeHintText:
+                      profileController.tuesdayTypeController.value.text,
                 ),
 
                 ///================================= Wednesday =============================
@@ -139,12 +146,15 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
                     if (value == AppStrings.weekend) {
                       profileController.weddayStartTimeController.value.clear();
                       profileController.weddayEndTimeController.value.clear();
+                      profileController.weddayAvailableList.clear();
                     }
                   },
                   startController:
                       profileController.weddayStartTimeController.value,
                   endController:
                       profileController.weddayEndTimeController.value,
+                  typeHintText:
+                      profileController.weddayTypeController.value.text,
                 ),
 
                 ///================================= Thursday =============================
@@ -172,12 +182,15 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
                       profileController.thursdayStartTimeController.value
                           .clear();
                       profileController.thursdayEndTimeController.value.clear();
+                      profileController.thudayAvailableList.clear();
                     }
                   },
                   startController:
                       profileController.thursdayStartTimeController.value,
                   endController:
                       profileController.thursdayEndTimeController.value,
+                  typeHintText:
+                      profileController.thursdayTypeController.value.text,
                 ),
 
                 ///================================= Friday =============================
@@ -201,12 +214,15 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
                     if (value == AppStrings.weekend) {
                       profileController.fridayStartTimeController.value.clear();
                       profileController.fridayEndTimeController.value.clear();
+                      profileController.fridayAvailableList.clear();
                     }
                   },
                   startController:
                       profileController.fridayStartTimeController.value,
                   endController:
                       profileController.fridayEndTimeController.value,
+                  typeHintText:
+                      profileController.fridayTypeController.value.text,
                 ),
 
                 ///================================= Saturday =============================
@@ -232,19 +248,21 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
                       profileController.saturdayStartTimeController.value
                           .clear();
                       profileController.saturdayEndTimeController.value.clear();
+                      profileController.satdayAvailableList.clear();
                     }
                   },
                   startController:
                       profileController.saturdayStartTimeController.value,
                   endController:
                       profileController.saturdayEndTimeController.value,
+                  typeHintText:
+                      profileController.saturdayTypeController.value.text,
                 ),
                 profileController.updateAppointmentLoading.value
-                    ? const CustomLoader()
+                    ? const CustomLoader() 
+                    //========================= Update Button ========================//
                     : CustomButton(
                         onTap: () async {
-                          debugPrint(
-                              '==============================click==========================');
                           await profileController.updateDoctorAppointment();
                         },
                         title: AppStrings.update,

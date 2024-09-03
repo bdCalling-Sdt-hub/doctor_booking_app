@@ -8,6 +8,7 @@ import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
+import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -150,14 +151,16 @@ class ProfessionalInfoScreen extends StatelessWidget {
 
               ///================================= Sign up Button ============================
 
-              CustomButton(
-                onTap: () {
-                  // Get.toNamed(AppRoutes.doctorHomeScreen);
+              doctorAuthController.signUpLoading.value
+                  ? const CustomLoader()
+                  : CustomButton(
+                      onTap: () {
+                        // Get.toNamed(AppRoutes.doctorHomeScreen);
 
-                  doctorAuthController.doctorSignUp();
-                },
-                title: AppStrings.signUp,
-              ),
+                        doctorAuthController.doctorSignUp();
+                      },
+                      title: AppStrings.signUp,
+                    ),
               SizedBox(
                 height: 10.h,
               ),
