@@ -1,17 +1,15 @@
 import 'package:doctor_booking/controller/doctor_schedule_controller/doctor_schedule_controller.dart';
-import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
-import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/inner_widget.dart/schedule_patient_list.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
-import 'package:doctor_booking/view/widgets/custom_calender/custom_calender.dart';
 import 'package:doctor_booking/view/widgets/custom_doctor_card.dart';
 import 'package:doctor_booking/view/widgets/custom_tab_selected/custom_tab_selected.dart';
 import 'package:doctor_booking/view/widgets/doctor_nav_bar/doctor_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ScheduleScreen extends StatelessWidget {
   ScheduleScreen({super.key});
@@ -37,35 +35,35 @@ class ScheduleScreen extends StatelessWidget {
                 children: [
                   //========================== Calender =========================
 
-                  CustomCalender(
-                    minDate: DateTime.now(),
-                    maxDate: DateTime(2090),
-                    initialDate: DateTime.now(),
-                    onDateChange: (date) {},
-                    activeBackgroundColor: AppColors.blackNormal,
-                    monthColor: AppColors.blackNormal,
-                    showNavigationButtons: false,
-                    inactiveBackgroundColor: AppColors.whiteDarkHover,
-                    weekStartFrom: WeekStartFrom.sunday,
-                    inactiveTextColor: AppColors.blackNormal,
-                    horizontalPadding: 10.w,
-                  ),
+                  // CustomCalender(
+                  //   minDate: DateTime.now(),
+                  //   maxDate: DateTime(2090),
+                  //   initialDate: DateTime.now(),
+                  //   onDateChange: (date) {},
+                  //   activeBackgroundColor: AppColors.blackNormal,
+                  //   monthColor: AppColors.blackNormal,
+                  //   showNavigationButtons: false,
+                  //   inactiveBackgroundColor: AppColors.whiteDarkHover,
+                  //   weekStartFrom: WeekStartFrom.sunday,
+                  //   inactiveTextColor: AppColors.blackNormal,
+                  //   horizontalPadding: 10.w,
+                  // ),
 
 //================= patient liat ================//
 
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  SchedulePatientList(
-                    patientImageList: const [],
-                    onTap: () {
-                      Get.toNamed(AppRoutes.allPatientListScreen);
-                    },
-                  ),
+                  // SizedBox(
+                  //   height: 10.h,
+                  // ),
+                  // SchedulePatientList(
+                  //   patientImageList: const [],
+                  //   onTap: () {
+                  //     Get.toNamed(AppRoutes.allPatientListScreen);
+                  //   },
+                  // ),
 
-                  SizedBox(
-                    height: 10.h,
-                  ),
+                  // SizedBox(
+                  //   height: 10.h,
+                  // ),
 
                   //============================ Tab view ========================//
                   Obx(() {
@@ -86,50 +84,73 @@ class ScheduleScreen extends StatelessWidget {
                   ),
                   ////========================= patient List ====================//
                   Obx(() {
-                    return scheduleController.tabCurrentIndex.value == 0
-                        ? Column(
-                            children: List.generate(
-                              5,
-                              (index) {
-                                return CustomDoctorCard(
-                                  imageUrl: AppConstants.userNtr,
-                                  patentName: 'Heart Disease',
-                                  time: '05-12-24 (12:00 AM)',
-                                  loacation: '3 rue Paul Bert 75011 Paris',
-                                  onTap: () {},
-                                );
-                              },
-                            ),
-                          )
-                        : scheduleController.tabCurrentIndex.value == 1
-                            ? Column(
-                                children: List.generate(
-                                  5,
-                                  (index) {
-                                    return CustomDoctorCard(
-                                      imageUrl: AppConstants.userNtr,
-                                      patentName: 'Masum Raj',
-                                      time: '05-12-24 (12:00 AM)',
-                                      loacation: '3 rue Paul Bert 75011 Paris',
-                                      onTap: () {},
-                                    );
-                                  },
-                                ),
-                              )
-                            : Column(
-                                children: List.generate(
-                                  5,
-                                  (index) {
-                                    return CustomDoctorCard(
-                                      imageUrl: AppConstants.userNtr,
-                                      patentName: 'Siyam ',
-                                      time: '05-12-24 (12:00 AM)',
-                                      loacation: '3 rue Paul Bert 75011 Paris',
-                                      onTap: () {},
-                                    );
-                                  },
-                                ),
-                              );
+                    if (scheduleController.tabCurrentIndex.value == 0) {
+                      return Column(
+                          children: List.generate(
+                        scheduleController.appointMentAllList.length,
+                        (index) {
+                          return CustomDoctorCard(
+                            imageUrl: scheduleController
+                                    .appointMentAllList[index].userId?.img ??
+                                '',
+                            patentName: scheduleController
+                                    .appointMentAllList[index].userId?.name ??
+                                '',
+                            time:
+                                '${scheduleController.appointMentAllList[index].date != null ? DateFormat.yMMMd().format(scheduleController.appointMentAllList[index].date!) : ''} (${scheduleController.appointMentAllList[index].time ?? ''})',
+                            loacation: scheduleController
+                                    .appointMentAllList[index]
+                                    .userId
+                                    ?.location ??
+                                '',
+                            onTap: () {},
+                          );
+                        },
+                      ));
+                    } else if (scheduleController.tabCurrentIndex.value == 1) {
+                      return Column(
+                        children: List.generate(
+                          scheduleController.pendingAppointmentList.length,
+                          (index) {
+                            return CustomDoctorCard(
+                              imageUrl: scheduleController
+                                      .pendingAppointmentList[index]
+                                      .userId
+                                      ?.img ??
+                                  '',
+                              patentName: scheduleController
+                                      .pendingAppointmentList[index]
+                                      .userId
+                                      ?.name ??
+                                  '',
+                              time:
+                                  '${scheduleController.pendingAppointmentList[index].date != null ? DateFormat.yMMMd().format(scheduleController.pendingAppointmentList[index].date!) : ''} (${scheduleController.pendingAppointmentList[index].time ?? ''})',
+                              loacation: scheduleController
+                                      .pendingAppointmentList[index]
+                                      .userId
+                                      ?.location ??
+                                  '',
+                              onTap: () {},
+                            );
+                          },
+                        ),
+                      );
+                    } else {
+                      return Column(
+                        children: List.generate(
+                          5,
+                          (index) {
+                            return CustomDoctorCard(
+                              imageUrl: AppConstants.userNtr,
+                              patentName: 'Siyam ',
+                              time: '05-12-24 (12:00 AM)',
+                              loacation: '3 rue Paul Bert 75011 Paris',
+                              onTap: () {},
+                            );
+                          },
+                        ),
+                      );
+                    }
                   }),
                 ],
               ),
