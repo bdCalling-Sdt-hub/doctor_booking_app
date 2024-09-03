@@ -3,7 +3,6 @@ class ApiUrl {
 
   //============================ Image base url ===========
   static const imageBaseUrl = 'http://103.161.9.133:5000';
-  static const imageBaseUrl = 'http://103.161.9.133:5000/';
 
   ///=============================== Auth Section ==============================
 
