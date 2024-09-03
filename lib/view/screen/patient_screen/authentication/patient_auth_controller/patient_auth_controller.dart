@@ -19,9 +19,9 @@ class PatientAuthController extends GetxController {
 // ============================ Sign in text Editing controller ======================
 
   final TextEditingController emailController =
-      TextEditingController(text: kDebugMode ? "powide4919@daypey.com" : "");
+      TextEditingController(text: kDebugMode ? "powirrrde4919@daypey.com" : "");
   final TextEditingController passwordController =
-      TextEditingController(text: kDebugMode ? "12345678" : "");
+      TextEditingController(text: kDebugMode ? "1234567" : "");
 
   ///=================== Update Interest ===================
   RxList<String> interestList = [
@@ -200,10 +200,12 @@ class PatientAuthController extends GetxController {
 
   ////=========================== Save Info =============================
   saveInfo({required Response<dynamic> response}) {
-    SharePrefsHelper.setString( AppConstants.bearerToken, response.body["token"]);
+    SharePrefsHelper.setString(
+        AppConstants.bearerToken, response.body["token"]);
 
-    SharePrefsHelper.setString(AppConstants.userName, response.body["data"]["name"]);
-     SharePrefsHelper.setString(AppConstants.id, response.body["data"]["_id"]);
+    SharePrefsHelper.setString(
+        AppConstants.userName, response.body["data"]["name"]);
+    SharePrefsHelper.setString(AppConstants.id, response.body["data"]["_id"]);
 
     SharePrefsHelper.setString(
         AppConstants.userLocation, response.body["data"]["location"]);

@@ -5,6 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PatientAppointmentController extends GetxController {
+  Rx<TextEditingController> resonOfVisitController =
+      TextEditingController().obs;
+
+  Rx<TextEditingController> describePbmController = TextEditingController().obs;
+
   ///=======================List============
   final List<String> userList = [
     AppStrings.upcoming,

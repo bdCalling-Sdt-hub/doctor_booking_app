@@ -5,7 +5,7 @@ import 'package:doctor_booking/controller/doctor_profile_controller/doctor_profi
 import 'package:doctor_booking/controller/doctor_schedule_controller/doctor_schedule_controller.dart';
 import 'package:doctor_booking/controller/hospital_controller/hospital_controller.dart';
 import 'package:doctor_booking/controller/notification_controller/notification_controller.dart';
-import 'package:doctor_booking/controller/patient_appointment_controller/patient_appointment_controller.dart';
+import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/controller/patient_appointment_controller.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/patient_auth_controller/patient_auth_controller.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/controller/profile_controller.dart';
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
@@ -16,7 +16,7 @@ class DependencyInjection extends Bindings {
   @override
   void dependencies() {
     ///==========================User section==================
-    Get.lazyPut(() => ProfileController(), fenix: true);
+    Get.lazyPut(() => PaitentProfileController(), fenix: true);
     Get.lazyPut(() => NotificationController(), fenix: true);
     Get.lazyPut(() => HospitalController(), fenix: false);
     Get.lazyPut(() => PatientAppointmentController(), fenix: true);

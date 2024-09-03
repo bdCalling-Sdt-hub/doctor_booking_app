@@ -12,7 +12,8 @@ import 'package:get/get.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   ChangePasswordScreen({super.key});
-  final ProfileController profileController = Get.find<ProfileController>();
+  final PaitentProfileController profileController =
+      Get.find<PaitentProfileController>();
 
   final formKey = GlobalKey<FormState>();
 

@@ -15,7 +15,8 @@ import 'package:get/get.dart';
 class AccountEditScreen extends StatelessWidget {
   AccountEditScreen({super.key});
 
-  final ProfileController profileController = Get.find<ProfileController>();
+  final PaitentProfileController profileController =
+      Get.find<PaitentProfileController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
