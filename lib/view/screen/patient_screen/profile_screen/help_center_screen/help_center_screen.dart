@@ -13,7 +13,8 @@ import 'package:get/get.dart';
 class HelpCenterScreen extends StatelessWidget {
   HelpCenterScreen({super.key});
 
-  final ProfileController profileController = Get.find<ProfileController>();
+  final PaitentProfileController profileController =
+      Get.find<PaitentProfileController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override

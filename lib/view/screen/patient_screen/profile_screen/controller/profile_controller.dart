@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ProfileController extends GetxController {
+class PaitentProfileController extends GetxController {
   final profileLoading = Status.loading.obs;
   void profileLoadingMethod(Status value) => profileLoading.value = value;
   GeneralController generalController = Get.find<GeneralController>();

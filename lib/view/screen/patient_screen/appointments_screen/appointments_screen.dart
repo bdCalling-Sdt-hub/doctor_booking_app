@@ -1,4 +1,4 @@
-import 'package:doctor_booking/controller/patient_appointment_controller/patient_appointment_controller.dart';
+import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/controller/patient_appointment_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';

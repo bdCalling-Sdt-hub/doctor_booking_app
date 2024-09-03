@@ -22,6 +22,7 @@ import 'package:doctor_booking/view/screen/patient_screen/authentication/select_
 import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_in_screen/sign_in_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_up_otp_screen/sign_up_otp_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_up_screen/sign_up_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/book_appointment_patient_details/book_appointment_patient_details.dart';
 import 'package:doctor_booking/view/screen/patient_screen/call_history_screen/call_history_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/categories_screen/categories_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/categories_screen/sub_categories_screen/sub_categories_screen.dart';
@@ -174,6 +175,10 @@ class AppRoutes {
     GetPage(name: chooseScreen, page: () => ChooseScreen()),
     GetPage(name: doctorProfileScreen, page: () => DoctorProfileScreen()),
     GetPage(name: specialistProfile, page: () => const SpecialistProfile()),
+    GetPage(
+        name: bookAppointmentPatientDetails,
+        page: () => BookAppointmentPatientDetails()),
+
     GetPage(
         name: rescheduleAppointmentScreen,
         page: () => const RescheduleAppoinmentScreen()),

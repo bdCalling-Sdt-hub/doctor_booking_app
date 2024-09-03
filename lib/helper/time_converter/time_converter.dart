@@ -25,4 +25,30 @@ class DateConverter {
       return "Good Evening";
     }
   }
+
+//================== Get Age =================
+
+  static String getAge({required String dOB}) {
+    // Parse the date of birth from the string input
+    List<String> dobParts = dOB.split("-");
+    int day = int.parse(dobParts[0]);
+    int month = int.parse(dobParts[1]);
+    int year = int.parse(dobParts[2]);
+
+    // Create a DateTime object for the date of birth
+    DateTime birthDate = DateTime(year, month, day);
+    DateTime currentDate = DateTime.now();
+
+    // Calculate age
+    int age = currentDate.year - birthDate.year;
+
+    // Adjust age if the birthday has not yet occurred this year
+    if (currentDate.month < birthDate.month ||
+        (currentDate.month == birthDate.month &&
+            currentDate.day < birthDate.day)) {
+      age--;
+    }
+
+    return age.toString();
+  }
 }
