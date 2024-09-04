@@ -1,8 +1,6 @@
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
-import 'package:doctor_booking/helper/time_converter/time_converter.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
-import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/patient_details/inner_widget.dart/patient_card.dart';
@@ -47,153 +45,189 @@ class BookAppointmentPatientDetails extends StatelessWidget {
         appBarContent: AppStrings.patientDetails,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 9.h,
-                  ),
-                  //===================== patient card ==================//
-                  PatientCard(
-                    imageUrl: "${ApiUrl.baseUrl}/${data.img ?? ""}",
-                    patientName: data.name ?? "",
-                    patientAge:
-                        DateConverter.getAge(dOB: data.dateOfBirth ?? ""),
-                    patientGender: 'Male',
-                  ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  SizedBox(
-                    child: CustomText(
-                      text: AppStrings.reasonOfVisit,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.grayNormal,
+        child: Obx(() {
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 9.h,
                     ),
-                  ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-
-                  ///================= Reason Of Visit ===================
-
-                  CustomTextField(
-                    textEditingController:
-                        appointmentController.resonOfVisitController.value,
-                    isDense: true,
-                  ),
-                  SizedBox(
-                    height: 18.h,
-                  ),
-
-                  //================= Describe Problem =============//
-                  SizedBox(
-                    child: CustomText(
-                      text: AppStrings.describeProblem,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.grayNormal,
+                    //===================== patient card ==================//
+                    PatientCard(
+                      imageUrl: "${ApiUrl.baseUrl}/${data.img ?? ""}",
+                      patientName: data.name ?? "",
+                      patientAge: data.dateOfBirth ?? "",
+                      // DateConverter.getAge(dOB: data.dateOfBirth ?? ""),
+                      patientGender: 'Male',
                     ),
-                  ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  //================= Describe Problem =============//
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                    SizedBox(
+                      child: CustomText(
+                        text: AppStrings.reasonOfVisit,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.grayNormal,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 4.h,
+                    ),
 
-                  CustomTextField(
-                    textEditingController:
-                        appointmentController.resonOfVisitController.value,
-                    isDense: true,
-                  ),
-                  SizedBox(
-                    height: 18.h,
-                  ),
-                  //=============== atach reports & previous ==============///
-                  SizedBox(
-                    child: CustomText(
-                      text: AppStrings.attachReportsAndPrevious,
+                    ///================= Reason Of Visit ===================
+
+                    CustomTextField(
+                      textEditingController:
+                          appointmentController.resonOfVisitController.value,
+                      isDense: true,
+                    ),
+                    SizedBox(
+                      height: 18.h,
+                    ),
+
+                    //================= Describe Problem =============//
+                    SizedBox(
+                      child: CustomText(
+                        text: AppStrings.describeProblem,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.grayNormal,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    //================= Describe Problem =============//
+
+                    CustomTextField(
+                      textEditingController:
+                          appointmentController.resonOfVisitController.value,
+                      isDense: true,
+                    ),
+                    SizedBox(
+                      height: 18.h,
+                    ),
+                    //=============== atach reports & previous ==============///
+                    SizedBox(
+                      child: CustomText(
+                        text: AppStrings.attachReportsAndPrevious,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.grayNormal,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 9.h,
+                    ),
+                    CustomText(
+                      text: 'JPG, PNG, PDF',
                       fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       color: AppColors.grayNormal,
                     ),
-                  ),
-                  SizedBox(
-                    height: 9.h,
-                  ),
-                  CustomText(
-                    text: 'JPG, PNG, PDF',
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.grayNormal,
-                  ),
-                  SizedBox(
-                    height: 21.h,
-                  ),
-                  //================= reports image ==============//
+                    SizedBox(
+                      height: 21.h,
+                    ),
+                    //================= Reports Image and remove Button ===============//
 
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        Row(
-                          children: List.generate(3, (index) {
-                            return CustomPateintDetailsImage(
-                              imageUrl: AppConstants.userNtr,
-                              onTap: () {},
-                            );
-                          }),
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          Row(
+                            children: List.generate(
+                                generalController.selectedImagesMulti.length,
+                                (index) {
+                              return Container(
+                                margin: EdgeInsets.only(right: 10.w),
+                                height: 100.w,
+                                width: 80.w,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        fit: BoxFit.fitHeight,
+                                        image: AssetImage(generalController
+                                            .selectedImagesMulti[index].path))),
 
-                        //============================= Add image container =======================//
+                                //========== Remove Img Button ==========
 
-                        InkWell(
-                          onTap: () {
-                            generalController.selectedImagesMulti();
-                          },
-                          child: Container(
-                            height: 60,
-                            width: 60,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: AppColors.white,
-                              borderRadius: BorderRadius.circular(4),
-                              border: Border.all(
-                                width: 1,
-                                color: AppColors.blackNormal,
+                                child: IconButton(
+                                    onPressed: () {
+                                      generalController.selectedImagesMulti
+                                          .removeAt(index);
+
+                                      generalController.selectedImagesMulti
+                                          .refresh();
+                                    },
+                                    icon: Container(
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.black,
+                                      ),
+                                      child: const Icon(
+                                        Icons.remove,
+                                        color: Colors.red,
+                                      ),
+                                    )),
+                              );
+                            }),
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+
+                          //============================= Add image container =======================//
+
+                          InkWell(
+                            onTap: () {
+                              //generalController.selectedImagesMulti();
+                              generalController.pickMultiImage();
+                            },
+                            child: Container(
+                              height: 100.h,
+                              width: 100.h,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: AppColors.white,
+                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(
+                                  width: 1,
+                                  color: AppColors.blackNormal,
+                                ),
+                              ),
+                              child: Icon(
+                                Icons.add,
+                                size: 30.h,
                               ),
                             ),
-                            child: Icon(
-                              Icons.add,
-                              size: 30.h,
-                            ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
 
-                  SizedBox(
-                    height: 60.h,
-                  ),
+                    SizedBox(
+                      height: 60.h,
+                    ),
 
-                  /// ======================= call button ==============//
-                  CustomButton(
-                    title: AppStrings.continues,
-                    onTap: () {},
-                  ),
-                ],
+                    /// ======================= Book button ==============//
+                    CustomButton(
+                      title: AppStrings.bookAppointment,
+                      onTap: () {
+                        appointmentController.bookAppoinment(
+                          doctorID: data.id ?? "",
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
+            ],
+          );
+        }),
       ),
     );
   }

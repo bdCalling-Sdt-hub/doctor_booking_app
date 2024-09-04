@@ -192,20 +192,20 @@ class AvailableDays {
       };
 
   List<dynamic> getTimesForDay(String day) {
-    switch (day.toLowerCase()) {
-      case 'mon':
+    switch (day) {
+      case 'Monday':
         return monday ?? [];
-      case 'tue':
+      case 'Tuesday':
         return tuesday ?? [];
-      case 'wed':
+      case 'Wednesday':
         return wednesday ?? [];
-      case 'thu':
+      case 'Thursday':
         return thursday ?? [];
-      case 'fri':
+      case 'Friday':
         return friday ?? [];
-      case 'sat':
+      case 'Saturday':
         return saturday ?? [];
-      case 'sun':
+      case 'Sunday':
         return sunday ?? [];
       default:
         return [];

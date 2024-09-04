@@ -173,10 +173,12 @@ class GeneralController extends GetxController with GetxServiceMixin {
         return;
       }
 
-      selectedImagesMulti.clear();
       for (var xFile in pickedFiles) {
         if (selectedImagesMulti.length < 6) {
           selectedImagesMulti.add(File(xFile.path));
+
+          debugPrint(
+              "Selected Image=============>>>>>>>>>>>$selectedImagesMulti");
         } else {
           Get.snackbar(
               '', 'You can only pick up to 6 images for each product.');
@@ -216,7 +218,8 @@ class GeneralController extends GetxController with GetxServiceMixin {
     // Loop to get the next 7 days
     for (int i = 0; i < 7; i++) {
       DateTime nextDay = today.add(Duration(days: i));
-      String day = DateFormat('EEE').format(nextDay); // Get the day (e.g., Fri)
+      String day =
+          DateFormat('EEEE').format(nextDay); // Get the day (e.g., Fri)
       String date = DateFormat('d').format(nextDay); // Get the date (e.g., 12)
 
       // Add the day and date to the map
@@ -287,20 +290,20 @@ class GeneralController extends GetxController with GetxServiceMixin {
 
   ///====================== Get Available For ========================
   String getAvailableFor(String day, AvailableFor availableFor) {
-    switch (day.toLowerCase()) {
-      case 'mon':
+    switch (day) {
+      case 'Monday':
         return availableFor.monday ?? "";
-      case 'tue':
+      case 'Tuesday':
         return availableFor.tuesday ?? "";
-      case 'wed':
+      case 'Wednesday':
         return availableFor.wednesday ?? "";
-      case 'thu':
+      case 'Thursday':
         return availableFor.thursday ?? "";
-      case 'fri':
+      case 'Friday':
         return availableFor.friday ?? "";
-      case 'sat':
+      case 'Saturday':
         return availableFor.saturday ?? "";
-      case 'sun':
+      case 'Sunday':
         return availableFor.sunday ?? "";
       default:
         return "Not Found";
