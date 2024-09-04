@@ -307,7 +307,9 @@ class DoctorProfileScreen extends StatelessWidget {
                           ),
 
                           ///================================= Sunday =============================
-                          doctorProfileController.sundayAvailableList.isNotEmpty
+                          doctorProfileController
+                                      .sundayTypeController.value.text !=
+                                  AppStrings.weekend
                               ? CustomAppointmentInfo(
                                   dayName: 'Sunday',
                                   startTimeTap: () async {},
@@ -340,7 +342,9 @@ class DoctorProfileScreen extends StatelessWidget {
                               : const SizedBox(),
 
                           ///================================= Monday =============================
-                          doctorProfileController.mondayAvailableList.isNotEmpty
+                          doctorProfileController
+                                      .mondayTypeController.value.text !=
+                                  AppStrings.weekend
                               ? CustomAppointmentInfo(
                                   dayName: 'Monday',
                                   startTimeTap: () async {},
@@ -373,7 +377,9 @@ class DoctorProfileScreen extends StatelessWidget {
                               : const SizedBox(),
 
                           ///================================= Tuesday =============================
-                          doctorProfileController.tuedayAvailableList.isNotEmpty
+                          doctorProfileController
+                                      .tuesdayTypeController.value.text !=
+                                  AppStrings.weekend
                               ? CustomAppointmentInfo(
                                   dayName: 'Tuesday',
                                   startTimeTap: () async {},
@@ -441,7 +447,9 @@ class DoctorProfileScreen extends StatelessWidget {
                               : const SizedBox(),
 
                           ///================================= Thursday =============================
-                          doctorProfileController.thudayAvailableList.isNotEmpty
+                          doctorProfileController
+                                      .thursdayTypeController.value.text !=
+                                  AppStrings.weekend
                               ? CustomAppointmentInfo(
                                   dayName: 'Thursday',
                                   startTimeTap: () async {},
@@ -474,7 +482,9 @@ class DoctorProfileScreen extends StatelessWidget {
                               : const SizedBox(),
 
                           ///================================= Friday =============================
-                          doctorProfileController.fridayAvailableList.isNotEmpty
+                          doctorProfileController
+                                      .fridayTypeController.value.text !=
+                                  AppStrings.weekend
                               ? CustomAppointmentInfo(
                                   dayName: 'Friday',
                                   startTimeTap: () async {},
@@ -507,7 +517,9 @@ class DoctorProfileScreen extends StatelessWidget {
                               : const SizedBox(),
 
                           ///================================= Saturday =============================
-                          doctorProfileController.satdayAvailableList.isNotEmpty
+                          doctorProfileController
+                                      .saturdayTypeController.value.text !=
+                                  AppStrings.weekend
                               ? CustomAppointmentInfo(
                                   dayName: 'Saturday',
                                   startTimeTap: () async {},

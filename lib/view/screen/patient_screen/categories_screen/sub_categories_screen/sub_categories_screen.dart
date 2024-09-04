@@ -30,10 +30,7 @@ class SubCategoriesScreen extends StatelessWidget {
                 Get.toNamed(AppRoutes.specialistProfile);
               },
               child: CustomCard(
-                favouriteOntap: () {
-                                
-                              },
-            
+                favouriteOntap: () {},
                 networkImageUrl: AppConstants.userNtr,
                 name: 'Jenny Wilson',
                 profession: 'Gynecologists',

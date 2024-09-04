@@ -48,7 +48,7 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
                     if (value == AppStrings.weekend) {
                       profileController.sundayStartTimeController.value.clear();
                       profileController.sundayEndTimeController.value.clear();
-                      profileController.sundayAvailableList.clear();
+                      profileController.sundayAvailableList.value = [];
                     }
                   },
                   typeHintText:
@@ -80,7 +80,7 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
                     if (value == AppStrings.weekend) {
                       profileController.mondayStartTimeController.value.clear();
                       profileController.mondayEndTimeController.value.clear();
-                      profileController.mondayAvailableList.clear();
+                      profileController.mondayAvailableList.value = [];
                     }
                   },
                   startController:
@@ -114,7 +114,7 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
                       profileController.tuesdayStartTimeController.value
                           .clear();
                       profileController.tuesdayEndTimeController.value.clear();
-                      profileController.tuedayAvailableList.clear();
+                      profileController.tuedayAvailableList.value = [];
                     }
                   },
                   startController:
@@ -146,7 +146,7 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
                     if (value == AppStrings.weekend) {
                       profileController.weddayStartTimeController.value.clear();
                       profileController.weddayEndTimeController.value.clear();
-                      profileController.weddayAvailableList.clear();
+                      profileController.weddayAvailableList.value = [];
                     }
                   },
                   startController:
@@ -182,7 +182,7 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
                       profileController.thursdayStartTimeController.value
                           .clear();
                       profileController.thursdayEndTimeController.value.clear();
-                      profileController.thudayAvailableList.clear();
+                      profileController.thudayAvailableList.value = [];
                     }
                   },
                   startController:
@@ -214,7 +214,7 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
                     if (value == AppStrings.weekend) {
                       profileController.fridayStartTimeController.value.clear();
                       profileController.fridayEndTimeController.value.clear();
-                      profileController.fridayAvailableList.clear();
+                      profileController.fridayAvailableList.value = [];
                     }
                   },
                   startController:
@@ -247,8 +247,11 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
                     if (value == AppStrings.weekend) {
                       profileController.saturdayStartTimeController.value
                           .clear();
+                      profileController.saturdayStartTimeController.refresh();
                       profileController.saturdayEndTimeController.value.clear();
-                      profileController.satdayAvailableList.clear();
+                      profileController.saturdayEndTimeController.refresh();
+                      profileController.satdayAvailableList.value = [];
+                      profileController.satdayAvailableList.refresh();
                     }
                   },
                   startController:
@@ -259,7 +262,7 @@ class DoctorEditAppointmentScreen extends StatelessWidget {
                       profileController.saturdayTypeController.value.text,
                 ),
                 profileController.updateAppointmentLoading.value
-                    ? const CustomLoader() 
+                    ? const CustomLoader()
                     //========================= Update Button ========================//
                     : CustomButton(
                         onTap: () async {

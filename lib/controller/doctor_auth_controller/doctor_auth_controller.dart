@@ -6,6 +6,7 @@ import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
+import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -283,6 +284,7 @@ class DoctorAuthController extends GetxController {
   Rx<TextEditingController> verifyCodeController = TextEditingController().obs;
 
   Future<void> varifyEmail() async {
+    generalController.showPopUpLoader();
     var body = {
       "email": doctorEmailController.value.text,
       "code": verifyCodeController.value.text,
@@ -291,7 +293,20 @@ class DoctorAuthController extends GetxController {
     var response =
         await ApiClient.postData(ApiUrl.varifyCode, jsonEncode(body));
     if (response.statusCode == 200) {
+      navigator?.pop();
+      SharePrefsHelper.setString(
+          AppConstants.bearerToken, response.body["token"]);
+      showCustomSnackBar(
+        response.body['message'],
+        getXSnackBar: false,
+        isError: false,
+      );
+
+      Get.offAllNamed(AppRoutes.doctorHomeScreen);
       debugPrint("============================= Sucsses=================");
+    } else {
+      navigator?.pop();
+      toastMessage(message: response.body["message"]);
     }
   }
 }

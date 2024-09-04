@@ -365,25 +365,32 @@ class DoctorProfileController extends GetxController {
   Rx<TextEditingController> saturdayTypeController =
       TextEditingController().obs;
 //============================ Appoint get start time and end time get =====================//
+  String? mondayStartTime;
   getTime({
     required int day,
     required int num,
   }) async {
+    TimeOfDay selectedTime = TimeOfDay.now();
     final picTime = await showTimePicker(
-        context: Get.context!, initialTime: TimeOfDay.now());
+      context: Get.context!,
+      initialTime: selectedTime,
+      builder: (BuildContext context, Widget? child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+              alwaysUse24HourFormat: false), // Ensure AM/PM format is used
+          child: child!,
+        );
+      },
+    );
 
     if (picTime != null) {
-      DateTime dateTimeNow = DateTime.now();
+      String formatDateTime = formatTimeOfDay(picTime);
 
-      DateTime picDate = DateTime(
-        dateTimeNow.year,
-        dateTimeNow.month,
-        dateTimeNow.day,
-        picTime.hour,
-        picTime.minute,
-      );
+      debugPrint(
+          "=====================pictime=============$picTime===========================");
+      debugPrint(
+          "=====================formatDateTime=============$formatDateTime===========================");
 
-      String formatDateTime = DateFormat.jm().format(picDate);
       //=================== Sun Day ================
       if (day == 1 && num == 1) {
         sundayStartTimeController.value.text = formatDateTime;
@@ -424,7 +431,16 @@ class DoctorProfileController extends GetxController {
     }
   }
 
+  String formatTimeOfDay(TimeOfDay timeOfDay) {
+    final now = DateTime.now();
+    final dateTime = DateTime(
+        now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
+    final format = DateFormat.jm(); // This provides the format for AM/PM
+    return format.format(dateTime);
+  }
+
   //====================================== Updater Doctor Appointment ==================================//
+
   RxBool updateAppointmentLoading = false.obs;
   Future<void> updateDoctorAppointment() async {
     String id = await SharePrefsHelper.getString(AppConstants.id);
@@ -462,13 +478,13 @@ class DoctorProfileController extends GetxController {
         }
       }),
       "available_for": jsonEncode({
-        "monday": mondayTypeController.value.text,
-        "tuesday": tuesdayTypeController.value.text,
-        "wednesday": weddayTypeController.value.text,
-        "thursday": thursdayTypeController.value.text,
-        "friday": fridayTypeController.value.text,
-        "saturday": saturdayTypeController.value.text,
-        "sunday": saturdayTypeController.value.text,
+        "monday": mondayTypeController.value.text.toString(),
+        "tuesday": tuesdayTypeController.value.text.toString(),
+        "wednesday": weddayTypeController.value.text.toString(),
+        "thursday": thursdayTypeController.value.text.toString(),
+        "friday": fridayTypeController.value.text.toString(),
+        "saturday": saturdayTypeController.value.text.toString(),
+        "sunday": sundayTypeController.value.text.toString(),
       })
     };
 
@@ -497,6 +513,7 @@ class DoctorProfileController extends GetxController {
       ApiChecker.checkApi(response);
     }
   }
+  //================================== Time Format =================================
 
   @override
   void onInit() {

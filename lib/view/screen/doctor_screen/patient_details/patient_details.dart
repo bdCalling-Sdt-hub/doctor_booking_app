@@ -41,7 +41,7 @@ class PatientDetails extends StatelessWidget {
                   PatientCard(
                       imageUrl: '',
                       patientName: model.userId!.name!,
-                      patientAge: model.userId?.age ?? '25',
+                      patientAge: model.userId?.age.toString() ?? '25',
                       patientGender: 'Male'),
                   SizedBox(
                     height: 15.h,

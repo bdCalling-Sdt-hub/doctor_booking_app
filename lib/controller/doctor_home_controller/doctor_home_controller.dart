@@ -23,7 +23,7 @@ class DoctorHomeController extends GetxController {
   //   AppStrings.cancel
   // ];
 
-  RxInt popupAvailableTimeCurrentIndex = RxInt(0);
+  RxInt popupAvailableTimeCurrentIndex = 0.obs;
   RxInt popupReschuduleCurrentIndex = RxInt(0);
   RxInt selectedIndex = RxInt(0);
 //========================= Home Tab List =====================
@@ -180,8 +180,11 @@ class DoctorHomeController extends GetxController {
         "time": doctorRescheduleTime.value,
         "date": doctorRescheduleDate.value,
         "notes": appointmentRescheduleNote.value.text,
-        "_id": appointmentId,
+        "appointmentId": appointmentId,
       };
+
+      debugPrint(
+          "======Appointment Id ========================$appointmentId============================");
 
       var response = await ApiClient.patchData(
           "${ApiUrl.updateAppointment}$id", jsonEncode(body));

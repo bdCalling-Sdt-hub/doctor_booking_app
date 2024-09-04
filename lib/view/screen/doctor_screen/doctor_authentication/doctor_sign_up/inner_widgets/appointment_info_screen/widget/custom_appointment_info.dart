@@ -18,11 +18,11 @@ class CustomAppointmentInfo extends StatelessWidget {
     required this.availableTab,
     this.startTimeHintText,
     this.endTimeHintText,
-    this.startController,
-    this.endController,
     this.isClosed = false,
     this.readOnly = false,
     this.typeHintText,
+    required this.startController,
+    required this.endController,
   });
 
   final String dayName;
@@ -31,8 +31,8 @@ class CustomAppointmentInfo extends StatelessWidget {
   final Function(String?)? availableTab;
   final String? startTimeHintText;
   final String? endTimeHintText;
-  final TextEditingController? startController;
-  final TextEditingController? endController;
+  final TextEditingController startController;
+  final TextEditingController endController;
   final bool isClosed;
   final DoctorAuthController doctorAuthController =
       Get.find<DoctorAuthController>();
@@ -130,7 +130,7 @@ class CustomAppointmentInfo extends StatelessWidget {
                   hintText: startTimeHintText ?? 'Input time',
                   hasBackgroundColor: true,
                   title: 'Start Time',
-                  controller: startController ?? TextEditingController(),
+                  controller: startController,
                   onTap: readOnly! ? () {} : startTimeTap,
                 ),
               ),
@@ -142,7 +142,7 @@ class CustomAppointmentInfo extends StatelessWidget {
                   hintText: endTimeHintText ?? 'Input time',
                   hasBackgroundColor: true,
                   title: 'End Time',
-                  controller: endController ?? TextEditingController(),
+                  controller: endController,
                   readOnly: true,
                   hasSuffixIcon: false,
                   onTap: readOnly! ? () {} : endTimeTap,

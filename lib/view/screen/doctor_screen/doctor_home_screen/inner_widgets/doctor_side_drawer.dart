@@ -63,7 +63,6 @@ class DoctorSideDrawer extends StatelessWidget {
                         icon: AppIcons.policy,
                         onTap: () {
                           Get.toNamed(AppRoutes.privacyPolicyScreen);
-
                         }),
 
                     ///====================== settings======================>
@@ -72,13 +71,15 @@ class DoctorSideDrawer extends StatelessWidget {
                         icon: AppIcons.setting,
                         onTap: () {
                           Get.toNamed(AppRoutes.settingScreen);
-
                         }),
 
-                     SizedBox(height: 200.h,),
+                    SizedBox(
+                      height: 200.h,
+                    ),
+
                     ///====================== Log Out======================>
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Get.toNamed(AppRoutes.signInScreen);
                       },
                       child: Row(

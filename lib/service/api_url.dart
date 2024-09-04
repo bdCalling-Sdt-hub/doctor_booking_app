@@ -9,7 +9,7 @@ class ApiUrl {
   static const login = '/auth/sign-in';
   static const doctorSignUp = '/auth/doctor-sign-up';
   static const paitentSignUp = '/auth/sign-up';
-  static const varifyCode = '/auth/verify-code'; 
+  static const varifyCode = '/auth/verify-code';
 
   ///========================== Paitent Section ============================
 
