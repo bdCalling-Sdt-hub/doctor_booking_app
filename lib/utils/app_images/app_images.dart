@@ -11,4 +11,5 @@ class AppImages {
   static const String ilera = "$basePath/ilera.png";
   static const String bannerOne = "$basePath/banner_one.png";
   static const String splashScreen = "$basePath/Splash_Screen.png";
+  static const String devitcard = "$basePath/devitcard.png";
 }

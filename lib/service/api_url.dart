@@ -43,6 +43,9 @@ class ApiUrl {
   static const profile = '/auth/profile';
   //=============================== Appointment ===========================//
   static const doctorAppointment = '/appointment/get-my-appointments';
+  static const appointmentUpdateStatus =
+      '/appointment/update-appointment-status/';
+
   //======================= Notification ===============================//
   static const doctorNotification = '/notification/get-notifications';
 

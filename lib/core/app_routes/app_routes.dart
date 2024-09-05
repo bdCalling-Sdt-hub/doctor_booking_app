@@ -8,6 +8,8 @@ import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/d
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/appointment_info_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/personal_info_screen/personal_info_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/professional_info_screen/professional_info_screen.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_payment_screen/doctor_payment_screen.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_payment_screen/information_screen/information_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_edit_appointment_screen/doctor_edit_appointment_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_edit_personal_profile_screen/doctor_edit_personal_profile_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_edit_professional_profile_screen/doctor_edit_professional_profile_screen.dart';
@@ -115,10 +117,12 @@ class AppRoutes {
   //=================== Doctor appointments history ===================//
 
   static const String doctorAppointmentsHistory = "/DoctorAppointmentsHistory";
+  static const String doctorPaymentScreen = "/DoctorPaymentScreen";
 
   //======================== All patient list screen =====================///
 
-  static const String allPatientListScreen = "/AllPatientListScreen";
+  static const String allPatientListScreen = "/AllPatientListScreen"; 
+  static const String informationScreen = "/InformationScreen"; 
   static const String patientDetails2 = "/PatientDetailsScreen";
   //================= Reschedule Appointment Screen ===================//
 
@@ -200,6 +204,8 @@ class AppRoutes {
     GetPage(name: appointmentInfoScreen, page: () => AppointmentInfoScreen()),
     GetPage(name: personalInfoScreen, page: () => PersonalInfoScreen()),
     GetPage(name: professionalInfoScreen, page: () => ProfessionalInfoScreen()),
+    GetPage(name: doctorPaymentScreen, page: () => DoctorPaymentScreen()),
+    GetPage(name: informationScreen, page: () => InformationScreen()),
 
     //====================== Doctor appointments history ========================//
 

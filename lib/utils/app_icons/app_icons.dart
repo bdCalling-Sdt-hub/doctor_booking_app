@@ -66,7 +66,9 @@ class AppIcons {
   static const String profileSelected = "$basePath/profile_selected.svg";
   static const String profileUnselected = "$basePath/profile_unselected.svg";
   static const String star = "$basePath/star.svg";
+  static const String addCircel = "$basePath/add_circle2.svg";
   static const String scearch = "$basePath/scearch.svg";
+  static const String delete = "$basePath/delete.svg";
   static const String videoCammera = "$basePath/videoCammera.svg";
   static const String notificationUnselected =
       "$basePath/notification_unselected.svg";

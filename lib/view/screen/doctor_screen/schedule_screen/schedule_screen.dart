@@ -87,13 +87,13 @@ class ScheduleScreen extends StatelessWidget {
                   ////========================= Appointment All  List ====================//
                   Obx(() {
                     if (scheduleController.tabCurrentIndex.value == 0) {
-                      return scheduleController.appointMentAllList.isNotEmpty
+                      return scheduleController.acceptAppointMentList.isNotEmpty
                           ? Column(
                               children: List.generate(
-                              scheduleController.appointMentAllList.length,
+                              scheduleController.acceptAppointMentList.length,
                               (index) {
                                 AppointmentModel model = scheduleController
-                                    .appointMentAllList[index];
+                                    .acceptAppointMentList[index];
                                 return CustomDoctorCard(
                                   imageUrl: model.userId?.img ?? '',
                                   patentName: model.userId?.name ?? '',
