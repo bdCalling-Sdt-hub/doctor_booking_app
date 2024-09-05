@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 class DoctorScheduleController extends GetxController {
   List<String> scheduleTabs = [
     AppStrings.upcoming,
-    AppStrings.reschedule,
+    AppStrings.pending,
     AppStrings.past,
   ];
 

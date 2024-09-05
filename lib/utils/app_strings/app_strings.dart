@@ -129,6 +129,7 @@ class AppStrings {
   static const String reschedule = 'Reschedule';
   static const String similarSpecialist = 'Similar Specialists';
   static const String daysOfWeek = 'Day of Week:';
+  static const String pending = 'Pending';
 
   ///=============================Profile===================
   static const String profile = 'Profile';

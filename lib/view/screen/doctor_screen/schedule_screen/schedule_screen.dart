@@ -2,6 +2,7 @@ import 'package:doctor_booking/controller/doctor_schedule_controller/doctor_sche
 import 'package:doctor_booking/model/doctor_appointment_model/appointment_model.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/pending_screen/pending_screen.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_doctor_card.dart';
 import 'package:doctor_booking/view/widgets/custom_tab_selected/custom_tab_selected.dart';
@@ -111,24 +112,7 @@ class ScheduleScreen extends StatelessWidget {
                       //===================== Appointment pending list =========================
                       return scheduleController
                               .pendingAppointmentList.isNotEmpty
-                          ? Column(
-                              children: List.generate(
-                                scheduleController
-                                    .pendingAppointmentList.length,
-                                (index) {
-                                  AppointmentModel model = scheduleController
-                                      .pendingAppointmentList[index];
-                                  return CustomDoctorCard(
-                                    imageUrl: model.userId?.img ?? '',
-                                    patentName: model.userId?.name ?? '',
-                                    time:
-                                        '${model.date != null ? DateFormat.yMMMd().format(model.date!) : ''} (${model.time ?? ''})',
-                                    loacation: model.userId?.location ?? '',
-                                    onTap: () {},
-                                  );
-                                },
-                              ),
-                            )
+                          ? PendingScreen()
                           : const Center(
                               child:
                                   CustomText(text: 'Appointment Not Availble'),
