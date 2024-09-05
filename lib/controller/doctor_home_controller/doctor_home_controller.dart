@@ -61,7 +61,7 @@ class DoctorHomeController extends GetxController {
       appointMentListToday.value = List<AppointmentModel>.from(
           response.body["data"].map((x) => AppointmentModel.fromJson(x)));
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         setRxRequestStatus(Status.internetError);
       } else {
         setRxRequestStatus(Status.error);
@@ -85,7 +85,7 @@ class DoctorHomeController extends GetxController {
         appointMentListWeekly.value = List<AppointmentModel>.from(
             response.body["data"].map((x) => AppointmentModel.fromJson(x)));
       } else {
-        if (response.statusText == ApiClient.noInternetMessage) {
+        if (response.statusText == ApiClient.somethingWentWrong) {
           setRxRequestStatus(Status.internetError);
         } else {
           setRxRequestStatus(Status.error);
@@ -102,7 +102,7 @@ class DoctorHomeController extends GetxController {
         appointMentListMonthly.value = List<AppointmentModel>.from(
             response.body["data"].map((x) => AppointmentModel.fromJson(x)));
       } else {
-        if (response.statusText == ApiClient.noInternetMessage) {
+        if (response.statusText == ApiClient.somethingWentWrong) {
           setRxRequestStatus(Status.internetError);
         } else {
           setRxRequestStatus(Status.error);
@@ -125,7 +125,7 @@ class DoctorHomeController extends GetxController {
       appointMentCalcelList.value = List<AppointmentModel>.from(
           response.body["data"].map((x) => AppointmentModel.fromJson(x)));
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         setRxRequestStatus(Status.internetError);
       } else {
         setRxRequestStatus(Status.error);
@@ -146,7 +146,7 @@ class DoctorHomeController extends GetxController {
       doctorOverview.value =
           DoctorOverviewModel.fromJson(response.body['data']);
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         setRxRequestStatus(Status.internetError);
       } else {
         setRxRequestStatus(Status.error);
@@ -204,7 +204,7 @@ class DoctorHomeController extends GetxController {
       } else {
         updatePersonalLoading.value = false;
         refresh();
-        if (response.statusText == ApiClient.noInternetMessage) {
+        if (response.statusText == ApiClient.somethingWentWrong) {
         } else {}
         updatePersonalLoading.value = false;
         refresh();

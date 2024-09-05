@@ -71,7 +71,7 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
       categoryList.value = List<CategoryDatum>.from(
           response.body["data"].map((x) => CategoryDatum.fromJson(x)));
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         categoryLoadingMethod(Status.internetError);
       } else {
         categoryLoadingMethod(Status.error);
@@ -92,7 +92,7 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
       bannerList.value = List<BannerDatum>.from(
           response.body["data"].map((x) => BannerDatum.fromJson(x)));
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         categoryLoadingMethod(Status.internetError);
       } else {
         categoryLoadingMethod(Status.error);
@@ -121,7 +121,7 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
 
       popularDocLoadingMethod(Status.completed);
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         popularDocLoadingMethod(Status.internetError);
       } else {
         popularDocLoadingMethod(Status.error);
@@ -150,7 +150,7 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
 
       recomemdedDocLoadingMethod(Status.completed);
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         recomemdedDocLoadingMethod(Status.internetError);
       } else {
         recomemdedDocLoadingMethod(Status.error);
@@ -186,7 +186,7 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
           response.body["data"].map((x) => FavouriteDocDatum.fromJson(x)));
       favouriteLoadingMethod(Status.completed);
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         favouriteLoadingMethod(Status.internetError);
       } else {
         favouriteLoadingMethod(Status.error);
@@ -215,7 +215,7 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
 
       allDocLoadingMethod(Status.completed);
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         allDocLoadingMethod(Status.internetError);
       } else {
         allDocLoadingMethod(Status.error);

@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
+import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/appointment_screen_popup/appointment_cancel_popup.dart';
@@ -42,20 +45,19 @@ class PatientAppointmentController extends GetxController {
   RxString selectedDay = "".obs;
   RxString selectedTime = "".obs;
   RxString selectedDate = "".obs;
-  RxString appointmentType = "".obs;
+  //RxString appointmentType = "".obs;
 
-  bookAppoinment({
-    required String doctorID,
-  }) async {
+  bookAppoinment(
+      {required String doctorID, required String availableFor}) async {
     generalController.showPopUpLoader();
 
-    var body = {
+    Map<String, String> body = {
       "desc": describePbmController.value.text,
       "reason": resonOfVisitController.value.text,
       "day": selectedDay.value,
       "time": selectedTime.value,
       "date": selectedDate.value,
-      "appointment_type": appointmentType.value
+      "appointment_type": availableFor
     };
 
     List<MultipartBody>? multipartBody = [];
@@ -66,12 +68,21 @@ class PatientAppointmentController extends GetxController {
     }
 
     var response = generalController.selectedImagesMulti.isEmpty
-        ? await ApiClient.postData(ApiUrl.bookAppoinment(docId: doctorID), body)
+        ? await ApiClient.postData(
+            ApiUrl.bookAppoinment(docId: doctorID),
+            jsonEncode(body),
+          )
         : await ApiClient.postMultipartData(
             ApiUrl.bookAppoinment(docId: doctorID), body,
             multipartBody: multipartBody);
+
     if (response.statusCode == 200) {
+      toastMessage(
+          message: "Appointment Request Send Successfully",
+          colors: Colors.green);
+      navigator?.pop();
     } else {
+      navigator?.pop();
       ApiChecker.checkApi(response);
     }
   }

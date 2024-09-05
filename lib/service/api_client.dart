@@ -14,7 +14,7 @@ import 'package:mime/mime.dart';
 class ApiClient extends GetxService {
   static var client = http.Client();
 
-  static const String noInternetMessage = "Can't connect to the internet!";
+  static const String somethingWentWrong = "Something Went Wrong";
   static const int timeoutInSeconds = 30;
 
   static String bearerToken =
@@ -42,7 +42,7 @@ class ApiClient extends GetxService {
       return handleResponse(response, uri);
     } catch (e) {
       debugPrint('------------${e.toString()}');
-      return const Response(statusCode: 1, statusText: noInternetMessage);
+      return const Response(statusCode: 1, statusText: somethingWentWrong);
     }
   }
 
@@ -71,10 +71,11 @@ class ApiClient extends GetxService {
           )
           .timeout(const Duration(seconds: timeoutInSeconds));
       return handleResponse(response, uri);
-    } catch (e) {
-      debugPrint('------------${e.toString()}');
+    } catch (e, s) {
+      debugPrint('Error------------${e.toString()}');
+      debugPrint('S------------${s.toString()}');
 
-      return const Response(statusCode: 1, statusText: noInternetMessage);
+      return const Response(statusCode: 1, statusText: somethingWentWrong);
     }
   }
 
@@ -106,7 +107,7 @@ class ApiClient extends GetxService {
     } catch (e) {
       debugPrint('------------${e.toString()}');
 
-      return const Response(statusCode: 1, statusText: noInternetMessage);
+      return const Response(statusCode: 1, statusText: somethingWentWrong);
     }
   }
 
@@ -131,7 +132,7 @@ class ApiClient extends GetxService {
           .timeout(const Duration(seconds: timeoutInSeconds));
       return handleResponse(response, uri);
     } catch (e) {
-      return const Response(statusCode: 1, statusText: noInternetMessage);
+      return const Response(statusCode: 1, statusText: somethingWentWrong);
     }
   }
 
@@ -179,12 +180,12 @@ class ApiClient extends GetxService {
 
       return Response(
           statusCode: response.statusCode,
-          statusText: noInternetMessage,
+          statusText: somethingWentWrong,
           body: content);
     } catch (e) {
       debugPrint('------------${e.toString()}');
 
-      return const Response(statusCode: 1, statusText: noInternetMessage);
+      return const Response(statusCode: 1, statusText: somethingWentWrong);
     }
   }
 
@@ -233,12 +234,12 @@ class ApiClient extends GetxService {
 
       return Response(
           statusCode: response.statusCode,
-          statusText: noInternetMessage,
+          statusText: somethingWentWrong,
           body: content);
     } catch (e) {
       debugPrint('------------${e.toString()}');
 
-      return const Response(statusCode: 1, statusText: noInternetMessage);
+      return const Response(statusCode: 1, statusText: somethingWentWrong);
     }
   }
 
@@ -310,10 +311,10 @@ class ApiClient extends GetxService {
 
       return Response(
           statusCode: response.statusCode,
-          statusText: noInternetMessage,
+          statusText: somethingWentWrong,
           body: content);
     } catch (e) {
-      return const Response(statusCode: 1, statusText: noInternetMessage);
+      return const Response(statusCode: 1, statusText: somethingWentWrong);
     }
   }
 
@@ -335,7 +336,7 @@ class ApiClient extends GetxService {
           .timeout(const Duration(seconds: timeoutInSeconds));
       return handleResponse(response, uri);
     } catch (e) {
-      return const Response(statusCode: 1, statusText: noInternetMessage);
+      return const Response(statusCode: 1, statusText: somethingWentWrong);
     }
   }
 
@@ -378,7 +379,7 @@ class ApiClient extends GetxService {
       //   body: response0.body,
       // );
     } else if (response0.statusCode != 200 && response0.body == null) {
-      response0 = const Response(statusCode: 0, statusText: noInternetMessage);
+      response0 = const Response(statusCode: 0, statusText: somethingWentWrong);
     }
 
     debugPrint(
