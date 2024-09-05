@@ -8,11 +8,13 @@ class DeviceUtils {
       statusBarIconBrightness: Brightness.dark,
     ));
   }
-  static systemNavigationBarColor(){
+
+  static systemNavigationBarColor() {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       systemNavigationBarColor: Colors.transparent,
     ));
   }
+
   static lockDevicePortrait() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,

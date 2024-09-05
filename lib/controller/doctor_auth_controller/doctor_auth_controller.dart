@@ -1,9 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
+import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
+import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
+import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -188,13 +191,13 @@ class DoctorAuthController extends GetxController {
   }
 
   ///========================= Doctor Sign Up ===========================
-
+  RxBool signUpLoading = false.obs;
   doctorSignUp() async {
-    //generalController.showPopUpLoader();
-
-    var body = {
-      ///==== Personal ====
-
+    signUpLoading.value = true;
+    refresh();
+    // Create a Map for the request body
+    Map<String, String> body = {
+      // Personal
       "name": doctorNameController.value.text,
       "email": doctorEmailController.value.text,
       "date_of_birth": doctorDateOfBirthController.value.text,
@@ -203,8 +206,7 @@ class DoctorAuthController extends GetxController {
       "password": doctorConfirmPasswordController.value.text,
       "role": "DOCTOR",
 
-      ///==== Appointment ====
-
+      // Appointment
       "available_for": jsonEncode({
         "monday": mondayTypeController.value.text,
         "tuesday": tuesdayTypeController.value.text,
@@ -214,7 +216,6 @@ class DoctorAuthController extends GetxController {
         "saturday": saturdayTypeController.value.text,
         "sunday": sundayTypeController.value.text
       }),
-
       "available_days": jsonEncode({
         "monday": {
           "startTime": mondayStartTimeController.value.text,
@@ -246,10 +247,7 @@ class DoctorAuthController extends GetxController {
         }
       }),
 
-      /// ======== Professional Info =========
-
-      //"gender": "",
-      //"access": "",
+      // Professional Info
       "specialization": specialisController.value.text,
       "experience": experienceController.value.text,
       "educational_background": educationController.value.text,
@@ -257,9 +255,58 @@ class DoctorAuthController extends GetxController {
       "appointment_fee": appointmentFeeController.value.text,
     };
 
-    var response = await ApiClient.postMultipartData(ApiUrl.doctorSignUp, body,
-        multipartBody: [MultipartBody("license", imageFile.value)]);
+    // Create the multipart data for the license image
+    var multipartBody = [MultipartBody("license", imageFile.value)];
 
-    if (response.statusCode == 200) {}
+    // Send the request
+    var response = await ApiClient.postMultipartData(
+      ApiUrl.doctorSignUp, body, // This should be Map<String, dynamic>
+      multipartBody: multipartBody,
+    );
+
+    if (response.statusCode == 201) {
+      signUpLoading.value = false;
+      refresh();
+      Get.offAllNamed(AppRoutes.doctorSignupOtpScreen,
+          arguments: doctorEmailController.value.text);
+    } else {
+      if (response.statusText == ApiClient.noInternetMessage) {
+        signUpLoading.value = false;
+        refresh();
+      } else {}
+      ApiChecker.checkApi(response);
+      signUpLoading.value = false;
+      refresh();
+    }
+  }
+  //================================ varifide code =================================
+
+  Rx<TextEditingController> verifyCodeController = TextEditingController().obs;
+
+  Future<void> varifyEmail() async {
+    generalController.showPopUpLoader();
+    var body = {
+      "email": doctorEmailController.value.text,
+      "code": verifyCodeController.value.text,
+    };
+
+    var response =
+        await ApiClient.postData(ApiUrl.varifyCode, jsonEncode(body));
+    if (response.statusCode == 200) {
+      navigator?.pop();
+      SharePrefsHelper.setString(
+          AppConstants.bearerToken, response.body["token"]);
+      showCustomSnackBar(
+        response.body['message'],
+        getXSnackBar: false,
+        isError: false,
+      );
+
+      Get.offAllNamed(AppRoutes.doctorHomeScreen);
+      debugPrint("============================= Sucsses=================");
+    } else {
+      navigator?.pop();
+      toastMessage(message: response.body["message"]);
+    }
   }
 }

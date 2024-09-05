@@ -259,14 +259,67 @@ class DoctorProfileController extends GetxController {
     sundayAvailableList.value = model.availableDays?.sunday ?? [];
     mondayAvailableList.value = model.availableDays?.monday ?? [];
     tuedayAvailableList.value = model.availableDays?.tuesday ?? [];
-    weddayAvailableList.value = model.availableDays?.wednesday ?? [];
+    if (model.availableDays?.wednesday != null) {
+      weddayAvailableList.value = model.availableDays?.wednesday ?? [];
+    }
+
     thudayAvailableList.value = model.availableDays?.thursday ?? [];
     fridayAvailableList.value = model.availableDays?.friday ?? [];
     satdayAvailableList.value = model.availableDays?.saturday ?? [];
-  } 
-  ///=============================================== Doctor appointment edit ==================================//    
-       
-    
+    //========================= Sun day start time and end time init =====================
+    if (sundayAvailableList.isNotEmpty) {
+      sundayStartTimeController.value.text = sundayAvailableList[0];
+      sundayEndTimeController.value.text =
+          sundayAvailableList[sundayAvailableList.length - 1];
+    }
+    //========================= Mon day start time and end time init =====================
+    if (mondayAvailableList.isNotEmpty) {
+      mondayStartTimeController.value.text = mondayAvailableList[0];
+      mondayEndTimeController.value.text =
+          mondayAvailableList[mondayAvailableList.length - 1];
+    }
+    //========================= tue day start time and end time init =====================
+    if (tuedayAvailableList.isNotEmpty) {
+      tuesdayStartTimeController.value.text = tuedayAvailableList[0];
+      tuesdayEndTimeController.value.text =
+          tuedayAvailableList[tuedayAvailableList.length - 1];
+    }
+    //========================= Wed day start time and end time init =====================
+    if (weddayAvailableList.isNotEmpty) {
+      weddayStartTimeController.value.text = weddayAvailableList[0];
+      weddayEndTimeController.value.text =
+          weddayAvailableList[weddayAvailableList.length - 1];
+    }
+    //========================= Thurs day start time and end time init =====================
+    if (thudayAvailableList.isNotEmpty) {
+      thursdayStartTimeController.value.text = thudayAvailableList[0];
+      thursdayEndTimeController.value.text =
+          thudayAvailableList[thudayAvailableList.length - 1];
+    }
+    //========================= Fri day start time and end time init =====================
+    if (fridayAvailableList.isNotEmpty) {
+      fridayStartTimeController.value.text = fridayAvailableList[0];
+      fridayEndTimeController.value.text =
+          fridayAvailableList[fridayAvailableList.length - 1];
+    }
+    //========================= Satar day start time and end time init =====================
+    if (satdayAvailableList.isNotEmpty) {
+      saturdayStartTimeController.value.text = satdayAvailableList[0];
+      saturdayEndTimeController.value.text =
+          satdayAvailableList[satdayAvailableList.length - 1];
+    }
+
+    sundayTypeController.value.text = model.availableFor?.sunday ?? '';
+    mondayTypeController.value.text = model.availableFor?.monday ?? '';
+    tuesdayTypeController.value.text = model.availableFor?.tuesday ?? '';
+    weddayTypeController.value.text = model.availableFor?.wednesday ?? '';
+    thursdayTypeController.value.text = model.availableFor?.thursday ?? '';
+    fridayTypeController.value.text = model.availableFor?.friday ?? '';
+    saturdayTypeController.value.text = model.availableFor?.saturday ?? '';
+  }
+
+  ///=============================================== Doctor appointment edit ==================================//
+
   //================== Doctor Appointment Time controller ==========================//
   Rx<TextEditingController> sundayTypeController = TextEditingController().obs;
   Rx<TextEditingController> sundayStartTimeController =
@@ -311,27 +364,33 @@ class DoctorProfileController extends GetxController {
       TextEditingController().obs;
   Rx<TextEditingController> saturdayTypeController =
       TextEditingController().obs;
- 
- 
+//============================ Appoint get start time and end time get =====================//
+  String? mondayStartTime;
   getTime({
     required int day,
     required int num,
   }) async {
+    TimeOfDay selectedTime = TimeOfDay.now();
     final picTime = await showTimePicker(
-        context: Get.context!, initialTime: TimeOfDay.now());
+      context: Get.context!,
+      initialTime: selectedTime,
+      builder: (BuildContext context, Widget? child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+              alwaysUse24HourFormat: false), // Ensure AM/PM format is used
+          child: child!,
+        );
+      },
+    );
 
     if (picTime != null) {
-      DateTime dateTimeNow = DateTime.now();
+      String formatDateTime = formatTimeOfDay(picTime);
 
-      DateTime picDate = DateTime(
-        dateTimeNow.year,
-        dateTimeNow.month,
-        dateTimeNow.day,
-        picTime.hour,
-        picTime.minute,
-      );
+      debugPrint(
+          "=====================pictime=============$picTime===========================");
+      debugPrint(
+          "=====================formatDateTime=============$formatDateTime===========================");
 
-      String formatDateTime = DateFormat.jm().format(picDate);
       //=================== Sun Day ================
       if (day == 1 && num == 1) {
         sundayStartTimeController.value.text = formatDateTime;
@@ -372,11 +431,89 @@ class DoctorProfileController extends GetxController {
     }
   }
 
+  String formatTimeOfDay(TimeOfDay timeOfDay) {
+    final now = DateTime.now();
+    final dateTime = DateTime(
+        now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
+    final format = DateFormat.jm(); // This provides the format for AM/PM
+    return format.format(dateTime);
+  }
 
+  //====================================== Updater Doctor Appointment ==================================//
 
+  RxBool updateAppointmentLoading = false.obs;
+  Future<void> updateDoctorAppointment() async {
+    String id = await SharePrefsHelper.getString(AppConstants.id);
+    updateAppointmentLoading.value = true;
+    refresh();
+    Map<String, String> body = {
+      "available_days": jsonEncode({
+        "monday": {
+          "startTime": mondayStartTimeController.value.text,
+          "endTime": mondayEndTimeController.value.text
+        },
+        "tuesday": {
+          "startTime": tuesdayStartTimeController.value.text,
+          "endTime": tuesdayEndTimeController.value.text
+        },
+        "wednesday": {
+          "startTime": weddayStartTimeController.value.text,
+          "endTime": weddayEndTimeController.value.text
+        },
+        "thursday": {
+          "startTime": thursdayStartTimeController.value.text,
+          "endTime": thursdayEndTimeController.value.text
+        },
+        "friday": {
+          "startTime": fridayStartTimeController.value.text,
+          "endTime": fridayEndTimeController.value.text
+        },
+        "saturday": {
+          "startTime": saturdayStartTimeController.value.text,
+          "endTime": saturdayEndTimeController.value.text
+        },
+        "sunday": {
+          "startTime": sundayStartTimeController.value.text,
+          "endTime": sundayEndTimeController.value.text
+        }
+      }),
+      "available_for": jsonEncode({
+        "monday": mondayTypeController.value.text.toString(),
+        "tuesday": tuesdayTypeController.value.text.toString(),
+        "wednesday": weddayTypeController.value.text.toString(),
+        "thursday": thursdayTypeController.value.text.toString(),
+        "friday": fridayTypeController.value.text.toString(),
+        "saturday": saturdayTypeController.value.text.toString(),
+        "sunday": sundayTypeController.value.text.toString(),
+      })
+    };
 
+    var response = await ApiClient.patchData(
+        "${ApiUrl.updateDoctorProfile}$id", jsonEncode(body));
 
+    if (response.statusCode == 200) {
+      getDoctorProfile();
+      updateAppointmentLoading.value = false;
 
+      refresh();
+      showCustomSnackBar(
+        response.body['message'],
+        getXSnackBar: false,
+        isError: false,
+      );
+
+      Get.back();
+    } else {
+      updateAppointmentLoading.value = false;
+      refresh();
+      if (response.statusText == ApiClient.noInternetMessage) {
+      } else {}
+      updateAppointmentLoading.value = false;
+      refresh();
+      ApiChecker.checkApi(response);
+    }
+  }
+  //================================== Time Format =================================
 
   @override
   void onInit() {

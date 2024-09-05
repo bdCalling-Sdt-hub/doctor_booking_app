@@ -4,12 +4,11 @@
 
 import 'dart:convert';
 
-List<AppointmentModel> appointmentModelFromJson(String str) =>
-    List<AppointmentModel>.from(
-        json.decode(str).map((x) => AppointmentModel.fromJson(x)));
+AppointmentModel appointmentModelFromJson(String str) =>
+    AppointmentModel.fromJson(json.decode(str));
 
-String appointmentModelToJson(List<AppointmentModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String appointmentModelToJson(AppointmentModel data) =>
+    json.encode(data.toJson());
 
 class AppointmentModel {
   String? id;
@@ -23,8 +22,11 @@ class AppointmentModel {
   String? reason;
   String? appointmentType;
   String? desc;
-  List<dynamic>? prescription;
+  List<String>? prescription;
   bool? review;
+  String? notes;
+  bool? reSchedule;
+  bool? paymentStatus;
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
@@ -43,6 +45,9 @@ class AppointmentModel {
     this.desc,
     this.prescription,
     this.review,
+    this.notes,
+    this.reSchedule,
+    this.paymentStatus,
     this.createdAt,
     this.updatedAt,
     this.v,
@@ -63,8 +68,11 @@ class AppointmentModel {
         desc: json["desc"],
         prescription: json["prescription"] == null
             ? []
-            : List<dynamic>.from(json["prescription"]!.map((x) => x)),
+            : List<String>.from(json["prescription"]!.map((x) => x)),
         review: json["review"],
+        notes: json["notes"],
+        reSchedule: json["reSchedule"],
+        paymentStatus: json["payment_status"],
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
@@ -90,6 +98,9 @@ class AppointmentModel {
             ? []
             : List<dynamic>.from(prescription!.map((x) => x)),
         "review": review,
+        "notes": notes,
+        "reSchedule": reSchedule,
+        "payment_status": paymentStatus,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "__v": v,
@@ -97,37 +108,41 @@ class AppointmentModel {
 }
 
 class UserId {
+  dynamic img;
+  dynamic age;
   String? id;
   String? name;
   String? email;
   String? location;
   String? phone;
-  dynamic age;
 
   UserId({
+    this.img,
+    this.age,
     this.id,
     this.name,
     this.email,
     this.location,
     this.phone,
-    this.age,
   });
 
   factory UserId.fromJson(Map<String, dynamic> json) => UserId(
+        img: json["img"],
+        age: json["age"],
         id: json["_id"],
         name: json["name"],
         email: json["email"],
         location: json["location"],
         phone: json["phone"],
-        age: json["age"],
       );
 
   Map<String, dynamic> toJson() => {
+        "img": img,
+        "age": age,
         "_id": id,
         "name": name,
         "email": email,
         "location": location,
         "phone": phone,
-        "age": age,
       };
 }

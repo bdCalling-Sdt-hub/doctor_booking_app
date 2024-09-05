@@ -36,7 +36,6 @@ class PopularSpecialistsScreen extends StatelessWidget {
                 },
                 child: CustomCard(
                   favouriteOntap: () {},
-                
                   networkImageUrl: "${ApiUrl.baseUrl}/${data.img ?? ""}",
                   name: data.name ?? "",
                   profession: data.specialization ?? "",

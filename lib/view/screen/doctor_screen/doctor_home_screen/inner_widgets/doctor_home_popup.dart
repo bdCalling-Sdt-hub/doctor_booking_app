@@ -105,7 +105,8 @@ class DoctorHomePopup extends StatelessWidget {
               //================================ Fri Day ===========================
               if (doctorHomeController.doctorRescheduleDay.value ==
                   AppStrings.friday)
-                doctorProfileController.fridayAvailableList.isNotEmpty
+                doctorProfileController.fridayTypeController.value.text !=
+                        AppStrings.weekend
                     ? AvailableTimeContainer(
                         selectedTime:
                             doctorProfileController.fridayAvailableList,
@@ -127,7 +128,8 @@ class DoctorHomePopup extends StatelessWidget {
               //================================ Tues Day ===========================
               if (doctorHomeController.doctorRescheduleDay.value ==
                   AppStrings.tuesday)
-                doctorProfileController.tuedayAvailableList.isNotEmpty
+                doctorProfileController.tuesdayTypeController.value.text !=
+                        AppStrings.weekend
                     ? AvailableTimeContainer(
                         selectedTime:
                             doctorProfileController.tuedayAvailableList,
@@ -149,7 +151,8 @@ class DoctorHomePopup extends StatelessWidget {
               //================================ Satar Day ================================
               if (doctorHomeController.doctorRescheduleDay.value ==
                   AppStrings.saturday)
-                doctorProfileController.satdayAvailableList.isNotEmpty
+                doctorProfileController.saturdayTypeController.value.text !=
+                        AppStrings.weekend
                     ? AvailableTimeContainer(
                         selectedTime:
                             doctorProfileController.satdayAvailableList,
@@ -171,7 +174,8 @@ class DoctorHomePopup extends StatelessWidget {
               //================================ Sun Day ================================
               if (doctorHomeController.doctorRescheduleDay.value ==
                   AppStrings.sunday)
-                doctorProfileController.sundayAvailableList.isNotEmpty
+                doctorProfileController.sundayTypeController.value.text !=
+                        AppStrings.weekend
                     ? AvailableTimeContainer(
                         selectedTime:
                             doctorProfileController.sundayAvailableList,
@@ -193,7 +197,8 @@ class DoctorHomePopup extends StatelessWidget {
               //================================ Mon Day ================================
               if (doctorHomeController.doctorRescheduleDay.value ==
                   AppStrings.monday)
-                doctorProfileController.mondayAvailableList.isNotEmpty
+                doctorProfileController.mondayTypeController.value.text !=
+                        AppStrings.weekend
                     ? AvailableTimeContainer(
                         selectedTime:
                             doctorProfileController.mondayAvailableList,
@@ -215,7 +220,8 @@ class DoctorHomePopup extends StatelessWidget {
               //================================ Wed Day ================================
               if (doctorHomeController.doctorRescheduleDay.value ==
                   AppStrings.wednesday)
-                doctorProfileController.weddayAvailableList.isNotEmpty
+                doctorProfileController.weddayTypeController.value.text !=
+                        AppStrings.weekend
                     ? AvailableTimeContainer(
                         selectedTime:
                             doctorProfileController.weddayAvailableList,
@@ -237,7 +243,8 @@ class DoctorHomePopup extends StatelessWidget {
               //================================ Thurs Day ================================
               if (doctorHomeController.doctorRescheduleDay.value ==
                   AppStrings.thursday)
-                doctorProfileController.thudayAvailableList.isNotEmpty
+                doctorProfileController.thursdayTypeController.value.text !=
+                        AppStrings.weekend
                     ? AvailableTimeContainer(
                         selectedTime:
                             doctorProfileController.thudayAvailableList,
@@ -320,14 +327,14 @@ class AvailableTimeContainer extends StatelessWidget {
     super.key,
     this.time,
     this.onChanged,
-    required this.currentIndex,
+    this.currentIndex,
     this.selectedTime,
   });
 
   final String? time;
 
   final ValueChanged<int>? onChanged;
-  final int currentIndex;
+  final int? currentIndex;
   final List<String>? selectedTime;
 
   @override
@@ -350,9 +357,11 @@ class AvailableTimeContainer extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
-                  color: currentIndex == index
-                      ? AppColors.blackNormal
-                      : AppColors.white,
+                  color: currentIndex == null
+                      ? AppColors.white
+                      : currentIndex == index
+                          ? AppColors.blackNormal
+                          : AppColors.white,
                   border: Border.all(
                     width: 1,
                     color: AppColors.grayLightHover,
@@ -361,9 +370,11 @@ class AvailableTimeContainer extends StatelessWidget {
                 text: selectedTime?[index] ?? '',
                 fontSize: 10.sp,
                 fontWeight: FontWeight.w600,
-                color: currentIndex == index
-                    ? AppColors.white
-                    : AppColors.blackNormal,
+                color: currentIndex == null
+                    ? AppColors.blackNormal
+                    : currentIndex == index
+                        ? AppColors.white
+                        : AppColors.blackNormal,
               ),
             ),
           );
