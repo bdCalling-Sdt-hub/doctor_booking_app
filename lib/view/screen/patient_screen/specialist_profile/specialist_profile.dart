@@ -4,6 +4,7 @@ import 'package:doctor_booking/helper/time_converter/time_converter.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/controller/patient_appointment_controller.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/controller/paitent_home_controller.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/popular_doctor.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
@@ -28,6 +29,9 @@ class SpecialistProfile extends StatefulWidget {
 class _DoctorProfileScreenState extends State<SpecialistProfile> {
   GeneralController generalController = Get.find<GeneralController>();
   PaitentHomeController homeController = Get.find<PaitentHomeController>();
+  PatientAppointmentController patientAppointmentController =
+      Get.find<PatientAppointmentController>();
+
   int _selectedDateIndex = 0;
   int _selectedDateIndex2 = 0;
   bool _isExpanded = false;
@@ -209,6 +213,16 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                         onTap: () {
                           setState(() {
                             _selectedDateIndex = index;
+
+                            //===== Get Selected Day =======
+                            patientAppointmentController.selectedDay.value =
+                                generalController.next7Days[index]["Day"]
+                                        ?.toLowerCase() ??
+                                    "";
+
+                            //===== Get Selected Date =======-
+                            patientAppointmentController.selectedDate.value =
+                                "${generalController.next7Days[index]["Date"] ?? ""}-${DateTime.now().month}-${DateTime.now().year} ";
                           });
                         },
                         child: Container(
