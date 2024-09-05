@@ -220,7 +220,7 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                                         ?.toLowerCase() ??
                                     "";
 
-                            //===== Get Selected Date =======
+                            //===== Get Selected Date =======-
                             patientAppointmentController.selectedDate.value =
                                 "${generalController.next7Days[index]["Date"] ?? ""}-${DateTime.now().month}-${DateTime.now().year} ";
                           });
