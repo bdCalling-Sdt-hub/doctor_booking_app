@@ -37,7 +37,11 @@ class DoctorPaymentScreen extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            PaymentCard(),
+            PaymentCard(
+              title: 'Dianne Russell',
+              subTitle: "* * * *   * * * *   7498",
+              deleteButton: () {},
+            ),
             SizedBox(
               height: 20.h,
             ),
@@ -94,11 +98,20 @@ class AddNewButton extends StatelessWidget {
 }
 
 class PaymentCard extends StatelessWidget {
-  const PaymentCard({super.key});
+  const PaymentCard(
+      {super.key,
+      required this.title,
+      required this.subTitle,
+      required this.deleteButton});
+
+  final String title;
+  final String subTitle;
+  final VoidCallback deleteButton;
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: [
@@ -113,12 +126,12 @@ class PaymentCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  text: 'Dianne Russell',
+                  text: title,
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                 ),
                 CustomText(
-                  text: '************** 789',
+                  text: subTitle,
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                 ),
@@ -126,9 +139,12 @@ class PaymentCard extends StatelessWidget {
             )
           ],
         ),
-        const CustomImage(
-          imageSrc: AppIcons.delete,
-          imageColor: AppColors.blackNormal,
+        GestureDetector(
+          onTap: deleteButton,
+          child: const CustomImage(
+            imageSrc: AppIcons.delete,
+            imageColor: AppColors.blackNormal,
+          ),
         )
       ],
     );

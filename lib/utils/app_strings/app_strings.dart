@@ -113,6 +113,23 @@ class AppStrings {
   static const String editProfessinalInformation = 'Edit Professional Info';
   static const String editAppointmentInformation = 'Edit Appointment Info';
   static const String appointmentInfo = 'Appointment Info';
+  static const String cardholdersName = "Card-holder's Name";
+  static const String front = "Front";
+  static const String dateofBirth = "Date of Birth";
+  static const String addressCity = "Address (City)";
+  static const String addressCountry = "Address (Country)";
+  static const String addressPostalCode = "Address (Postal Code)";
+  static const String line1 = "Line 1";
+  static const String typehere = "type here...";
+  static const String bankInfoProductdescription =
+      "Bank Info (Product description)";
+  static const String bankInfoWebsite = "Bank Info (Website)";
+  static const String bankInfoBusinessname = "Bank Info (Business name)";
+  static const String bankInfoCountry = "Bank Info (Country)";
+  static const String accountHolderType = "Account Holder Type";
+  static const String bankAccountNumber = "Bank Account Number";
+  static const String back = "Back";
+  static const String submit = "Submit";
 
   ///==========================Schedule=================
   static const String schedule = 'Schedule';

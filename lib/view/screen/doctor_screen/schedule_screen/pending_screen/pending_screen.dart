@@ -1,5 +1,5 @@
-import 'package:doctor_booking/controller/doctor_home_controller/doctor_home_controller.dart';
-import 'package:doctor_booking/controller/doctor_schedule_controller/doctor_schedule_controller.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_controller/doctor_home_controller.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/doctor_schedule_controller/doctor_schedule_controller.dart';
 import 'package:doctor_booking/model/doctor_appointment_model/appointment_model.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';

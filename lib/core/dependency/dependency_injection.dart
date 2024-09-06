@@ -1,8 +1,8 @@
 import 'package:doctor_booking/controller/calls_controller.dart/calls_controller.dart';
-import 'package:doctor_booking/controller/doctor_auth_controller/doctor_auth_controller.dart';
-import 'package:doctor_booking/controller/doctor_home_controller/doctor_home_controller.dart';
-import 'package:doctor_booking/controller/doctor_profile_controller/doctor_profile_controller.dart';
-import 'package:doctor_booking/controller/doctor_schedule_controller/doctor_schedule_controller.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_auth_controller/doctor_auth_controller.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_controller/doctor_home_controller.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_profile_controller/doctor_profile_controller.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/doctor_schedule_controller/doctor_schedule_controller.dart';
 import 'package:doctor_booking/controller/hospital_controller/hospital_controller.dart';
 import 'package:doctor_booking/controller/notification_controller/notification_controller.dart';
 import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/controller/patient_appointment_controller.dart';
