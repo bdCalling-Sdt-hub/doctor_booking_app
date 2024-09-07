@@ -109,6 +109,8 @@ class AppStrings {
   static const String accepted = 'accepted';
   static const String rejected = 'rejected';
   static const String pending = 'pending';
+  static const String pendingCapital = 'Pending';
+
   static const String completed = 'completed';
 
   static const String patientsChecked = 'Patients Checked';
@@ -154,11 +156,9 @@ class AppStrings {
   static const String reschedule = 'Reschedule';
   static const String similarSpecialist = 'Similar Specialists';
   static const String daysOfWeek = 'Day of Week:';
-  static const String pending = 'Pending';
+
   static const String accept = 'Accept';
   static const String reject = 'Reject';
-  static const String rejected = 'rejected';
-  static const String accepted = 'accepted';
 
   ///=============================Profile===================
   static const String profile = 'Profile';
