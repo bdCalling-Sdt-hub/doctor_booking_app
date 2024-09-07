@@ -2,7 +2,6 @@ import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
-import 'package:doctor_booking/utils/app_images/app_images.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/banner_model.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/category_model.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/favourite_doc_model.dart';
@@ -32,11 +31,7 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
   void allDocLoadingMethod(Status value) => allDocLoading.value = value;
 
   RxInt bannerIndex = 0.obs;
-  final List<String> bannerImg = [
-    AppImages.bannerOne,
-    AppImages.bannerOne,
-    AppImages.bannerOne,
-  ];
+
   Rx<PageController> pageController = PageController().obs;
   List<String> categories = [
     'Cardiologist',

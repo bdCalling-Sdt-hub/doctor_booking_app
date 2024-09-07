@@ -1,4 +1,4 @@
-import 'package:doctor_booking/controller/hospital_controller/hospital_controller.dart';
+import 'package:doctor_booking/view/screen/patient_screen/hospital_screen/controller/hospital_controller.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';

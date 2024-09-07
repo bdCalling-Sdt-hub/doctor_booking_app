@@ -1,7 +1,7 @@
-import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_images/app_images.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/hospital_screen/controller/hospital_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
@@ -12,7 +12,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class LocationScreen extends StatelessWidget {
-  const LocationScreen({super.key});
+  LocationScreen({super.key});
+
+  final HospitalController hospitalController = Get.find<HospitalController>();
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +66,13 @@ class LocationScreen extends StatelessWidget {
               ///=========================Allow Access Button===================
               CustomButton(
                 onTap: () {
-                  Get.toNamed(AppRoutes.hospitalScreen);
+                  hospitalController.determinePosition()
+                      // .then((value) {
+                      //   value.latitude;
+                      //   value.longitude;
+                      // })
+                      ;
+                  //Get.toNamed(AppRoutes.hospitalScreen);
                 },
                 title: AppStrings.allowAccess,
               )
