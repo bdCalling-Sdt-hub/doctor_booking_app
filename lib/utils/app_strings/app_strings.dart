@@ -244,7 +244,6 @@ class AppStrings {
   static const String payment = 'Payment';
   static const String creditDebitCards = 'Credit/Debit Cards';
   static const String addNewCard = 'Add New Card';
-
   //===================== Doctor Notification =====================//
   static const String notificationToday = 'TODAY';
   static const String notificationYesterday = 'YESTERDAY';
