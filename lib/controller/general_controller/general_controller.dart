@@ -247,7 +247,7 @@ class GeneralController extends GetxController with GetxServiceMixin {
       setRxRequestStatus(Status.completed);
       termsModel.value = TermsModel.fromJson(response.body['data']);
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         setRxRequestStatus(Status.internetError);
       } else {
         setRxRequestStatus(Status.error);
@@ -267,7 +267,7 @@ class GeneralController extends GetxController with GetxServiceMixin {
       setRxRequestStatus(Status.completed);
       privacyModel.value = TermsModel.fromJson(response.body['data']);
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         setRxRequestStatus(Status.internetError);
       } else {
         setRxRequestStatus(Status.error);

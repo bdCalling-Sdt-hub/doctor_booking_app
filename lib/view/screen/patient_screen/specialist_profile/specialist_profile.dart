@@ -33,7 +33,7 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
       Get.find<PatientAppointmentController>();
 
   int _selectedDateIndex = 0;
-  int _selectedDateIndex2 = 0;
+  int _selectedDateIndex2 = -1;
   bool _isExpanded = false;
 
   void _toggleExpanded() {
@@ -53,7 +53,13 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
         availableDays: data.availableDays!,
         selectedDateIndex: _selectedDateIndex2);
 
+    patientAppointmentController.selectedDay.value =
+        generalController.next7Days[0]["Day"]?.toLowerCase() ?? "";
     homeController.getReview(id: "66cbf796bbca6f1b088cdf6f");
+
+    patientAppointmentController.selectedDate.value =
+        "${generalController.next7Days[0]["Date"] ?? ""}-${DateTime.now().month}-${DateTime.now().year}";
+
     super.initState();
   }
 
@@ -65,8 +71,12 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
         padding: EdgeInsets.all(24.r),
         child: CustomButton(
           onTap: () {
-            Get.toNamed(AppRoutes.bookAppointmentPatientDetails,
-                arguments: data);
+            Get.toNamed(AppRoutes.bookAppointmentPatientDetails, arguments: [
+              data,
+              generalController.getAvailableFor(
+                  generalController.next7Days[_selectedDateIndex]["Day"] ?? "",
+                  data.availableFor!)
+            ]);
           },
           title: AppStrings.bookAppointment,
         ),
@@ -222,7 +232,9 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
 
                             //===== Get Selected Date =======-
                             patientAppointmentController.selectedDate.value =
-                                "${generalController.next7Days[index]["Date"] ?? ""}-${DateTime.now().month}-${DateTime.now().year} ";
+                                "${generalController.next7Days[index]["Date"] ?? ""}-${DateTime.now().month}-${DateTime.now().year}";
+
+                            ///====== Get Available For =======
                           });
                         },
                         child: Container(
@@ -276,6 +288,19 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                         onTap: () {
                           setState(() {
                             _selectedDateIndex2 = index;
+
+                            ///============== Get Selected Time ===============
+
+                            patientAppointmentController.selectedTime.value =
+                                generalController
+                                    .getAvailableTimesForSelectedDay(
+                                        selectedDay: generalController
+                                                    .next7Days[
+                                                _selectedDateIndex]["Day"] ??
+                                            "",
+                                        availableDays: data.availableDays,
+                                        selectedDateIndex:
+                                            _selectedDateIndex2)[index];
                           });
                         },
                         child: Container(
@@ -309,6 +334,8 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                 SizedBox(
                   height: 10.h,
                 ),
+
+                ///==================== Available For ===================
 
                 CustomRow(
                     title: AppStrings.availableFor,

@@ -112,7 +112,7 @@ class PaitentProfileController extends GetxController {
     } else {
       loading.value = false;
       refresh();
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
       } else {}
       loading.value = false;
       refresh();
@@ -140,7 +140,7 @@ class PaitentProfileController extends GetxController {
       profileLoadingMethod(Status.completed);
       refresh();
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         profileLoadingMethod(Status.internetError);
       } else {
         profileLoadingMethod(Status.error);

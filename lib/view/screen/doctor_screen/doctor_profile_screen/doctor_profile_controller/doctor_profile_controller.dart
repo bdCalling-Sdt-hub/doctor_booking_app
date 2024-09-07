@@ -68,7 +68,7 @@ class DoctorProfileController extends GetxController {
       initAvalibleDayList(profileModel.value);
       debugPrint(profileModel.value.name);
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         setRxRequestStatus(Status.internetError);
       } else {
         setRxRequestStatus(Status.error);
@@ -154,7 +154,7 @@ class DoctorProfileController extends GetxController {
     } else {
       updatePersonalLoading.value = false;
       refresh();
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
       } else {}
       updatePersonalLoading.value = false;
       refresh();
@@ -238,7 +238,7 @@ class DoctorProfileController extends GetxController {
     } else {
       updateProfessionalLoading.value = false;
       refresh();
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
       } else {}
       updateProfessionalLoading.value = false;
       refresh();
@@ -506,7 +506,7 @@ class DoctorProfileController extends GetxController {
     } else {
       updateAppointmentLoading.value = false;
       refresh();
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
       } else {}
       updateAppointmentLoading.value = false;
       refresh();

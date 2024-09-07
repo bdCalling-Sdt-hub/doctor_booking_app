@@ -47,7 +47,7 @@ class DoctorScheduleController extends GetxController {
       acceptAppointMentList.value = List<AppointmentModel>.from(
           response.body["data"].map((x) => AppointmentModel.fromJson(x)));
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         setRxRequestStatus(Status.internetError);
       } else {
         setRxRequestStatus(Status.error);
@@ -68,7 +68,7 @@ class DoctorScheduleController extends GetxController {
       pendingAppointmentList.value = List<AppointmentModel>.from(
           response.body["data"].map((x) => AppointmentModel.fromJson(x)));
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         setRxRequestStatus(Status.internetError);
       } else {
         setRxRequestStatus(Status.error);
@@ -87,7 +87,7 @@ class DoctorScheduleController extends GetxController {
       pastAppointment.value = List<AppointmentModel>.from(
           response.body["data"].map((x) => AppointmentModel.fromJson(x)));
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         setRxRequestStatus(Status.internetError);
       } else {
         setRxRequestStatus(Status.error);

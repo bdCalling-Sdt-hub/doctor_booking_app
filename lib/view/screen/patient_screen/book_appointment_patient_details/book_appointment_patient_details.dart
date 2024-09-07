@@ -22,7 +22,8 @@ class BookAppointmentPatientDetails extends StatelessWidget {
 
   // final controller = Get.find<GeneralController>();
 
-  final PopularDoctorDatum data = Get.arguments;
+  final PopularDoctorDatum data = Get.arguments[0];
+  final availableFor = Get.arguments[1];
 
   final GeneralController generalController = Get.find<GeneralController>();
 
@@ -36,7 +37,7 @@ class BookAppointmentPatientDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = profileController.profileData.value;
+    final userData = profileController.profileData.value;
 
     return Scaffold(
       backgroundColor: AppColors.whiteNormal,
@@ -58,9 +59,9 @@ class BookAppointmentPatientDetails extends StatelessWidget {
                     ),
                     //===================== patient card ==================//
                     PatientCard(
-                      imageUrl: "${ApiUrl.baseUrl}/${data.img ?? ""}",
-                      patientName: data.name ?? "",
-                      patientAge: data.dateOfBirth ?? "",
+                      imageUrl: "${ApiUrl.baseUrl}/${userData.img ?? ""}",
+                      patientName: userData.name ?? "",
+                      patientAge: userData.dateOfBirth ?? "",
                       // DateConverter.getAge(dOB: data.dateOfBirth ?? ""),
                       patientGender: 'Male',
                     ),
@@ -106,7 +107,7 @@ class BookAppointmentPatientDetails extends StatelessWidget {
 
                     CustomTextField(
                       textEditingController:
-                          appointmentController.resonOfVisitController.value,
+                          appointmentController.describePbmController.value,
                       isDense: true,
                     ),
                     SizedBox(
@@ -218,8 +219,8 @@ class BookAppointmentPatientDetails extends StatelessWidget {
                       title: AppStrings.bookAppointment,
                       onTap: () {
                         appointmentController.bookAppoinment(
-                          doctorID: data.id ?? "",
-                        );
+                            doctorID: data.id ?? "",
+                            availableFor: availableFor);
                       },
                     ),
                   ],

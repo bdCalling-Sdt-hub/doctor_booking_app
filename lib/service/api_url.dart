@@ -35,9 +35,12 @@ class ApiUrl {
   static const favourite = '/favorite/add-remove-favorite';
   static const getFavourite = '/favorite/get-favorite-doctors';
 
-  //============ Book Appoinment ==========
+  //============ Appoinment ==========
   static bookAppoinment({required String docId}) =>
       '/appointment/create-appointment/$docId';
+
+  static getAppoinments({required String status}) =>
+      "/appointment/get-my-appointments?status=$status";
 
   ///=============================== Doctor Section ==============================
   static const profile = '/auth/profile';

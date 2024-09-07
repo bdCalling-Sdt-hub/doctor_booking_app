@@ -77,7 +77,7 @@ class NotificationController extends GetxController {
           .body['data']
           .map((x) => DoctorNotificationModel.fromJson(x)));
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         setRxRequestStatus(Status.internetError);
       } else {
         setRxRequestStatus(Status.error);

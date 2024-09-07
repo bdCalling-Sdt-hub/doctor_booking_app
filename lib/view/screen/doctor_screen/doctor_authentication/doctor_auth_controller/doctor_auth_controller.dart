@@ -270,7 +270,7 @@ class DoctorAuthController extends GetxController {
       Get.offAllNamed(AppRoutes.doctorSignupOtpScreen,
           arguments: doctorEmailController.value.text);
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         signUpLoading.value = false;
         refresh();
       } else {}
