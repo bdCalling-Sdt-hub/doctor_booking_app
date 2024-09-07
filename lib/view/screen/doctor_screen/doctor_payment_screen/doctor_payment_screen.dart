@@ -115,7 +115,7 @@ class PaymentCard extends StatelessWidget {
       children: [
         Row(
           children: [
-            CustomImage(
+            const CustomImage(
               imageSrc: AppImages.devitcard,
               imageType: ImageType.png,
             ),
@@ -132,7 +132,7 @@ class PaymentCard extends StatelessWidget {
                 ),
                 CustomText(
                   text: subTitle,
-                  fontSize: 14.sp,
+                  fontSize: 12.sp,
                   fontWeight: FontWeight.w600,
                 ),
               ],

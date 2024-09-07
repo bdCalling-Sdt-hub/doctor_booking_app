@@ -33,14 +33,13 @@ class DoctorScheduleController extends GetxController {
   }
 
   RxInt tabCurrentIndex = RxInt(0);
-//=========================== Get All Appoinment =========================//
+//=========================== Get acept Appoinment =========================//
   final rxRequestStatus = Status.loading.obs;
   void setRxRequestStatus(Status value) => rxRequestStatus.value = value;
   RxList<AppointmentModel> acceptAppointMentList = <AppointmentModel>[].obs;
 
-  getAllDoctorAppointment() async {
-    var response =
-        await ApiClient.getData("${ApiUrl.doctorAppointment}?status=accepted");
+  getAllDoctorAcceptAppointment() async {
+    var response = await ApiClient.getData(ApiUrl.acceptedDoctorAppointment);
 
     if (response.statusCode == 200) {
       setRxRequestStatus(Status.completed);
@@ -58,13 +57,10 @@ class DoctorScheduleController extends GetxController {
   }
   //==================================== Pending Appointment ===========================//     ?status=pending
 
-  final String pendingAppointmentUrl =
-      "${ApiUrl.doctorAppointment}?status=pending";
-
   RxList<AppointmentModel> pendingAppointmentList = <AppointmentModel>[].obs;
 
   Future<void> getPendingDoctorAppointment() async {
-    var response = await ApiClient.getData(pendingAppointmentUrl);
+    var response = await ApiClient.getData(ApiUrl.pendingDoctorAppointment);
 
     if (response.statusCode == 200) {
       setRxRequestStatus(Status.completed);
@@ -82,11 +78,10 @@ class DoctorScheduleController extends GetxController {
   }
   //============================== Past Appointment ===============================//
 
-  final String pastAppointmentUrl = "${ApiUrl.doctorAppointment}?type=past";
   RxList<AppointmentModel> pastAppointment = <AppointmentModel>[].obs;
 
   Future<void> getPastDoctorAppointment() async {
-    var response = await ApiClient.getData(pastAppointmentUrl);
+    var response = await ApiClient.getData(ApiUrl.pastDoctorAppointment);
 
     if (response.statusCode == 200) {
       pastAppointment.value = List<AppointmentModel>.from(
@@ -113,6 +108,7 @@ class DoctorScheduleController extends GetxController {
         "${ApiUrl.appointmentUpdateStatus}$appointmentId", jsonEncode(body));
     if (response.statusCode == 200) {
       getPendingDoctorAppointment();
+      getAllDoctorAcceptAppointment();
       showCustomSnackBar(
         response.body['message'],
         getXSnackBar: false,
@@ -133,7 +129,7 @@ class DoctorScheduleController extends GetxController {
 
   @override
   void onInit() {
-    getAllDoctorAppointment();
+    getAllDoctorAcceptAppointment();
     getPendingDoctorAppointment();
     getPastDoctorAppointment();
     super.onInit();

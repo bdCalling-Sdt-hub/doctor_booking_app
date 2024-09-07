@@ -342,6 +342,7 @@ class AvailableTimeContainer extends StatelessWidget {
     return GridView.builder(
         shrinkWrap: true,
         itemCount: selectedTime?.length ?? 0,
+        physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4,
             mainAxisSpacing: 8.w,
@@ -467,11 +468,11 @@ class PopupButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: 40.h,
+        height: 38.h,
         width: 129.w,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100),
+          borderRadius: BorderRadius.circular(8),
           color: AppColors.blackNormal,
         ),
         child: CustomText(

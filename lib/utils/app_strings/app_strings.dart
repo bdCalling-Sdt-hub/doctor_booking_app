@@ -114,6 +114,7 @@ class AppStrings {
   static const String editAppointmentInformation = 'Edit Appointment Info';
   static const String appointmentInfo = 'Appointment Info';
   static const String cardholdersName = "Card-holder's Name";
+  static const String accountName = "Account Name";
   static const String front = "Front";
   static const String dateofBirth = "Date of Birth";
   static const String addressCity = "Address (City)";
@@ -126,6 +127,7 @@ class AppStrings {
   static const String bankInfoWebsite = "Bank Info (Website)";
   static const String bankInfoBusinessname = "Bank Info (Business name)";
   static const String bankInfoCountry = "Bank Info (Country)";
+  static const String bankInfoCurrency = "Bank Info (Currency)";
   static const String accountHolderType = "Account Holder Type";
   static const String bankAccountNumber = "Bank Account Number";
   static const String back = "Back";

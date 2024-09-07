@@ -1,3 +1,4 @@
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_controller/doctor_home_controller.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/doctor_schedule_controller/doctor_schedule_controller.dart';
 import 'package:doctor_booking/model/doctor_appointment_model/appointment_model.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
@@ -12,11 +13,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
 class ScheduleScreen extends StatelessWidget {
   ScheduleScreen({super.key});
 
   final DoctorScheduleController scheduleController =
       Get.find<DoctorScheduleController>();
+  final DoctorHomeController homeController = Get.find<DoctorHomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class ScheduleScreen extends StatelessWidget {
             children: [
               _buildTabSelector(),
               SizedBox(height: 25.h),
-              _buildAppointmentList(),
+              _buildAppointmentList(context),
             ],
           ),
         ),
@@ -61,14 +64,14 @@ class ScheduleScreen extends StatelessWidget {
   }
 
   /// Builds the appointment list based on the selected tab
-  Widget _buildAppointmentList() {
+  Widget _buildAppointmentList(context) {
     return Obx(() {
       if (scheduleController.tabCurrentIndex.value == 0) {
         return _buildAcceptedAppointments();
       } else if (scheduleController.tabCurrentIndex.value == 1) {
         return _buildPendingAppointments();
       } else {
-        return _buildPastAppointments();
+        return _buildPastAppointments(context);
       }
     });
   }
@@ -80,11 +83,13 @@ class ScheduleScreen extends StatelessWidget {
             children: List.generate(
               scheduleController.acceptAppointMentList.length,
               (index) {
-                AppointmentModel model = scheduleController.acceptAppointMentList[index];
+                AppointmentModel model =
+                    scheduleController.acceptAppointMentList[index];
                 return CustomDoctorCard(
                   imageUrl: model.userId?.img ?? '',
                   patentName: model.userId?.name ?? '',
-                  time: '${model.date != null ? DateFormat.yMMMd().format(model.date!) : ''} (${model.time ?? ''})',
+                  time:
+                      '${model.date != null ? DateFormat.yMMMd().format(model.date!) : ''} (${model.time ?? ''})',
                   loacation: model.userId?.location ?? '',
                   onTap: () {},
                 );
@@ -102,19 +107,28 @@ class ScheduleScreen extends StatelessWidget {
   }
 
   /// Builds the list of past appointments
-  Widget _buildPastAppointments() {
+  Widget _buildPastAppointments(context) {
     return scheduleController.pastAppointment.isNotEmpty
         ? Column(
             children: List.generate(
               scheduleController.pastAppointment.length,
               (index) {
-                AppointmentModel model = scheduleController.pastAppointment[index];
+                AppointmentModel model =
+                    scheduleController.pastAppointment[index];
                 return CustomDoctorCard(
                   imageUrl: model.userId?.img ?? '',
                   patentName: model.userId?.name ?? '',
-                  time: '${model.date != null ? DateFormat.yMMMd().format(model.date!) : ''} (${model.time ?? ''})',
+                  time:
+                      '${model.date != null ? DateFormat.yMMMd().format(model.date!) : ''} (${model.time ?? ''})',
                   loacation: model.userId?.location ?? '',
                   onTap: () {},
+                  showPopupButton: true,
+                  reScheduleButton: () {
+                    if (model.id != null) {
+                      Navigator.pop(context);
+                      homeController.showHomePopup(id: model.id!);
+                    }
+                  },
                 );
               },
             ),
