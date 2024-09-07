@@ -6,8 +6,10 @@ import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
+import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/appointment_screen_popup/appointment_cancel_popup.dart';
+import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/model/appoinment_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,8 +18,11 @@ class PatientAppointmentController extends GetxController {
       TextEditingController().obs;
 
   Rx<TextEditingController> describePbmController = TextEditingController().obs;
-
   GeneralController generalController = Get.find<GeneralController>();
+
+  Rx<Status> appoinmentLoading = Status.loading.obs;
+  void appoinmentLoadingMethod({required Status status}) =>
+      appoinmentLoading = status.obs;
 
   ///=======================List============
   final List<String> userList = [
@@ -29,6 +34,7 @@ class PatientAppointmentController extends GetxController {
   //============================ Appointment screen more popup buton item list =========================
 
   List<String> moreButtonList = [AppStrings.reschedule, AppStrings.cancel];
+  List<String> cancelButton = [AppStrings.cancel];
 
   ///============================== Appointment Screen pop up ======================//
 
@@ -77,13 +83,43 @@ class PatientAppointmentController extends GetxController {
             multipartBody: multipartBody);
 
     if (response.statusCode == 200) {
+      navigator?.pop();
       toastMessage(
           message: "Appointment Request Send Successfully",
           colors: Colors.green);
-      navigator?.pop();
     } else {
       navigator?.pop();
       ApiChecker.checkApi(response);
     }
+  }
+
+  ///======================== Get My Appoinments =======================
+  RxList<AppoinmentListModel> appoinmentList = <AppoinmentListModel>[].obs;
+
+  getMyAppoinment({required String status}) async {
+    appoinmentList.value = [];
+    appoinmentLoadingMethod(status: Status.loading);
+    refresh();
+    var response =
+        await ApiClient.getData(ApiUrl.getAppoinments(status: status));
+
+    appoinmentList.value = List<AppoinmentListModel>.from(
+        response.body["data"].map((x) => AppoinmentListModel.fromJson(x)));
+
+    if (response.statusCode == 200) {
+    } else {
+      if (response.statusText == ApiClient.somethingWentWrong) {
+        appoinmentLoadingMethod(status: Status.internetError);
+      } else {
+        appoinmentLoadingMethod(status: Status.error);
+      }
+      ApiChecker.checkApi(response);
+    }
+  }
+
+  @override
+  void onInit() {
+    getMyAppoinment(status: AppStrings.accepted);
+    super.onInit();
   }
 }

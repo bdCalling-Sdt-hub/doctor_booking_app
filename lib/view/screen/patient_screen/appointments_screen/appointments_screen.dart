@@ -1,3 +1,4 @@
+import 'package:doctor_booking/helper/time_converter/time_converter.dart';
 import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/controller/patient_appointment_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
@@ -38,47 +39,55 @@ class AppointmentsScreen extends StatelessWidget {
                       patientAppointmentController.selectedIndex.value,
                   onTabSelected: (index) {
                     patientAppointmentController.selectedIndex.value = index;
+                    switch (patientAppointmentController.selectedIndex.value) {
+                      case 0:
+                        // ignore: void_checks
+                        return patientAppointmentController.getMyAppoinment(
+                            status: AppStrings.accepted);
+
+                      case 1:
+                        // ignore: void_checks
+                        return patientAppointmentController.getMyAppoinment(
+                            status: AppStrings.completed);
+
+                      case 2:
+                        // ignore: void_checks
+                        return patientAppointmentController.getMyAppoinment(
+                            status: AppStrings.rejected);
+                    }
                     // Handle any additional actions here if needed
                   },
                   selectedColor: AppColors.blackNormal,
                   unselectedColor: AppColors.whiteDarkHover,
                 ),
 
-                ///=================================Upcoming Data==================
+                ///======================== Upcoming Data ==================
                 patientAppointmentController.selectedIndex.value == 0
                     ? Column(
-                        children: List.generate(4, (index) {
+                        children: List.generate(
+                            patientAppointmentController.appoinmentList.length,
+                            (index) {
+                          var data = patientAppointmentController
+                              .appoinmentList[index];
                           return CustomAppointmentCard(
                             imageUrl: AppConstants.userNtr,
-                            name: 'Jenny Wilson',
-                            profession: 'This is a subtitle',
+                            name: data.name ?? "",
+                            profession: data.doctorId?.specialization ?? "",
                             trailing: CustomPopupmenuButton(
                               onChanged: (value) {
-                                if (value == AppStrings.reschedule) {
-                                  Get.toNamed(
-                                      AppRoutes.rescheduleAppointmentScreen);
-                                } else {
-                                  patientAppointmentController
-                                      .appointmentCancelPopup();
-                                }
+                                patientAppointmentController
+                                    .appointmentCancelPopup();
                               },
-                              items:
-                                  patientAppointmentController.moreButtonList,
+                              items: patientAppointmentController.cancelButton,
                               icons: Icons.more_vert,
                             ),
-
-                            //IconButton(
-                            //   icon: const Icon(Icons.more_vert),
-                            //   onPressed: () {
-                            //     // Handle trailing icon press
-                            //   },
-                            // ),
                             onTap: () {
                               // Handle card tap
                             },
-                            date: '02 Jun, Wed',
-                            time: '10 AM',
-                            location: 'Coronary Care Hospital',
+                            date: DateConverter.estimatedDate(
+                                data.date ?? DateTime.now()),
+                            time: data.time ?? "",
+                            location: data.doctorId?.location ?? "",
                           );
                         }),
                       )
@@ -87,21 +96,36 @@ class AppointmentsScreen extends StatelessWidget {
                     ///==================================Past Data=====================
                     patientAppointmentController.selectedIndex.value == 1
                         ? Column(
-                            children: List.generate(4, (index) {
+                            children: List.generate(
+                                patientAppointmentController
+                                    .appoinmentList.length, (index) {
+                              var data = patientAppointmentController
+                                  .appoinmentList[index];
                               return CustomAppointmentCard(
                                 imageUrl: AppConstants.userNtr,
-                                name: 'Masum Raj',
-                                profession: 'This is a subtitle',
-                                trailing: IconButton(
-                                  icon: const Icon(Icons.more_vert),
-                                  onPressed: () {},
+                                name: data.name ?? "",
+                                profession: data.doctorId?.specialization ?? "",
+                                trailing: CustomPopupmenuButton(
+                                  onChanged: (value) {
+                                    if (value == AppStrings.reschedule) {
+                                      Get.toNamed(AppRoutes
+                                          .rescheduleAppointmentScreen);
+                                    } else {
+                                      patientAppointmentController
+                                          .appointmentCancelPopup();
+                                    }
+                                  },
+                                  items: patientAppointmentController
+                                      .moreButtonList,
+                                  icons: Icons.more_vert,
                                 ),
                                 onTap: () {
                                   // Handle card tap
                                 },
-                                date: '02 Jun, Wed',
-                                time: '10 AM',
-                                location: 'Coronary Care Hospital',
+                                date: DateConverter.estimatedDate(
+                                    data.date ?? DateTime.now()),
+                                time: data.time ?? "",
+                                location: data.doctorId?.location ?? "",
                               );
                             }),
                           )
@@ -110,23 +134,37 @@ class AppointmentsScreen extends StatelessWidget {
                         ///===============================Canceled Data=========================
                         patientAppointmentController.selectedIndex.value == 2
                             ? Column(
-                                children: List.generate(4, (index) {
+                                children: List.generate(
+                                    patientAppointmentController
+                                        .appoinmentList.length, (index) {
+                                  var data = patientAppointmentController
+                                      .appoinmentList[index];
                                   return CustomAppointmentCard(
                                     imageUrl: AppConstants.userNtr,
-                                    name: 'Rafsan Vai',
-                                    profession: 'This is a subtitle',
-                                    trailing: IconButton(
-                                      icon: const Icon(Icons.more_vert),
-                                      onPressed: () {
-                                        // Handle trailing icon press
+                                    name: data.name ?? "",
+                                    profession:
+                                        data.doctorId?.specialization ?? "",
+                                    trailing: CustomPopupmenuButton(
+                                      onChanged: (value) {
+                                        if (value == AppStrings.reschedule) {
+                                          Get.toNamed(AppRoutes
+                                              .rescheduleAppointmentScreen);
+                                        } else {
+                                          patientAppointmentController
+                                              .appointmentCancelPopup();
+                                        }
                                       },
+                                      items: patientAppointmentController
+                                          .moreButtonList,
+                                      icons: Icons.more_vert,
                                     ),
                                     onTap: () {
                                       // Handle card tap
                                     },
-                                    date: '02 Jun, Wed',
-                                    time: '10 AM',
-                                    location: 'Coronary Care Hospital',
+                                    date: DateConverter.estimatedDate(
+                                        data.date ?? DateTime.now()),
+                                    time: data.time ?? "",
+                                    location: data.doctorId?.location ?? "",
                                   );
                                 }),
                               )

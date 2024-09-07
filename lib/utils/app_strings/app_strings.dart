@@ -105,6 +105,11 @@ class AppStrings {
   ///=================================Doctor’s Profile=====================
   static const String doctorProfile = 'Doctor’s Profile';
   static const String experience = 'Experience';
+  static const String accepted = 'accepted';
+  static const String rejected = 'rejected';
+  static const String pending = 'pending';
+  static const String completed = 'completed';
+
   static const String patientsChecked = 'Patients Checked';
   static const String overallRating = 'Overall Rating';
   static const String appointmentFee = 'Appointment Fee';
