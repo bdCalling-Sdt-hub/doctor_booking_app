@@ -7,6 +7,7 @@ import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/d
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
+import 'package:doctor_booking/view/widgets/custom_popupmenu_button/custom_popupmenu_button.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -84,13 +85,37 @@ class DoctorEditProfessionalProfileScreen extends StatelessWidget {
                         height: 8.h,
                       ),
                       //============ doctor specilization ============//
+                      // CustomFormCard(
+                      //   hasBackgroundColor: true,
+                      //   title: AppStrings.specialization,
+                      //   controller: doctorProfileController
+                      //       .doctorSpecializationController.value,
+                      //   hintTextChangeColor: true,
+                      //   hintText: 'Cardiologist.',
+                      //   validator: (value) {
+                      //     if (value == null || value.toString().isEmpty) {
+                      //       return AppStrings.fieldCantBeEmpty.tr;
+                      //     } else {
+                      //       return null;
+                      //     }
+                      //   },
+                      // ),
                       CustomFormCard(
                         hasBackgroundColor: true,
-                        title: AppStrings.specialization,
+                        title: 'Specialisation',
                         controller: doctorProfileController
                             .doctorSpecializationController.value,
-                        hintTextChangeColor: true,
-                        hintText: 'Cardiologist.',
+                        readOnly: true,
+                        suffixIcon: CustomPopupmenuButton(
+                          onChanged: (value) {
+                            doctorProfileController
+                                .doctorSpecializationController
+                                .value
+                                .text = value;
+                          },
+                          items: generalController.categoryListName,
+                          icons: Icons.keyboard_arrow_down,
+                        ),
                         validator: (value) {
                           if (value == null || value.toString().isEmpty) {
                             return AppStrings.fieldCantBeEmpty.tr;

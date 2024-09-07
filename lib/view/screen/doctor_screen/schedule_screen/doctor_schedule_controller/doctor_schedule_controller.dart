@@ -118,7 +118,7 @@ class DoctorScheduleController extends GetxController {
       debugPrint(
           "==============================${response.statusCode}====================");
     } else {
-      if (response.statusText == ApiClient.noInternetMessage) {
+      if (response.statusText == ApiClient.somethingWentWrong) {
         setRxRequestStatus(Status.internetError);
       } else {
         setRxRequestStatus(Status.error);

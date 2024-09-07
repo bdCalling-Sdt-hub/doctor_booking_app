@@ -81,9 +81,7 @@ class AppointmentsScreen extends StatelessWidget {
                               items: patientAppointmentController.cancelButton,
                               icons: Icons.more_vert,
                             ),
-                            onTap: () {
-                              // Handle card tap
-                            },
+                            onTap: () {},
                             date: DateConverter.estimatedDate(
                                 data.date ?? DateTime.now()),
                             time: data.time ?? "",

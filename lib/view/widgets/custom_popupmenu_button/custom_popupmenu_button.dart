@@ -20,7 +20,7 @@ class CustomPopupmenuButton extends StatelessWidget {
       color: AppColors.white,
       icon: Icon(
         icons ?? Icons.arrow_forward_ios,
-        color: AppColors.blackNormal,
+        color: AppColors.grayNormal,
       ),
       itemBuilder: (context) => List.generate(items.length, (index) {
         return PopupMenuItem(
