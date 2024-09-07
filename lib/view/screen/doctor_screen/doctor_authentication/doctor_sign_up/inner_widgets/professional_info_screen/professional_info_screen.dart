@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:doctor_booking/controller/doctor_auth_controller/doctor_auth_controller.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_auth_controller/doctor_auth_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';

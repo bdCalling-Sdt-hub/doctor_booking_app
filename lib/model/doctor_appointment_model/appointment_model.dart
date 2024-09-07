@@ -108,41 +108,41 @@ class AppointmentModel {
 }
 
 class UserId {
-  dynamic img;
   dynamic age;
   String? id;
   String? name;
   String? email;
   String? location;
   String? phone;
+  String? img;
 
   UserId({
-    this.img,
     this.age,
     this.id,
     this.name,
     this.email,
     this.location,
     this.phone,
+    this.img,
   });
 
   factory UserId.fromJson(Map<String, dynamic> json) => UserId(
-        img: json["img"],
         age: json["age"],
         id: json["_id"],
         name: json["name"],
         email: json["email"],
         location: json["location"],
         phone: json["phone"],
+        img: json["img"],
       );
 
   Map<String, dynamic> toJson() => {
-        "img": img,
         "age": age,
         "_id": id,
         "name": name,
         "email": email,
         "location": location,
         "phone": phone,
+        "img": img,
       };
 }

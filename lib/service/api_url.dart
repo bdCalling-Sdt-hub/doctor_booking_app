@@ -46,6 +46,14 @@ class ApiUrl {
   static const profile = '/auth/profile';
   //=============================== Appointment ===========================//
   static const doctorAppointment = '/appointment/get-my-appointments';
+  //============================  Pending appointment =========================
+
+  static const pendingDoctorAppointment = "$doctorAppointment?status=pending";
+  static const pastDoctorAppointment = "$doctorAppointment?type=past";
+  static const acceptedDoctorAppointment = "$doctorAppointment?status=accepted";
+  static const appointmentUpdateStatus =
+      '/appointment/update-appointment-status/';
+
   //======================= Notification ===============================//
   static const doctorNotification = '/notification/get-notifications';
 
@@ -67,4 +75,6 @@ class ApiUrl {
   static const privacyPolicy = '/settings/get-settings/privacy';
   //=============================== Update Appointment ===================================//
   static const updateAppointment = '/appointment/update-appointment/';
+  //=========================== Doctor create payment account ==================//
+  static const doctorCreatePaymentAccount = '/appointment/update-appointment/';
 }

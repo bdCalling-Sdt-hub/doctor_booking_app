@@ -58,6 +58,7 @@ class AppStrings {
   static const String weekend = "WEEKEND";
 
   static const String confirm = "Confirm";
+  static const String information = "Information";
   static const String yourMailHere = "Your mail here";
   static const String phoneNumber = "Phone Number";
   static const String yourPhoneNumberHere = "Your phone number here";
@@ -117,6 +118,25 @@ class AppStrings {
   static const String editProfessinalInformation = 'Edit Professional Info';
   static const String editAppointmentInformation = 'Edit Appointment Info';
   static const String appointmentInfo = 'Appointment Info';
+  static const String cardholdersName = "Card-holder's Name";
+  static const String accountName = "Account Name";
+  static const String front = "Front";
+  static const String dateofBirth = "Date of Birth";
+  static const String addressCity = "Address (City)";
+  static const String addressCountry = "Address (Country)";
+  static const String addressPostalCode = "Address (Postal Code)";
+  static const String line1 = "Line 1";
+  static const String typehere = "type here...";
+  static const String bankInfoProductdescription =
+      "Bank Info (Product description)";
+  static const String bankInfoWebsite = "Bank Info (Website)";
+  static const String bankInfoBusinessname = "Bank Info (Business name)";
+  static const String bankInfoCountry = "Bank Info (Country)";
+  static const String bankInfoCurrency = "Bank Info (Currency)";
+  static const String accountHolderType = "Account Holder Type";
+  static const String bankAccountNumber = "Bank Account Number";
+  static const String back = "Back";
+  static const String submit = "Submit";
 
   ///==========================Schedule=================
   static const String schedule = 'Schedule';
@@ -134,6 +154,11 @@ class AppStrings {
   static const String reschedule = 'Reschedule';
   static const String similarSpecialist = 'Similar Specialists';
   static const String daysOfWeek = 'Day of Week:';
+  static const String pending = 'Pending';
+  static const String accept = 'Accept';
+  static const String reject = 'Reject';
+  static const String rejected = 'rejected';
+  static const String accepted = 'accepted';
 
   ///=============================Profile===================
   static const String profile = 'Profile';
@@ -200,6 +225,7 @@ class AppStrings {
   static const String markAllAsRead = 'Mark all as read';
   static const String allPatientList = 'All Patient List';
   static const String yes = 'Yes';
+  static const String no = 'No';
   static const String cancel = 'Cancel';
   static const String weight = 'Weight (KG)';
   static const String reasonOfVisit = 'Reason of Visit';
@@ -215,6 +241,9 @@ class AppStrings {
   static const String californiaUsa = 'California, USA';
   static const String cammera = 'Cammera';
   static const String gallery = 'Gallery';
+  static const String payment = 'Payment';
+  static const String creditDebitCards = 'Credit/Debit Cards';
+  static const String addNewCard = 'Add New Card';
 
   //===================== Doctor Notification =====================//
   static const String notificationToday = 'TODAY';

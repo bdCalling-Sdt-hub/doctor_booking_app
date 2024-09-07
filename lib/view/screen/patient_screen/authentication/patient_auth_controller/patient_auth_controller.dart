@@ -79,6 +79,8 @@ class PatientAuthController extends GetxController {
     );
 
     if (response.statusCode == 200) {
+      signInLoading.value = false;
+      refresh();
       if (response.body['data']['role'] == 'DOCTOR') {
         saveInfo(response: response);
         Get.offAllNamed(AppRoutes.doctorHomeScreen);
@@ -88,6 +90,8 @@ class PatientAuthController extends GetxController {
       }
     } else {
       ApiChecker.checkApi(response);
+      signInLoading.value = false;
+      refresh();
     }
     signInLoading.value = false;
     refresh();

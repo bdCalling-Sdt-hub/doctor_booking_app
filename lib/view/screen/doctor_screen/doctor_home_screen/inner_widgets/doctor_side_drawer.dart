@@ -67,6 +67,14 @@ class DoctorSideDrawer extends StatelessWidget {
 
                     ///====================== settings======================>
                     customRow(
+                        title: AppStrings.paymentOption,
+                        icon: AppIcons.addCard,
+                        onTap: () {
+                          Get.toNamed(AppRoutes.doctorPaymentScreen);
+                        }),
+
+                    ///====================== settings======================>
+                    customRow(
                         title: AppStrings.settings,
                         icon: AppIcons.setting,
                         onTap: () {

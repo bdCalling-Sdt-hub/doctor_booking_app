@@ -17,6 +17,7 @@ class CustomFormCard extends StatelessWidget {
   final bool isMultiLine;
   final String? Function(dynamic)? validator;
   final bool? hintTextChangeColor;
+  final int? maxLine;
 
   const CustomFormCard({
     super.key,
@@ -31,6 +32,7 @@ class CustomFormCard extends StatelessWidget {
     this.validator,
     this.hintText,
     this.hintTextChangeColor = false,
+    this.maxLine,
   });
 
   @override
@@ -65,14 +67,13 @@ class CustomFormCard extends StatelessWidget {
           isPassword: isPassword,
           textEditingController: controller,
           inputTextStyle: GoogleFonts.poppins(color: AppColors.grayNormal),
-          fillColor: hasBackgroundColor
-              ? AppColors.whiteLightActive
-              : AppColors.whiteNormal,
+          fillColor:
+              hasBackgroundColor ? AppColors.white : AppColors.whiteNormal,
           fieldBorderColor: AppColors.grayLightHover,
           keyboardType:
               isPassword ? TextInputType.visiblePassword : TextInputType.text,
           onTap: onTap,
-          maxLines: isMultiLine ? 8 : 1,
+          maxLines: isMultiLine ? 8 : maxLine ?? 1,
         ),
         SizedBox(height: 15.h),
       ],

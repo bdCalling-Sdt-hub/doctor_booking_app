@@ -1,5 +1,5 @@
-import 'package:doctor_booking/controller/doctor_home_controller/doctor_home_controller.dart';
-import 'package:doctor_booking/controller/doctor_profile_controller/doctor_profile_controller.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_controller/doctor_home_controller.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_profile_controller/doctor_profile_controller.dart';
 import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
@@ -342,6 +342,7 @@ class AvailableTimeContainer extends StatelessWidget {
     return GridView.builder(
         shrinkWrap: true,
         itemCount: selectedTime?.length ?? 0,
+        physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4,
             mainAxisSpacing: 8.w,
@@ -467,11 +468,11 @@ class PopupButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: 40.h,
+        height: 38.h,
         width: 129.w,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100),
+          borderRadius: BorderRadius.circular(8),
           color: AppColors.blackNormal,
         ),
         child: CustomText(
