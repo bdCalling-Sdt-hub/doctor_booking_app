@@ -4,6 +4,7 @@ import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/profile_screen/controller/profile_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_appointment_card/custom_appointment_card.dart';
 import 'package:doctor_booking/view/widgets/custom_popupmenu_button/custom_popupmenu_button.dart';
@@ -18,6 +19,9 @@ class AppointmentsScreen extends StatelessWidget {
 
   final PatientAppointmentController patientAppointmentController =
       Get.find<PatientAppointmentController>();
+
+  final PaitentProfileController profileController =
+      Get.find<PaitentProfileController>();
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +87,13 @@ class AppointmentsScreen extends StatelessWidget {
                               icons: Icons.more_vert,
                             ),
                             onTap: () {
+                              debugPrint(
+                                  "User ID>>>>${data.userId} || User name>>>>${profileController.profileData.value.name} || Call ID>>>${data.id}");
                               Get.to(() => AudioVideoCall(
+                                    userID: data.userId ?? "",
+                                    userName: profileController
+                                            .profileData.value.name ??
+                                        "",
                                     callID: data.id ?? "",
                                   ));
                             },
