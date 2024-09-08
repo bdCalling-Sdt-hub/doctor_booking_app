@@ -1,4 +1,5 @@
 import 'package:doctor_booking/controller/notification_controller/notification_controller.dart';
+import 'package:doctor_booking/helper/time_converter/time_converter.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
@@ -49,106 +50,113 @@ class DoctorNotificationScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 20.0.h),
                     child: Column(
                       children: [
-                        SizedBox(
-                          height: 10.h,
-                        ),
+                        // SizedBox(
+                        //   height: 10.h,
+                        // ),
 
                         ///=================== to day & mark all text =============//
-                        SizedBox(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CustomText(
-                                text: AppStrings.notificationToday,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.whiteDarkActive,
-                              ),
-                              CustomText(
-                                text: AppStrings.markAllAsRead,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.grayNormal,
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 24.h,
-                        ),
-                        //=================== notifications ===================///
-                        Column(
-                          children: List.generate(
-                            notificationController
-                                .doctorNotificationList.length,
-                            (index) => DoctorNotificationCard(
-                              container: const CircleAvatar(
-                                radius: 30,
-                                backgroundColor: AppColors.blackLight,
-                                child: CustomImage(
-                                  imageSrc: AppIcons.calendarClock,
-                                  sizeWidth: 24,
-                                ),
-                              ),
-                              title: notificationController
-                                      .doctorNotificationList[index].title ??
-                                  '',
-                              description: notificationController
-                                      .doctorNotificationList[index].body ??
-                                  '',
-                              time: '2h',
-                              onTap: () {},
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 24.h,
-                        ),
+                        // SizedBox(
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //     children: [
+                        //       CustomText(
+                        //         text: AppStrings.notificationToday,
+                        //         fontSize: 16.sp,
+                        //         fontWeight: FontWeight.w400,
+                        //         color: AppColors.whiteDarkActive,
+                        //       ),
+                        //       CustomText(
+                        //         text: AppStrings.markAllAsRead,
+                        //         fontSize: 15.sp,
+                        //         fontWeight: FontWeight.w400,
+                        //         color: AppColors.grayNormal,
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        // SizedBox(
+                        //   height: 24.h,
+                        // ),
+                        // //=================== notifications ===================///
+                        // Column(
+                        //   children: List.generate(
+                        //     notificationController
+                        //         .doctorNotificationList.length,
+                        //     (index) => DoctorNotificationCard(
+                        //       container: const CircleAvatar(
+                        //         radius: 30,
+                        //         backgroundColor: AppColors.blackLight,
+                        //         child: CustomImage(
+                        //           imageSrc: AppIcons.calendarClock,
+                        //           sizeWidth: 24,
+                        //         ),
+                        //       ),
+                        //       title: notificationController
+                        //               .doctorNotificationList[index].title ??
+                        //           '',
+                        //       description: notificationController
+                        //               .doctorNotificationList[index].body ??
+                        //           '',
+                        //       time: '2h',
+                        //       onTap: () {},
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(
+                        //   height: 24.h,
+                        // ),
                         //========================== yester day notification ====================//
                         SizedBox(
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              CustomText(
-                                text: AppStrings.notificationYesterday,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.whiteDarkActive,
-                              ),
-                              CustomText(
-                                text: AppStrings.markAllAsRead,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.grayNormal,
-                              ),
+                              // CustomText(
+                              //   text: AppStrings.notificationYesterday,
+                              //   fontSize: 16.sp,
+                              //   fontWeight: FontWeight.w400,
+                              //   color: AppColors.whiteDarkActive,
+                              // ),
+
+                              TextButton(
+                                onPressed: () {},
+                                child: CustomText(
+                                  text: AppStrings.markAllAsRead,
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.grayNormal,
+                                ),
+                              )
                             ],
                           ),
                         ),
                         SizedBox(
                           height: 24.h,
                         ),
-                        Column(
-                          children: List.generate(
-                            2,
-                            (index) => DoctorNotificationCard(
-                              container: const CircleAvatar(
-                                radius: 30,
-                                backgroundColor: AppColors.blackLight,
-                                child: CustomImage(
-                                  imageSrc: AppIcons.calendarClock,
-                                  sizeWidth: 24,
+                        Obx(() {
+                          return Column(
+                            children: List.generate(
+                                notificationController
+                                    .doctorNotificationList.length, (index) {
+                              var data = notificationController
+                                  .doctorNotificationList[index];
+                              return DoctorNotificationCard(
+                                container: const CircleAvatar(
+                                  radius: 30,
+                                  backgroundColor: AppColors.blackLight,
+                                  child: CustomImage(
+                                    imageSrc: AppIcons.calendarClock,
+                                    sizeWidth: 24,
+                                  ),
                                 ),
-                              ),
-                              title: 'Appointment Success',
-                              description:
-                                  'You have successfully cancelled your appointment with Dr. David Patel.',
-                              time: '2h',
-                              onTap: () {
-                                notificationController.showNotificationPopup();
-                              },
-                            ),
-                          ),
-                        ),
+                                title: data.title ?? '',
+                                description: data.body ?? '',
+                                time: DateConverter.formatTimeAgo(
+                                    data.createdAt ?? ""),
+                                onTap: () {},
+                              );
+                            }),
+                          );
+                        }),
                       ],
                     ),
                   ),

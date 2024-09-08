@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_controller/doctor_home_controller.dart';
 import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
 import 'package:doctor_booking/model/doctor_profile_model/doctor_profile_model.dart';
@@ -16,6 +15,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 class DoctorProfileController extends GetxController {
+  // final DoctorAuthController authController = Get.find<DoctorAuthController>();
   final DoctorHomeController doctorHomeController =
       Get.find<DoctorHomeController>();
   Rx<TextEditingController> doctorNameController = TextEditingController().obs;
@@ -433,10 +433,9 @@ class DoctorProfileController extends GetxController {
 
   String formatTimeOfDay(TimeOfDay timeOfDay) {
     final now = DateTime.now();
-    final dateTime = DateTime(
-        now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
-    final format = DateFormat.jm(); // This provides the format for AM/PM
-    return format.format(dateTime);
+    final format = DateFormat('h:mm a').format(DateTime(
+        now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute));
+    return format;
   }
 
   //====================================== Updater Doctor Appointment ==================================//
@@ -476,6 +475,8 @@ class DoctorProfileController extends GetxController {
           "startTime": sundayStartTimeController.value.text,
           "endTime": sundayEndTimeController.value.text
         }
+
+        //  "sunday": {"startTime": "5:52 PM", "endTime": "04:47 PM"}
       }),
       "available_for": jsonEncode({
         "monday": mondayTypeController.value.text.toString(),
@@ -487,6 +488,9 @@ class DoctorProfileController extends GetxController {
         "sunday": sundayTypeController.value.text.toString(),
       })
     };
+
+    debugPrint(
+        "Sunday Time========>>>>>>>>>>>>Start${sundayStartTimeController.value.text} || End${sundayEndTimeController.value.text}");
 
     var response = await ApiClient.patchData(
         "${ApiUrl.updateDoctorProfile}$id", jsonEncode(body));

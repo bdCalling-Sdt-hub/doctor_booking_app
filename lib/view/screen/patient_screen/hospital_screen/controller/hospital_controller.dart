@@ -29,13 +29,13 @@ class HospitalController extends GetxController {
     if (!await Permission.location.isGranted) {
       PermissionStatus status = await Permission.location.request();
       if (status != PermissionStatus.granted) {
-        return Future.error('Location permissions are denied');
+        return toastMessage(message: 'Location permissions are denied');
       }
     }
 
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
+      return toastMessage(message: 'Turn on Location');
     }
 
     Position position = await Geolocator.getCurrentPosition(

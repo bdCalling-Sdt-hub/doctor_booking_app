@@ -1,8 +1,8 @@
 class ApiUrl {
   static const baseUrl = "http://103.161.9.133:5000";
-
-  //============================ Image base url ===========
   static const imageBaseUrl = 'http://103.161.9.133:5000';
+  static const socketUrl =
+      'http://103.161.9.133:5000?userId=66d7efd8ca187e791dac4758';
 
   ///=============================== Auth Section ==============================
 

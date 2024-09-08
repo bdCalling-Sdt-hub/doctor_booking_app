@@ -1,5 +1,6 @@
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/core/dependency/dependency_injection.dart';
+import 'package:doctor_booking/service/socket_service.dart';
 import 'package:doctor_booking/view/widgets/device_utils/device_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +12,7 @@ void main() {
   di.dependencies();
   DeviceUtils.lockDevicePortrait();
 
+  SocketApi.init();
   runApp(const MyApp());
 }
 
