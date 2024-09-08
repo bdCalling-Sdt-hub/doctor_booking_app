@@ -30,8 +30,9 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-.android
-.ios
+/android
+/ios
+/lib/utils/api_keys
 
 # Symbolication related
 app.*.symbols
