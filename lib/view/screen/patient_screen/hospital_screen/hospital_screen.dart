@@ -62,6 +62,7 @@ class HospitalScreen extends StatelessWidget {
           ),
           Expanded(
             child: CustomText(
+              overflow: TextOverflow.fade,
               maxLines: 3,
               text: name,
               fontWeight: FontWeight.w400,

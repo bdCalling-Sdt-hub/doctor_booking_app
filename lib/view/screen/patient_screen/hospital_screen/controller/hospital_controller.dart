@@ -46,10 +46,10 @@ class HospitalController extends GetxController {
       // Get.toNamed(AppRoutes.hospitalScreen,
       //     arguments: [value.latitude, value.longitude]);
 
-      // fetchNearbyHospitals(
-      //     position.latitude, position.longitude, GOOGLE_MAP_KEY);
+      fetchNearbyHospitals(
+          position.latitude, position.longitude, GOOGLE_MAP_KEY);
 
-      fetchNearbyHospitals(24.098379, 90.328712, GOOGLE_MAP_KEY);
+      //fetchNearbyHospitals(24.098379, 90.328712, GOOGLE_MAP_KEY);
     }
   }
 
