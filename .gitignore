@@ -32,7 +32,7 @@ migrate_working_dir/
 /build/
 /android
 /ios
-**/lib/utils/api_keys
+**/lib/utils/api_keys.dart
 
 # Symbolication related
 app.*.symbols
