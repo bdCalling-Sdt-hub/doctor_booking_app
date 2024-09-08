@@ -1,1 +1,1 @@
-String GOOGLE_MAP_KEY = "";
+String GOOGLE_MAP_KEY = "   ";
