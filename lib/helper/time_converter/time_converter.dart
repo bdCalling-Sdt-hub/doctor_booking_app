@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class DateConverter {
@@ -96,5 +97,11 @@ class DateConverter {
       'Dec'
     ];
     return months[month - 1];
+  } 
+ static String formatTimeOfDay(TimeOfDay timeOfDay) {
+    final now = DateTime.now();
+    final format = DateFormat('h:mm a').format(DateTime(
+        now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute));
+    return format;
   }
 }

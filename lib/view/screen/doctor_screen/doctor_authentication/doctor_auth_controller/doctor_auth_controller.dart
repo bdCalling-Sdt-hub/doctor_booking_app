@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
+import 'package:doctor_booking/helper/time_converter/time_converter.dart';
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
@@ -12,7 +13,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
+
 
 class DoctorAuthController extends GetxController {
   GeneralController generalController = Get.find<GeneralController>();
@@ -139,17 +140,9 @@ class DoctorAuthController extends GetxController {
         context: Get.context!, initialTime: TimeOfDay.now());
 
     if (picTime != null) {
-      DateTime dateTimeNow = DateTime.now();
+    
 
-      DateTime picDate = DateTime(
-        dateTimeNow.year,
-        dateTimeNow.month,
-        dateTimeNow.day,
-        picTime.hour,
-        picTime.minute,
-      );
-
-      String formatDateTime = DateFormat.jm().format(picDate);
+      String formatDateTime = DateConverter.formatTimeOfDay(picTime);
       //=================== Sun Day ================
       if (day == 1 && num == 1) {
         sundayStartTimeController.value.text = formatDateTime;

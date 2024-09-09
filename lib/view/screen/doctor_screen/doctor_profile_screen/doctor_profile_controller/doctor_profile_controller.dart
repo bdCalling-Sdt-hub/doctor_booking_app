@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:doctor_booking/helper/time_converter/time_converter.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_controller/doctor_home_controller.dart';
 import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
 import 'package:doctor_booking/model/doctor_profile_model/doctor_profile_model.dart';
@@ -12,7 +13,6 @@ import 'package:doctor_booking/view/widgets/custom_image_picker_popup/custom_ima
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 
 class DoctorProfileController extends GetxController {
   // final DoctorAuthController authController = Get.find<DoctorAuthController>();
@@ -384,7 +384,7 @@ class DoctorProfileController extends GetxController {
     );
 
     if (picTime != null) {
-      String formatDateTime = formatTimeOfDay(picTime);
+      String formatDateTime =DateConverter.formatTimeOfDay(picTime);
 
       debugPrint(
           "=====================pictime=============$picTime===========================");
@@ -431,12 +431,7 @@ class DoctorProfileController extends GetxController {
     }
   }
 
-  String formatTimeOfDay(TimeOfDay timeOfDay) {
-    final now = DateTime.now();
-    final format = DateFormat('h:mm a').format(DateTime(
-        now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute));
-    return format;
-  }
+  
 
   //====================================== Updater Doctor Appointment ==================================//
 

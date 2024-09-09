@@ -70,10 +70,12 @@ class DoctorHomePopup extends StatelessWidget {
                 maxDate: DateTime(2090),
                 initialDate: DateTime.now(),
                 onDateChange: (date) {
-                  doctorHomeController.doctorRescheduleDate.value =
-                      DateFormat('yMd').format(date).toLowerCase();
-                  doctorHomeController.doctorRescheduleDay.value =
-                      DateFormat('EEEE').format(date).toLowerCase();
+                 //  doctorHomeController.doctorRescheduleDate.value =
+                    //   DateFormat('yMd').format(date).toLowerCase();
+                   doctorHomeController.doctorRescheduleDay.value =
+                      DateFormat('EEEE').format(date).toLowerCase(); 
+
+                  doctorHomeController.initRescheduleDateMonthYaer(date);
 
                   debugPrint(
                       "==============${doctorHomeController.doctorRescheduleDate.value}===============");
