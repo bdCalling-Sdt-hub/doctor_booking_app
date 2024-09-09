@@ -7,6 +7,7 @@ import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
+import 'package:doctor_booking/service/socket_service.dart';
 import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:flutter/foundation.dart';
@@ -79,13 +80,18 @@ class PatientAuthController extends GetxController {
     );
 
     if (response.statusCode == 200) {
+      // SocketApi.socket.dispose();
+      // SocketApi.socket.disconnect().;
+
       signInLoading.value = false;
       refresh();
       if (response.body['data']['role'] == 'DOCTOR') {
         saveInfo(response: response);
+        SocketApi.init();
         Get.offAllNamed(AppRoutes.doctorHomeScreen);
       } else {
         saveInfo(response: response);
+        SocketApi.init();
         Get.offAllNamed(AppRoutes.homeScreen);
       }
     } else {
@@ -157,6 +163,7 @@ class PatientAuthController extends GetxController {
       navigator?.pop();
       SharePrefsHelper.setString(
           AppConstants.bearerToken, response.body["accessToken"]);
+
       Get.offAllNamed(AppRoutes.homeScreen);
     } else {
       navigator?.pop();
@@ -215,7 +222,7 @@ class PatientAuthController extends GetxController {
         AppConstants.userLocation, response.body["data"]["location"]);
 
     SharePrefsHelper.setString(
-        AppConstants.userImage, response.body["data"]["image"] ?? "");
+        AppConstants.userImage, response.body["data"]["img"] ?? "");
 
     generalController.getSavedInfo();
   }

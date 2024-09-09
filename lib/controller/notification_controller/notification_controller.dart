@@ -1,7 +1,9 @@
+import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/model/doctor_notification_model/notification_model.dart';
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
+import 'package:doctor_booking/service/socket_service.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
@@ -10,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NotificationController extends GetxController {
+  GeneralController generalController = Get.find<GeneralController>();
   final List<Map<String, dynamic>> notificationList = [
     {
       "title": "Appointment Success!",
@@ -67,6 +70,7 @@ class NotificationController extends GetxController {
 
   final rxRequestStatus = Status.loading.obs;
   void setRxRequestStatus(Status value) => rxRequestStatus.value = value;
+
   getAllDoctorNotification() async {
     setRxRequestStatus(Status.loading);
     var response = await ApiClient.getData(ApiUrl.doctorNotification);
@@ -86,11 +90,49 @@ class NotificationController extends GetxController {
     }
   }
 
-  
+  ///======================== Read All Notification =======================
+  readAllNotification() async {
+    generalController.showPopUpLoader();
+    var response = await ApiClient.patchData(ApiUrl.readAllNotification, {},
+        isContentType: false);
+    if (response.statusCode == 200) {
+      navigator?.pop();
+      getAllDoctorNotification();
+    } else {
+      navigator?.pop();
+      ApiChecker.checkApi(response);
+    }
+  }
+
+  ///======================== Listen Socket Notification ======================
+  listenNewNotification() {
+    SocketApi.socket?.on("new-notification", (value) {
+      debugPrint("Notification Socket===========>>>>>>>>>>>>$value");
+
+      Map<String, dynamic> getresponse = value;
+
+      DoctorNotificationModel newNotification =
+          DoctorNotificationModel.fromJson(getresponse);
+
+      doctorNotificationList.insert(0, newNotification);
+    });
+
+    doctorNotificationList.refresh();
+  }
+
+  // listenNewNotificat() {
+  //   SocketApi.socket.emitWithAck("new-notification::656587875875875875",
+  //       (data) {
+  //     debugPrint("Notification Socket===========>>>>>>>>>>>>$data");
+  //   });
+
+  //   doctorNotificationList.refresh();
+  // }
 
   @override
   void onInit() {
-    super.onInit();
+    listenNewNotification();
     getAllDoctorNotification();
+    super.onInit();
   }
 }

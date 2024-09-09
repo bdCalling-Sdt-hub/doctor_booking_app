@@ -1,53 +1,56 @@
-import 'package:doctor_booking/service/api_url.dart';
+import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
+import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:flutter/foundation.dart';
-
 import 'package:socket_io_client/socket_io_client.dart' as io;
-import 'package:socket_io_client/socket_io_client.dart';
 
-///<------------------------- Socket Class ---------------->
 class SocketApi {
-  // late IO.Socket socket;
-  // Factory constructor to return the same static instance every time you create an object.
+  // Singleton instance of the class
   factory SocketApi() {
     return _socketApi;
   }
 
-  // An internal private constructor to access it only once for the static instance of the class.
+  // Private constructor for singleton
   SocketApi._internal();
 
-  ///<------------------------- Socket Client ---------------->
+  static late io.Socket socket;
 
-  static io.Socket socket = io.io(
-    ApiUrl.socketUrl,
-    io.OptionBuilder().setTransports(['websocket']).build(),
-  );
+  ///<------------------------- Socket Initialization with dynamic User ID ---------------->
 
-  ///<------------------------- Socket Initialization ---------------->
-  static void init() {
-    debugPrint(
-        '=============> Socket initialization, connected: ${socket.connected}');
-    if (!socket.connected) {
-      // socket.connect();
-      socket.onConnect((_) {
-        debugPrint(
-            '==============>>>>>>> Socket Connected ${socket.connected}===============<<<<<<<');
-      });
-
-      //<----------------------Listen for new message--------------->
-
-      socket.on('unauthorized', (dynamic data) {
-        debugPrint('Unauthorized');
-      });
-      socket.onError((dynamic error) {
-        debugPrint('Socket error: $error');
-      });
-      socket.onDisconnect((dynamic data) {
-        debugPrint('Socket instance disconnected');
-      });
-    } else {
-      debugPrint('Socket instance already connected');
+  static void init() async {
+    String userId = await SharePrefsHelper.getString(AppConstants.id);
+    if (userId.isEmpty || userId == "null") {
+      return;
     }
+    socket = io.io(
+      "http://103.161.9.133:5000?userId=$userId",
+      io.OptionBuilder().setTransports(['websocket']).build(),
+    );
+
+    debugPrint(
+        '$userId=============> Socket initialization, connected: ${socket.connected}');
+
+    // Listen for socket connection
+    socket.onConnect((_) {
+      debugPrint(
+          '==============>>>>>>> Socket Connected ${socket.connected}===============<<<<<<<');
+    });
+
+    // Listen for unauthorized events
+    socket.on('unauthorized', (dynamic data) {
+      debugPrint('Unauthorized');
+    });
+
+    // Listen for errors
+    socket.onError((dynamic error) {
+      debugPrint('Socket error: $error');
+    });
+
+    // Listen for disconnection
+    socket.onDisconnect((dynamic data) {
+      debugPrint('Socket instance disconnected');
+    });
   }
 
+  // Static instance of the class
   static final SocketApi _socketApi = SocketApi._internal();
 }

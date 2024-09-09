@@ -1,14 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:doctor_booking/controller/notification_controller/notification_controller.dart';
 import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
-import 'package:doctor_booking/model/doctor_notification_model/notification_model.dart';
 import 'package:doctor_booking/model/terms_model/terms_model.dart';
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
-import 'package:doctor_booking/service/socket_service.dart';
 import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/inner_widget/appointments_history_dialog.dart';
@@ -198,12 +194,15 @@ class GeneralController extends GetxController with GetxServiceMixin {
 
   ///========================= Get User Info =========================
   RxString userImg = "".obs;
+  RxString userId = "".obs;
   RxString userName = "".obs;
   RxString userLocation = "".obs;
 
   getSavedInfo() async {
     userImg.value = await SharePrefsHelper.getString(AppConstants.userImage);
     userName.value = await SharePrefsHelper.getString(AppConstants.userName);
+    userId.value = await SharePrefsHelper.getString(AppConstants.id);
+
     userLocation.value =
         await SharePrefsHelper.getString(AppConstants.userLocation);
     refresh();
@@ -334,26 +333,8 @@ class GeneralController extends GetxController with GetxServiceMixin {
     }
   }
 
-  listenNewNotification() {
-    NotificationController notificationController =
-        Get.find<NotificationController>();
-    SocketApi.socket.on("new-notification", (value) {
-      debugPrint("Notification Socket===========>>>>>>>>>>>>$value");
-
-      Map<String, dynamic> getresponse = value;
-
-      DoctorNotificationModel newNotification =
-          DoctorNotificationModel.fromJson(getresponse);
-
-      notificationController.doctorNotificationList.insert(0, newNotification);
-    });
-
-    notificationController.doctorNotificationList.refresh();
-  }
-
   @override
   void onInit() {
-    listenNewNotification();
     getTerms();
     getPrivacyPolicy();
     sevenDaysInfo();

@@ -14,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 class DoctorAuthController extends GetxController {
   GeneralController generalController = Get.find<GeneralController>();
 
@@ -140,8 +139,6 @@ class DoctorAuthController extends GetxController {
         context: Get.context!, initialTime: TimeOfDay.now());
 
     if (picTime != null) {
-    
-
       String formatDateTime = DateConverter.formatTimeOfDay(picTime);
       //=================== Sun Day ================
       if (day == 1 && num == 1) {
