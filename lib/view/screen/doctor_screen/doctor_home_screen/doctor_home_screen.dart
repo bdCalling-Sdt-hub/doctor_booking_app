@@ -171,7 +171,8 @@ class DoctorHomeScreen extends StatelessWidget {
                                     return CustomDoctorCard(
                                       imageUrl: '',
                                       patentName: data.userId?.name ?? '',
-                                      time: data.time ?? '',
+                                      time:
+                                          "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
                                       loacation: data.appointmentType ?? '',
                                       onTap: () => Get.toNamed(
                                           AppRoutes.patientDetails,
@@ -202,7 +203,8 @@ class DoctorHomeScreen extends StatelessWidget {
                                     return CustomDoctorCard(
                                       imageUrl: '',
                                       patentName: data.userId?.name ?? '',
-                                      time: data.time ?? '',
+                                      time:
+                                          "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
                                       loacation: data.appointmentType ?? '',
                                       onTap: () => Get.toNamed(
                                           AppRoutes.patientDetails,
@@ -241,7 +243,8 @@ class DoctorHomeScreen extends StatelessWidget {
                                   return CustomDoctorCard(
                                     imageUrl: '',
                                     patentName: data.userId?.name ?? '',
-                                    time: data.time ?? '',
+                                    time:
+                                        "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
                                     loacation: data.appointmentType ?? '',
                                     onTap: () {
                                       var userdetails = controller
