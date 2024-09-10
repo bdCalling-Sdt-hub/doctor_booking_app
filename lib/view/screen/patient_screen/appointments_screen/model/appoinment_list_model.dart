@@ -54,7 +54,7 @@ class AppoinmentListModel {
         day: json["day"],
         status: json["status"],
         reason: json["reason"],
-        appointmentType: json["appointmentType"],
+        appointmentType: json["appointment_type"],
         desc: json["desc"],
         prescription: json["prescription"] == null
             ? []

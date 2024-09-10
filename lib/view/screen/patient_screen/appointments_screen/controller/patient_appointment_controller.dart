@@ -9,6 +9,7 @@ import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/appointment_screen_popup/appointment_cancel_popup.dart';
+import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/appointments_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/model/appoinment_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,7 +27,7 @@ class PatientAppointmentController extends GetxController {
 
   ///=======================List============
   final List<String> userList = [
-    //AppStrings.pendingCapital,
+    AppStrings.pendingCapital,
     AppStrings.upcoming,
     AppStrings.past,
     AppStrings.canceled,
@@ -88,6 +89,10 @@ class PatientAppointmentController extends GetxController {
       toastMessage(
           message: "Appointment Request Send Successfully",
           colors: Colors.green);
+
+      getMyAppoinment(status: AppStrings.pending);
+
+      Get.offAll(() => AppointmentsScreen());
     } else {
       navigator?.pop();
       ApiChecker.checkApi(response);
@@ -120,7 +125,7 @@ class PatientAppointmentController extends GetxController {
 
   @override
   void onInit() {
-    getMyAppoinment(status: AppStrings.accepted);
+    getMyAppoinment(status: AppStrings.pending);
     super.onInit();
   }
 }

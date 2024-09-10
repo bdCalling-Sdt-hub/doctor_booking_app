@@ -15,6 +15,8 @@ class CustomAppointmentCard extends StatelessWidget {
   final String profession;
   final String date;
   final String time;
+  final String type;
+
   final String location;
   final Widget? trailing;
   final VoidCallback? onTap;
@@ -29,13 +31,14 @@ class CustomAppointmentCard extends StatelessWidget {
     required this.date,
     required this.time,
     required this.location,
+    required this.type,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: AppColors.whiteNormal,
         borderRadius: BorderRadius.circular(8),
@@ -133,7 +136,14 @@ class CustomAppointmentCard extends StatelessWidget {
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
                 color: AppColors.grayNormal,
-              )
+              ),
+              CustomText(
+                left: 5,
+                text: "Type: $type",
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: AppColors.grayNormal,
+              ),
             ],
           ),
           SizedBox(

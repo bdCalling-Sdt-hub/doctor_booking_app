@@ -1,9 +1,11 @@
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/core/dependency/dependency_injection.dart';
+import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/service/socket_service.dart';
 import 'package:doctor_booking/view/widgets/device_utils/device_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -11,7 +13,7 @@ void main() {
   DependencyInjection di = DependencyInjection();
   di.dependencies();
   DeviceUtils.lockDevicePortrait();
-
+  Stripe.publishableKey = ApiUrl.stripePublicKey;
   SocketApi.init();
   runApp(const MyApp());
 }

@@ -1,3 +1,4 @@
+import 'package:doctor_booking/controller/payment_controller/payment_controller.dart';
 import 'package:doctor_booking/helper/time_converter/time_converter.dart';
 import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/controller/patient_appointment_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
@@ -22,6 +23,9 @@ class AppointmentsScreen extends StatelessWidget {
 
   final PaitentProfileController profileController =
       Get.find<PaitentProfileController>();
+
+  final PaitentPaymentController paitentPaymentController =
+      Get.find<PaitentPaymentController>();
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +52,18 @@ class AppointmentsScreen extends StatelessWidget {
                       case 0:
                         // ignore: void_checks
                         return patientAppointmentController.getMyAppoinment(
+                            status: AppStrings.pending);
+                      case 1:
+                        // ignore: void_checks
+                        return patientAppointmentController.getMyAppoinment(
                             status: AppStrings.accepted);
 
-                      case 1:
+                      case 2:
                         // ignore: void_checks
                         return patientAppointmentController.getMyAppoinment(
                             status: AppStrings.completed);
 
-                      case 2:
+                      case 3:
                         // ignore: void_checks
                         return patientAppointmentController.getMyAppoinment(
                             status: AppStrings.rejected);
@@ -67,119 +75,65 @@ class AppointmentsScreen extends StatelessWidget {
                 ),
 
                 ///======================== Upcoming Data ==================
-                patientAppointmentController.selectedIndex.value == 0
-                    ? Column(
-                        children: List.generate(
-                            patientAppointmentController.appoinmentList.length,
-                            (index) {
-                          var data = patientAppointmentController
-                              .appoinmentList[index];
-                          return CustomAppointmentCard(
-                            imageUrl: AppConstants.userNtr,
-                            name: data.name ?? "",
-                            profession: data.doctorId?.specialization ?? "",
-                            trailing: CustomPopupmenuButton(
-                              onChanged: (value) {
-                                patientAppointmentController
-                                    .appointmentCancelPopup();
-                              },
-                              items: patientAppointmentController.cancelButton,
-                              icons: Icons.more_vert,
-                            ),
-                            onTap: () {
-                              debugPrint(
-                                  "User ID>>>>${data.userId} || User name>>>>${profileController.profileData.value.name} || Call ID>>>${data.id}");
-                              Get.to(() => AudioVideoCall(
-                                    userID: data.userId ?? "",
-                                    userName: profileController
-                                            .profileData.value.name ??
-                                        "",
-                                    callID: data.id ?? "",
-                                  ));
-                            },
-                            date: DateConverter.estimatedDate(
-                                data.date ?? DateTime.now()),
-                            time: data.time ?? "",
-                            location: data.doctorId?.location ?? "",
-                          );
-                        }),
-                      )
-                    :
 
-                    ///==================================Past Data=====================
-                    patientAppointmentController.selectedIndex.value == 1
-                        ? Column(
-                            children: List.generate(
-                                patientAppointmentController
-                                    .appoinmentList.length, (index) {
-                              var data = patientAppointmentController
-                                  .appoinmentList[index];
-                              return CustomAppointmentCard(
-                                imageUrl: AppConstants.userNtr,
-                                name: data.name ?? "",
-                                profession: data.doctorId?.specialization ?? "",
-                                trailing: CustomPopupmenuButton(
-                                  onChanged: (value) {
-                                    if (value == AppStrings.reschedule) {
-                                      Get.toNamed(AppRoutes
-                                          .rescheduleAppointmentScreen);
-                                    } else {
-                                      patientAppointmentController
-                                          .appointmentCancelPopup();
-                                    }
-                                  },
-                                  items: patientAppointmentController
-                                      .moreButtonList,
-                                  icons: Icons.more_vert,
-                                ),
-                                onTap: () {
-                                  // Handle card tap
-                                },
-                                date: DateConverter.estimatedDate(
-                                    data.date ?? DateTime.now()),
-                                time: data.time ?? "",
-                                location: data.doctorId?.location ?? "",
-                              );
-                            }),
-                          )
-                        :
+                // Obx(() {
+                //   switch (patientAppointmentController.selectedIndex.value) {
+                //     case 0:
+                //       return const SizedBox();
 
-                        ///===============================Canceled Data=========================
-                        patientAppointmentController.selectedIndex.value == 2
-                            ? Column(
-                                children: List.generate(
-                                    patientAppointmentController
-                                        .appoinmentList.length, (index) {
-                                  var data = patientAppointmentController
-                                      .appoinmentList[index];
-                                  return CustomAppointmentCard(
-                                    imageUrl: AppConstants.userNtr,
-                                    name: data.name ?? "",
-                                    profession:
-                                        data.doctorId?.specialization ?? "",
-                                    trailing: CustomPopupmenuButton(
-                                      onChanged: (value) {
-                                        if (value == AppStrings.reschedule) {
-                                          Get.toNamed(AppRoutes
-                                              .rescheduleAppointmentScreen);
-                                        } else {
-                                          patientAppointmentController
-                                              .appointmentCancelPopup();
-                                        }
-                                      },
-                                      items: patientAppointmentController
-                                          .moreButtonList,
-                                      icons: Icons.more_vert,
-                                    ),
-                                    onTap: () {},
-                                    date: DateConverter.estimatedDate(
-                                        data.date ?? DateTime.now()),
-                                    time: data.time ?? "",
-                                    location: data.doctorId?.location ?? "",
-                                  );
-                                }),
-                              )
-                            : const SizedBox()
+                //     default:
+                //       return const SizedBox();
+                //   }
+                // }),
+
+                Column(
+                  children: List.generate(
+                      patientAppointmentController.appoinmentList.length,
+                      (index) {
+                    var data =
+                        patientAppointmentController.appoinmentList[index];
+                    return CustomAppointmentCard(
+                      type: data.appointmentType ?? "",
+                      imageUrl: AppConstants.userNtr,
+                      name: data.name ?? "",
+                      profession: data.doctorId?.specialization ?? "",
+                      trailing: CustomPopupmenuButton(
+                        onChanged: (value) {
+                          if (value == AppStrings.reschedule) {
+                            Get.toNamed(AppRoutes.rescheduleAppointmentScreen);
+                          } else {
+                            patientAppointmentController
+                                .appointmentCancelPopup();
+                          }
+                        },
+                        items: patientAppointmentController.moreButtonList,
+                        icons: Icons.more_vert,
+                      ),
+                      onTap: () {
+                        // debugPrint(
+                        //     "User ID>>>>${data.userId} || User name>>>>${profileController.profileData.value.name} || Call ID>>>${data.id}");
+                        // Get.to(() => AudioVideoCall(
+                        //       userID: data.userId ?? "",
+                        //       userName:
+                        //           profileController.profileData.value.name ??
+                        //               "",
+                        //       callID: data.id ?? "",
+                        //     ));
+
+                        ///============== TODO Change Ammount =============
+                        paitentPaymentController.makePayment(
+                            amount: 60,
+                            userID: data.userId ?? "",
+                            doctorID: data.doctorId?.id ?? "",
+                            appoinmentId: data.id ?? "");
+                      },
+                      date: DateConverter.estimatedDate(
+                          data.date ?? DateTime.now()),
+                      time: data.time ?? "",
+                      location: data.doctorId?.location ?? "",
+                    );
+                  }),
+                )
               ],
             ),
           ),

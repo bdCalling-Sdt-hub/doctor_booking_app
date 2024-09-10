@@ -4,6 +4,9 @@ class ApiUrl {
   static const socketUrl =
       'http://103.161.9.133:5000?userId=66d7efd8ca187e791dac4758';
 
+  static const stripePublicKey =
+      "pk_test_51PvZAIRv9ouTNUmHJAe3Sl0oUW8zqon9fr5jb6J5B5bDmSVWmb8DVtuUTQUry4SXLCtZSKugavb72wW6bzNjsm3T00C83N7lLB";
+
   ///=============================== Auth Section ==============================
 
   static const login = '/auth/sign-in';
@@ -41,6 +44,11 @@ class ApiUrl {
 
   static getAppoinments({required String status}) =>
       "/appointment/get-my-appointments?status=$status";
+
+  ///============= Payment Section ===============
+
+  static const paymentIntent = '/payment/create-payment-intent';
+  static const savePayment = '/payment/save-payment';
 
   ///=============================== Doctor Section ==============================
   static const profile = '/auth/profile';

@@ -1,4 +1,5 @@
 import 'package:doctor_booking/controller/calls_controller.dart/calls_controller.dart';
+import 'package:doctor_booking/controller/payment_controller/payment_controller.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_auth_controller/doctor_auth_controller.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_controller/doctor_home_controller.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_payment_screen/payment_controller/payment_controller.dart';
@@ -21,6 +22,7 @@ class DependencyInjection extends Bindings {
     Get.lazyPut(() => NotificationController(), fenix: true);
     Get.lazyPut(() => HospitalController(), fenix: false);
     Get.lazyPut(() => PatientAppointmentController(), fenix: true);
+    Get.lazyPut(() => PaitentPaymentController(), fenix: true);
 
     ///========================== Doctor Home section ==================
 
