@@ -106,7 +106,7 @@ class NotificationController extends GetxController {
 
   ///======================== Listen Socket Notification ======================
   listenNewNotification() {
-    SocketApi.socket?.on("new-notification", (value) {
+    SocketApi.socket.on("new-notification", (value) {
       debugPrint("Notification Socket===========>>>>>>>>>>>>$value");
 
       Map<String, dynamic> getresponse = value;

@@ -334,7 +334,6 @@ class GeneralController extends GetxController with GetxServiceMixin {
     }
   }
 
-<<<<<<< HEAD
   ///========================== Get Category ==========================
   RxList<CategoryDatum> categoryList = <CategoryDatum>[].obs;
 
@@ -365,23 +364,6 @@ class GeneralController extends GetxController with GetxServiceMixin {
         categoryListName.add(categoryList[i].name!);
       }
     }
-=======
-  listenNewNotification() {
-    NotificationController notificationController =
-        Get.find<NotificationController>();
-    SocketApi.socket.on("new-notification", (value) {
-      debugPrint("Notification Socket===========>>>>>>>>>>>>$value");
-
-      Map<String, dynamic> getresponse = value;
-
-      DoctorNotificationModel newNotification =
-          DoctorNotificationModel.fromJson(getresponse);
-
-      notificationController.doctorNotificationList.insert(0, newNotification);
-    });
-
-    notificationController.doctorNotificationList.refresh();
->>>>>>> 1e38b9bcff42b2a191e9f74926715752c271a61b
   }
 
   @override
