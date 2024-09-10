@@ -49,7 +49,7 @@ class HomeAppBar extends StatelessWidget {
                   ///==================== Profile =====================
                   CustomNetworkImage(
                       boxShape: BoxShape.circle,
-                      imageUrl: "${ApiUrl.baseUrl}$image",
+                      imageUrl: "${ApiUrl.baseUrl}/$image",
                       height: 60,
                       width: 60),
 

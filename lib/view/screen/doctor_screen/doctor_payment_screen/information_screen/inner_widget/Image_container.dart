@@ -1,6 +1,4 @@
-// ignore: file_names
 import 'dart:io';
-
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';

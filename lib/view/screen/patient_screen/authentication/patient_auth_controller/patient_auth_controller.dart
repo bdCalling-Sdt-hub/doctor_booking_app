@@ -20,9 +20,9 @@ class PatientAuthController extends GetxController {
 // ============================ Sign in text Editing controller ======================
 
   final TextEditingController emailController =
-      TextEditingController(text: kDebugMode ? "viwobo9754@janfab.com" : "");
+      TextEditingController(text: kDebugMode ? "powirrrde4919@daypey.com" : "");
   final TextEditingController passwordController =
-      TextEditingController(text: kDebugMode ? "123456789" : "");
+      TextEditingController(text: kDebugMode ? "1234567" : "");
 
   ///=================== Update Interest ===================
   RxList<String> interestList = [

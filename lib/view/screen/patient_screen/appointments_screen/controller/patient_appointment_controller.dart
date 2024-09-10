@@ -26,7 +26,7 @@ class PatientAppointmentController extends GetxController {
 
   ///=======================List============
   final List<String> userList = [
-    AppStrings.pendingCapital,
+    //AppStrings.pendingCapital,
     AppStrings.upcoming,
     AppStrings.past,
     AppStrings.canceled,

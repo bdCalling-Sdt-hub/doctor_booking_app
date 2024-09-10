@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
+import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
 import 'package:doctor_booking/model/doctor_profile_model/doctor_profile_model.dart';
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
@@ -151,7 +152,7 @@ class PaitentProfileController extends GetxController {
 
   ///======================== Edit Profile =====================
 
-  saveInfo(ProfileModel profileData) {
+  saveInfo(ProfileModel profileData) async {
     image.value = "${ApiUrl.baseUrl}/${profileData.img ?? ""}";
     fullNameController.value =
         TextEditingController(text: profileData.name ?? "");
@@ -170,6 +171,13 @@ class PaitentProfileController extends GetxController {
 
     locationController.value =
         TextEditingController(text: profileData.location ?? "");
+
+    SharePrefsHelper.setString(AppConstants.userImage, profileData.img ?? "");
+    SharePrefsHelper.setString(AppConstants.userName, profileData.name ?? "");
+    SharePrefsHelper.setString(
+        AppConstants.userLocation, profileData.location ?? "");
+
+    generalController.getSavedInfo();
   }
 
   editProfile() async {
