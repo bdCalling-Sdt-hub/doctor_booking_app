@@ -139,10 +139,12 @@ class AppStrings {
   static const String bankAccountNumber = "Bank Account Number";
   static const String back = "Back";
   static const String submit = "Submit";
+  static const String online = "ONLINE";
 
   ///==========================Schedule=================
   static const String schedule = 'Schedule';
   static const String videoCall = 'Video Call';
+  static const String consultant = 'Mark As Done';
 
   static const String bookAppointment = 'Book Appointment';
   static const String availAbleTime = 'Available Time';
@@ -246,7 +248,6 @@ class AppStrings {
   static const String payment = 'Payment';
   static const String creditDebitCards = 'Credit/Debit Cards';
   static const String addNewCard = 'Add New Card';
-
   //===================== Doctor Notification =====================//
   static const String notificationToday = 'TODAY';
   static const String notificationYesterday = 'YESTERDAY';

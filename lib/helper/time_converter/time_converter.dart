@@ -97,11 +97,36 @@ class DateConverter {
       'Dec'
     ];
     return months[month - 1];
-  } 
- static String formatTimeOfDay(TimeOfDay timeOfDay) {
+  }
+
+  static String formatTimeOfDay(TimeOfDay timeOfDay) {
     final now = DateTime.now();
     final format = DateFormat('h:mm a').format(DateTime(
         now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute));
     return format;
+  }
+
+  static bool isWithin30MinutesOfTime(String timeString) {
+    // Define the date format to parse the input time
+    final dateFormat = DateFormat('h:mm a'); // 8:30 PM format
+
+    // Parse the input time string
+    DateTime inputTime = dateFormat.parse(timeString);
+
+    // Get the current date and time
+    DateTime now = DateTime.now();
+
+    // Construct a DateTime object for the parsed time on the current date
+    DateTime targetTime = DateTime(
+        now.year, now.month, now.day, inputTime.hour, inputTime.minute);
+
+    // Calculate the time range for comparison
+    DateTime thirtyMinutesBefore = targetTime.subtract(Duration(minutes: 30));
+    DateTime thirtyMinutesAfter = targetTime.add(Duration(minutes: 30));
+
+    // Check if the current time is within the desired range
+    return now.isAfter(thirtyMinutesBefore) &&
+        now.isBefore(targetTime) &&
+        !now.isAfter(thirtyMinutesAfter);
   }
 }

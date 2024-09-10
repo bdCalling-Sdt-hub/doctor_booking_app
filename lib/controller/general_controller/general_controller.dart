@@ -8,6 +8,7 @@ import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/inner_widget/appointments_history_dialog.dart';
+import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/category_model.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/popular_doctor.dart';
 import 'package:doctor_booking/view/widgets/custom_image_picker_popup/custom_image_picker_popup.dart';
 import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
@@ -333,11 +334,44 @@ class GeneralController extends GetxController with GetxServiceMixin {
     }
   }
 
+  ///========================== Get Category ==========================
+  RxList<CategoryDatum> categoryList = <CategoryDatum>[].obs;
+
+  getCategory() async {
+    // categoryLoadingMethod(Status.loading);
+
+    var response = await ApiClient.getData(ApiUrl.category);
+
+    if (response.statusCode == 200) {
+      categoryList.value = List<CategoryDatum>.from(
+          response.body["data"].map((x) => CategoryDatum.fromJson(x)));
+      getCategoryName();
+    } else {
+      if (response.statusText == ApiClient.somethingWentWrong) {
+        //  categoryLoadingMethod(Status.internetError);
+      } else {
+        /// categoryLoadingMethod(Status.error);
+      }
+      ApiChecker.checkApi(response);
+    }
+  }
+
+  RxList<String> categoryListName = <String>[].obs;
+
+  getCategoryName() {
+    if (categoryList.isNotEmpty) {
+      for (int i = 0; i < categoryList.length; i++) {
+        categoryListName.add(categoryList[i].name!);
+      }
+    }
+  }
+
   @override
   void onInit() {
     getTerms();
     getPrivacyPolicy();
     sevenDaysInfo();
+    getCategory();
     super.onInit();
   }
 }

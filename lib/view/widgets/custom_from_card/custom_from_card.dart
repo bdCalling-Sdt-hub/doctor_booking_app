@@ -18,6 +18,7 @@ class CustomFormCard extends StatelessWidget {
   final String? Function(dynamic)? validator;
   final bool? hintTextChangeColor;
   final int? maxLine;
+  final Widget? suffixIcon;
 
   const CustomFormCard({
     super.key,
@@ -33,6 +34,7 @@ class CustomFormCard extends StatelessWidget {
     this.hintText,
     this.hintTextChangeColor = false,
     this.maxLine,
+    this.suffixIcon,
   });
 
   @override
@@ -57,13 +59,16 @@ class CustomFormCard extends StatelessWidget {
               fontWeight: FontWeight.w400,
               fontSize: 16,
               color: AppColors.whiteDarkHover),
-          suffixIcon: hasSuffixIcon == null
-              ? null
-              : hasSuffixIcon!
-                  ? const Icon(Icons.keyboard_arrow_down)
-                  :
-                  // ignore: unnecessary_null_comparison
-                  const Icon(Icons.alarm),
+          // ignore: prefer_if_null_operators
+          suffixIcon: suffixIcon != null
+              ? suffixIcon
+              : hasSuffixIcon == null
+                  ? null
+                  : hasSuffixIcon!
+                      ? const Icon(Icons.keyboard_arrow_down)
+                      :
+                      // ignore: unnecessary_null_comparison
+                      const Icon(Icons.alarm),
           isPassword: isPassword,
           textEditingController: controller,
           inputTextStyle: GoogleFonts.poppins(color: AppColors.grayNormal),

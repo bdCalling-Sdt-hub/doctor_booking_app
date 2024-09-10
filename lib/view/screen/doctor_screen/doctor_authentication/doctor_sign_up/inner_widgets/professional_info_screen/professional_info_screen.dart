@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_auth_controller/doctor_auth_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
@@ -9,6 +10,7 @@ import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
+import 'package:doctor_booking/view/widgets/custom_popupmenu_button/custom_popupmenu_button.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,7 @@ class ProfessionalInfoScreen extends StatelessWidget {
 
   final DoctorAuthController doctorAuthController =
       Get.find<DoctorAuthController>();
+  final GeneralController genarelController = Get.find<GeneralController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,12 +49,21 @@ class ProfessionalInfoScreen extends StatelessWidget {
                 controller: doctorAuthController.appointmentFeeController.value,
               ),
 
-              ///==================================specialization==========================
+              // /==================================specialization==========================
               CustomFormCard(
                 hasBackgroundColor: true,
                 title: 'Specialisation',
                 controller: doctorAuthController.specialisController.value,
+                readOnly: true,
+                suffixIcon: CustomPopupmenuButton(
+                  onChanged: (value) {
+                    doctorAuthController.specialisController.value.text = value;
+                  },
+                  items: genarelController.categoryListName,
+                  icons: Icons.keyboard_arrow_down,
+                ),
               ),
+
               //============================= Discription ================
               CustomFormCard(
                 hasBackgroundColor: true,
