@@ -119,7 +119,6 @@ class AppointmentsScreen extends StatelessWidget {
                         //               "",
                         //       callID: data.id ?? "",
                         //     ));
-
                         ///============== TODO Change Ammount =============
                         paitentPaymentController.makePayment(
                             amount: 60,
