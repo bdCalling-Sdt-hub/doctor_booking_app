@@ -17,6 +17,8 @@ class AppConstants {
   static String userName = "userName";
   static String userLocation = "userLocation";
   static String userImage = "userImage";
+  static String userId = "userId";
+
 
   static String userNtr =
       'https://www.india.com/wp-content/uploads/2022/03/Jr-NTR-On-RRR-Massive-Success.jpg';

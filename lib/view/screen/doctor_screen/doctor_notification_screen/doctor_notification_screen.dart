@@ -118,7 +118,9 @@ class DoctorNotificationScreen extends StatelessWidget {
                               // ),
 
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  notificationController.readAllNotification();
+                                },
                                 child: CustomText(
                                   text: AppStrings.markAllAsRead,
                                   fontSize: 15.sp,
@@ -140,6 +142,7 @@ class DoctorNotificationScreen extends StatelessWidget {
                               var data = notificationController
                                   .doctorNotificationList[index];
                               return DoctorNotificationCard(
+                                readed: data.isRead ?? true,
                                 container: const CircleAvatar(
                                   radius: 30,
                                   backgroundColor: AppColors.blackLight,

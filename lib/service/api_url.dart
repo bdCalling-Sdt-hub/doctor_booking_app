@@ -56,6 +56,7 @@ class ApiUrl {
 
   //======================= Notification ===============================//
   static const doctorNotification = '/notification/get-notifications';
+  static const readAllNotification = '/notification/read-all';
 
   //============================= Change password ====================//
   static const changePassword = '/auth/change-password';
