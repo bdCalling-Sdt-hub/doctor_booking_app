@@ -56,6 +56,7 @@ class AppStrings {
       "Choose one or more categories that represent what categories you want to see. ";
 
   static const String weekend = "WEEKEND";
+  static const String licenseNo = "License No";
 
   static const String confirm = "Confirm";
   static const String information = "Information";

@@ -219,7 +219,18 @@ class DoctorProfileScreen extends StatelessWidget {
                             width: 335.w,
                           ),
                           SizedBox(
-                            height: 8.h,
+                            height: 12.h,
+                          ),
+                          //============ License No ============//
+                          CustomFormCard(
+                            hasBackgroundColor: true,
+                            title: AppStrings.licenseNo,
+                            controller: TextEditingController(),
+                            hintTextChangeColor: true,
+                            readOnly: true,
+                            hintText: doctorProfileController
+                                    .profileModel.value.licenseNo ??
+                                '',
                           ),
                           //============ doctor specilization ============//
                           CustomFormCard(

@@ -30,7 +30,7 @@ class PersonalInfoScreen extends StatelessWidget {
                 title: AppStrings.yourName,
                 controller: doctorAuthController.doctorNameController.value,
                 validator: (value) {
-                  if (value == null) {
+                  if (value == null || value.toString().isEmpty) {
                     return AppStrings.fieldCantBeEmpty;
                   }
                   return null;
@@ -59,7 +59,7 @@ class PersonalInfoScreen extends StatelessWidget {
                 controller:
                     doctorAuthController.doctorDateOfBirthController.value,
                 validator: (value) {
-                  if (value == null) {
+                  if (value == null || value.toString().isEmpty) {
                     return AppStrings.fieldCantBeEmpty;
                   }
                   return null;
@@ -73,7 +73,7 @@ class PersonalInfoScreen extends StatelessWidget {
                 title: AppStrings.email,
                 controller: doctorAuthController.doctorEmailController.value,
                 validator: (value) {
-                  if (value == null) {
+                  if (value == null || value.toString().isEmpty) {
                     return AppStrings.fieldCantBeEmpty;
                   }
                   return null;
@@ -88,7 +88,7 @@ class PersonalInfoScreen extends StatelessWidget {
                 controller:
                     doctorAuthController.doctorPhoneNumberController.value,
                 validator: (value) {
-                  if (value == null) {
+                  if (value == null || value.toString().isEmpty) {
                     return AppStrings.fieldCantBeEmpty;
                   }
                   return null;
@@ -102,7 +102,7 @@ class PersonalInfoScreen extends StatelessWidget {
                 title: AppStrings.location,
                 controller: doctorAuthController.doctorLocationController.value,
                 validator: (value) {
-                  if (value == null) {
+                  if (value == null || value.toString().isEmpty) {
                     return AppStrings.fieldCantBeEmpty;
                   }
                   return null;
@@ -116,7 +116,7 @@ class PersonalInfoScreen extends StatelessWidget {
                 title: AppStrings.password,
                 controller: doctorAuthController.doctorPasswordController.value,
                 validator: (value) {
-                  if (value == null) {
+                  if (value == null || value.toString().isEmpty) {
                     return AppStrings.fieldCantBeEmpty;
                   }
                   return null;
@@ -131,7 +131,7 @@ class PersonalInfoScreen extends StatelessWidget {
                 controller:
                     doctorAuthController.doctorConfirmPasswordController.value,
                 validator: (value) {
-                  if (value == null) {
+                  if (value == null || value.toString().isEmpty) {
                     return AppStrings.fieldCantBeEmpty;
                   }
                   return null;

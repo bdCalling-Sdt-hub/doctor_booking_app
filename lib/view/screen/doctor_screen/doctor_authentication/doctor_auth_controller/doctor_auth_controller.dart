@@ -130,6 +130,10 @@ class DoctorAuthController extends GetxController {
 
   Rx<TextEditingController> affiliationController =
       TextEditingController(text: kDebugMode ? "BdCalling" : "").obs;
+  Rx<TextEditingController> licenceNoController =
+      TextEditingController(text: kDebugMode ? "123456789765432" : "").obs;
+  Rx<TextEditingController> professionalDiscriptionController =
+      TextEditingController(text: kDebugMode ? "This is discription" : "").obs;
 
   getTime({
     required int day,
@@ -243,6 +247,7 @@ class DoctorAuthController extends GetxController {
       "educational_background": educationController.value.text,
       "current_affiliation": affiliationController.value.text,
       "appointment_fee": appointmentFeeController.value.text,
+      "license_no": licenceNoController.value.text,
     };
 
     // Create the multipart data for the license image
