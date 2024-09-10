@@ -102,7 +102,7 @@ class AppointmentsScreen extends StatelessWidget {
                                 .appointmentCancelPopup();
                           }
                         },
-                        items: patientAppointmentController.moreButtonList,
+                        items: patientAppointmentController.cancelButton,
                         icons: Icons.more_vert,
                       ),
                       onTap: () {
