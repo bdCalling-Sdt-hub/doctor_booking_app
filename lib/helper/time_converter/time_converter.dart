@@ -172,4 +172,14 @@ class DateConverter {
       return false;
     }
   }
+
+  static String formatDate(String isoDateString) {
+    // Parse the ISO date string into a DateTime object
+    DateTime parsedDate = DateTime.parse(isoDateString);
+
+    // Format the DateTime object to "day-month-year"
+    String formattedDate = DateFormat('dd-MM-yyyy').format(parsedDate);
+
+    return formattedDate;
+  }
 }

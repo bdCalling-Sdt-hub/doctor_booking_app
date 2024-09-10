@@ -14,7 +14,8 @@ import 'package:doctor_booking/view/widgets/video_call/video_call.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+
+import '../../../../helper/time_converter/time_converter.dart';
 
 class ScheduleScreen extends StatelessWidget {
   ScheduleScreen({super.key});
@@ -93,7 +94,8 @@ class ScheduleScreen extends StatelessWidget {
                 return CustomDoctorCard(
                   imageUrl: model.userId?.img ?? '',
                   patentName: model.userId?.name ?? '',
-                  time: model.time ?? '',
+                  time:
+                      "${DateConverter.formatDate(model.date ?? '')}(${model.time})",
                   loacation: model.userId?.location ?? '',
                   onTap: () {
                     debugPrint(
@@ -131,7 +133,8 @@ class ScheduleScreen extends StatelessWidget {
                 return CustomDoctorCard(
                   imageUrl: model.userId?.img ?? '',
                   patentName: model.userId?.name ?? '',
-                  time: model.time ?? '',
+                  time:
+                      "${DateConverter.formatDate(model.date ?? '')}(${model.time})",
                   loacation: model.userId?.location ?? '',
                   onTap: () {},
                   showPopupButton: true,
