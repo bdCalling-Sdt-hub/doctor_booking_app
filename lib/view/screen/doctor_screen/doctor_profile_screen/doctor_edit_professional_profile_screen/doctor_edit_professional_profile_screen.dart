@@ -55,12 +55,7 @@ class DoctorEditProfessionalProfileScreen extends StatelessWidget {
                         color: AppColors.whiteDarker,
                       ),
 
-                      // CustomNetworkImage(
-                      //   imageUrl: AppConstants.medicalLicence,
-                      //   height: 160.h,
-                      //   width: 335.w,
-                      //   borderRadius: BorderRadius.circular(8),
-                      // ),
+                    
                       doctorProfileController.licenseImage.value == null
                           ? DoctorEditLicenseNetworkImage(
                               imageSrc: doctorProfileController
@@ -84,22 +79,7 @@ class DoctorEditProfessionalProfileScreen extends StatelessWidget {
                       SizedBox(
                         height: 8.h,
                       ),
-                      //============ doctor specilization ============//
-                      // CustomFormCard(
-                      //   hasBackgroundColor: true,
-                      //   title: AppStrings.specialization,
-                      //   controller: doctorProfileController
-                      //       .doctorSpecializationController.value,
-                      //   hintTextChangeColor: true,
-                      //   hintText: 'Cardiologist.',
-                      //   validator: (value) {
-                      //     if (value == null || value.toString().isEmpty) {
-                      //       return AppStrings.fieldCantBeEmpty.tr;
-                      //     } else {
-                      //       return null;
-                      //     }
-                      //   },
-                      // ),
+
                       CustomFormCard(
                         hasBackgroundColor: true,
                         title: 'Specialisation',
