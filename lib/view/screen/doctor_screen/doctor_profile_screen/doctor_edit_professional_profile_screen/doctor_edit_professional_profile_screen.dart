@@ -55,7 +55,6 @@ class DoctorEditProfessionalProfileScreen extends StatelessWidget {
                         color: AppColors.whiteDarker,
                       ),
 
-                    
                       doctorProfileController.licenseImage.value == null
                           ? DoctorEditLicenseNetworkImage(
                               imageSrc: doctorProfileController
@@ -78,6 +77,22 @@ class DoctorEditProfessionalProfileScreen extends StatelessWidget {
                             ),
                       SizedBox(
                         height: 8.h,
+                      ),
+                      //==================== License No ====================
+                      CustomFormCard(
+                        hasBackgroundColor: true,
+                        title: AppStrings.licenseNo,
+                        controller: doctorProfileController
+                            .doctorLisenceNoController.value,
+                        hintTextChangeColor: true,
+                        hintText: 'License no',
+                        validator: (value) {
+                          if (value == null || value.toString().isEmpty) {
+                            return AppStrings.fieldCantBeEmpty.tr;
+                          } else {
+                            return null;
+                          }
+                        },
                       ),
 
                       CustomFormCard(

@@ -7,12 +7,10 @@ import 'dart:convert';
 ProfileModel profileModelFromJson(String str) =>
     ProfileModel.fromJson(json.decode(str));
 
-String profileModelToJson(ProfileModel data) => json.encode(data.toJson());
-
 class ProfileModel {
-  String? id;
   String? img;
   String? name;
+  int? appointmentFee;
   String? email;
   String? dateOfBirth;
   String? location;
@@ -27,20 +25,23 @@ class ProfileModel {
   AvailableDays? availableDays;
   AvailableFor? availableFor;
   String? license;
+  String? licenseNo;
   String? specialization;
   String? experience;
   String? educationalBackground;
   String? currentAffiliation;
   int? rating;
   int? totalRated;
+  bool? approved;
+  String? id;
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
 
   ProfileModel({
-    this.id,
     this.img,
     this.name,
+    this.appointmentFee,
     this.email,
     this.dateOfBirth,
     this.location,
@@ -55,21 +56,24 @@ class ProfileModel {
     this.availableDays,
     this.availableFor,
     this.license,
+    this.licenseNo,
     this.specialization,
     this.experience,
     this.educationalBackground,
     this.currentAffiliation,
     this.rating,
     this.totalRated,
+    this.approved,
+    this.id,
     this.createdAt,
     this.updatedAt,
     this.v,
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
-        id: json["_id"],
         img: json["img"],
         name: json["name"],
+        appointmentFee: json["appointment_fee"],
         email: json["email"],
         dateOfBirth: json["date_of_birth"],
         location: json["location"],
@@ -88,12 +92,15 @@ class ProfileModel {
             ? null
             : AvailableFor.fromJson(json["available_for"]),
         license: json["license"],
+        licenseNo: json["license_no"],
         specialization: json["specialization"],
         experience: json["experience"],
         educationalBackground: json["educational_background"],
         currentAffiliation: json["current_affiliation"],
         rating: json["rating"],
         totalRated: json["total_rated"],
+        approved: json["approved"],
+        id: json["_id"],
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
@@ -102,35 +109,6 @@ class ProfileModel {
             : DateTime.parse(json["updatedAt"]),
         v: json["__v"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "img": img,
-        "name": name,
-        "email": email,
-        "date_of_birth": dateOfBirth,
-        "location": location,
-        "phone": phone,
-        "password": password,
-        "provider": provider,
-        "gender": gender,
-        "block": block,
-        "role": role,
-        "verified": verified,
-        "access": access,
-        "available_days": availableDays?.toJson(),
-        "available_for": availableFor?.toJson(),
-        "license": license,
-        "specialization": specialization,
-        "experience": experience,
-        "educational_background": educationalBackground,
-        "current_affiliation": currentAffiliation,
-        "rating": rating,
-        "total_rated": totalRated,
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
-        "__v": v,
-      };
 }
 
 class AvailableDays {
@@ -193,8 +171,6 @@ class AvailableDays {
         "sunday":
             sunday == null ? [] : List<dynamic>.from(sunday!.map((x) => x)),
       };
-
-  // Method to get available times for a specific day
 }
 
 class AvailableFor {

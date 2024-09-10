@@ -23,184 +23,247 @@ class ProfessionalInfoScreen extends StatelessWidget {
   final DoctorAuthController doctorAuthController =
       Get.find<DoctorAuthController>();
   final GeneralController genarelController = Get.find<GeneralController>();
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.whiteNormal,
       body: SingleChildScrollView(
         child: Obx(() {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ///============= medicalLicenceImage image =========
-              _buildImageSection(
-                title: AppStrings.medicalLicenceImage,
-                image: doctorAuthController.documentImage,
-                onSelectImage: () => doctorAuthController.documentImages(),
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              //=========================== Appointment fee ========================//
-              CustomFormCard(
-                hintText: 'Enter your fee',
-                hasBackgroundColor: true,
-                title: 'Appointment Fee',
-                controller: doctorAuthController.appointmentFeeController.value,
-              ),
-
-              // /==================================specialization==========================
-              CustomFormCard(
-                hasBackgroundColor: true,
-                title: 'Specialisation',
-                controller: doctorAuthController.specialisController.value,
-                readOnly: true,
-                suffixIcon: CustomPopupmenuButton(
-                  onChanged: (value) {
-                    doctorAuthController.specialisController.value.text = value;
-                  },
-                  items: genarelController.categoryListName,
-                  icons: Icons.keyboard_arrow_down,
+          return Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ///============= medicalLicenceImage image =========
+                _buildImageSection(
+                  title: AppStrings.medicalLicenceImage,
+                  image: doctorAuthController.documentImage,
+                  onSelectImage: () => doctorAuthController.documentImages(),
                 ),
-              ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                //=========================== Appointment Licence no ========================//
+                CustomFormCard(
+                  hintText: 'Enter your license no',
+                  hasBackgroundColor: true,
+                  title: 'License No',
+                  controller: doctorAuthController.licenceNoController.value,
+                  validator: (value) {
+                    if (value == null || value.toString().isEmpty) {
+                      return AppStrings.fieldCantBeEmpty;
+                    }
+                    return null;
+                  },
+                ),
+                //=========================== Appointment fee ========================//
+                CustomFormCard(
+                  hintText: 'Enter your fee',
+                  hasBackgroundColor: true,
+                  title: 'Appointment Fee',
+                  controller:
+                      doctorAuthController.appointmentFeeController.value,
+                  validator: (value) {
+                    if (value == null || value.toString().isEmpty) {
+                      return AppStrings.fieldCantBeEmpty;
+                    }
+                    return null;
+                  },
+                ),
 
-              //============================= Discription ================
-              CustomFormCard(
-                hasBackgroundColor: true,
-                title: 'Professional Discription',
-                controller: TextEditingController(),
-                hintText: 'Enter discription',
-              ),
+                // /==================================specialization==========================
+                CustomFormCard(
+                  hasBackgroundColor: true,
+                  title: 'Specialisation',
+                  controller: doctorAuthController.specialisController.value,
+                  readOnly: true,
+                  suffixIcon: CustomPopupmenuButton(
+                    onChanged: (value) {
+                      doctorAuthController.specialisController.value.text =
+                          value;
+                    },
+                    items: genarelController.categoryListName,
+                    icons: Icons.keyboard_arrow_down,
+                  ),
+                  validator: (value) {
+                    if (value == null || value.toString().isEmpty) {
+                      return AppStrings.fieldCantBeEmpty;
+                    }
+                    return null;
+                  },
+                ),
 
-              ///==================================yearsOfExperience==========================
-              CustomFormCard(
-                hasBackgroundColor: true,
-                title: AppStrings.yearsOfExperience,
-                controller: doctorAuthController.experienceController.value,
-              ),
+                //============================= Discription ================
+                CustomFormCard(
+                  hasBackgroundColor: true,
+                  title: 'Professional Discription',
+                  controller: doctorAuthController
+                      .professionalDiscriptionController.value,
+                  hintText: 'Enter discription',
+                  validator: (value) {
+                    if (value == null || value.toString().isEmpty) {
+                      return AppStrings.fieldCantBeEmpty;
+                    }
+                    return null;
+                  },
+                ),
 
-              ///==================================Educational Background==========================
-              CustomFormCard(
+                ///==================================yearsOfExperience==========================
+                CustomFormCard(
+                  hasBackgroundColor: true,
+                  title: AppStrings.yearsOfExperience,
+                  controller: doctorAuthController.experienceController.value,
+                  validator: (value) {
+                    if (value == null || value.toString().isEmpty) {
+                      return AppStrings.fieldCantBeEmpty;
+                    }
+                    return null;
+                  },
+                ),
+
+                ///==================================Educational Background==========================
+                CustomFormCard(
                   hasBackgroundColor: true,
                   title: AppStrings.educationalBackground,
-                  controller: doctorAuthController.educationController.value),
+                  controller: doctorAuthController.educationController.value,
+                  validator: (value) {
+                    if (value == null || value.toString().isEmpty) {
+                      return AppStrings.fieldCantBeEmpty;
+                    }
+                    return null;
+                  },
+                ),
 
-              ///==================================currentAffiliation==========================
-              CustomFormCard(
+                ///==================================currentAffiliation==========================
+                CustomFormCard(
                   hasBackgroundColor: true,
                   title: AppStrings.currentAffiliation,
-                  controller: doctorAuthController.affiliationController.value),
+                  controller: doctorAuthController.affiliationController.value,
+                  validator: (value) {
+                    if (value == null || value.toString().isEmpty) {
+                      return AppStrings.fieldCantBeEmpty;
+                    }
+                    return null;
+                  },
+                ),
 
-              ///==============Checkbox============
-              Row(
-                children: [
-                  Checkbox(
-                    value: doctorAuthController.isRemember.value,
-                    checkColor: AppColors.blackNormal,
-                    activeColor: AppColors.white,
-                    onChanged: (value) {
-                      doctorAuthController.toggleRemember();
-                    },
-                  ),
-                  Expanded(
-                    child: RichText(
-                      maxLines: 4,
-                      text: TextSpan(
-                        children: <TextSpan>[
-                          const TextSpan(
-                            text: AppStrings.byContinueYouAccept,
-                            style: TextStyle(
-                              color: AppColors.blackNormal,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
+                ///==============Checkbox============
+                Row(
+                  children: [
+                    Checkbox(
+                      value: doctorAuthController.isRemember.value,
+                      checkColor: AppColors.blackNormal,
+                      activeColor: AppColors.white,
+                      onChanged: (value) {
+                        doctorAuthController.toggleRemember();
+                      },
+                    ),
+                    Expanded(
+                      child: RichText(
+                        maxLines: 4,
+                        text: TextSpan(
+                          children: <TextSpan>[
+                            const TextSpan(
+                              text: AppStrings.byContinueYouAccept,
+                              style: TextStyle(
+                                color: AppColors.blackNormal,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 12,
+                              ),
                             ),
-                          ),
 
-                          ///==========================Terms of use=======================
-                          TextSpan(
-                            text: "\n${AppStrings.termsAndConditions}  ",
-                            style: const TextStyle(
-                              color: AppColors.blackNormal,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
+                            ///==========================Terms of use=======================
+                            TextSpan(
+                              text: "\n${AppStrings.termsAndConditions}  ",
+                              style: const TextStyle(
+                                color: AppColors.blackNormal,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Get.toNamed(
+                                      AppRoutes.termsAndConditionScreen);
+                                },
                             ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Get.toNamed(AppRoutes.termsAndConditionScreen);
-                              },
-                          ),
-                          const TextSpan(
-                            text: "${AppStrings.and}  ",
-                            style: TextStyle(
-                              color: AppColors.blackNormal,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
+                            const TextSpan(
+                              text: "${AppStrings.and}  ",
+                              style: TextStyle(
+                                color: AppColors.blackNormal,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 12,
+                              ),
                             ),
-                          ),
 
-                          ///==============================Privacy policy====================
-                          TextSpan(
-                            text: AppStrings.privacyPolicy,
-                            style: const TextStyle(
-                              color: AppColors.blackNormal,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
+                            ///==============================Privacy policy====================
+                            TextSpan(
+                              text: AppStrings.privacyPolicy,
+                              style: const TextStyle(
+                                color: AppColors.blackNormal,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Get.toNamed(AppRoutes.privacyPolicyScreen);
+                                },
                             ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Get.toNamed(AppRoutes.privacyPolicyScreen);
-                              },
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
 
-              ///================================= Sign up Button ============================
+                ///================================= Sign up Button ============================
 
-              doctorAuthController.signUpLoading.value
-                  ? const CustomLoader()
-                  : CustomButton(
+                doctorAuthController.signUpLoading.value
+                    ? const CustomLoader()
+                    : CustomButton(
+                        onTap: () {
+                          // Get.toNamed(AppRoutes.doctorHomeScreen);
+
+                          if (formKey.currentState!.validate()) {
+                            doctorAuthController.doctorSignUp();
+                          }
+                        },
+                        title: AppStrings.signUp,
+                      ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CustomText(
+                      text: AppStrings.alreadyHaveAAccount,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.whiteDarker,
+                    ),
+                    GestureDetector(
                       onTap: () {
-                        // Get.toNamed(AppRoutes.doctorHomeScreen);
-
-                        doctorAuthController.doctorSignUp();
+                        Get.toNamed(AppRoutes.signInScreen);
                       },
-                      title: AppStrings.signUp,
+                      child: const CustomText(
+                        left: 8,
+                        text: AppStrings.signIn,
+                        color: AppColors.bluNormalHover,
+                      ),
                     ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const CustomText(
-                    text: AppStrings.alreadyHaveAAccount,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.whiteDarker,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.toNamed(AppRoutes.signInScreen);
-                    },
-                    child: const CustomText(
-                      left: 8,
-                      text: AppStrings.signIn,
-                      color: AppColors.bluNormalHover,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-            ],
+                  ],
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+              ],
+            ),
           );
         }),
       ),

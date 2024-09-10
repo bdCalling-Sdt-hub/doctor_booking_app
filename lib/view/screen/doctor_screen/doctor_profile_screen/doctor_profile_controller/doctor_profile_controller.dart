@@ -33,6 +33,8 @@ class DoctorProfileController extends GetxController {
       TextEditingController().obs;
   Rx<TextEditingController> doctorCurrentAlliliationController =
       TextEditingController().obs;
+  Rx<TextEditingController> doctorLisenceNoController =
+      TextEditingController().obs;
 
   textControllerValueAdd(ProfileModel model) {
     doctorNameController.value.text = model.name ?? '';
@@ -48,6 +50,7 @@ class DoctorProfileController extends GetxController {
         model.educationalBackground ?? '';
     doctorCurrentAlliliationController.value.text =
         model.currentAffiliation ?? '';
+    doctorLisenceNoController.value.text = model.licenseNo ?? '';
   }
 
   final rxRequestStatus = Status.loading.obs;
@@ -213,6 +216,7 @@ class DoctorProfileController extends GetxController {
       'educational_background':
           doctorEducationalBackgroundController.value.text,
       'current_affiliation': doctorCurrentAlliliationController.value.text,
+      'license_no': doctorLisenceNoController.value.text,
     };
 
     var response = licenseImage.value != null
@@ -384,7 +388,7 @@ class DoctorProfileController extends GetxController {
     );
 
     if (picTime != null) {
-      String formatDateTime =DateConverter.formatTimeOfDay(picTime);
+      String formatDateTime = DateConverter.formatTimeOfDay(picTime);
 
       debugPrint(
           "=====================pictime=============$picTime===========================");
@@ -430,8 +434,6 @@ class DoctorProfileController extends GetxController {
       }
     }
   }
-
-  
 
   //====================================== Updater Doctor Appointment ==================================//
 
