@@ -1,4 +1,5 @@
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_controller/doctor_home_controller.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_profile_controller/doctor_profile_controller.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/doctor_schedule_controller/doctor_schedule_controller.dart';
 import 'package:doctor_booking/model/doctor_appointment_model/appointment_model.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
@@ -9,6 +10,7 @@ import 'package:doctor_booking/view/widgets/custom_doctor_card.dart';
 import 'package:doctor_booking/view/widgets/custom_tab_selected/custom_tab_selected.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:doctor_booking/view/widgets/doctor_nav_bar/doctor_nav_bar.dart';
+import 'package:doctor_booking/view/widgets/video_call/video_call.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -20,6 +22,9 @@ class ScheduleScreen extends StatelessWidget {
   final DoctorScheduleController scheduleController =
       Get.find<DoctorScheduleController>();
   final DoctorHomeController homeController = Get.find<DoctorHomeController>();
+
+  final DoctorProfileController profileController =
+      Get.find<DoctorProfileController>();
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +96,16 @@ class ScheduleScreen extends StatelessWidget {
                   time:
                       '${model.date != null ? DateFormat.yMMMd().format(model.date!) : ''} (${model.time ?? ''})',
                   loacation: model.userId?.location ?? '',
-                  onTap: () {},
+                  onTap: () {
+                    debugPrint(
+                        "Doctor ID>>>>${model.doctorId} || Doctor name>>>>${profileController.profileModel.value.name} || Call ID ${model.id}");
+                    Get.to(() => AudioVideoCall(
+                          userID: model.doctorId ?? "",
+                          userName:
+                              profileController.profileModel.value.name ?? "",
+                          callID: model.id ?? "",
+                        ));
+                  },
                 );
               },
             ),

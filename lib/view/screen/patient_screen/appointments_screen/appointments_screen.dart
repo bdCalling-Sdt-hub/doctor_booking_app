@@ -4,11 +4,13 @@ import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/profile_screen/controller/profile_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_appointment_card/custom_appointment_card.dart';
 import 'package:doctor_booking/view/widgets/custom_popupmenu_button/custom_popupmenu_button.dart';
 import 'package:doctor_booking/view/widgets/custom_tab_selected/custom_tab_selected.dart';
 import 'package:doctor_booking/view/widgets/patient_nav_bar/patient_nav_bar.dart';
+import 'package:doctor_booking/view/widgets/video_call/video_call.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +19,9 @@ class AppointmentsScreen extends StatelessWidget {
 
   final PatientAppointmentController patientAppointmentController =
       Get.find<PatientAppointmentController>();
+
+  final PaitentProfileController profileController =
+      Get.find<PaitentProfileController>();
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +86,17 @@ class AppointmentsScreen extends StatelessWidget {
                               items: patientAppointmentController.cancelButton,
                               icons: Icons.more_vert,
                             ),
-                            onTap: () {},
+                            onTap: () {
+                              debugPrint(
+                                  "User ID>>>>${data.userId} || User name>>>>${profileController.profileData.value.name} || Call ID>>>${data.id}");
+                              Get.to(() => AudioVideoCall(
+                                    userID: data.userId ?? "",
+                                    userName: profileController
+                                            .profileData.value.name ??
+                                        "",
+                                    callID: data.id ?? "",
+                                  ));
+                            },
                             date: DateConverter.estimatedDate(
                                 data.date ?? DateTime.now()),
                             time: data.time ?? "",
@@ -156,9 +171,7 @@ class AppointmentsScreen extends StatelessWidget {
                                           .moreButtonList,
                                       icons: Icons.more_vert,
                                     ),
-                                    onTap: () {
-                                      // Handle card tap
-                                    },
+                                    onTap: () {},
                                     date: DateConverter.estimatedDate(
                                         data.date ?? DateTime.now()),
                                     time: data.time ?? "",

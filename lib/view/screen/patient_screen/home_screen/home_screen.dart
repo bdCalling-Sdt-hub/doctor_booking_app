@@ -65,6 +65,8 @@ class HomeScreen extends StatelessWidget {
                         pageSnapping: false,
                         onPageChanged: (index, reason) {
                           homeController.bannerIndex.value = index;
+                          homeController.pageController.value =
+                              PageController(initialPage: index);
                         },
                       ),
                       items: homeController.bannerList.map((imagePath) {
@@ -77,9 +79,6 @@ class HomeScreen extends StatelessWidget {
                                 image: DecorationImage(
                                   image: CachedNetworkImageProvider(
                                       "${ApiUrl.baseUrl}/${imagePath.img}"),
-
-                                  // AssetImage(
-                                  //     "${ApiUrl.baseUrl}/${imagePath.img}"),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -95,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                     ///============================Dot indicator================
                     SmoothPageIndicator(
                       controller: homeController.pageController.value,
-                      count: homeController.bannerImg.length,
+                      count: homeController.bannerList.length,
                       axisDirection: Axis.horizontal,
                       effect: const ExpandingDotsEffect(
                         expansionFactor: 3,

@@ -4,7 +4,7 @@ import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doct
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_payment_screen/payment_controller/payment_controller.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_profile_controller/doctor_profile_controller.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/doctor_schedule_controller/doctor_schedule_controller.dart';
-import 'package:doctor_booking/controller/hospital_controller/hospital_controller.dart';
+import 'package:doctor_booking/view/screen/patient_screen/hospital_screen/controller/hospital_controller.dart';
 import 'package:doctor_booking/controller/notification_controller/notification_controller.dart';
 import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/controller/patient_appointment_controller.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/patient_auth_controller/patient_auth_controller.dart';
