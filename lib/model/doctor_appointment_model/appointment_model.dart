@@ -7,15 +7,12 @@ import 'dart:convert';
 AppointmentModel appointmentModelFromJson(String str) =>
     AppointmentModel.fromJson(json.decode(str));
 
-String appointmentModelToJson(AppointmentModel data) =>
-    json.encode(data.toJson());
-
 class AppointmentModel {
   String? id;
   String? name;
   String? doctorId;
   UserId? userId;
-  DateTime? date;
+  String? date;
   String? time;
   String? day;
   String? status;
@@ -59,7 +56,7 @@ class AppointmentModel {
         name: json["name"],
         doctorId: json["doctorId"],
         userId: json["userId"] == null ? null : UserId.fromJson(json["userId"]),
-        date: json["date"] == null ? null : DateTime.parse(json["date"]),
+        date: json["date"],
         time: json["time"],
         day: json["day"],
         status: json["status"],
@@ -81,30 +78,6 @@ class AppointmentModel {
             : DateTime.parse(json["updatedAt"]),
         v: json["__v"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "name": name,
-        "doctorId": doctorId,
-        "userId": userId?.toJson(),
-        "date": date?.toIso8601String(),
-        "time": time,
-        "day": day,
-        "status": status,
-        "reason": reason,
-        "appointment_type": appointmentType,
-        "desc": desc,
-        "prescription": prescription == null
-            ? []
-            : List<dynamic>.from(prescription!.map((x) => x)),
-        "review": review,
-        "notes": notes,
-        "reSchedule": reSchedule,
-        "payment_status": paymentStatus,
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
-        "__v": v,
-      };
 }
 
 class UserId {

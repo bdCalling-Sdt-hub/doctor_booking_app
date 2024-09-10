@@ -139,7 +139,8 @@ class DoctorHomeScreen extends StatelessWidget {
                                         },
                                         timeTextColor: AppColors.blackO,
                                         videoCallOrConsaltentDoneButton: () {
-                                          print(data.time);
+                                          print(DateConverter
+                                              .isWithin30MinutesOfTime());
                                         },
                                         typeOnline: data.appointmentType == null
                                             ? null
@@ -147,10 +148,7 @@ class DoctorHomeScreen extends StatelessWidget {
                                                     AppStrings.online
                                                 ? true
                                                 : false,
-                                        showVideoCallOrConsalttentButton:
-                                            DateConverter
-                                                .isWithin30MinutesOfTime(
-                                                    data.time ?? ''),
+                                        showVideoCallOrConsalttentButton: true,
                                       );
                                     }),
                                   )
@@ -173,8 +171,7 @@ class DoctorHomeScreen extends StatelessWidget {
                                     return CustomDoctorCard(
                                       imageUrl: '',
                                       patentName: data.userId?.name ?? '',
-                                      time:
-                                          "${"${data.date?.day ?? ''}-${data.date?.month ?? ''}-${data.date?.year ?? ''}"}(${data.time ?? ''})",
+                                      time: data.time ?? '',
                                       loacation: data.appointmentType ?? '',
                                       onTap: () => Get.toNamed(
                                           AppRoutes.patientDetails,
@@ -205,8 +202,7 @@ class DoctorHomeScreen extends StatelessWidget {
                                     return CustomDoctorCard(
                                       imageUrl: '',
                                       patentName: data.userId?.name ?? '',
-                                      time:
-                                          "${"${data.date?.day ?? ''}-${data.date?.month ?? ''}-${data.date?.year ?? ''}"}(${data.time ?? ''})",
+                                      time: data.time ?? '',
                                       loacation: data.appointmentType ?? '',
                                       onTap: () => Get.toNamed(
                                           AppRoutes.patientDetails,

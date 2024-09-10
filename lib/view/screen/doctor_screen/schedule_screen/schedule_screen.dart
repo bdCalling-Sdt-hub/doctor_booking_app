@@ -93,8 +93,7 @@ class ScheduleScreen extends StatelessWidget {
                 return CustomDoctorCard(
                   imageUrl: model.userId?.img ?? '',
                   patentName: model.userId?.name ?? '',
-                  time:
-                      '${model.date != null ? DateFormat.yMMMd().format(model.date!) : ''} (${model.time ?? ''})',
+                  time: model.time ?? '',
                   loacation: model.userId?.location ?? '',
                   onTap: () {
                     debugPrint(
@@ -132,8 +131,7 @@ class ScheduleScreen extends StatelessWidget {
                 return CustomDoctorCard(
                   imageUrl: model.userId?.img ?? '',
                   patentName: model.userId?.name ?? '',
-                  time:
-                      '${model.date != null ? DateFormat.yMMMd().format(model.date!) : ''} (${model.time ?? ''})',
+                  time: model.time ?? '',
                   loacation: model.userId?.location ?? '',
                   onTap: () {},
                   showPopupButton: true,
