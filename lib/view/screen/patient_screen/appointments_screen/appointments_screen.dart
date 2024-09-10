@@ -6,7 +6,6 @@ import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/controller/profile_controller.dart';
-import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_appointment_card/custom_appointment_card.dart';
 import 'package:doctor_booking/view/widgets/custom_popupmenu_button/custom_popupmenu_button.dart';
 import 'package:doctor_booking/view/widgets/custom_tab_selected/custom_tab_selected.dart';
@@ -31,14 +30,18 @@ class AppointmentsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.whiteLightActive,
-      appBar: const CustomAppBar(
-        appBarContent: AppStrings.appointments,
-      ),
+      // appBar: const CustomAppBar(
+      //   appBarContent: AppStrings.appointments,
+      // ),
       bottomNavigationBar: const PatientNavBar(currentIndex: 3),
       body: Obx(() {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+        return RefreshIndicator(
+          onRefresh: () {
+            return patientAppointmentController.getMyAppoinment(
+                status: AppStrings.accepted);
+          },
           child: SingleChildScrollView(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 64),
             child: Column(
               children: [
                 ///===========================3 Tab bar=======================
@@ -74,17 +77,7 @@ class AppointmentsScreen extends StatelessWidget {
                   unselectedColor: AppColors.whiteDarkHover,
                 ),
 
-                ///======================== Upcoming Data ==================
-
-                // Obx(() {
-                //   switch (patientAppointmentController.selectedIndex.value) {
-                //     case 0:
-                //       return const SizedBox();
-
-                //     default:
-                //       return const SizedBox();
-                //   }
-                // }),
+                ///======================== Appoinments ==================
 
                 Column(
                   children: List.generate(
@@ -93,6 +86,9 @@ class AppointmentsScreen extends StatelessWidget {
                     var data =
                         patientAppointmentController.appoinmentList[index];
                     return CustomAppointmentCard(
+                      appoinmentType: data.appointmentType ?? "",
+                      appoinmentStatus: data.status ?? "",
+                      paymentStatus: data.paymentStatus ?? false,
                       type: data.appointmentType ?? "",
                       imageUrl: AppConstants.userNtr,
                       name: data.name ?? "",
@@ -110,21 +106,24 @@ class AppointmentsScreen extends StatelessWidget {
                         icons: Icons.more_vert,
                       ),
                       onTap: () {
-                        // debugPrint(
-                        //     "User ID>>>>${data.userId} || User name>>>>${profileController.profileData.value.name} || Call ID>>>${data.id}");
-                        // Get.to(() => AudioVideoCall(
-                        //       userID: data.userId ?? "",
-                        //       userName:
-                        //           profileController.profileData.value.name ??
-                        //               "",
-                        //       callID: data.id ?? "",
-                        //     ));
-                        ///============== TODO Change Ammount =============
-                        paitentPaymentController.makePayment(
-                            amount: 60,
-                            userID: data.userId ?? "",
-                            doctorID: data.doctorId?.id ?? "",
-                            appoinmentId: data.id ?? "");
+                        if (data.paymentStatus ?? false) {
+                          debugPrint(
+                              "User ID>>>>${data.userId} || User name>>>>${profileController.profileData.value.name} || Call ID>>>${data.id}");
+                          Get.to(() => AudioVideoCall(
+                                userID: data.userId ?? "",
+                                userName:
+                                    profileController.profileData.value.name ??
+                                        "",
+                                callID: data.id ?? "",
+                              ));
+                        } else {
+                          ///============== TODO Change Ammount =============
+                          paitentPaymentController.makePayment(
+                              amount: 60,
+                              userID: data.userId ?? "",
+                              doctorID: data.doctorId?.id ?? "",
+                              appoinmentId: data.id ?? "");
+                        }
                       },
                       date: DateConverter.estimatedDate(
                           data.date ?? DateTime.now()),

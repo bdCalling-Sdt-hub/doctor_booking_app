@@ -5,12 +5,16 @@ import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
+import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/controller/patient_appointment_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 
 class PaitentPaymentController extends GetxController {
   GeneralController generalController = Get.find<GeneralController>();
+  PatientAppointmentController appointmentController =
+      Get.find<PatientAppointmentController>();
 
   ///========================= Create Payment Intent =========================
   Future<Map<String, dynamic>?> createPaymentIntent({
@@ -96,7 +100,8 @@ class PaitentPaymentController extends GetxController {
     );
 
     if (response.statusCode == 200) {
-      toastMessage(message: response.body["message"]);
+      appointmentController.getMyAppoinment(status: AppStrings.accepted);
+      toastMessage(message: response.body["message"], colors: Colors.green);
 
       navigator!.pop();
       return true;

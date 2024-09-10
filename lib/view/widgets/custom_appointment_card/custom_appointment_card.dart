@@ -16,6 +16,9 @@ class CustomAppointmentCard extends StatelessWidget {
   final String date;
   final String time;
   final String type;
+  final String appoinmentStatus;
+  final bool paymentStatus;
+  final String appoinmentType;
 
   final String location;
   final Widget? trailing;
@@ -32,6 +35,9 @@ class CustomAppointmentCard extends StatelessWidget {
     required this.time,
     required this.location,
     required this.type,
+    required this.appoinmentStatus,
+    required this.paymentStatus,
+    required this.appoinmentType,
   });
 
   @override
@@ -150,14 +156,27 @@ class CustomAppointmentCard extends StatelessWidget {
             height: 8.h,
           ),
 
-          //====================== Calling Button ========================
-          CustomButton(
-            onTap: () {
-              onTap!();
-            },
-            // fillColor: AppColors.bluNormalHover.withOpacity(.7),
-            title: AppStrings.videoCall,
-          )
+          //====================== Calling/Payment Button ========================
+          if (appoinmentStatus == AppStrings.accepted &&
+              appoinmentType == "ONLINE" &&
+              paymentStatus)
+            CustomButton(
+              onTap: () {
+                onTap!();
+              },
+              // fillColor: AppColors.bluNormalHover.withOpacity(.7),
+              title: AppStrings.videoCall,
+            ),
+
+          if (!paymentStatus && appoinmentStatus == AppStrings.accepted)
+            CustomButton(
+              onTap: () {
+                onTap!();
+              },
+              // fillColor: AppColors.bluNormalHover.withOpacity(.7),
+              title:
+                  paymentStatus ? AppStrings.videoCall : AppStrings.makePayment,
+            ),
         ],
       ),
     );

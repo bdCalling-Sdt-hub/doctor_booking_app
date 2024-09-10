@@ -19,7 +19,7 @@ class AudioVideoCall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ZegoUIKitPrebuiltCall(
-        appID: ZEGOCLOUD_APPID,
+        appID: ZEGOCLOUD_APP_ID,
         appSign: ZEGOCLOUD_APP_SIGN,
         callID: callID,
         userID: userID,

@@ -144,8 +144,8 @@ class AppStrings {
   ///==========================Schedule=================
   static const String schedule = 'Schedule';
   static const String videoCall = 'Video Call';
+  static const String makePayment = 'Make Payment';
   static const String consultant = 'Mark As Done';
-
   static const String bookAppointment = 'Book Appointment';
   static const String availAbleTime = 'Available Time';
   static const String details = 'Details';
