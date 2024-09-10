@@ -1,6 +1,5 @@
-
-
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
+import 'package:doctor_booking/helper/time_converter/time_converter.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
@@ -106,107 +105,52 @@ class DoctorHomeScreen extends StatelessWidget {
                             textColor: AppColors.grayNormal,
                           );
                         }),
-                        SizedBox(height: 24.h),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 56.h,
-                          decoration: BoxDecoration(
-                            color: AppColors.whiteNormal,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0.h),
-                            child: Obx(() {
-                              return Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Flexible(
-                                    //======================= To day button ==================//
-                                    child: HomeSmallContainer(
-                                      onTap: () {
-                                        controller.scheduleTime.value =
-                                            AppStrings.today;
-                                        controller.getAllDoctorAppointment();
-                                      },
-                                      isActive: controller.scheduleTime.value ==
-                                          AppStrings.today,
-                                      title: AppStrings.today,
-                                    ),
-                                  ),
-                                  Flexible(
-                                    //=================== Weekly Button =====================//
-                                    child: HomeSmallContainer(
-                                      onTap: () {
-                                        controller.scheduleTime.value =
-                                            AppStrings.weekly;
-                                        controller
-                                            .getAllDoctorAppointmentWeeklyAndMonthy(
-                                                AppStrings.weekly);
-                                      },
-                                      isActive: controller.scheduleTime.value ==
-                                          AppStrings.weekly,
-                                      title: AppStrings.weekly,
-                                    ),
-                                  ),
-                                  Flexible(
-                                    //============================ Monthly button ======================//
-                                    child: HomeSmallContainer(
-                                      onTap: () {
-                                        controller.scheduleTime.value =
-                                            AppStrings.monthly;
-                                        controller
-                                            .getAllDoctorAppointmentWeeklyAndMonthy(
-                                                AppStrings.monthly);
-                                      },
-                                      isActive: controller.scheduleTime.value ==
-                                          AppStrings.monthly,
-                                      title: AppStrings.monthly,
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }),
-                          ),
-                        ),
+                        //  SizedBox(height: 24.h),
+
                         SizedBox(height: 16.h),
                         //====================================== Schedule List ====================================//
                         if (controller.tabSelectedIndex.value == 0)
+                          //=============== Today === Weekly and monthly field =================================
+                          _toDayWeeklyMonthlyField(context),
+                        if (controller.tabSelectedIndex.value == 0)
                           //======================= To Day List ========================
-                          if (controller.scheduleTime.value == AppStrings.today)
+                          if (controller.scheduleTime.value ==
+                                  AppStrings.today &&
+                              controller.tabSelectedIndex.value == 0)
                             controller.appointMentListToday.isNotEmpty
                                 ? Column(
                                     children: List.generate(
                                         controller.appointMentListToday.length,
                                         (index) {
+                                      var data = controller
+                                          .appointMentListToday[index];
                                       return CustomDoctorCard(
                                         imageUrl: '',
-                                        patentName: controller
-                                                .appointMentListToday[index]
-                                                .userId
-                                                ?.name ??
-                                            '',
-                                        time:
-                                            'Today (${controller.appointMentListToday[index].time ?? ''})',
-                                        loacation: controller
-                                                .appointMentListToday[index]
-                                                .appointmentType ??
-                                            '',
-                                        onTap: () {
-                                          var userdetails = controller
-                                              .appointMentListToday[index];
-                                          Get.toNamed(AppRoutes.patientDetails,
-                                              arguments: userdetails);
-                                        },
+                                        patentName: data.userId?.name ?? '',
+                                        time: 'Today (${data.time ?? ''})',
+                                        loacation: data.appointmentType ?? '',
+                                        onTap: () => Get.toNamed(
+                                            AppRoutes.patientDetails,
+                                            arguments: data),
                                         reScheduleButton: () {
                                           Navigator.pop(context);
                                           controller.showHomePopup(
-                                              id: controller
-                                                  .appointMentListToday[index]
-                                                  .id
-                                                  .toString());
+                                              id: data.id.toString());
                                         },
                                         timeTextColor: AppColors.blackO,
+                                        videoCallOrConsaltentDoneButton: () {
+                                          print(data.time);
+                                        },
+                                        typeOnline: data.appointmentType == null
+                                            ? null
+                                            : data.appointmentType! ==
+                                                    AppStrings.online
+                                                ? true
+                                                : false,
+                                        showVideoCallOrConsalttentButton:
+                                            DateConverter
+                                                .isWithin30MinutesOfTime(
+                                                    data.time ?? ''),
                                       );
                                     }),
                                   )
@@ -216,37 +160,28 @@ class DoctorHomeScreen extends StatelessWidget {
                                     ),
                                   ),
                         //======================= Weekly List =====================
-                        if (controller.scheduleTime.value == AppStrings.weekly)
+                        if (controller.scheduleTime.value ==
+                                AppStrings.weekly &&
+                            controller.tabSelectedIndex.value == 0)
                           controller.appointMentListWeekly.isNotEmpty
                               ? Column(
                                   children: List.generate(
                                       controller.appointMentListWeekly.length,
                                       (index) {
+                                    var data =
+                                        controller.appointMentListWeekly[index];
                                     return CustomDoctorCard(
                                       imageUrl: '',
-                                      patentName: controller
-                                              .appointMentListWeekly[index]
-                                              .userId
-                                              ?.name ??
-                                          '',
+                                      patentName: data.userId?.name ?? '',
                                       time:
-                                          'Today (${controller.appointMentListWeekly[index].time ?? ''})',
-                                      loacation: controller
-                                              .appointMentListWeekly[index]
-                                              .appointmentType ??
-                                          '',
-                                      onTap: () {
-                                        var userdetails = controller
-                                            .appointMentListWeekly[index];
-                                        Get.toNamed(AppRoutes.patientDetails,
-                                            arguments: userdetails);
-                                      },
-                                      reScheduleButton: () {
-                                        controller.showHomePopup(
-                                            id: controller
-                                                .appointMentListWeekly[index].id
-                                                .toString());
-                                      },
+                                          "${"${data.date?.day ?? ''}-${data.date?.month ?? ''}-${data.date?.year ?? ''}"}(${data.time ?? ''})",
+                                      loacation: data.appointmentType ?? '',
+                                      onTap: () => Get.toNamed(
+                                          AppRoutes.patientDetails,
+                                          arguments: data),
+                                      reScheduleButton: () =>
+                                          controller.showHomePopup(
+                                              id: data.id.toString()),
                                       timeTextColor: AppColors.blackO,
                                     );
                                   }),
@@ -257,38 +192,28 @@ class DoctorHomeScreen extends StatelessWidget {
                                   ),
                                 ),
                         //======================= monthly List =====================
-                        if (controller.scheduleTime.value == AppStrings.monthly)
+                        if (controller.scheduleTime.value ==
+                                AppStrings.monthly &&
+                            controller.tabSelectedIndex.value == 0)
                           controller.appointMentListMonthly.isNotEmpty
                               ? Column(
                                   children: List.generate(
                                       controller.appointMentListMonthly.length,
                                       (index) {
+                                    var data = controller
+                                        .appointMentListMonthly[index];
                                     return CustomDoctorCard(
                                       imageUrl: '',
-                                      patentName: controller
-                                              .appointMentListMonthly[index]
-                                              .userId
-                                              ?.name ??
-                                          '',
+                                      patentName: data.userId?.name ?? '',
                                       time:
-                                          'Today (${controller.appointMentListMonthly[index].time ?? ''})',
-                                      loacation: controller
-                                              .appointMentListMonthly[index]
-                                              .appointmentType ??
-                                          '',
-                                      onTap: () {
-                                        var userdetails = controller
-                                            .appointMentListMonthly[index];
-                                        Get.toNamed(AppRoutes.patientDetails,
-                                            arguments: userdetails);
-                                      },
-                                      reScheduleButton: () {
-                                        controller.showHomePopup(
-                                            id: controller
-                                                .appointMentListMonthly[index]
-                                                .id
-                                                .toString());
-                                      },
+                                          "${"${data.date?.day ?? ''}-${data.date?.month ?? ''}-${data.date?.year ?? ''}"}(${data.time ?? ''})",
+                                      loacation: data.appointmentType ?? '',
+                                      onTap: () => Get.toNamed(
+                                          AppRoutes.patientDetails,
+                                          arguments: data),
+                                      reScheduleButton: () =>
+                                          controller.showHomePopup(
+                                              id: data.id.toString()),
                                       timeTextColor: AppColors.blackO,
                                     );
                                   }),
@@ -315,19 +240,13 @@ class DoctorHomeScreen extends StatelessWidget {
                                 children: List.generate(
                                     controller.appointMentCalcelList.length,
                                     (index) {
+                                  var data =
+                                      controller.appointMentCalcelList[index];
                                   return CustomDoctorCard(
                                     imageUrl: '',
-                                    patentName: controller
-                                            .appointMentCalcelList[index]
-                                            .userId
-                                            ?.name ??
-                                        '',
-                                    time:
-                                        'Today (${controller.appointMentCalcelList[index].time ?? ''})',
-                                    loacation: controller
-                                            .appointMentCalcelList[index]
-                                            .appointmentType ??
-                                        '',
+                                    patentName: data.userId?.name ?? '',
+                                    time: data.time ?? '',
+                                    loacation: data.appointmentType ?? '',
                                     onTap: () {
                                       var userdetails = controller
                                           .appointMentCalcelList[index];
@@ -350,6 +269,62 @@ class DoctorHomeScreen extends StatelessWidget {
         }
       }),
       bottomNavigationBar: const DoctorNavBar(currentIndex: 0),
+    );
+  }
+
+  Widget _toDayWeeklyMonthlyField(context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 56.h,
+      decoration: BoxDecoration(
+        color: AppColors.whiteNormal,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(8.0.h),
+        child: Obx(() {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                //======================= To day button ==================//
+                child: HomeSmallContainer(
+                  onTap: () {
+                    controller.scheduleTime.value = AppStrings.today;
+                    controller.getAllDoctorAppointment();
+                  },
+                  isActive: controller.scheduleTime.value == AppStrings.today,
+                  title: AppStrings.today,
+                ),
+              ),
+              Flexible(
+                //=================== Weekly Button =====================//
+                child: HomeSmallContainer(
+                  onTap: () {
+                    controller.scheduleTime.value = AppStrings.weekly;
+                    controller.getAllDoctorAppointmentWeeklyAndMonthy(
+                        AppStrings.weekly);
+                  },
+                  isActive: controller.scheduleTime.value == AppStrings.weekly,
+                  title: AppStrings.weekly,
+                ),
+              ),
+              Flexible(
+                //============================ Monthly button ======================//
+                child: HomeSmallContainer(
+                  onTap: () {
+                    controller.scheduleTime.value = AppStrings.monthly;
+                    controller.getAllDoctorAppointmentWeeklyAndMonthy(
+                        AppStrings.monthly);
+                  },
+                  isActive: controller.scheduleTime.value == AppStrings.monthly,
+                  title: AppStrings.monthly,
+                ),
+              ),
+            ],
+          );
+        }),
+      ),
     );
   }
 }

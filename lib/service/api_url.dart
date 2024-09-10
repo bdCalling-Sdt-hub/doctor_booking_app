@@ -50,7 +50,8 @@ class ApiUrl {
 
   static const pendingDoctorAppointment = "$doctorAppointment?status=pending";
   static const pastDoctorAppointment = "$doctorAppointment?type=past";
-  static const acceptedDoctorAppointment = "$doctorAppointment?status=accepted";
+  static const acceptedDoctorAppointment =
+      "$doctorAppointment?status=accepted&type=today";
   static const appointmentUpdateStatus =
       '/appointment/update-appointment-status/';
 

@@ -53,8 +53,7 @@ class DoctorHomeController extends GetxController {
   RxList<AppointmentModel> appointMentListToday = <AppointmentModel>[].obs;
 
   getAllDoctorAppointment() async {
-    var response =
-        await ApiClient.getData("${ApiUrl.doctorAppointment}?type=today");
+    var response = await ApiClient.getData(ApiUrl.acceptedDoctorAppointment);
 
     if (response.statusCode == 200) {
       setRxRequestStatus(Status.completed);
@@ -156,33 +155,28 @@ class DoctorHomeController extends GetxController {
     }
   }
 
-//============================== Resudule Appointment ======================// 
-
-  
-
-
+//============================== Resudule Appointment ======================//
 
   Rx<TextEditingController> appointmentRescheduleNote =
       TextEditingController().obs;
-  RxString doctorRescheduleDate = ''.obs; 
-  RxString doctorRescheduleMonth = ''.obs; 
-  RxString doctorRescheduleYear = ''.obs; 
+  RxString doctorRescheduleDate = ''.obs;
+  RxString doctorRescheduleMonth = ''.obs;
+  RxString doctorRescheduleYear = ''.obs;
 
   RxString doctorRescheduleDay = 'Sunday'.obs;
   RxString doctorRescheduleTime = ''.obs;
-  RxBool rescheduleLoading = false.obs;  
+  RxBool rescheduleLoading = false.obs;
 
+  //================= Set Date Month Year ==========================//
+  initRescheduleDateMonthYaer(DateTime dateTime) {
+    doctorRescheduleDate.value = DateFormat('d').format(dateTime).toLowerCase();
+    doctorRescheduleMonth.value =
+        DateFormat('M').format(dateTime).toLowerCase();
+    doctorRescheduleYear.value = DateFormat('y').format(dateTime).toLowerCase();
 
-  //================= Set Date Month Year ==========================//     
-  initRescheduleDateMonthYaer(DateTime dateTime){
-     
-   doctorRescheduleDate.value =  DateFormat('d').format(dateTime).toLowerCase();
-   doctorRescheduleMonth.value =  DateFormat('M').format(dateTime).toLowerCase();
-   doctorRescheduleYear.value =  DateFormat('y').format(dateTime).toLowerCase(); 
-
-   debugPrint("==================================== ${doctorRescheduleDate.value}-${doctorRescheduleMonth.value}-${doctorRescheduleYear.value}");
- refresh();
-
+    debugPrint(
+        "==================================== ${doctorRescheduleDate.value}-${doctorRescheduleMonth.value}-${doctorRescheduleYear.value}");
+    refresh();
   }
 
   Future<void> doctorRescheduleAppointment(
@@ -199,7 +193,8 @@ class DoctorHomeController extends GetxController {
       Map<String, String> body = {
         "day": doctorRescheduleDay.value,
         "time": doctorRescheduleTime.value,
-        "date": "${doctorRescheduleDate.value}-${doctorRescheduleMonth.value}-${doctorRescheduleYear.value}",
+        "date":
+            "${doctorRescheduleDate.value}-${doctorRescheduleMonth.value}-${doctorRescheduleYear.value}",
         "notes": appointmentRescheduleNote.value.text,
         "appointmentId": appointmentId,
       };
