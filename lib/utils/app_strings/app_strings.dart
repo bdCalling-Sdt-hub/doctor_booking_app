@@ -113,6 +113,7 @@ class AppStrings {
   static const String pendingCapital = 'Pending';
 
   static const String completed = 'completed';
+  static const String completed2 = 'Completed';
 
   static const String patientsChecked = 'Patients Checked';
   static const String overallRating = 'Overall Rating';
@@ -231,7 +232,7 @@ class AppStrings {
   static const String allPatientList = 'All Patient List';
   static const String yes = 'Yes';
   static const String no = 'No';
-  static const String cancel = 'Cancel';
+  static const String cancel = 'Canceled';
   static const String weight = 'Weight (KG)';
   static const String reasonOfVisit = 'Reason of Visit';
   static const String describeProblem = 'Describe Problem';

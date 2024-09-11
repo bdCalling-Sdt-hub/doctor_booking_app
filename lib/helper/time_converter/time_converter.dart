@@ -137,38 +137,97 @@ class DateConverter {
   //     return false;
   //   }
   // }
+  // static bool isWithin30MinutesOfTime(
+  //     {String dateString = "2024-09-10T00:00:00.000Z",
+  //     String timeString = "05:18 PM"}) {
+  //   try {
+  //     // Define the format to parse the date and time together
+  //     final dateTimeFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z' h:mm a");
+
+  //     // Parse the date part first (to handle ISO format like 2024-09-10T00:00:00.000Z)
+  //     DateTime parsedDate = DateTime.parse(dateString);
+
+  //     // Use the formatted date with the time string (e.g., "03:30 PM") to create a full DateTime
+  //     String formattedDate = DateFormat('yyyy-MM-dd').format(parsedDate);
+  //     String dateTimeString = "$formattedDate $timeString";
+
+  //     // Define another DateFormat to parse the combined string
+  //     final combinedFormat = DateFormat('yyyy-MM-dd h:mm a');
+
+  //     // Parse the combined string to get the full DateTime object
+  //     DateTime inputDateTime = combinedFormat.parse(dateTimeString);
+
+  //     // Get the current time
+  //     DateTime now = DateTime.now();
+
+  //     // Calculate 30 minutes after the input time
+  //     DateTime thirtyMinutesAfter = inputDateTime.add(Duration(minutes: 30));
+
+  //     // Check if the current time is between the target time and 30 minutes after
+  //     return now.isAfter(inputDateTime) && now.isBefore(thirtyMinutesAfter) ||
+  //         now.isAtSameMomentAs(inputDateTime);
+  //   } catch (e) {
+  //     // If any parsing errors occur, print the error and return false
+  //     print('Error parsing date or time: $e');
+  //     return false;
+  //   }
+  // }
+
   static bool isWithin30MinutesOfTime(
-      {String dateString = "2024-09-10T00:00:00.000Z",
-      String timeString = "05:18 PM"}) {
+      {String inputDateString = "2024-09-11T00:00:00.000Z",
+      String inputTimeString = "09:15 AM"}) {
+    // Clean the input time string by removing any extra spaces or invisible characters
+    inputTimeString = inputTimeString.trim().replaceAll(RegExp(r'\s+'), ' ');
+
+    // Parse the input date
+    DateTime inputDate =
+        DateTime.parse(inputDateString); // "2024-09-10T00:00:00.000Z"
+
+    // Parse the time string ("05:18 PM") using DateFormat from intl package
     try {
-      // Define the format to parse the date and time together
-      final dateTimeFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z' h:mm a");
+      final DateFormat timeFormat =
+          DateFormat('h:mm a'); // 'jm' is the pattern for '5:18 PM'
+      final DateTime parsedTime = timeFormat.parse(inputTimeString);
 
-      // Parse the date part first (to handle ISO format like 2024-09-10T00:00:00.000Z)
-      DateTime parsedDate = DateTime.parse(dateString);
+      // Create a DateTime combining inputDate with parsed time
+      DateTime inputDateTime = DateTime(
+        inputDate.year,
+        inputDate.month,
+        inputDate.day,
+        parsedTime.hour,
+        parsedTime.minute,
+      );
 
-      // Use the formatted date with the time string (e.g., "03:30 PM") to create a full DateTime
-      String formattedDate = DateFormat('yyyy-MM-dd').format(parsedDate);
-      String dateTimeString = "$formattedDate $timeString";
-
-      // Define another DateFormat to parse the combined string
-      final combinedFormat = DateFormat('yyyy-MM-dd h:mm a');
-
-      // Parse the combined string to get the full DateTime object
-      DateTime inputDateTime = combinedFormat.parse(dateTimeString);
+      // Add 30 minutes to the parsed time
+      DateTime matchTimeWith30MinAdded =
+          inputDateTime.add(const Duration(minutes: 30));
 
       // Get the current time
       DateTime now = DateTime.now();
 
-      // Calculate 30 minutes after the input time
-      DateTime thirtyMinutesAfter = inputDateTime.add(Duration(minutes: 30));
+      // if (!now.isAfter(inputDateTime) ||
+      //     now.isBefore(inputDateTime.subtract(Duration(minutes: 2)))) {
+      //   print('===============================> Hello');
+      //   return false;
+      // }
 
-      // Check if the current time is between the target time and 30 minutes after
-      return now.isAfter(inputDateTime) && now.isBefore(thirtyMinutesAfter) ||
-          now.isAtSameMomentAs(inputDateTime);
+      // if (now.hour == inputDateTime.hour) {
+      //   if (now.minute > matchTimeWith30MinAdded.minute) {
+      //     return false;
+      //   }
+
+      //   if (now.minute >= inputDateTime.minute) {
+      //     print(now.minute);
+      //     print(inputDateTime.minute);
+      //     return true;
+      //   }
+      // }
+
+      //  Compare the current time with the input time and the time 30 minutes after it
+      return now.isAfter(inputDateTime) &&
+          now.isBefore(matchTimeWith30MinAdded);
     } catch (e) {
-      // If any parsing errors occur, print the error and return false
-      print('Error parsing date or time: $e');
+      debugPrint('Error parsing time string: $e');
       return false;
     }
   }

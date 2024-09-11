@@ -1,3 +1,4 @@
+import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_controller/doctor_home_controller.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_profile_controller/doctor_profile_controller.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/doctor_schedule_controller/doctor_schedule_controller.dart';
@@ -54,12 +55,21 @@ class ScheduleScreen extends StatelessWidget {
 
   /// Builds the tab selector widget
   Widget _buildTabSelector() {
+    final DoctorScheduleController scheduleController =
+        Get.find<DoctorScheduleController>();
     return Obx(() {
       return CustomTabSelector(
         tabs: scheduleController.scheduleTabs,
         selectedIndex: scheduleController.tabCurrentIndex.value,
         onTabSelected: (value) {
           scheduleController.tabCurrentIndex.value = value;
+          if (value == 0) {
+            scheduleController.getAllDoctorAcceptAppointment();
+          } else if (value == 1) {
+            scheduleController.getPendingDoctorAppointment();
+          } else {
+            scheduleController.getPastDoctorAppointment();
+          }
         },
         selectedColor: AppColors.grayNormal,
         unselectedColor: AppColors.grayLightHover,
@@ -91,8 +101,9 @@ class ScheduleScreen extends StatelessWidget {
               (index) {
                 AppointmentModel model =
                     scheduleController.acceptAppointMentList[index];
+
                 return CustomDoctorCard(
-                  imageUrl: model.userId?.img ?? '',
+                  imageUrl: "${ApiUrl.imageBaseUrl}${model.userId?.img}",
                   patentName: model.userId?.name ?? '',
                   time:
                       "${DateConverter.formatDate(model.date ?? '')}(${model.time})",
@@ -131,7 +142,7 @@ class ScheduleScreen extends StatelessWidget {
                 AppointmentModel model =
                     scheduleController.pastAppointment[index];
                 return CustomDoctorCard(
-                  imageUrl: model.userId?.img ?? '',
+                  imageUrl: "${ApiUrl.imageBaseUrl}${model.userId?.img}",
                   patentName: model.userId?.name ?? '',
                   time:
                       "${DateConverter.formatDate(model.date ?? '')}(${model.time})",

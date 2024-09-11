@@ -28,7 +28,11 @@ class DoctorHomeController extends GetxController {
   RxInt popupReschuduleCurrentIndex = RxInt(0);
   RxInt selectedIndex = RxInt(0);
 //========================= Home Tab List =====================
-  List<String> tabs = [AppStrings.schedule, AppStrings.cancel];
+  List<String> tabs = [
+    AppStrings.schedule,
+    AppStrings.completed2,
+    AppStrings.cancel
+  ];
   RxInt tabSelectedIndex = RxInt(0);
 
   showHomePopup({required String id}) {
@@ -52,7 +56,7 @@ class DoctorHomeController extends GetxController {
   // RxList<AppointmentModel> appointMentList = <AppointmentModel>[].obs;
   RxList<AppointmentModel> appointMentListToday = <AppointmentModel>[].obs;
 
-  getAllDoctorAppointment() async {
+  getDoctorAcceptedAndTodayAppointment() async {
     var response = await ApiClient.getData(ApiUrl.acceptedDoctorAppointment);
 
     if (response.statusCode == 200) {
@@ -123,6 +127,26 @@ class DoctorHomeController extends GetxController {
       setRxRequestStatus(Status.completed);
 
       appointMentCalcelList.value = List<AppointmentModel>.from(
+          response.body["data"].map((x) => AppointmentModel.fromJson(x)));
+    } else {
+      if (response.statusText == ApiClient.somethingWentWrong) {
+        setRxRequestStatus(Status.internetError);
+      } else {
+        setRxRequestStatus(Status.error);
+      }
+      ApiChecker.checkApi(response);
+    }
+  }
+
+  RxList<AppointmentModel> appointmentCompletedList = <AppointmentModel>[].obs;
+
+  getDoctorAppointmentCompleted() async {
+    var response = await ApiClient.getData(ApiUrl.completedDoctorAppointment);
+
+    if (response.statusCode == 200) {
+      setRxRequestStatus(Status.completed);
+
+      appointmentCompletedList.value = List<AppointmentModel>.from(
           response.body["data"].map((x) => AppointmentModel.fromJson(x)));
     } else {
       if (response.statusText == ApiClient.somethingWentWrong) {
@@ -231,15 +255,14 @@ class DoctorHomeController extends GetxController {
 
   allMethod() {
     getDoctorOverview();
-    getAllDoctorAppointment();
+    getDoctorAcceptedAndTodayAppointment();
     getAllDoctorAppointmentCencel();
+    getDoctorAppointmentCompleted();
   }
 
   @override
   void onInit() {
-    getDoctorOverview();
-    getAllDoctorAppointment();
-    getAllDoctorAppointmentCencel();
+    allMethod();
     super.onInit();
   }
 }

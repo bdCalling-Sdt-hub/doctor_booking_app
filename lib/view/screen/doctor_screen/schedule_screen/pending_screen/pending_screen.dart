@@ -3,7 +3,6 @@ import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doct
 import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/doctor_schedule_controller/doctor_schedule_controller.dart';
 import 'package:doctor_booking/model/doctor_appointment_model/appointment_model.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
-import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
@@ -15,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../../service/api_url.dart';
 
 class PendingScreen extends StatelessWidget {
   PendingScreen({super.key});
@@ -32,7 +32,7 @@ class PendingScreen extends StatelessWidget {
               scheduleController.pendingAppointmentList[index];
           return CustomDoctorPendingCard(
             showPopupButton: false,
-            imageUrl: model.userId?.img ?? AppConstants.userNtr,
+            imageUrl: "${ApiUrl.imageBaseUrl}${model.userId?.img}",
             patentName: model.userId?.name ?? '',
             time:
                 "${DateConverter.formatDate(model.date ?? '')}(${model.time})",

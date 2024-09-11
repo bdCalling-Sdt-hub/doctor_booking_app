@@ -17,6 +17,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../service/api_url.dart';
+
 class DoctorProfileScreen extends StatelessWidget {
   DoctorProfileScreen({super.key});
 
@@ -57,10 +59,8 @@ class DoctorProfileScreen extends StatelessWidget {
                     ),
                     //=========================== Doctor profile image ====================//
                     CustomNetworkImage(
-                      imageUrl: doctorProfileController.profileModel.value.img!
-                              .startsWith('http')
-                          ? doctorProfileController.profileModel.value.img ?? ""
-                          : '$imageBaseUrl${doctorProfileController.profileModel.value.img ?? ""}',
+                      imageUrl:
+                          "${ApiUrl.imageBaseUrl}${doctorProfileController.profileModel.value.img}",
                       height: 90.h,
                       width: 90.w,
                       boxShape: BoxShape.circle,
