@@ -81,6 +81,8 @@ class DoctorId {
   String? location;
   String? phone;
   String? specialization;
+  int? appointmentFee;
+
 
   DoctorId({
     this.id,
@@ -90,6 +92,7 @@ class DoctorId {
     this.location,
     this.phone,
     this.specialization,
+    this.appointmentFee
   });
 
   factory DoctorId.fromJson(Map<String, dynamic> json) => DoctorId(
@@ -100,5 +103,6 @@ class DoctorId {
         location: json["location"],
         phone: json["phone"],
         specialization: json["specialization"],
+        appointmentFee: json["appointment_fee"]
       );
 }

@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
-import 'package:doctor_booking/model/doctor_profile_model/doctor_profile_model.dart';
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
+import 'package:doctor_booking/view/screen/patient_screen/profile_screen/model/profile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -129,14 +129,14 @@ class PaitentProfileController extends GetxController {
 
   ///=========================== Get Profile ==========================
 
-  Rx<ProfileModel> profileData = ProfileModel().obs;
+  Rx<PaitentProfileModel> profileData = PaitentProfileModel().obs;
   getProfile() async {
     profileLoadingMethod(Status.loading);
 
     var response = await ApiClient.getData(ApiUrl.getProfile);
 
     if (response.statusCode == 200) {
-      profileData.value = ProfileModel.fromJson(response.body["data"]);
+      profileData.value = PaitentProfileModel.fromJson(response.body["data"]);
       saveInfo(profileData.value);
       profileLoadingMethod(Status.completed);
       refresh();
@@ -152,7 +152,7 @@ class PaitentProfileController extends GetxController {
 
   ///======================== Edit Profile =====================
 
-  saveInfo(ProfileModel profileData) async {
+  saveInfo(PaitentProfileModel profileData) async {
     image.value = "${ApiUrl.baseUrl}/${profileData.img ?? ""}";
     fullNameController.value =
         TextEditingController(text: profileData.name ?? "");

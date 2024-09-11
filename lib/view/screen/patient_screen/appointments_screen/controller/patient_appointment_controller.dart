@@ -123,6 +123,27 @@ class PatientAppointmentController extends GetxController {
     }
   }
 
+//===================== Refresh =====================
+
+  refreshScreen({required int index}) {
+    switch (index) {
+      case 0:
+        // ignore: void_checks
+        return getMyAppoinment(status: AppStrings.pending);
+      case 1:
+        // ignore: void_checks
+        return getMyAppoinment(status: AppStrings.accepted);
+
+      case 2:
+        // ignore: void_checks
+        return getMyAppoinment(status: AppStrings.completed);
+
+      case 3:
+        // ignore: void_checks
+        return getMyAppoinment(status: AppStrings.rejected);
+    }
+  }
+
   @override
   void onInit() {
     getMyAppoinment(status: AppStrings.pending);
