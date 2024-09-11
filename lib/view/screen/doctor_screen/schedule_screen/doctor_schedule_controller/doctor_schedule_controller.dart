@@ -127,6 +127,12 @@ class DoctorScheduleController extends GetxController {
     }
   }
 
+  getAllMethod() {
+    getAllDoctorAcceptAppointment();
+    getPendingDoctorAppointment();
+    getPastDoctorAppointment();
+  }
+
   @override
   void onInit() {
     getAllDoctorAcceptAppointment();

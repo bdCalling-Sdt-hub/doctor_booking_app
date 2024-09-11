@@ -41,12 +41,15 @@ class ScheduleScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0.h),
-          child: Column(
-            children: [
-              _buildTabSelector(),
-              SizedBox(height: 25.h),
-              _buildAppointmentList(context),
-            ],
+          child: RefreshIndicator(
+            onRefresh: () => scheduleController.getAllMethod(),
+            child: Column(
+              children: [
+                _buildTabSelector(),
+                SizedBox(height: 25.h),
+                _buildAppointmentList(context),
+              ],
+            ),
           ),
         ),
       ),
