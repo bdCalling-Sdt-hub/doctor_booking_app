@@ -100,6 +100,12 @@ class DoctorHomeScreen extends StatelessWidget {
                             selectedIndex: controller.tabSelectedIndex.value,
                             onTabSelected: (value) {
                               controller.tabSelectedIndex.value = value;
+                              if (value == 0) {
+                                if (value == 0) {
+                                  controller
+                                      .getDoctorAcceptedAndTodayAppointment();
+                                }
+                              }
                             },
                             selectedColor: AppColors.grayNormal,
                             unselectedColor: AppColors.whiteNormalHover,
@@ -141,17 +147,18 @@ class DoctorHomeScreen extends StatelessWidget {
                                               id: data.id.toString());
                                         },
                                         timeTextColor: AppColors.blackO,
-                                        videoCallOrConsaltentDoneButton: () {
-                                          print(DateConverter
-                                              .isWithin30MinutesOfTime());
-                                        },
+                                        videoCallOrConsaltentDoneButton: () {},
                                         typeOnline: data.appointmentType == null
                                             ? null
                                             : data.appointmentType! ==
                                                     AppStrings.online
                                                 ? true
                                                 : false,
-                                        showVideoCallOrConsalttentButton: true,
+                                        showVideoCallOrConsalttentButton:
+                                            DateConverter
+                                                .isWithin30MinutesOfTime(
+                                                    data.date ?? '',
+                                                    data.time ?? ''),
                                       );
                                     }),
                                   )

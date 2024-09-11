@@ -1,6 +1,5 @@
 import 'package:doctor_booking/model/doctor_appointment_model/appointment_model.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
-import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/patient_details/inner_widget.dart/patient_card.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/patient_details/inner_widget.dart/patient_details_containert.dart';
@@ -11,6 +10,8 @@ import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import '../../../../service/api_url.dart';
 
 // ignore: must_be_immutable
 class PatientDetails extends StatelessWidget {
@@ -39,7 +40,7 @@ class PatientDetails extends StatelessWidget {
                   ),
                   //===================== patient card ==================//
                   PatientCard(
-                      imageUrl: '',
+                      imageUrl: "${ApiUrl.imageBaseUrl}${model.userId?.img}",
                       patientName: model.userId!.name!,
                       patientAge: model.userId?.age.toString() ?? '25',
                       patientGender: 'Male'),
@@ -125,11 +126,15 @@ class PatientDetails extends StatelessWidget {
                           child: Row(
                             children: List.generate(
                               model.prescription!.length,
-                              (index) => CustomNetworkImage(
-                                imageUrl: AppConstants.prescribtion,
-                                height: 173.h,
-                                width: 173.w,
-                                borderRadius: BorderRadius.circular(8),
+                              (index) => Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: CustomNetworkImage(
+                                  imageUrl:
+                                      "${ApiUrl.imageBaseUrl}${model.prescription?[index] ?? ''}",
+                                  height: 173.h,
+                                  width: 173.w,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                               ),
                             ),
                           ),

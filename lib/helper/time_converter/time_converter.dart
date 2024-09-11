@@ -174,8 +174,7 @@ class DateConverter {
   // }
 
   static bool isWithin30MinutesOfTime(
-      {String inputDateString = "2024-09-11T00:00:00.000Z",
-      String inputTimeString = "09:15 AM"}) {
+      String inputDateString, String inputTimeString) {
     // Clean the input time string by removing any extra spaces or invisible characters
     inputTimeString = inputTimeString.trim().replaceAll(RegExp(r'\s+'), ' ');
 
