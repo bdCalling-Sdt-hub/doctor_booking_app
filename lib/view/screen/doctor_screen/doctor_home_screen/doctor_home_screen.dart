@@ -19,6 +19,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../service/api_url.dart';
+
 class DoctorHomeScreen extends StatelessWidget {
   DoctorHomeScreen({super.key});
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -125,7 +127,8 @@ class DoctorHomeScreen extends StatelessWidget {
                                       var data = controller
                                           .appointMentListToday[index];
                                       return CustomDoctorCard(
-                                        imageUrl: '',
+                                        imageUrl:
+                                            "${ApiUrl.imageBaseUrl}${data.userId?.img}",
                                         patentName: data.userId?.name ?? '',
                                         time: 'Today (${data.time ?? ''})',
                                         loacation: data.appointmentType ?? '',
@@ -165,7 +168,8 @@ class DoctorHomeScreen extends StatelessWidget {
                                     var data =
                                         controller.appointMentListWeekly[index];
                                     return CustomDoctorCard(
-                                      imageUrl: '',
+                                      imageUrl:
+                                          "${ApiUrl.imageBaseUrl}${data.userId?.img}",
                                       patentName: data.userId?.name ?? '',
                                       time:
                                           "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
@@ -215,7 +219,7 @@ class DoctorHomeScreen extends StatelessWidget {
           List.generate(controller.appointMentListMonthly.length, (index) {
         var data = controller.appointMentListMonthly[index];
         return CustomDoctorCard(
-          imageUrl: '',
+          imageUrl: "${ApiUrl.imageBaseUrl}${data.userId?.img}",
           patentName: data.userId?.name ?? '',
           time: "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
           loacation: data.appointmentType ?? '',
@@ -234,7 +238,7 @@ class DoctorHomeScreen extends StatelessWidget {
           List.generate(controller.appointmentCompletedList.length, (index) {
         var data = controller.appointmentCompletedList[index];
         return CustomDoctorCard(
-          imageUrl: data.userId?.img ?? '',
+          imageUrl: "${ApiUrl.imageBaseUrl}${data.userId?.img}",
           patentName: data.userId?.name ?? '',
           time: "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
           loacation: data.appointmentType ?? '',
@@ -263,7 +267,7 @@ class DoctorHomeScreen extends StatelessWidget {
               List.generate(controller.appointMentCalcelList.length, (index) {
             var data = controller.appointMentCalcelList[index];
             return CustomDoctorCard(
-              imageUrl: '',
+              imageUrl: "${ApiUrl.imageBaseUrl}${data.userId?.img}",
               patentName: data.userId?.name ?? '',
               time:
                   "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
