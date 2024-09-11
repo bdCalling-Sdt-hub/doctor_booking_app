@@ -1,4 +1,4 @@
-class ProfileModel {
+class PaitentProfileModel {
   String? id;
   String? name;
   String? email;
@@ -15,31 +15,33 @@ class ProfileModel {
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
-  String? age;
+  int? age;
   String? img;
+  String? gender;
 
-  ProfileModel({
-    this.id,
-    this.name,
-    this.email,
-    this.dateOfBirth,
-    this.location,
-    this.phone,
-    this.password,
-    this.provider,
-    this.block,
-    this.role,
-    this.access,
-    this.verified,
-    this.category,
-    this.createdAt,
-    this.updatedAt,
-    this.v,
-    this.age,
-    this.img,
-  });
+  PaitentProfileModel(
+      {this.id,
+      this.name,
+      this.email,
+      this.dateOfBirth,
+      this.location,
+      this.phone,
+      this.password,
+      this.provider,
+      this.block,
+      this.role,
+      this.access,
+      this.verified,
+      this.category,
+      this.createdAt,
+      this.updatedAt,
+      this.v,
+      this.age,
+      this.img,
+      this.gender});
 
-  factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
+  factory PaitentProfileModel.fromJson(Map<String, dynamic> json) =>
+      PaitentProfileModel(
         id: json["_id"],
         name: json["name"],
         email: json["email"],
@@ -64,27 +66,6 @@ class ProfileModel {
         v: json["__v"],
         age: json["age"],
         img: json["img"],
+        gender: json["gender"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "name": name,
-        "email": email,
-        "date_of_birth": dateOfBirth,
-        "location": location,
-        "phone": phone,
-        "password": password,
-        "provider": provider,
-        "block": block,
-        "role": role,
-        "access": access,
-        "verified": verified,
-        "category":
-            category == null ? [] : List<dynamic>.from(category!.map((x) => x)),
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
-        "__v": v,
-        "age": age,
-        "img": img,
-      };
 }

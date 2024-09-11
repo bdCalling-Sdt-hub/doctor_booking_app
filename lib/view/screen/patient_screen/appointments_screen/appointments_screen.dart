@@ -51,26 +51,7 @@ class AppointmentsScreen extends StatelessWidget {
                       patientAppointmentController.selectedIndex.value,
                   onTabSelected: (index) {
                     patientAppointmentController.selectedIndex.value = index;
-                    switch (patientAppointmentController.selectedIndex.value) {
-                      case 0:
-                        // ignore: void_checks
-                        return patientAppointmentController.getMyAppoinment(
-                            status: AppStrings.pending);
-                      case 1:
-                        // ignore: void_checks
-                        return patientAppointmentController.getMyAppoinment(
-                            status: AppStrings.accepted);
-
-                      case 2:
-                        // ignore: void_checks
-                        return patientAppointmentController.getMyAppoinment(
-                            status: AppStrings.completed);
-
-                      case 3:
-                        // ignore: void_checks
-                        return patientAppointmentController.getMyAppoinment(
-                            status: AppStrings.rejected);
-                    }
+                    patientAppointmentController.refreshScreen(index: index);
                     // Handle any additional actions here if needed
                   },
                   selectedColor: AppColors.blackNormal,
@@ -117,9 +98,8 @@ class AppointmentsScreen extends StatelessWidget {
                                 callID: data.id ?? "",
                               ));
                         } else {
-                          ///============== TODO Change Ammount =============
                           paitentPaymentController.makePayment(
-                              amount: 60,
+                              amount: data.doctorId?.appointmentFee ?? 0,
                               userID: data.userId ?? "",
                               doctorID: data.doctorId?.id ?? "",
                               appoinmentId: data.id ?? "");
