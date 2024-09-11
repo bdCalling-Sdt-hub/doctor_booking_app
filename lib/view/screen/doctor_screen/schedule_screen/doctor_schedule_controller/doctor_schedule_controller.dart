@@ -39,7 +39,7 @@ class DoctorScheduleController extends GetxController {
   RxList<AppointmentModel> acceptAppointMentList = <AppointmentModel>[].obs;
 
   getAllDoctorAcceptAppointment() async {
-    var response = await ApiClient.getData(ApiUrl.acceptedDoctorAppointment);
+    var response = await ApiClient.getData(ApiUrl.doctorAppointment);
 
     if (response.statusCode == 200) {
       setRxRequestStatus(Status.completed);

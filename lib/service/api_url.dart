@@ -1,6 +1,6 @@
 class ApiUrl {
   static const baseUrl = "http://103.161.9.133:5000";
-  static const imageBaseUrl = 'http://103.161.9.133:5000';
+  static const imageBaseUrl = 'http://103.161.9.133:5000/';
   static const socketUrl =
       'http://103.161.9.133:5000?userId=66d7efd8ca187e791dac4758';
 
@@ -57,6 +57,8 @@ class ApiUrl {
   //============================  Pending appointment =========================
 
   static const pendingDoctorAppointment = "$doctorAppointment?status=pending";
+  static const completedDoctorAppointment =
+      "$doctorAppointment?status=completed";
   static const pastDoctorAppointment = "$doctorAppointment?type=past";
   static const acceptedDoctorAppointment =
       "$doctorAppointment?status=accepted&type=today";

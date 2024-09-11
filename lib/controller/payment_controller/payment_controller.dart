@@ -110,5 +110,21 @@ class PaitentPaymentController extends GetxController {
       navigator!.pop();
       return false;
     }
-  }
+  } 
+
+//====================================== Doctor Payment History ================================//    
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
 }

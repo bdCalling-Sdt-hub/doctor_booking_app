@@ -152,11 +152,7 @@ class DoctorHomeScreen extends StatelessWidget {
                                       );
                                     }),
                                   )
-                                : const Center(
-                                    child: CustomText(
-                                      text: 'Appointment Not Available',
-                                    ),
-                                  ),
+                                : _emptyList(),
                         //======================= Weekly List =====================
                         if (controller.scheduleTime.value ==
                                 AppStrings.weekly &&
@@ -184,81 +180,23 @@ class DoctorHomeScreen extends StatelessWidget {
                                     );
                                   }),
                                 )
-                              : const Center(
-                                  child: CustomText(
-                                    text: 'Appointment Not Available',
-                                  ),
-                                ),
+                              : _emptyList(),
                         //======================= monthly List =====================
                         if (controller.scheduleTime.value ==
                                 AppStrings.monthly &&
                             controller.tabSelectedIndex.value == 0)
                           controller.appointMentListMonthly.isNotEmpty
-                              ? Column(
-                                  children: List.generate(
-                                      controller.appointMentListMonthly.length,
-                                      (index) {
-                                    var data = controller
-                                        .appointMentListMonthly[index];
-                                    return CustomDoctorCard(
-                                      imageUrl: '',
-                                      patentName: data.userId?.name ?? '',
-                                      time:
-                                          "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
-                                      loacation: data.appointmentType ?? '',
-                                      onTap: () => Get.toNamed(
-                                          AppRoutes.patientDetails,
-                                          arguments: data),
-                                      reScheduleButton: () =>
-                                          controller.showHomePopup(
-                                              id: data.id.toString()),
-                                      timeTextColor: AppColors.blackO,
-                                    );
-                                  }),
-                                )
-                              : const Center(
-                                  child: CustomText(
-                                    text: 'Appointment Not Available',
-                                  ),
-                                ),
-                        //======================================= Cancel List =================================
+                              ? _showMonthlyList()
+                              : _emptyList(),
+
                         if (controller.tabSelectedIndex.value == 1)
-                          Column(
-                            children: [
-                              SizedBox(height: 24.h),
-                              CustomText(
-                                text:
-                                    "${AppStrings.totalCancelation} ${controller.doctorOverview.value.totalAppointment?.rejected}",
-                                fontSize: 14.w,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.blackNormal,
-                              ),
-                              SizedBox(height: 16.h),
-                              Column(
-                                children: List.generate(
-                                    controller.appointMentCalcelList.length,
-                                    (index) {
-                                  var data =
-                                      controller.appointMentCalcelList[index];
-                                  return CustomDoctorCard(
-                                    imageUrl: '',
-                                    patentName: data.userId?.name ?? '',
-                                    time:
-                                        "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
-                                    loacation: data.appointmentType ?? '',
-                                    onTap: () {
-                                      var userdetails = controller
-                                          .appointMentCalcelList[index];
-                                      Get.toNamed(AppRoutes.patientDetails,
-                                          arguments: userdetails);
-                                    },
-                                    reScheduleButton: () {},
-                                    timeTextColor: AppColors.red,
-                                  );
-                                }),
-                              ),
-                            ],
-                          ),
+                          controller.appointmentCompletedList.isNotEmpty
+                              ? _showCompltedList()
+                              : _emptyList(),
+
+                        //======================================= Cancel List =================================
+                        if (controller.tabSelectedIndex.value == 2)
+                          _showCancelList()
                       ],
                     ),
                   ),
@@ -268,6 +206,78 @@ class DoctorHomeScreen extends StatelessWidget {
         }
       }),
       bottomNavigationBar: const DoctorNavBar(currentIndex: 0),
+    );
+  }
+
+  _showMonthlyList() {
+    return Column(
+      children:
+          List.generate(controller.appointMentListMonthly.length, (index) {
+        var data = controller.appointMentListMonthly[index];
+        return CustomDoctorCard(
+          imageUrl: '',
+          patentName: data.userId?.name ?? '',
+          time: "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
+          loacation: data.appointmentType ?? '',
+          onTap: () => Get.toNamed(AppRoutes.patientDetails, arguments: data),
+          reScheduleButton: () =>
+              controller.showHomePopup(id: data.id.toString()),
+          timeTextColor: AppColors.blackO,
+        );
+      }),
+    );
+  }
+
+  _showCompltedList() {
+    return Column(
+      children:
+          List.generate(controller.appointmentCompletedList.length, (index) {
+        var data = controller.appointmentCompletedList[index];
+        return CustomDoctorCard(
+          imageUrl: data.userId?.img ?? '',
+          patentName: data.userId?.name ?? '',
+          time: "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
+          loacation: data.appointmentType ?? '',
+          onTap: () => Get.toNamed(AppRoutes.patientDetails, arguments: data),
+          showPopupButton: false,
+          timeTextColor: AppColors.blackO,
+        );
+      }),
+    );
+  }
+
+  _showCancelList() {
+    return Column(
+      children: [
+        SizedBox(height: 8.h),
+        CustomText(
+          text:
+              "${AppStrings.totalCancelation} ${controller.doctorOverview.value.totalAppointment?.rejected}",
+          fontSize: 14.w,
+          fontWeight: FontWeight.w500,
+          color: AppColors.blackNormal,
+        ),
+        SizedBox(height: 16.h),
+        Column(
+          children:
+              List.generate(controller.appointMentCalcelList.length, (index) {
+            var data = controller.appointMentCalcelList[index];
+            return CustomDoctorCard(
+              imageUrl: '',
+              patentName: data.userId?.name ?? '',
+              time:
+                  "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
+              loacation: data.appointmentType ?? '',
+              onTap: () {
+                var userdetails = controller.appointMentCalcelList[index];
+                Get.toNamed(AppRoutes.patientDetails, arguments: userdetails);
+              },
+              reScheduleButton: () {},
+              timeTextColor: AppColors.red,
+            );
+          }),
+        ),
+      ],
     );
   }
 
@@ -290,7 +300,7 @@ class DoctorHomeScreen extends StatelessWidget {
                 child: HomeSmallContainer(
                   onTap: () {
                     controller.scheduleTime.value = AppStrings.today;
-                    controller.getAllDoctorAppointment();
+                    controller.getDoctorAcceptedAndTodayAppointment();
                   },
                   isActive: controller.scheduleTime.value == AppStrings.today,
                   title: AppStrings.today,
@@ -324,6 +334,23 @@ class DoctorHomeScreen extends StatelessWidget {
           );
         }),
       ),
+    );
+  }
+
+  _emptyList() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 100.h,
+        ),
+        const Center(
+          child: CustomText(
+            text: 'Appointment Not Available',
+          ),
+        ),
+      ],
     );
   }
 }
