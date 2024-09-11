@@ -19,6 +19,10 @@ class AudioVideoCall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ZegoUIKitPrebuiltCall(
+      events: ZegoUIKitPrebuiltCallEvents(),
+        onDispose: () {
+          print("---------- Dispose");
+        },
         appID: ZEGOCLOUD_APP_ID,
         appSign: ZEGOCLOUD_APP_SIGN,
         callID: callID,

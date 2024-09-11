@@ -46,7 +46,7 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
 
   @override
   void initState() {
-    homeController.getAllDoc(query: data.specialization ?? "");
+    // homeController.getAllDoc(query: data.specialization ?? "");
     generalController.getAvailableTimesForSelectedDay(
         selectedDay:
             generalController.next7Days[_selectedDateIndex]["Day"] ?? "",

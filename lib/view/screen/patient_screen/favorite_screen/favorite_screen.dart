@@ -42,38 +42,44 @@ class FavoriteScreen extends StatelessWidget {
               );
 
             case Status.completed:
-              return GridView.builder(
-                scrollDirection: Axis.vertical,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 18.0,
-                    mainAxisExtent: 250),
-                itemCount: homeController.favouriteDocList.length,
-                itemBuilder: (context, index) {
-                  var data = homeController.favouriteDocList[index].doctorId;
-                  return GestureDetector(
-                    onTap: () {
-                      Get.toNamed(AppRoutes.specialistProfile);
-                    },
-                    child: CustomCard(
-                      isFavourite: true,
-                      favouriteOntap: () {
-                        generalController
-                            .makeFavourite(docID: data?.id ?? "")
-                            .then((value) {
-                          homeController.favouriteDocList.removeAt(index);
-                          homeController.favouriteDocList.refresh();
-                        });
-                      },
-                      networkImageUrl: "${ApiUrl.baseUrl}/${data?.img ?? ""}",
-                      name: data?.name ?? "",
-                      profession: data?.specialization ?? "",
-                      rating: "${data?.rating}",
-                    ),
-                  );
+              return RefreshIndicator(
+                onRefresh: () {
+                  return homeController.getFavouriteDocList();
                 },
-                shrinkWrap: true,
-                padding: const EdgeInsets.all(10.0),
+                child: GridView.builder(
+                  scrollDirection: Axis.vertical,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 18.0,
+                      mainAxisExtent: 250),
+                  itemCount: homeController.favouriteDocList.length,
+                  itemBuilder: (context, index) {
+                    var data = homeController.favouriteDocList[index].doctorId;
+                    return GestureDetector(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.specialistProfile,
+                            arguments: homeController.favouriteDocList[index]);
+                      },
+                      child: CustomCard(
+                        isFavourite: true,
+                        favouriteOntap: () {
+                          generalController
+                              .makeFavourite(docID: data?.id ?? "")
+                              .then((value) {
+                            homeController.favouriteDocList.removeAt(index);
+                            homeController.favouriteDocList.refresh();
+                          });
+                        },
+                        networkImageUrl: "${ApiUrl.baseUrl}/${data?.img ?? ""}",
+                        name: data?.name ?? "",
+                        profession: data?.specialization ?? "",
+                        rating: "${data?.rating}",
+                      ),
+                    );
+                  },
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.all(10.0),
+                ),
               );
           }
         }));
