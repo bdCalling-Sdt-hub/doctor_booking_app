@@ -28,6 +28,8 @@ class ApiUrl {
   static allDoctors({required String specialization}) =>
       '/doctors?specialization=$specialization';
 
+  static search({required String search}) => '/doctors?search=$search';
+
   //=========== Single Doctors ==========
   static singleDoctors({required String docID}) =>
       '/doctors/single-doctor/$docID';
@@ -36,7 +38,7 @@ class ApiUrl {
   static const getProfile = '/auth/profile';
   static const updateProfile = '/auth/update-user';
   static const favourite = '/favorite/add-remove-favorite';
-  static const getFavourite = '/favorite/get-favorite-doctors';
+  static const getFavourite = '/favorite/get-favorite-doctors?limit=100&page=1';
 
   //============ Appoinment ==========
   static bookAppoinment({required String docId}) =>

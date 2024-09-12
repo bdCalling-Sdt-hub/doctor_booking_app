@@ -121,8 +121,8 @@ class AppRoutes {
 
   //======================== All patient list screen =====================///
 
-  static const String allPatientListScreen = "/AllPatientListScreen"; 
-  static const String informationScreen = "/InformationScreen"; 
+  static const String allPatientListScreen = "/AllPatientListScreen";
+  static const String informationScreen = "/InformationScreen";
   static const String patientDetails2 = "/PatientDetailsScreen";
   //================= Reschedule Appointment Screen ===================//
 
@@ -144,7 +144,7 @@ class AppRoutes {
     GetPage(name: accountEditScreen, page: () => AccountEditScreen()),
 
     ///============================Home section================
-    GetPage(name: searchScreen, page: () => const SearchScreen()),
+    GetPage(name: searchScreen, page: () => SearchScreen()),
     GetPage(name: notificationScreen, page: () => NotificationScreen()),
     GetPage(name: settingScreen, page: () => SettingScreen()),
     GetPage(name: changePasswordScreen, page: () => ChangePasswordScreen()),

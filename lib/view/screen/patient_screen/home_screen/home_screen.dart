@@ -194,8 +194,6 @@ class HomeScreen extends StatelessWidget {
                                         !homeController.popuDocFavouList[index];
                                   }
                                 });
-                             
-                             
                               },
                               isFavourite:
                                   homeController.popuDocFavouList[index],

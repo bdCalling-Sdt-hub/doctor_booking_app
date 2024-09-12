@@ -32,29 +32,27 @@ class NotificationItem extends StatelessWidget {
                 text: title,
                 color: AppColors.blackNormal,
                 fontWeight: FontWeight.w500,
-                fontSize: 16.sp,
+                fontSize: 12.sp,
               ),
               Row(
                 children: [
-                  Flexible(
-                    flex: 7,
+                  Expanded(
                     child: CustomText(
+                      maxLines: 3,
+                      textAlign: TextAlign.left,
                       text: description,
                       color: AppColors.blackNormal,
                       fontWeight: FontWeight.w400,
-                      fontSize: 14.sp,
+                      fontSize: 10.sp,
                     ),
                   ),
-                  Flexible(
-                    flex: 3,
-                    child: CustomText(
-                      left: 8,
-                      text: time,
-                      color: AppColors.blackNormal,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14.sp,
-                      textAlign: TextAlign.end,
-                    ),
+                  CustomText(
+                    left: 8,
+                    text: time,
+                    color: AppColors.blackNormal,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 8.sp,
+                    textAlign: TextAlign.end,
                   ),
                 ],
               ),

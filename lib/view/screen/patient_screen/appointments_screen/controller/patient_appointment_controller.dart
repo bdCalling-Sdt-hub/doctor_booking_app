@@ -153,7 +153,7 @@ class PatientAppointmentController extends GetxController {
       Response response = await ApiClient.getData(ApiUrl.getAppoinments(
           status: appoinmentStatus[selectedIndex.value],
           page: page.value.toString()));
-          
+
       currentPage.value = response.body['pagination']['currentPage'];
       totalPage.value = response.body['pagination']['totalPages'];
 

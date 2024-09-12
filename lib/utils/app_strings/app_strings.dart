@@ -96,6 +96,8 @@ class AppStrings {
   static const String topSearch = "Top search";
   static const String notification = "Notification";
   static const String favorites = "Favorites";
+  static const String clear = "Clear";
+
   static const String allowAccess = "Allow Access";
   static const String allowLocationAccess = "Allow Location Access";
   static const String whatAreYouLookingFor = "What are you looking for?";
@@ -155,7 +157,7 @@ class AppStrings {
   static const String similarDoctors = 'Similar Doctors';
   static const String upcoming = 'Upcoming';
   static const String past = 'Past';
-  
+
   static const String canceled = 'Canceled';
   static const String appointmentTime = 'Appointment Time:';
   static const String rescheduleAppointment = 'Reschedule Appointment';

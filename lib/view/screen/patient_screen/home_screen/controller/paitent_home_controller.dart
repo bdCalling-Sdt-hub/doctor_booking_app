@@ -34,6 +34,7 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
   void singleDocLoadingMethod(Status value) => singleDocLoading.value = value;
 
   RxInt bannerIndex = 0.obs;
+  RxBool isSearch = false.obs;
 
   Rx<PageController> pageController = PageController().obs;
   List<String> categories = [
@@ -175,6 +176,7 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
   RxList<FavouriteDocDatum> favouriteDocList = <FavouriteDocDatum>[].obs;
   RxList<PopularDoctorDatum> getFavDoc = <PopularDoctorDatum>[].obs;
   RxList<bool> favBool = <bool>[].obs;
+
   getFavouriteDocList() async {
     favouriteDocList.value = [];
     getFavDoc.value = [];
@@ -220,12 +222,14 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
   ///==================== All Doctor List ====================
   RxList<PopularDoctorDatum> allDoctorList = <PopularDoctorDatum>[].obs;
   RxList<bool> allDocFavouList = <bool>[].obs;
+  Rx<TextEditingController> searchController = TextEditingController().obs;
 
-  getAllDoc({required String query}) async {
+  getAllDoc({required String query, bool isSearch = false}) async {
     allDocLoadingMethod(Status.loading);
 
-    var response =
-        await ApiClient.getData(ApiUrl.allDoctors(specialization: query));
+    var response = isSearch
+        ? await ApiClient.getData(ApiUrl.search(search: query))
+        : await ApiClient.getData(ApiUrl.allDoctors(specialization: query));
 
     if (response.statusCode == 200) {
       allDoctorList.value = List<PopularDoctorDatum>.from(

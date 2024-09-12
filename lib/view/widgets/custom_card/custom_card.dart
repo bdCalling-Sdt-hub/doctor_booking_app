@@ -29,7 +29,7 @@ class CustomCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(right: 18),
       width: 150.w, // Constrained width
-      height: 250.h, // Constrained height
+      height: 230.h, // Constrained height
       decoration: BoxDecoration(
         color: AppColors.whiteNormal,
         border: Border.all(color: AppColors.grayLightHover),
