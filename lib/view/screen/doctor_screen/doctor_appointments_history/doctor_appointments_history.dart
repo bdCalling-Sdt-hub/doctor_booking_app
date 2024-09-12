@@ -1,10 +1,12 @@
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
+import 'package:doctor_booking/helper/time_converter/time_converter.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/inner_widget/appointments_history_card.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_controller/doctor_home_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
@@ -20,6 +22,7 @@ class DoctorAppointmentsHistory extends StatelessWidget {
   DoctorAppointmentsHistory({super.key});
 
   final GeneralController generalController = Get.find<GeneralController>();
+  final DoctorHomeController homeController = Get.find<DoctorHomeController>();
   final DoctorPaymentController paymentController =
       Get.find<DoctorPaymentController>();
 
@@ -100,7 +103,11 @@ class DoctorAppointmentsHistory extends StatelessWidget {
                                 ),
                                 //=================== Amount===========//
                                 CustomText(
-                                  text: '\$ 10,000',
+                                  text: homeController.doctorOverview.value
+                                              .availableForReceive ==
+                                          null
+                                      ? '\$0'
+                                      : "\$${homeController.doctorOverview.value.availableForReceive.toString()}",
                                   fontSize: 20.sp,
                                   fontWeight: FontWeight.w500,
                                   color: AppColors.grayNormal,
@@ -121,7 +128,11 @@ class DoctorAppointmentsHistory extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: CustomText(
-                              text: '${AppStrings.totalAppointment2}: 12,258 ',
+                              text: homeController.doctorOverview.value
+                                          .totalAppointment?.completed ==
+                                      null
+                                  ? '0'
+                                  : "${AppStrings.totalAppointment2} : ${homeController.doctorOverview.value.totalAppointment!.completed.toString()}",
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w500,
                               color: AppColors.white,
@@ -142,28 +153,39 @@ class DoctorAppointmentsHistory extends StatelessWidget {
                                     (index) {
                                   var data = paymentController
                                       .paymentHistoryList[index];
-                                  print(
-                                      "==========Data=====================> $data");
+
                                   return AppointmentsHistoryCard(
                                     imageUrl:
                                         "${ApiUrl.imageBaseUrl}${data.userId?.img}",
                                     patientName: data.userId?.name ?? '',
-                                    appointmentDate: 'Date: 05-12-2024',
-                                    appointmentTime: '12 : 00 AM',
-                                    totalAmount: '\$320.00',
-                                    amount: '-\$10.00',
+                                    appointmentDate:
+                                        "Date: ${data.createdAt != null ? DateConverter.formatDate(data.createdAt!) : ''}",
+                                    appointmentTime: data.createdAt != null
+                                        ? DateConverter.formatTime(
+                                            data.createdAt!)
+                                        : '',
+                                    totalAmount:
+                                        '\$${data.doctorAmount ?? '0'}',
+                                    amount: data.amount != null &&
+                                            data.doctorAmount != null
+                                        ? '-\$${data.amount! - data.doctorAmount!}'
+                                        : '0',
                                     onTap: () {
-                                      generalController
-                                          .showAppintmentHistoryDialog(
-                                              imageUrl: AppConstants.userNtr,
-                                              patientName: 'Hasibur Rashid Mah',
-                                              sickName: 'Heart Disease',
-                                              appointmentFee: '\$650',
-                                              contactNumber:
-                                                  ' (00)+ 1205 125 12',
-                                              appointmentTime:
-                                                  '42 May, Sun  10 AM',
-                                              rated: '4.5');
+                                      generalController.showAppintmentHistoryDialog(
+                                          imageUrl:
+                                              "${ApiUrl.imageBaseUrl}${data.userId?.img}",
+                                          patientName: data.userId?.name ?? '',
+                                          sickName: 'Heart Disease',
+                                          appointmentFee:
+                                              '\$${data.amount ?? '0'}',
+                                          contactNumber:
+                                              data.userId?.phone ?? '',
+                                          appointmentTime:
+                                              data.createdAt != null
+                                                  ? DateConverter.formatDate(
+                                                      data.createdAt!)
+                                                  : '',
+                                          rated: '4.5');
                                     },
                                   );
                                 }),
