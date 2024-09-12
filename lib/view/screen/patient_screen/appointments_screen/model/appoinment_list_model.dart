@@ -3,7 +3,7 @@ class AppoinmentListModel {
   String? name;
   DoctorId? doctorId;
   String? userId;
-  DateTime? date;
+  String? date;
   String? time;
   String? day;
   String? status;
@@ -49,7 +49,7 @@ class AppoinmentListModel {
             ? null
             : DoctorId.fromJson(json["doctorId"]),
         userId: json["userId"],
-        date: json["date"] == null ? null : DateTime.parse(json["date"]),
+        date: json["date"] ,
         time: json["time"],
         day: json["day"],
         status: json["status"],

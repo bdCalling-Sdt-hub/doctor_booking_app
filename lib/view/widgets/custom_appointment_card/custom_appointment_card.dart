@@ -18,11 +18,13 @@ class CustomAppointmentCard extends StatelessWidget {
   final String type;
   final String appoinmentStatus;
   final bool paymentStatus;
+  final bool reSchedule;
   final String appoinmentType;
 
   final String location;
   final Widget? trailing;
   final VoidCallback? onTap;
+  final VoidCallback? onTap2;
 
   const CustomAppointmentCard({
     super.key,
@@ -38,6 +40,8 @@ class CustomAppointmentCard extends StatelessWidget {
     required this.appoinmentStatus,
     required this.paymentStatus,
     required this.appoinmentType,
+    this.onTap2,
+    required this.reSchedule,
   });
 
   @override
@@ -157,6 +161,7 @@ class CustomAppointmentCard extends StatelessWidget {
           ),
 
           //====================== Calling/Payment Button ========================
+
           if (appoinmentStatus == AppStrings.accepted &&
               appoinmentType == "ONLINE" &&
               paymentStatus)
@@ -164,7 +169,6 @@ class CustomAppointmentCard extends StatelessWidget {
               onTap: () {
                 onTap!();
               },
-              // fillColor: AppColors.bluNormalHover.withOpacity(.7),
               title: AppStrings.videoCall,
             ),
 
@@ -173,10 +177,43 @@ class CustomAppointmentCard extends StatelessWidget {
               onTap: () {
                 onTap!();
               },
-              // fillColor: AppColors.bluNormalHover.withOpacity(.7),
               title:
                   paymentStatus ? AppStrings.videoCall : AppStrings.makePayment,
             ),
+
+          ///======================  Reschedule request ====================
+
+          Row(
+            children: [
+              //================== Decline ================
+
+              Expanded(
+                child: CustomButton(
+                  fillColor: AppColors.white,
+                  textColor: AppColors.blackDarker,
+                  onTap: () {
+                    onTap!();
+                  },
+                  title: AppStrings.reject,
+                ),
+              ),
+
+              SizedBox(
+                width: 20.w,
+              ),
+
+              //================== Accept ================
+
+              Expanded(
+                child: CustomButton(
+                  onTap: () {
+                    onTap2!();
+                  },
+                  title: AppStrings.accept,
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );

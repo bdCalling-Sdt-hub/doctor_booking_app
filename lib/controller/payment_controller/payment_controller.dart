@@ -39,6 +39,7 @@ class PaitentPaymentController extends GetxController {
       {required int amount,
       required String userID,
       required String doctorID,
+      required String appoinmentDate,
       required String appoinmentId}) async {
     Map<String, dynamic>? paymentIntentData;
     try {
@@ -57,6 +58,7 @@ class PaitentPaymentController extends GetxController {
         ));
         await Stripe.instance.presentPaymentSheet();
         bool instant = await makeOrder(
+            appoinmentDate: appoinmentDate,
             amount: amount,
             appoinmentId: appoinmentId,
             doctorID: doctorID,
@@ -83,6 +85,7 @@ class PaitentPaymentController extends GetxController {
       required int amount,
       required String userID,
       required String doctorID,
+      required String appoinmentDate,
       required String appoinmentId}) async {
     Map<String, String> body = {
       "transitionId": getResponse?["transactionId"],
@@ -90,8 +93,10 @@ class PaitentPaymentController extends GetxController {
       "doctorId": doctorID,
       "amount": amount.toString(),
       "AppointmentId": appoinmentId,
-      "status": "success"
-      //['pending', 'success', 'failed'] this is  optional you dont need to pass them
+      "status": "success",
+      "appointmentDate": appoinmentDate,
+
+      //['pending', 'success', 'failed']
     };
 
     var response = await ApiClient.postData(
@@ -110,21 +115,7 @@ class PaitentPaymentController extends GetxController {
       navigator!.pop();
       return false;
     }
-  } 
+  }
 
-//====================================== Doctor Payment History ================================//    
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
+//====================================== Doctor Payment History ================================//
 }

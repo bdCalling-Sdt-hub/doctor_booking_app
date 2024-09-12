@@ -366,6 +366,22 @@ class GeneralController extends GetxController with GetxServiceMixin {
     }
   }
 
+//================== Update Appoinment =================
+
+  Future<bool> updateAppoinment(
+      {required String status, required String docId}) async {
+    showPopUpLoader();
+
+    var response = await ApiClient.patchData(
+        ApiUrl.updateAppoinment(docId: docId), {"status": status});
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   @override
   void onInit() {
     getTerms();

@@ -75,6 +75,10 @@ class AppointmentsScreen extends StatelessWidget {
                               .isLoadMoreRunning.value ==
                           false) {
                         return CustomAppointmentCard(
+                          reSchedule: data.reSchedule??false,
+                          onTap2: () {
+                            
+                          },
                           appoinmentType: data.appointmentType ?? "",
                           appoinmentStatus: data.status ?? "",
                           paymentStatus: data.paymentStatus ?? false,
@@ -111,16 +115,20 @@ class AppointmentsScreen extends StatelessWidget {
                                         "",
                                     callID: data.id ?? "",
                                   ));
-                            } else {
+                            } else if(data.reSchedule??false){
+                              
+                            }
+                            
+                            else {
                               paitentPaymentController.makePayment(
+                                  appoinmentDate: data.date ?? "",
                                   amount: data.doctorId?.appointmentFee ?? 0,
                                   userID: data.userId ?? "",
                                   doctorID: data.doctorId?.id ?? "",
                                   appoinmentId: data.id ?? "");
                             }
                           },
-                          date: DateConverter.estimatedDate(
-                              data.date ?? DateTime.now()),
+                          date: DateConverter.timeFormetString(data.date ?? ""),
                           time: data.time ?? "",
                           location: data.doctorId?.location ?? "",
                         );
