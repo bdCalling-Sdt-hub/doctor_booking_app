@@ -29,7 +29,7 @@ class PatientAppointmentController extends GetxController {
   final List<String> userList = [
     AppStrings.pendingCapital,
     AppStrings.upcoming,
-    AppStrings.past,
+    AppStrings.completed,
     AppStrings.canceled,
   ];
   RxInt selectedIndex = 0.obs;

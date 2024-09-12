@@ -37,8 +37,8 @@ class AppointmentsScreen extends StatelessWidget {
       body: Obx(() {
         return RefreshIndicator(
           onRefresh: () {
-            return patientAppointmentController.getMyAppoinment(
-                status: AppStrings.accepted);
+            return patientAppointmentController.refreshScreen(
+                index: patientAppointmentController.selectedIndex.value);
           },
           child: SingleChildScrollView(
             padding: const EdgeInsets.only(left: 20, right: 20, top: 64),
@@ -74,18 +74,22 @@ class AppointmentsScreen extends StatelessWidget {
                       imageUrl: AppConstants.userNtr,
                       name: data.name ?? "",
                       profession: data.doctorId?.specialization ?? "",
-                      trailing: CustomPopupmenuButton(
-                        onChanged: (value) {
-                          if (value == AppStrings.reschedule) {
-                            Get.toNamed(AppRoutes.rescheduleAppointmentScreen);
-                          } else {
-                            patientAppointmentController
-                                .appointmentCancelPopup();
-                          }
-                        },
-                        items: patientAppointmentController.cancelButton,
-                        icons: Icons.more_vert,
-                      ),
+                      trailing: data.status == AppStrings.pending ||
+                              data.status == AppStrings.accepted
+                          ? CustomPopupmenuButton(
+                              onChanged: (value) {
+                                if (value == AppStrings.reschedule) {
+                                  Get.toNamed(
+                                      AppRoutes.rescheduleAppointmentScreen);
+                                } else {
+                                  patientAppointmentController
+                                      .appointmentCancelPopup();
+                                }
+                              },
+                              items: patientAppointmentController.cancelButton,
+                              icons: Icons.more_vert,
+                            )
+                          : const SizedBox(),
                       onTap: () {
                         if (data.paymentStatus ?? false) {
                           debugPrint(

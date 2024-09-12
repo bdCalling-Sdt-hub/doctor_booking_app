@@ -55,7 +55,8 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
 
     patientAppointmentController.selectedDay.value =
         generalController.next7Days[0]["Day"]?.toLowerCase() ?? "";
-    homeController.getReview(id: "66cbf796bbca6f1b088cdf6f");
+    homeController.getAllDoc(query: data.specialization ?? "");
+    homeController.getReview(id: data.id ?? "");
 
     patientAppointmentController.selectedDate.value =
         "${generalController.next7Days[0]["Date"] ?? ""}-${DateTime.now().month}-${DateTime.now().year}";
@@ -353,59 +354,64 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                 ),
 
                 ///==================================Review And Rating =======================
-                const CustomText(
-                  top: 24,
-                  text: AppStrings.reviewAndRating,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.grayNormal,
-                  bottom: 10,
-                ),
-                Column(
-                  children:
-                      List.generate(homeController.reviewList.length, (index) {
-                    var data = homeController.reviewList[index];
-                    return CustomRatingCard(
-                        name: data.sender?.name ?? "",
-                        date: DateConverter.estimatedDate(
-                            data.createdAt ?? DateTime.now()),
-                        imageUrl: "${ApiUrl.baseUrl}/${data.sender?.img ?? ""}",
-                        rating: data.rating ?? 0.0,
-                        review: data.comment ?? "");
-                  }),
-                ),
-                //
-                ///==================================View All Condition=================
-                Center(
-                  child: GestureDetector(
-                    onTap: _toggleExpanded,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CustomText(
-                          text: _isExpanded ? 'ViewLess' : AppStrings.viewAll,
-                          color: AppColors.blackNormal,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        Icon(
-                          _isExpanded
-                              ? Icons.keyboard_arrow_up_rounded
-                              : Icons.keyboard_arrow_down_rounded,
-                          color: AppColors.blackO,
-                        ),
-                      ],
+                if (homeController.reviewList.isNotEmpty) ...[
+                  const CustomText(
+                    top: 24,
+                    text: AppStrings.reviewAndRating,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.grayNormal,
+                    bottom: 10,
+                  ),
+                  Column(
+                    children: List.generate(homeController.reviewList.length,
+                        (index) {
+                      var data = homeController.reviewList[index];
+                      return CustomRatingCard(
+                          name: data.sender?.name ?? "",
+                          date: DateConverter.estimatedDate(
+                              data.createdAt ?? DateTime.now()),
+                          imageUrl:
+                              "${ApiUrl.baseUrl}/${data.sender?.img ?? ""}",
+                          rating: data.rating ?? 0.0,
+                          review: data.comment ?? "");
+                    }),
+                  ),
+                  //
+                  ///==================================View All Condition=================
+                  Center(
+                    child: GestureDetector(
+                      onTap: _toggleExpanded,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CustomText(
+                            text: _isExpanded ? 'ViewLess' : AppStrings.viewAll,
+                            color: AppColors.blackNormal,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          Icon(
+                            _isExpanded
+                                ? Icons.keyboard_arrow_up_rounded
+                                : Icons.keyboard_arrow_down_rounded,
+                            color: AppColors.blackO,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
+                ],
+
+                ///============================== Similar Doctor =========================
+                SizedBox(
+                  height: 26.h,
                 ),
+                const CustomRow(
+                    title: AppStrings.similarSpecialist, subtitle: ""),
                 SizedBox(
                   height: 12.h,
                 ),
-
-                ///============================== Similar Doctor =========================
-                const CustomRow(
-                    title: AppStrings.similarSpecialist,
-                    subtitle: AppStrings.viewAll),
                 SizedBox(
                   height: 12.h,
                 ),
@@ -415,13 +421,30 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                     children: List.generate(homeController.allDoctorList.length,
                         (index) {
                       var data = homeController.allDoctorList[index];
-                      return CustomCard(
-                          favouriteOntap: () {},
-                          networkImageUrl:
-                              "${ApiUrl.baseUrl}/${data.img ?? ""}",
-                          name: data.name ?? "",
-                          profession: data.specialization ?? "",
-                          rating: data.rating.toString());
+                      return GestureDetector(
+                        onTap: () {
+                          //  print("object");
+                          Get.offAndToNamed(AppRoutes.specialistProfile,
+                              arguments: data);
+                        },
+                        child: CustomCard(
+                            isFavourite: homeController.favBool[index],
+                            favouriteOntap: () {
+                              generalController
+                                  .makeFavourite(docID: data.id ?? "")
+                                  .then((value) {
+                                if (value) {
+                                  homeController.favBool[index] =
+                                      !homeController.favBool[index];
+                                }
+                              });
+                            },
+                            networkImageUrl:
+                                "${ApiUrl.baseUrl}/${data.img ?? ""}",
+                            name: data.name ?? "",
+                            profession: data.specialization ?? "",
+                            rating: data.rating.toString()),
+                      );
                     }),
                   ),
                 ),

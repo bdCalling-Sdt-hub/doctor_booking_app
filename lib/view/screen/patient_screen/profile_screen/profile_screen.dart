@@ -43,13 +43,13 @@ class ProfileScreen extends StatelessWidget {
                 },
                 isCevron: true),
 
-            ///=======================paymentOption==============
+            // ///=======================paymentOption==============
 
-            CustomProfileCard(
-                text: AppStrings.paymentOption,
-                leadingIcon: AppIcons.addCard,
-                onTap: () {},
-                isCevron: true),
+            // CustomProfileCard(
+            //     text: AppStrings.paymentOption,
+            //     leadingIcon: AppIcons.addCard,
+            //     onTap: () {},
+            //     isCevron: true),
 
             ///=======================helpCenter==============
 

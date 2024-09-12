@@ -27,107 +27,78 @@ class PopularDoctorDatum {
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
+  int? appointmentFee;
 
-  PopularDoctorDatum({
-    this.id,
-    this.img,
-    this.name,
-    this.email,
-    this.dateOfBirth,
-    this.location,
-    this.phone,
-    this.password,
-    this.provider,
-    this.isFavorite,
-    this.gender,
-    this.block,
-    this.role,
-    this.verified,
-    this.access,
-    this.availableDays,
-    this.availableFor,
-    this.license,
-    this.specialization,
-    this.experience,
-    this.educationalBackground,
-    this.currentAffiliation,
-    this.rating,
-    this.totalRated,
-    this.createdAt,
-    this.updatedAt,
-    this.v,
-  });
+  PopularDoctorDatum(
+      {this.id,
+      this.img,
+      this.name,
+      this.email,
+      this.dateOfBirth,
+      this.location,
+      this.phone,
+      this.password,
+      this.provider,
+      this.isFavorite,
+      this.gender,
+      this.block,
+      this.role,
+      this.verified,
+      this.access,
+      this.availableDays,
+      this.availableFor,
+      this.license,
+      this.specialization,
+      this.experience,
+      this.educationalBackground,
+      this.currentAffiliation,
+      this.rating,
+      this.totalRated,
+      this.createdAt,
+      this.updatedAt,
+      this.v,
+      this.appointmentFee});
 
   factory PopularDoctorDatum.fromJson(Map<String, dynamic> json) =>
       PopularDoctorDatum(
-        id: json["_id"],
-        img: json["img"],
-        name: json["name"],
-        email: json["email"],
-        dateOfBirth: json["date_of_birth"] == null
-            ? null
-            : DateTime.parse(json["date_of_birth"]),
-        location: json["location"],
-        phone: json["phone"],
-        password: json["password"],
-        provider: json["provider"],
-        gender: json["gender"],
-        block: json["block"],
-        role: json["role"],
-        verified: json["verified"],
-        isFavorite: json["isFavorite"],
-        access: json["access"],
-        availableDays: json["available_days"] == null
-            ? null
-            : AvailableDays.fromJson(json["available_days"]),
-        availableFor: json["available_for"] == null
-            ? null
-            : AvailableFor.fromJson(json["available_for"]),
-        license: json["license"],
-        specialization: json["specialization"],
-        experience: json["experience"],
-        educationalBackground: json["educational_background"],
-        currentAffiliation: json["current_affiliation"],
-        rating: json["rating"],
-        totalRated: json["total_rated"],
-        createdAt: json["createdAt"] == null
-            ? null
-            : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null
-            ? null
-            : DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "img": img,
-        "name": name,
-        "email": email,
-        "date_of_birth":
-            "${dateOfBirth!.year.toString().padLeft(4, '0')}-${dateOfBirth!.month.toString().padLeft(2, '0')}-${dateOfBirth!.day.toString().padLeft(2, '0')}",
-        "location": location,
-        "phone": phone,
-        "password": password,
-        "provider": provider,
-        "gender": gender,
-        "block": block,
-        "role": role,
-        "verified": verified,
-        "access": access,
-        "available_days": availableDays?.toJson(),
-        "available_for": availableFor?.toJson(),
-        "license": license,
-        "specialization": specialization,
-        "experience": experience,
-        "educational_background": educationalBackground,
-        "current_affiliation": currentAffiliation,
-        "rating": rating,
-        "total_rated": totalRated,
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
-        "__v": v,
-      };
+          id: json["_id"],
+          img: json["img"],
+          name: json["name"],
+          email: json["email"],
+          dateOfBirth: json["date_of_birth"] == null
+              ? null
+              : DateTime.parse(json["date_of_birth"]),
+          location: json["location"],
+          phone: json["phone"],
+          password: json["password"],
+          provider: json["provider"],
+          gender: json["gender"],
+          block: json["block"],
+          role: json["role"],
+          verified: json["verified"],
+          isFavorite: json["isFavorite"],
+          access: json["access"],
+          availableDays: json["available_days"] == null
+              ? null
+              : AvailableDays.fromJson(json["available_days"]),
+          availableFor: json["available_for"] == null
+              ? null
+              : AvailableFor.fromJson(json["available_for"]),
+          license: json["license"],
+          specialization: json["specialization"],
+          experience: json["experience"],
+          educationalBackground: json["educational_background"],
+          currentAffiliation: json["current_affiliation"],
+          rating: json["rating"],
+          totalRated: json["total_rated"],
+          createdAt: json["createdAt"] == null
+              ? null
+              : DateTime.parse(json["createdAt"]),
+          updatedAt: json["updatedAt"] == null
+              ? null
+              : DateTime.parse(json["updatedAt"]),
+          v: json["__v"],
+          appointmentFee: json["appointment_fee"]);
 }
 
 class AvailableDays {
