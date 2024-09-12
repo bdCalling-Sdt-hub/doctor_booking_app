@@ -25,12 +25,22 @@ class PatientAppointmentController extends GetxController {
   void appoinmentLoadingMethod({required Status status}) =>
       appoinmentLoading = status.obs;
 
+  RxInt totalPage = 0.obs;
+  RxInt currentPage = 0.obs;
+
   ///=======================List============
-  final List<String> userList = [
+  final List<String> tapBarItems = [
     AppStrings.pendingCapital,
     AppStrings.upcoming,
-    AppStrings.past,
+    AppStrings.completed,
     AppStrings.canceled,
+  ];
+
+  final List<String> appoinmentStatus = [
+    AppStrings.pending,
+    AppStrings.accepted,
+    AppStrings.completed,
+    AppStrings.rejected,
   ];
   RxInt selectedIndex = 0.obs;
   //============================ Appointment screen more popup buton item list =========================
@@ -109,10 +119,14 @@ class PatientAppointmentController extends GetxController {
     var response =
         await ApiClient.getData(ApiUrl.getAppoinments(status: status));
 
-    appoinmentList.value = List<AppoinmentListModel>.from(
-        response.body["data"].map((x) => AppoinmentListModel.fromJson(x)));
-
     if (response.statusCode == 200) {
+      appoinmentList.value = List<AppoinmentListModel>.from(
+          response.body["data"].map((x) => AppoinmentListModel.fromJson(x)));
+
+      currentPage.value = response.body['pagination']['currentPage'];
+      totalPage.value = response.body['pagination']['totalPages'];
+      appoinmentLoadingMethod(status: Status.completed);
+      refresh();
     } else {
       if (response.statusText == ApiClient.somethingWentWrong) {
         appoinmentLoadingMethod(status: Status.internetError);
@@ -121,6 +135,50 @@ class PatientAppointmentController extends GetxController {
       }
       ApiChecker.checkApi(response);
     }
+  }
+
+  ///========================= Get More Appoinment With Pagination ========================
+  Rx<ScrollController> scrollController = ScrollController().obs;
+  var isLoadMoreRunning = false.obs;
+  RxInt page = 1.obs;
+
+  loadMoreAppoinments() async {
+    debugPrint("============== Load More Appoinment ================");
+    if (appoinmentLoading.value != Status.loading &&
+        isLoadMoreRunning.value == false &&
+        totalPage != currentPage) {
+      isLoadMoreRunning(true);
+      page.value += 1;
+
+      Response response = await ApiClient.getData(ApiUrl.getAppoinments(
+          status: appoinmentStatus[selectedIndex.value],
+          page: page.value.toString()));
+          
+      currentPage.value = response.body['pagination']['currentPage'];
+      totalPage.value = response.body['pagination']['totalPages'];
+
+      if (response.statusCode == 200) {
+        var demoList = List<AppoinmentListModel>.from(
+            response.body["data"].map((x) => AppoinmentListModel.fromJson(x)));
+        appoinmentList.addAll(demoList);
+        appoinmentList.refresh();
+        refresh();
+      } else {
+        ApiChecker.checkApi(response);
+      }
+      isLoadMoreRunning(false);
+    }
+  }
+
+  //===================Pagination Scroll Controller===============
+
+  Future<void> addScrollListener() async {
+    scrollController.value.addListener(() {
+      if (scrollController.value.position.pixels ==
+          scrollController.value.position.maxScrollExtent) {
+        loadMoreAppoinments();
+      }
+    });
   }
 
 //===================== Refresh =====================
@@ -147,6 +205,7 @@ class PatientAppointmentController extends GetxController {
   @override
   void onInit() {
     getMyAppoinment(status: AppStrings.pending);
+    scrollController.value.addListener(addScrollListener);
     super.onInit();
   }
 }

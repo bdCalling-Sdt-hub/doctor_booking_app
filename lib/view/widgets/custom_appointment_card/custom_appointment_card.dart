@@ -43,8 +43,8 @@ class CustomAppointmentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 16),
-      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
         color: AppColors.whiteNormal,
         borderRadius: BorderRadius.circular(8),

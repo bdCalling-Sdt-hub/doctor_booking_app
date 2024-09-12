@@ -42,8 +42,8 @@ class ApiUrl {
   static bookAppoinment({required String docId}) =>
       '/appointment/create-appointment/$docId';
 
-  static getAppoinments({required String status}) =>
-      "/appointment/get-my-appointments?status=$status";
+  static getAppoinments({required String status, String page = "1"}) =>
+      "/appointment/get-my-appointments?page=$page&status=$status";
 
   ///============= Payment Section ===============
 

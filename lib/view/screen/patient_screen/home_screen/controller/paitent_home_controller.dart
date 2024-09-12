@@ -30,6 +30,9 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
   final allDocLoading = Status.loading.obs;
   void allDocLoadingMethod(Status value) => allDocLoading.value = value;
 
+  final singleDocLoading = Status.loading.obs;
+  void singleDocLoadingMethod(Status value) => singleDocLoading.value = value;
+
   RxInt bannerIndex = 0.obs;
 
   Rx<PageController> pageController = PageController().obs;
@@ -170,8 +173,12 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
 
   ///================= Get favourite Doctor ===============
   RxList<FavouriteDocDatum> favouriteDocList = <FavouriteDocDatum>[].obs;
-
+  RxList<PopularDoctorDatum> getFavDoc = <PopularDoctorDatum>[].obs;
+  RxList<bool> favBool = <bool>[].obs;
   getFavouriteDocList() async {
+    favouriteDocList.value = [];
+    getFavDoc.value = [];
+
     favouriteLoadingMethod(Status.loading);
 
     var response = await ApiClient.getData(ApiUrl.getFavourite);
@@ -179,6 +186,26 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
     if (response.statusCode == 200) {
       favouriteDocList.value = List<FavouriteDocDatum>.from(
           response.body["data"].map((x) => FavouriteDocDatum.fromJson(x)));
+
+      for (int i = 0; i < favouriteDocList.length; i++) {
+        var data = favouriteDocList[i].doctorId;
+        getFavDoc.add(PopularDoctorDatum(
+          id: data?.id ?? "",
+          availableDays: data!.availableDays,
+          availableFor: data.availableFor,
+          img: data.img ?? "",
+          name: data.name ?? "",
+          specialization: data.specialization ?? "",
+          rating: data.rating,
+          experience: data.experience ?? "",
+          location: data.location ?? "",
+          appointmentFee: data.appointmentFee,
+        ));
+      }
+
+      for (int i = 0; i < getFavDoc.length; i++) {
+        favBool.add(getFavDoc[i].isFavorite ?? false);
+      }
       favouriteLoadingMethod(Status.completed);
     } else {
       if (response.statusText == ApiClient.somethingWentWrong) {
@@ -218,6 +245,28 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
       ApiChecker.checkApi(response);
     }
   }
+
+  ///==================== Get Single Doctor ====================
+
+  // Rx<SingleDoctorModel> singleDoctor = SingleDoctorModel().obs;
+  // getSingleDoc({required String docID}) async {
+  //   singleDocLoadingMethod(Status.loading);
+
+  //   var response = await ApiClient.getData(ApiUrl.singleDoctors(docID: docID));
+
+  //   if (response.statusCode == 200) {
+  //     singleDoctor.value = SingleDoctorModel.fromJson(response.body);
+
+  //     singleDocLoadingMethod(Status.completed);
+  //   } else {
+  //     if (response.statusText == ApiClient.somethingWentWrong) {
+  //       singleDocLoadingMethod(Status.internetError);
+  //     } else {
+  //       singleDocLoadingMethod(Status.error);
+  //     }
+  //     ApiChecker.checkApi(response);
+  //   }
+  // }
 
   ///============ All Methods ============
   allMethods() {

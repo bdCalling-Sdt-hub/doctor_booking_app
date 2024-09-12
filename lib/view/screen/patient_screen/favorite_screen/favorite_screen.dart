@@ -52,28 +52,28 @@ class FavoriteScreen extends StatelessWidget {
                       crossAxisCount: 2,
                       mainAxisSpacing: 18.0,
                       mainAxisExtent: 250),
-                  itemCount: homeController.favouriteDocList.length,
+                  itemCount: homeController.getFavDoc.length,
                   itemBuilder: (context, index) {
-                    var data = homeController.favouriteDocList[index].doctorId;
+                    var data = homeController.getFavDoc[index];
                     return GestureDetector(
                       onTap: () {
                         Get.toNamed(AppRoutes.specialistProfile,
-                            arguments: homeController.favouriteDocList[index]);
+                            arguments: homeController.getFavDoc[index]);
                       },
                       child: CustomCard(
                         isFavourite: true,
                         favouriteOntap: () {
                           generalController
-                              .makeFavourite(docID: data?.id ?? "")
+                              .makeFavourite(docID: data.id ?? "")
                               .then((value) {
                             homeController.favouriteDocList.removeAt(index);
                             homeController.favouriteDocList.refresh();
                           });
                         },
-                        networkImageUrl: "${ApiUrl.baseUrl}/${data?.img ?? ""}",
-                        name: data?.name ?? "",
-                        profession: data?.specialization ?? "",
-                        rating: "${data?.rating}",
+                        networkImageUrl: "${ApiUrl.baseUrl}/${data.img ?? ""}",
+                        name: data.name ?? "",
+                        profession: data.specialization ?? "",
+                        rating: "${data.rating}",
                       ),
                     );
                   },
