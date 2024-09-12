@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 
+
 class PaitentPaymentController extends GetxController {
   GeneralController generalController = Get.find<GeneralController>();
   PatientAppointmentController appointmentController =
@@ -110,21 +111,6 @@ class PaitentPaymentController extends GetxController {
       navigator!.pop();
       return false;
     }
-  } 
-
-//====================================== Doctor Payment History ================================//    
-
-
- 
-
-
-
-
-
-
-
-
-
-
+  }
 
 }

@@ -1,15 +1,3 @@
-// To parse this JSON data, do
-//
-//     final appointmentHistoryModel = appointmentHistoryModelFromJson(jsonString);
-
-import 'dart:convert';
-
-AppointmentHistoryModel appointmentHistoryModelFromJson(String str) =>
-    AppointmentHistoryModel.fromJson(json.decode(str));
-
-String appointmentHistoryModelToJson(AppointmentHistoryModel data) =>
-    json.encode(data.toJson());
-
 class AppointmentHistoryModel {
   String? id;
   int? amount;
@@ -20,6 +8,8 @@ class AppointmentHistoryModel {
   bool? paymentDoctor;
   int? doctorAmount;
   String? appointmentId;
+  DateTime? createdAt;
+  DateTime? updatedAt;
   int? v;
 
   AppointmentHistoryModel({
@@ -32,23 +22,36 @@ class AppointmentHistoryModel {
     this.paymentDoctor,
     this.doctorAmount,
     this.appointmentId,
+    this.createdAt,
+    this.updatedAt,
     this.v,
   });
 
-  factory AppointmentHistoryModel.fromJson(Map<String, dynamic> json) =>
-      AppointmentHistoryModel(
-        id: json["_id"],
-        amount: json["amount"],
-        transitionId: json["transitionId"],
-        status: json["status"],
-        doctorId:
-            json["doctorId"] == null ? null : RId.fromJson(json["doctorId"]),
-        userId: json["userId"] == null ? null : RId.fromJson(json["userId"]),
-        paymentDoctor: json["payment_doctor"],
-        doctorAmount: json["doctor_amount"],
-        appointmentId: json["AppointmentId"],
-        v: json["__v"],
-      );
+  // Factory constructor to parse JSON data
+  factory AppointmentHistoryModel.fromJson(Map<String, dynamic> json) {
+    // Properly handle doctorId and userId, ensuring they're parsed as objects
+    return AppointmentHistoryModel(
+      id: json["_id"] as String?,
+      amount: json["amount"] as int?,
+      transitionId: json["transitionId"] as String?,
+      status: json["status"] as String?,
+      doctorId:
+          json["doctorId"] != null && json["doctorId"] is Map<String, dynamic>
+              ? RId.fromJson(json["doctorId"] as Map<String, dynamic>)
+              : null,
+      userId: json["userId"] != null && json["userId"] is Map<String, dynamic>
+          ? RId.fromJson(json["userId"] as Map<String, dynamic>)
+          : null,
+      paymentDoctor: json["payment_doctor"] as bool?,
+      doctorAmount: json["doctor_amount"] as int?,
+      appointmentId: json["AppointmentId"] as String?,
+      createdAt:
+          json["createdAt"] != null ? DateTime.parse(json["createdAt"]) : null,
+      updatedAt:
+          json["updatedAt"] != null ? DateTime.parse(json["updatedAt"]) : null,
+      v: json["__v"] as int?,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "_id": id,
@@ -60,10 +63,13 @@ class AppointmentHistoryModel {
         "payment_doctor": paymentDoctor,
         "doctor_amount": doctorAmount,
         "AppointmentId": appointmentId,
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
         "__v": v,
       };
 }
 
+// Class to represent doctorId and userId
 class RId {
   String? id;
   String? img;
@@ -83,15 +89,17 @@ class RId {
     this.specialization,
   });
 
-  factory RId.fromJson(Map<String, dynamic> json) => RId(
-        id: json["_id"],
-        img: json["img"],
-        name: json["name"],
-        email: json["email"],
-        location: json["location"],
-        phone: json["phone"],
-        specialization: json["specialization"],
-      );
+  factory RId.fromJson(Map<String, dynamic> json) {
+    return RId(
+      id: json["_id"] as String?,
+      img: json["img"] as String?,
+      name: json["name"] as String?,
+      email: json["email"] as String?,
+      location: json["location"] as String?,
+      phone: json["phone"] as String?,
+      specialization: json["specialization"] as String?,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "_id": id,

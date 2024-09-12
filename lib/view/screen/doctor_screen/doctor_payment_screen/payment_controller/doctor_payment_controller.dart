@@ -2,13 +2,17 @@ import 'dart:io';
 
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
+import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
-class PaymentController extends GetxController {
+import '../../../../../model/appointment_history_model/appointment_history_model.dart';
+import '../../../../../service/api_check.dart';
+
+class DoctorPaymentController extends GetxController {
   //=========================== Front and back image get ================================//
   Rx<File?> frontImageFile = File('').obs;
   Rx<File?> backImageFile = File('').obs;
@@ -101,5 +105,35 @@ class PaymentController extends GetxController {
 
       if (response.statusCode == 200) {}
     }
+  }
+
+//====================================== Doctor Payment History ================================//
+  final rxRequestStatus = Status.loading.obs;
+  void setRxRequestStatus(Status value) => rxRequestStatus.value = value;
+  RxList<AppointmentHistoryModel> paymentHistoryList =
+      <AppointmentHistoryModel>[].obs;
+  Future<void> getMyAppoinmentHistory() async {
+    var response = await ApiClient.getData(ApiUrl.doctorPaymentHistory);
+
+    if (response.statusCode == 200) {
+      setRxRequestStatus(Status.completed);
+
+      paymentHistoryList.value = List<AppointmentHistoryModel>.from(
+          response.body['data'].map((x) =>
+              AppointmentHistoryModel.fromJson(x as Map<String, dynamic>)));
+    } else {
+      if (response.statusText == ApiClient.somethingWentWrong) {
+        setRxRequestStatus(Status.internetError);
+      } else {
+        setRxRequestStatus(Status.error);
+      }
+      ApiChecker.checkApi(response);
+    }
+  }
+
+  @override
+  void onInit() {
+    getMyAppoinmentHistory();
+    super.onInit();
   }
 }
