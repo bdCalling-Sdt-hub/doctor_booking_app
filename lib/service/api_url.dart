@@ -102,4 +102,9 @@ class ApiUrl {
   static const doctorCreatePaymentAccount = '/appointment/update-appointment/';
   //=========================== Doctor payment history ==================//
   static const doctorPaymentHistory = '/payment/user-payment-history';
+
+  //=========================== Doctor Home Type Status ==================//
+
+  static getAppointmentType({required String type, String page = '1'}) =>
+      "/appointment/get-my-appointments?page=$page&status=accepted&type=$type";
 }
