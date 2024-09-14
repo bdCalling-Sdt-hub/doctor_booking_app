@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
+import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,10 @@ class DoctorPaymentController extends GetxController {
     }
   }
 
+  String formatDate(DateTime date) {
+    return DateFormat('yyyy-MM-dd').format(date);
+  }
+
   //======================= Get user date of birth ==============================
 
   Rx<TextEditingController> dateOfbirthController = TextEditingController().obs;
@@ -45,8 +50,7 @@ class DoctorPaymentController extends GetxController {
       lastDate: DateTime.now(),
     );
     if (pickDate != null) {
-      dateOfbirthController.value.text =
-          DateFormat('dd/MM/yyyy').format(pickDate);
+      dateOfbirthController.value.text = formatDate(pickDate);
     }
   }
   //================================ Field contropller =================================
@@ -74,56 +78,64 @@ class DoctorPaymentController extends GetxController {
 
   Rx<TextEditingController> nameController = TextEditingController().obs;
 
+  RxBool addCardLoading = false.obs;
+
   Future<void> addNewCard() async {
     if (frontImageFile.value != null && backImageFile.value != null) {
-      Map<String, String> body = {
-        "address": jsonEncode({
-          "city": "FR",
-          "country": "FR",
-          "postal_code": "93300",
-          "line1": "56 rue du landy"
-        }),
-        "bank_info": jsonEncode({
-          "account_holder_name": "madical",
-          "account_holder_type": "individual",
-          "account_number": "FR1420041010050500013M02606",
-          "country": "FR",
-          "currency": "eur"
-        }),
-        "business_profile": jsonEncode({
-          "business_name": "Cooking",
-          "website": "www.xyz.com",
-          "product_description": "Description"
-        }),
+      addCardLoading(true);
+      refresh();
 
-        // "business_profile[product_description]":
-        //     bankInfoProductDiscriptionController.value.text,
-        // "business_profile[website]": bankInfoWebsiteController.value.text,
-        // "business_profile[business_name]":
-        //     bankInfoBusinessController.value.text,
-        // "bank_info[currency]": bankInfoCurrencyController.value.text,
-        // "bank_info[country]": bankInfoCountryController.value.text,
-        // "bank_info[account_number]": bankAccountNumberController.value.text,
-        // "bank_info[account_holder_type]":
-        //     accountHolderTypeController.value.text,
-        // "bank_info[account_holder_name]": nameController.value.text,
-        // "line1": lineOneController.value.text,
-        // "address[postal_code]": addressPostalCodeController.value.text,
-        // "address[country]": addressCountryController.value.text,
-        // "address[city]": addressCityController.value.text,
+      // Construct the body
+      Map<String, String> body = {
+        "dateOfBirth": dateOfbirthController.value.text,
+        "data": jsonEncode({
+          "address": {
+            "city": addressCityController.value.text,
+            "country": addressCountryController.value.text,
+            "postal_code": addressPostalCodeController.value.text,
+            "line1": lineOneController.value.text,
+          },
+          "bank_info": {
+            "account_holder_name": nameController.value.text,
+            "account_holder_type": accountHolderTypeController.value.text,
+            "account_number": bankAccountNumberController.value.text,
+            "country": bankInfoCountryController.value.text,
+            "currency": bankInfoCurrencyController.value.text,
+          },
+          "business_profile": {
+            "business_name": bankInfoBusinessController.value.text,
+            "website": bankInfoWebsiteController.value.text,
+            "product_description":
+                bankInfoProductDiscriptionController.value.text,
+          },
+        })
       };
 
+      // Sending the request
       var response = await ApiClient.postMultipartData(
           ApiUrl.doctorCreatePaymentAccount, body,
           multipartBody: [
-            MultipartBody(
-              "kycFront",
-              frontImageFile.value!,
-            ),
+            MultipartBody("kycFront", frontImageFile.value!),
             MultipartBody("kycBack", backImageFile.value!)
           ]);
 
-      if (response.statusCode == 200) {}
+      // Check response status
+      if (response.statusCode == 200) {
+        try {
+          // Ensure the response body is properly decoded
+          var responseBody = jsonDecode(response.body);
+          if (responseBody is Map && responseBody.containsKey('message')) {
+            showCustomSnackBar(responseBody['message'], isError: false);
+          }
+        } catch (e) {
+          showCustomSnackBar('Error parsing response', isError: true);
+        }
+      } else {
+        showCustomSnackBar('Something went wrong', isError: true);
+      }
+
+      addCardLoading(false);
+      refresh();
     }
   }
 

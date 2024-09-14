@@ -104,15 +104,23 @@ class ApiUrl {
 
   //=========================== Doctor create payment account ==================//
 
-  static const doctorCreatePaymentAccount = '/appointment/update-appointment/';
+//  static const doctorCreatePaymentAccount = '/appointment/update-appointment/';
   //=========================== Doctor payment history ==================//
   static const doctorPaymentHistory = '/payment/user-payment-history';
 
   //=========================== Doctor Home Type Status ==================//
 
   static getAppointmentType({required String type, String page = '1'}) =>
-      "/appointment/get-my-appointments?page=$page&status=accepted&type=$type"; 
+      "/appointment/get-my-appointments?page=$page&status=accepted&type=$type";
 
-       static getAppointmentPast({required String type, String page = '1'}) =>
+  static getAppointmentPast({required String type, String page = '1'}) =>
       "/appointment/get-my-appointments?page=$page&type=$type";
+
+  //=========================== Doctor create payment account ==================//
+
+  static const doctorCreatePaymentAccount = '/payment/create-connected-account';
+
+  //=================== Create doctor call history =======================//
+
+  static const createDoctorCallHistory = '/call/create-call-history';
 }

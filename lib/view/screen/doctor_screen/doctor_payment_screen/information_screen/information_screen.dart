@@ -7,6 +7,7 @@ import 'package:doctor_booking/view/screen/doctor_screen/doctor_payment_screen/p
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
+import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -269,21 +270,24 @@ class InformationScreen extends StatelessWidget {
                     height: 40.h,
                   ),
                   //============================ Submit button =======================..
-                  CustomButton(
-                    onTap: () {
-                      if (paymentController.frontImageFile.value != null &&
-                          paymentController.backImageFile.value != null) { 
-                             if (formKey.currentState!.validate()) { 
-                              
-                             }
-                      } else {
-                        showCustomSnackBar(
-                            "Please add both front and back image",
-                            isError: true);
-                      }
-                    },
-                    title: AppStrings.submit,
-                  ),
+                  paymentController.addCardLoading.value
+                      ? const CustomLoader()
+                      : CustomButton(
+                          onTap: () {
+                            if (paymentController.frontImageFile.value !=
+                                    null &&
+                                paymentController.backImageFile.value != null) {
+                              if (formKey.currentState!.validate()) {
+                                paymentController.addNewCard();
+                              }
+                            } else {
+                              showCustomSnackBar(
+                                  "Please add both front and back image",
+                                  isError: true);
+                            }
+                          },
+                          title: AppStrings.submit,
+                        ),
                   SizedBox(
                     height: 40.h,
                   ),

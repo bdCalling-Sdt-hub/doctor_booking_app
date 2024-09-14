@@ -20,6 +20,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../service/api_url.dart';
+import '../../../widgets/video_call/video_call.dart';
 
 class DoctorHomeScreen extends StatelessWidget {
   DoctorHomeScreen({super.key});
@@ -168,7 +169,24 @@ class DoctorHomeScreen extends StatelessWidget {
                                                 },
                                                 timeTextColor: AppColors.blackO,
                                                 videoCallOrConsaltentDoneButton:
-                                                    () {},
+                                                    () {
+                                                  debugPrint(
+                                                      "Doctor ID>>>>${data.doctorId} || Doctor name>>>>${doctorProfileController.profileModel.value.name} || Call ID ${data.id}");
+                                                  Get.to(() => AudioVideoCall(
+                                                        senderID:
+                                                            data.doctorId ?? "",
+                                                        userName:
+                                                            doctorProfileController
+                                                                    .profileModel
+                                                                    .value
+                                                                    .name ??
+                                                                "",
+                                                        callID: data.id ?? "",
+                                                        receiverId:
+                                                            data.userId?.id ??
+                                                                "",
+                                                      ));
+                                                },
                                                 typeOnline: data
                                                             .appointmentType ==
                                                         null

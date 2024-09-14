@@ -276,11 +276,29 @@ class DoctorHomeController extends GetxController {
     }
   }
 
+  Future<void> createCallHistory(
+      {required String senderId, required String receiverId}) async {
+    Map<String, String> body = {
+      "doctorId": senderId,
+      "userId": receiverId,
+    };
+
+    var response = await ApiClient.postData(
+        ApiUrl.createDoctorCallHistory, jsonEncode(body));
+
+    if (response.statusCode == 200) {
+      debugPrint(
+          "===============Response body====================${response.body}");
+    } else {
+      ApiChecker.checkApi(response);
+    }
+  }
+
   @override
   void onInit() {
     homescrollControloler.value.addListener(addScrollListener);
-    getAllDoctorAppointment(status: AppStrings.accepted); 
-     getDoctorOverview();
+    getAllDoctorAppointment(status: AppStrings.accepted);
+    getDoctorOverview();
     super.onInit();
   }
 }

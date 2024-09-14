@@ -75,10 +75,8 @@ class AppointmentsScreen extends StatelessWidget {
                               .isLoadMoreRunning.value ==
                           false) {
                         return CustomAppointmentCard(
-                          reSchedule: data.reSchedule??false,
-                          onTap2: () {
-                            
-                          },
+                          reSchedule: data.reSchedule ?? false,
+                          onTap2: () {},
                           appoinmentType: data.appointmentType ?? "",
                           appoinmentStatus: data.status ?? "",
                           paymentStatus: data.paymentStatus ?? false,
@@ -109,17 +107,15 @@ class AppointmentsScreen extends StatelessWidget {
                               debugPrint(
                                   "User ID>>>>${data.userId} || User name>>>>${profileController.profileData.value.name} || Call ID>>>${data.id}");
                               Get.to(() => AudioVideoCall(
-                                    userID: data.userId ?? "",
+                                    senderID: data.userId ?? "",
                                     userName: profileController
                                             .profileData.value.name ??
                                         "",
                                     callID: data.id ?? "",
+                                    receiverId: data.doctorId?.id ?? "",
                                   ));
-                            } else if(data.reSchedule??false){
-                              
-                            }
-                            
-                            else {
+                            } else if (data.reSchedule ?? false) {
+                            } else {
                               paitentPaymentController.makePayment(
                                   appoinmentDate: data.date ?? "",
                                   amount: data.doctorId?.appointmentFee ?? 0,
