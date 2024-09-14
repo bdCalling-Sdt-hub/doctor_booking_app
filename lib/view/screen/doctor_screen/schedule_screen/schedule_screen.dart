@@ -42,8 +42,8 @@ class ScheduleScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.0.h),
         child: RefreshIndicator(
-          color: AppColors.blackNormal,
-          backgroundColor: AppColors.grayLightHover,
+          backgroundColor: AppColors.blackNormal,
+          color: AppColors.white,
           onRefresh: () => scheduleController
               .refreshScreen(scheduleController.tabCurrentIndex.value),
           child: Column(

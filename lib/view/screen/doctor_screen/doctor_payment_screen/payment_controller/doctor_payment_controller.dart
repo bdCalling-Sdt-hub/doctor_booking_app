@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:doctor_booking/service/api_client.dart';
@@ -76,21 +77,40 @@ class DoctorPaymentController extends GetxController {
   Future<void> addNewCard() async {
     if (frontImageFile.value != null && backImageFile.value != null) {
       Map<String, String> body = {
-        "business_profile[product_description]":
-            bankInfoProductDiscriptionController.value.text,
-        "business_profile[website]": bankInfoWebsiteController.value.text,
-        "business_profile[business_name]":
-            bankInfoBusinessController.value.text,
-        "bank_info[currency]": bankInfoCurrencyController.value.text,
-        "bank_info[country]": bankInfoCountryController.value.text,
-        "bank_info[account_number]": bankAccountNumberController.value.text,
-        "bank_info[account_holder_type]":
-            accountHolderTypeController.value.text,
-        "bank_info[account_holder_name]": nameController.value.text,
-        "line1": lineOneController.value.text,
-        "address[postal_code]": addressPostalCodeController.value.text,
-        "address[country]": addressCountryController.value.text,
-        "address[city]": addressCityController.value.text,
+        "address": jsonEncode({
+          "city": "FR",
+          "country": "FR",
+          "postal_code": "93300",
+          "line1": "56 rue du landy"
+        }),
+        "bank_info": jsonEncode({
+          "account_holder_name": "madical",
+          "account_holder_type": "individual",
+          "account_number": "FR1420041010050500013M02606",
+          "country": "FR",
+          "currency": "eur"
+        }),
+        "business_profile": jsonEncode({
+          "business_name": "Cooking",
+          "website": "www.xyz.com",
+          "product_description": "Description"
+        }),
+
+        // "business_profile[product_description]":
+        //     bankInfoProductDiscriptionController.value.text,
+        // "business_profile[website]": bankInfoWebsiteController.value.text,
+        // "business_profile[business_name]":
+        //     bankInfoBusinessController.value.text,
+        // "bank_info[currency]": bankInfoCurrencyController.value.text,
+        // "bank_info[country]": bankInfoCountryController.value.text,
+        // "bank_info[account_number]": bankAccountNumberController.value.text,
+        // "bank_info[account_holder_type]":
+        //     accountHolderTypeController.value.text,
+        // "bank_info[account_holder_name]": nameController.value.text,
+        // "line1": lineOneController.value.text,
+        // "address[postal_code]": addressPostalCodeController.value.text,
+        // "address[country]": addressCountryController.value.text,
+        // "address[city]": addressCityController.value.text,
       };
 
       var response = await ApiClient.postMultipartData(

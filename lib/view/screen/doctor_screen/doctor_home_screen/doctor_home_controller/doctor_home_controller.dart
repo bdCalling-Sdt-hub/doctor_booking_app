@@ -279,7 +279,8 @@ class DoctorHomeController extends GetxController {
   @override
   void onInit() {
     homescrollControloler.value.addListener(addScrollListener);
-    getAllDoctorAppointment(status: AppStrings.accepted);
+    getAllDoctorAppointment(status: AppStrings.accepted); 
+     getDoctorOverview();
     super.onInit();
   }
 }
