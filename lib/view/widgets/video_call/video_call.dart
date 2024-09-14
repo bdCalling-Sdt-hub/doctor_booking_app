@@ -16,10 +16,11 @@ class AudioVideoCall extends StatelessWidget {
 
   //final String userID = Random().nextInt(1000000).toString();
 
+  void something() {}
+
   @override
   Widget build(BuildContext context) {
     return ZegoUIKitPrebuiltCall(
-        events: ZegoUIKitPrebuiltCallEvents(),
         onDispose: () {
           print("---------- Dispose");
         },

@@ -20,7 +20,7 @@ class DependencyInjection extends Bindings {
     ///==========================User section==================
     Get.lazyPut(() => PaitentProfileController(), fenix: true);
     Get.lazyPut(() => NotificationController(), fenix: true);
-    Get.lazyPut(() => HospitalController(), fenix: false);
+    Get.lazyPut(() => HospitalController(), fenix: true);
     Get.lazyPut(() => PatientAppointmentController(), fenix: true);
     Get.lazyPut(() => PaitentPaymentController(), fenix: true);
 

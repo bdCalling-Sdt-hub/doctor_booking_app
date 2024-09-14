@@ -1,3 +1,4 @@
+import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/controller/payment_controller/payment_controller.dart';
 import 'package:doctor_booking/helper/time_converter/time_converter.dart';
 import 'package:doctor_booking/service/api_url.dart';
@@ -5,6 +6,7 @@ import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/co
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/model/appoinment_list_model.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/controller/profile_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_appointment_card/custom_appointment_card.dart';
 import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
@@ -26,6 +28,8 @@ class AppointmentsScreen extends StatelessWidget {
 
   final PaitentPaymentController paitentPaymentController =
       Get.find<PaitentPaymentController>();
+
+  final GeneralController generalController = Get.find<GeneralController>();
 
   @override
   Widget build(BuildContext context) {
@@ -69,15 +73,25 @@ class AppointmentsScreen extends StatelessWidget {
                     itemCount:
                         patientAppointmentController.appoinmentList.length,
                     itemBuilder: (context, index) {
-                      var data =
+                      AppoinmentListModel data =
                           patientAppointmentController.appoinmentList[index];
                       if (patientAppointmentController
                               .isLoadMoreRunning.value ==
                           false) {
                         return CustomAppointmentCard(
-                          reSchedule: data.reSchedule??false,
-                          onTap2: () {
-                            
+                          doctorInfo: data.doctorId!,
+                          reSchedule: data.reSchedule ?? false,
+                          onTap2: () async {
+                            bool complete =
+                                await generalController.updateAppoinment(
+                                    appoinmentID: data.id ?? "",
+                                    status: AppStrings.accepted);
+                            if (complete) {
+                              patientAppointmentController.refreshScreen(
+                                  index: index);
+                            }
+
+                            debugPrint("Reschedule Accept>>>>>>>>>>>>>>>");
                           },
                           appoinmentType: data.appointmentType ?? "",
                           appoinmentStatus: data.status ?? "",
@@ -104,7 +118,7 @@ class AppointmentsScreen extends StatelessWidget {
                                   icons: Icons.more_vert,
                                 )
                               : const SizedBox(),
-                          onTap: () {
+                          onTap: () async {
                             if (data.paymentStatus ?? false) {
                               debugPrint(
                                   "User ID>>>>${data.userId} || User name>>>>${profileController.profileData.value.name} || Call ID>>>${data.id}");
@@ -115,11 +129,17 @@ class AppointmentsScreen extends StatelessWidget {
                                         "",
                                     callID: data.id ?? "",
                                   ));
-                            } else if(data.reSchedule??false){
-                              
-                            }
-                            
-                            else {
+                            } else if (data.reSchedule ?? false) {
+                              bool complete =
+                                  await generalController.updateAppoinment(
+                                      appoinmentID: data.id ?? "",
+                                      status: AppStrings.rejected);
+                              if (complete) {
+                                patientAppointmentController.refreshScreen(
+                                    index: index);
+                              }
+                              debugPrint("Reschedule Reject>>>>>>>>>>>>>>>");
+                            } else {
                               paitentPaymentController.makePayment(
                                   appoinmentDate: data.date ?? "",
                                   amount: data.doctorId?.appointmentFee ?? 0,

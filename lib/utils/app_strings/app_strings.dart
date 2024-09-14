@@ -157,9 +157,9 @@ class AppStrings {
   static const String similarDoctors = 'Similar Doctors';
   static const String upcoming = 'Upcoming';
   static const String past = 'Past';
+  static const String reScheduleReq = 'has requested for a re-schedule';
 
   static const String pastCapital = 'Past';
-
 
   static const String canceled = 'Canceled';
   static const String appointmentTime = 'Appointment Time:';

@@ -32,14 +32,14 @@ class PatientAppointmentController extends GetxController {
   final List<String> tapBarItems = [
     AppStrings.pendingCapital,
     AppStrings.upcoming,
-    AppStrings.completed,
+    //AppStrings.completed,
     AppStrings.canceled,
   ];
 
   final List<String> appoinmentStatus = [
     AppStrings.pending,
     AppStrings.accepted,
-    AppStrings.completed,
+    //AppStrings.completed,
     AppStrings.rejected,
   ];
   RxInt selectedIndex = 0.obs;
@@ -111,8 +111,9 @@ class PatientAppointmentController extends GetxController {
 
   ///======================== Get My Appoinments =======================
   RxList<AppoinmentListModel> appoinmentList = <AppoinmentListModel>[].obs;
+  RxList<AppoinmentListModel> appoinmentHistory = <AppoinmentListModel>[].obs;
 
-  getMyAppoinment({required String status}) async {
+  getMyAppoinment({required String status, bool isHistory = false}) async {
     appoinmentList.value = [];
     appoinmentLoadingMethod(status: Status.loading);
     refresh();
@@ -122,6 +123,11 @@ class PatientAppointmentController extends GetxController {
     if (response.statusCode == 200) {
       appoinmentList.value = List<AppoinmentListModel>.from(
           response.body["data"].map((x) => AppoinmentListModel.fromJson(x)));
+
+      if (isHistory) {
+        appoinmentHistory.value = List<AppoinmentListModel>.from(
+            response.body["data"].map((x) => AppoinmentListModel.fromJson(x)));
+      }
 
       currentPage.value = response.body['pagination']['currentPage'];
       totalPage.value = response.body['pagination']['totalPages'];
@@ -194,11 +200,34 @@ class PatientAppointmentController extends GetxController {
 
       case 2:
         // ignore: void_checks
-        return getMyAppoinment(status: AppStrings.completed);
-
-      case 3:
-        // ignore: void_checks
         return getMyAppoinment(status: AppStrings.rejected);
+    }
+  }
+
+//===================== Give Ratting =====================
+  RxDouble rattingvalue = 5.0.obs;
+  Rx<TextEditingController> commentController = TextEditingController().obs;
+
+  makeRatting({required String docID, required String appointmentId}) async {
+    generalController.showPopUpLoader();
+
+    Map<String, dynamic> body = {
+      "receiver": docID,
+      "rating": rattingvalue.value,
+      "comment": commentController.value.text,
+      "appointmentId": appointmentId
+    };
+
+    var response =
+        await ApiClient.postData(ApiUrl.giveRatting, jsonEncode(body));
+
+    if (response.statusCode == 200) {
+      navigator?.pop();
+      navigator?.pop();
+      toastMessage(message: response.body["message"], colors: Colors.green);
+    } else {
+      navigator?.pop();
+      ApiChecker.checkApi(response);
     }
   }
 

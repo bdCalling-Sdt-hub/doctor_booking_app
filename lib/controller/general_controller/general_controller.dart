@@ -10,9 +10,7 @@ import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/inner_widget/appointments_history_dialog.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/category_model.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/popular_doctor.dart';
-import 'package:doctor_booking/view/widgets/custom_image_picker_popup/custom_image_picker_popup.dart';
 import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,37 +21,10 @@ class GeneralController extends GetxController with GetxServiceMixin {
 
   RxString role = "".obs;
 
-  ///================== Choose Camera or Gallery ====================
-
-  popupCameraOrGallery() {
-    return showDialog(
-        barrierDismissible: true,
-        barrierColor: Colors.transparent,
-        context: Get.context!,
-        builder: (_) {
-          return SizedBox(
-            height: 70,
-            child: AlertDialog(
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              content: CustomImagePickerPopup(
-                galleryButton: () {
-                  openGallery(source: ImageSource.gallery);
-                },
-                cammeraButton: () {
-                  openGallery(source: ImageSource.camera);
-                },
-              ),
-            ),
-          );
-        });
-  }
-
   ///================== Show Loader ====================
 
   showPopUpLoader() {
     return showDialog(
-        barrierDismissible: false,
         barrierColor: Colors.transparent,
         context: Get.context!,
         builder: (_) {
@@ -103,52 +74,11 @@ class GeneralController extends GetxController with GetxServiceMixin {
   ///================== Get Calender value ====================
 
   Rx<DateTime> calenderValue = DateTime.now().obs;
-
-  pickDate(
-      {required BuildContext context, TextEditingController? value}) async {
-    DateTime? result = await showDatePicker(
-        context: context, firstDate: DateTime(1980), lastDate: DateTime.now());
-
-    calenderValue.value = result ?? DateTime.now();
-
-    // value!.text = DateConverter.yearMonthDate(calenderValue.value);
-    refresh();
-  }
-
   Rx<DateTime> startTimeValue = DateTime.now().obs;
   Rx<DateTime> endTimeValue = DateTime.now().obs;
 
-  pickTime({required BuildContext context}) async {
-    TimeOfDay? time =
-        await showTimePicker(context: context, initialTime: TimeOfDay.now());
-
-    if (time != null) {
-      DateTime dateTime = DateTime.now();
-
-      DateTime selectedTime = DateTime(
-        dateTime.year,
-        dateTime.month,
-        dateTime.day,
-        time.hour,
-        time.minute,
-      );
-      startTimeValue.value = selectedTime;
-      if (kDebugMode) {
-        print(selectedTime);
-      }
-    }
-  }
-
   ///====================== Pick Image =====================
   Rx<File?> proImage = Rx<File?>(null);
-
-  Future<void> openGallery({required ImageSource source}) async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: source, imageQuality: 10);
-    if (pickedFile != null) {
-      proImage.value = File(pickedFile.path);
-    }
-  }
 
   ///============================Multi Image picker method================
   RxList<File> selectedImagesMulti = <File>[].obs;
@@ -369,15 +299,18 @@ class GeneralController extends GetxController with GetxServiceMixin {
 //================== Update Appoinment =================
 
   Future<bool> updateAppoinment(
-      {required String status, required String docId}) async {
+      {required String status, required String appoinmentID}) async {
     showPopUpLoader();
 
     var response = await ApiClient.patchData(
-        ApiUrl.updateAppoinment(docId: docId), {"status": status});
+        ApiUrl.updateAppoinment(appoinmentID: appoinmentID),
+        jsonEncode({"status": status}));
 
     if (response.statusCode == 200) {
+      navigator?.pop();
       return true;
     } else {
+      navigator?.pop();
       return false;
     }
   }

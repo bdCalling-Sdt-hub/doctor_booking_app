@@ -1,6 +1,8 @@
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/model/appoinment_list_model.dart';
+
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_image.dart';
@@ -20,7 +22,7 @@ class CustomAppointmentCard extends StatelessWidget {
   final bool paymentStatus;
   final bool reSchedule;
   final String appoinmentType;
-
+  final DoctorId doctorInfo;
   final String location;
   final Widget? trailing;
   final VoidCallback? onTap;
@@ -42,6 +44,7 @@ class CustomAppointmentCard extends StatelessWidget {
     required this.appoinmentType,
     this.onTap2,
     required this.reSchedule,
+    required this.doctorInfo,
   });
 
   @override
@@ -107,13 +110,18 @@ class CustomAppointmentCard extends StatelessWidget {
                 fontSize: 12,
                 color: AppColors.whiteDarker,
               ),
+
+              ///============== Appoinment Date ===============
+
               CustomText(
                 left: 10,
                 top: 7,
                 text: date,
                 fontWeight: FontWeight.w500,
                 fontSize: 12,
-                color: AppColors.grayNormal,
+                color: reSchedule && appoinmentStatus == AppStrings.pending
+                    ? AppColors.red
+                    : AppColors.grayNormal,
               ),
               SizedBox(
                 width: 7.w,
@@ -124,13 +132,18 @@ class CustomAppointmentCard extends StatelessWidget {
                 color: AppColors.blackDarker,
                 fontWeight: FontWeight.w800,
               ),
+
+              ///============== Appoinment Time ===============
+
               CustomText(
                 left: 10,
                 top: 7,
                 text: time,
                 fontWeight: FontWeight.w500,
                 fontSize: 12,
-                color: AppColors.grayNormal,
+                color: reSchedule && appoinmentStatus == AppStrings.pending
+                    ? AppColors.red
+                    : AppColors.grayNormal,
               ),
             ],
           ),
@@ -139,23 +152,39 @@ class CustomAppointmentCard extends StatelessWidget {
           ),
           Row(
             children: [
-              const CustomImage(imageSrc: AppIcons.location),
-              CustomText(
-                left: 5,
-                text: location,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: AppColors.grayNormal,
-              ),
-              CustomText(
-                left: 5,
-                text: "Type: $type",
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                color: AppColors.grayNormal,
-              ),
+              if (type == "OFFLINE") ...[
+                const CustomImage(imageSrc: AppIcons.location),
+                CustomText(
+                  left: 5,
+                  text: location,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.grayNormal,
+                ),
+              ],
+              if (type == "ONLINE")
+                CustomText(
+                  left: 5,
+                  text: "Type: $type",
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.grayNormal,
+                ),
             ],
           ),
+
+          if (reSchedule && appoinmentStatus == AppStrings.pending)
+            CustomText(
+              left: 5,
+              top: 4.h,
+              bottom: 4.h,
+              maxLines: 2,
+              textAlign: TextAlign.left,
+              text: "${doctorInfo.name} ${AppStrings.reScheduleReq}",
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: AppColors.red,
+            ),
           SizedBox(
             height: 8.h,
           ),
@@ -164,7 +193,8 @@ class CustomAppointmentCard extends StatelessWidget {
 
           if (appoinmentStatus == AppStrings.accepted &&
               appoinmentType == "ONLINE" &&
-              paymentStatus)
+              paymentStatus &&
+              !reSchedule)
             CustomButton(
               onTap: () {
                 onTap!();
@@ -172,7 +202,9 @@ class CustomAppointmentCard extends StatelessWidget {
               title: AppStrings.videoCall,
             ),
 
-          if (!paymentStatus && appoinmentStatus == AppStrings.accepted)
+          if (!paymentStatus &&
+              appoinmentStatus == AppStrings.accepted &&
+              !reSchedule)
             CustomButton(
               onTap: () {
                 onTap!();
@@ -183,37 +215,38 @@ class CustomAppointmentCard extends StatelessWidget {
 
           ///======================  Reschedule request ====================
 
-          Row(
-            children: [
-              //================== Decline ================
+          if (reSchedule && appoinmentStatus == AppStrings.pending)
+            Row(
+              children: [
+                //================== Decline ================
 
-              Expanded(
-                child: CustomButton(
-                  fillColor: AppColors.white,
-                  textColor: AppColors.blackDarker,
-                  onTap: () {
-                    onTap!();
-                  },
-                  title: AppStrings.reject,
+                Expanded(
+                  child: CustomButton(
+                    fillColor: AppColors.white,
+                    textColor: AppColors.blackDarker,
+                    onTap: () {
+                      onTap!();
+                    },
+                    title: AppStrings.reject,
+                  ),
                 ),
-              ),
 
-              SizedBox(
-                width: 20.w,
-              ),
-
-              //================== Accept ================
-
-              Expanded(
-                child: CustomButton(
-                  onTap: () {
-                    onTap2!();
-                  },
-                  title: AppStrings.accept,
+                SizedBox(
+                  width: 20.w,
                 ),
-              ),
-            ],
-          )
+
+                //================== Accept ================
+
+                Expanded(
+                  child: CustomButton(
+                    onTap: () {
+                      onTap2!();
+                    },
+                    title: AppStrings.accept,
+                  ),
+                ),
+              ],
+            )
         ],
       ),
     );
