@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../../core/app_routes/app_routes.dart';
 import '../../../../../service/api_url.dart';
 import '../../../../widgets/custom_loader/custom_loader.dart';
 
@@ -39,7 +40,9 @@ class PendingScreen extends StatelessWidget {
                 time:
                     "${DateConverter.formatDate(model.date ?? '')}(${model.time})",
                 loacation: model.appointmentType ?? '',
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(AppRoutes.patientDetails, arguments: model);
+                },
                 acceptButton: () {
                   if (model.id != null) {
                     scheduleController.appointmentStatusUpdate(

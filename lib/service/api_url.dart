@@ -106,5 +106,8 @@ class ApiUrl {
   //=========================== Doctor Home Type Status ==================//
 
   static getAppointmentType({required String type, String page = '1'}) =>
-      "/appointment/get-my-appointments?page=$page&status=accepted&type=$type";
+      "/appointment/get-my-appointments?page=$page&status=accepted&type=$type"; 
+
+       static getAppointmentPast({required String type, String page = '1'}) =>
+      "/appointment/get-my-appointments?page=$page&type=$type";
 }

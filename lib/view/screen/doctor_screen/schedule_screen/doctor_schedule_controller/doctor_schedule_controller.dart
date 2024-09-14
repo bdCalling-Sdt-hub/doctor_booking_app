@@ -23,7 +23,7 @@ class DoctorScheduleController extends GetxController {
   final List<String> appoinmentStatus = [
     AppStrings.accepted,
     AppStrings.pending,
-    AppStrings.rejected,
+    AppStrings.past,
     //  AppStrings.completed,
     //   AppStrings.rejected,
   ];
@@ -52,8 +52,9 @@ class DoctorScheduleController extends GetxController {
   Future<void> getDoctorAppointment(String status) async {
     appointmentList.value = [];
     setRxRequestStatus(Status.loading);
-    var response =
-        await ApiClient.getData(ApiUrl.getAppoinments(status: status));
+    var response = tabCurrentIndex.value == 2
+        ? await ApiClient.getData(ApiUrl.getAppointmentPast(type: status))
+        : await ApiClient.getData(ApiUrl.getAppoinments(status: status));
     if (response.statusCode == 200) {
       setRxRequestStatus(Status.completed);
       appointmentList.value = List<AppointmentModel>.from(
@@ -98,9 +99,13 @@ class DoctorScheduleController extends GetxController {
           "===========================> Total Page ${totalPage.value} <===========================");
       debugPrint(
           "===========================> currentPage ${currentPage.value} <===========================");
-      var response = await ApiClient.getData(ApiUrl.getAppoinments(
-          status: appoinmentStatus[tabCurrentIndex.value],
-          page: page.value.toString()));
+      var response = tabCurrentIndex.value == 2
+          ? await ApiClient.getData(ApiUrl.getAppointmentPast(
+              type: appoinmentStatus[tabCurrentIndex.value],
+              page: page.value.toString()))
+          : await ApiClient.getData(ApiUrl.getAppoinments(
+              status: appoinmentStatus[tabCurrentIndex.value],
+              page: page.value.toString()));
       if (response.statusCode == 200) {
         var demoList = List<AppointmentModel>.from(
           response.body["data"].map(
@@ -173,7 +178,7 @@ class DoctorScheduleController extends GetxController {
       case 1:
         return getDoctorAppointment(AppStrings.pending);
       case 2:
-        return getDoctorAppointment(AppStrings.rejected);
+        return getDoctorAppointment(AppStrings.past);
     }
   }
 
