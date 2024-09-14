@@ -247,5 +247,14 @@ class DateConverter {
     String formattedDate = DateFormat('dd-MM-yyyy').format(parsedDate);
 
     return formattedDate;
-  }
+  } 
+ static String formatTime(String input) {
+  // Parse the input string into a DateTime object
+  DateTime dateTime = DateTime.parse(input).toLocal(); // Convert to local timezone if needed
+
+  // Format the DateTime into the desired time format (e.g., 10:00 PM)
+  String formattedTime = DateFormat('hh:mm a').format(dateTime);
+
+  return formattedTime;
+}
 }

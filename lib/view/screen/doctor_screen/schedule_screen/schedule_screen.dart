@@ -8,6 +8,7 @@ import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/pending_screen/pending_screen.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_doctor_card.dart';
+import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
 import 'package:doctor_booking/view/widgets/custom_tab_selected/custom_tab_selected.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:doctor_booking/view/widgets/doctor_nav_bar/doctor_nav_bar.dart';
@@ -38,9 +39,13 @@ class ScheduleScreen extends StatelessWidget {
       appBar: const CustomAppBar(
         appBarContent: AppStrings.schedule,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0.h),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.0.h),
+        child: RefreshIndicator(
+          backgroundColor: AppColors.blackNormal,
+          color: AppColors.white,
+          onRefresh: () => scheduleController
+              .refreshScreen(scheduleController.tabCurrentIndex.value),
           child: Column(
             children: [
               _buildTabSelector(),
@@ -63,13 +68,9 @@ class ScheduleScreen extends StatelessWidget {
         selectedIndex: scheduleController.tabCurrentIndex.value,
         onTabSelected: (value) {
           scheduleController.tabCurrentIndex.value = value;
-          if (value == 0) {
-            scheduleController.getAllDoctorAcceptAppointment();
-          } else if (value == 1) {
-            scheduleController.getPendingDoctorAppointment();
-          } else {
-            scheduleController.getPastDoctorAppointment();
-          }
+          scheduleController.refreshScreen(value);
+          scheduleController.tabCurrentIndex
+              .refresh(); // Refresh the selected index
         },
         selectedColor: AppColors.grayNormal,
         unselectedColor: AppColors.grayLightHover,
@@ -94,70 +95,79 @@ class ScheduleScreen extends StatelessWidget {
 
   /// Builds the list of accepted appointments
   Widget _buildAcceptedAppointments() {
-    return scheduleController.acceptAppointMentList.isNotEmpty
-        ? Column(
-            children: List.generate(
-              scheduleController.acceptAppointMentList.length,
-              (index) {
-                AppointmentModel model =
-                    scheduleController.acceptAppointMentList[index];
-
-                return CustomDoctorCard(
-                  imageUrl: "${ApiUrl.imageBaseUrl}${model.userId?.img}",
-                  patentName: model.userId?.name ?? '',
-                  time:
-                      "${DateConverter.formatDate(model.date ?? '')}(${model.time})",
-                  loacation: model.userId?.location ?? '',
-                  onTap: () {
-                    debugPrint(
-                        "Doctor ID>>>>${model.doctorId} || Doctor name>>>>${profileController.profileModel.value.name} || Call ID ${model.id}");
-                    Get.to(() => AudioVideoCall(
-                          userID: model.doctorId ?? "",
-                          userName:
-                              profileController.profileModel.value.name ?? "",
-                          callID: model.id ?? "",
-                        ));
-                  },
-                );
-              },
-            ),
+    return scheduleController.appointmentList.isNotEmpty
+        ? Expanded(
+            child: ListView.builder(
+                controller: scheduleController.scrollController.value,
+                itemCount: scheduleController.appointmentList.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  AppointmentModel model =
+                      scheduleController.appointmentList[index];
+                  if (scheduleController.isLoadMoreRunning.value == false) {
+                    return CustomDoctorCard(
+                      imageUrl: "${ApiUrl.imageBaseUrl}${model.userId?.img}",
+                      patentName: model.userId?.name ?? '',
+                      time:
+                          "${DateConverter.formatDate(model.date ?? '')}(${model.time})",
+                      loacation: model.appointmentType ?? '',
+                      onTap: () {
+                        debugPrint(
+                            "Doctor ID>>>>${model.doctorId} || Doctor name>>>>${profileController.profileModel.value.name} || Call ID ${model.id}");
+                        Get.to(() => AudioVideoCall(
+                              userID: model.doctorId ?? "",
+                              userName:
+                                  profileController.profileModel.value.name ??
+                                      "",
+                              callID: model.id ?? "",
+                            ));
+                      },
+                    );
+                  } else {
+                    return const CustomLoader();
+                  }
+                }),
           )
         : const Center(child: CustomText(text: 'Appointment Not Available'));
   }
 
   /// Builds the list of pending appointments
   Widget _buildPendingAppointments() {
-    return scheduleController.pendingAppointmentList.isNotEmpty
+    return scheduleController.appointmentList.isNotEmpty
         ? PendingScreen()
         : const Center(child: CustomText(text: 'Appointment Not Available'));
   }
 
   /// Builds the list of past appointments
   Widget _buildPastAppointments(context) {
-    return scheduleController.pastAppointment.isNotEmpty
-        ? Column(
-            children: List.generate(
-              scheduleController.pastAppointment.length,
-              (index) {
-                AppointmentModel model =
-                    scheduleController.pastAppointment[index];
-                return CustomDoctorCard(
-                  imageUrl: "${ApiUrl.imageBaseUrl}${model.userId?.img}",
-                  patentName: model.userId?.name ?? '',
-                  time:
-                      "${DateConverter.formatDate(model.date ?? '')}(${model.time})",
-                  loacation: model.userId?.location ?? '',
-                  onTap: () {},
-                  showPopupButton: true,
-                  reScheduleButton: () {
-                    if (model.id != null) {
-                      Navigator.pop(context);
-                      homeController.showHomePopup(id: model.id!);
-                    }
-                  },
-                );
-              },
-            ),
+    return scheduleController.appointmentList.isNotEmpty
+        ? Expanded(
+            child: ListView.builder(
+                shrinkWrap: true,
+                controller: scheduleController.scrollController.value,
+                itemCount: scheduleController.appointmentList.length,
+                itemBuilder: (context, index) {
+                  final model = scheduleController.appointmentList[index];
+                  if (scheduleController.isLoadMoreRunning.value == false) {
+                    return CustomDoctorCard(
+                      imageUrl: "${ApiUrl.imageBaseUrl}${model.userId?.img}",
+                      patentName: model.userId?.name ?? '',
+                      time:
+                          "${DateConverter.formatDate(model.date ?? '')}(${model.time})",
+                      loacation: model.appointmentType ?? '',
+                      onTap: () {},
+                      showPopupButton: true,
+                      reScheduleButton: () {
+                        if (model.id != null) {
+                          Navigator.pop(context);
+                          homeController.showHomePopup(id: model.id!);
+                        }
+                      },
+                    );
+                  } else {
+                    return const CustomLoader();
+                  }
+                }),
           )
         : const Center(child: CustomText(text: 'Appointment Not Available'));
   }

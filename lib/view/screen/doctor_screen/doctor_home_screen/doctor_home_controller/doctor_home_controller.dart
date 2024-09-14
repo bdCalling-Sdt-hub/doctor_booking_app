@@ -33,7 +33,19 @@ class DoctorHomeController extends GetxController {
     AppStrings.completed2,
     AppStrings.cancel
   ];
-  RxInt tabSelectedIndex = RxInt(0);
+  //========================= Home Status List =====================
+  List<String> appointmentStatusList = [
+    AppStrings.accepted,
+    AppStrings.completed,
+    AppStrings.rejected
+  ];
+
+  RxString setType = AppStrings.todaySmall.obs;
+
+  RxInt tabSelectedIndex = 0.obs;
+
+  RxInt totalPage = 0.obs;
+  RxInt currentPage = 0.obs;
 
   showHomePopup({required String id}) {
     return showDialog(
@@ -51,19 +63,25 @@ class DoctorHomeController extends GetxController {
   final rxRequestStatus = Status.loading.obs;
   void setRxRequestStatus(Status value) => rxRequestStatus.value = value;
 
-  //======================= Get doctor appointment list Today ==============
+  //======================== Get All Appointment ======================//
 
-  // RxList<AppointmentModel> appointMentList = <AppointmentModel>[].obs;
-  RxList<AppointmentModel> appointMentListToday = <AppointmentModel>[].obs;
+  RxList<AppointmentModel> appointMentList = <AppointmentModel>[].obs;
 
-  getDoctorAcceptedAndTodayAppointment() async {
-    var response = await ApiClient.getData(ApiUrl.acceptedDoctorAppointment);
+  Future<void> getAllDoctorAppointment(
+      {required String status, String type = AppStrings.todaySmall}) async {
+    appointMentList.value = [];
 
+    var response = tabSelectedIndex.value == 0
+        ? await ApiClient.getData(ApiUrl.getAppointmentType(type: type))
+        : await ApiClient.getData(ApiUrl.getAppoinments(status: status));
     if (response.statusCode == 200) {
       setRxRequestStatus(Status.completed);
-
-      appointMentListToday.value = List<AppointmentModel>.from(
+      appointMentList.value = List<AppointmentModel>.from(
           response.body["data"].map((x) => AppointmentModel.fromJson(x)));
+      totalPage.value = response.body['pagination']['totalPages'];
+      currentPage.value = response.body['pagination']['currentPage'];
+      pageInit();
+      refresh();
     } else {
       if (response.statusText == ApiClient.somethingWentWrong) {
         setRxRequestStatus(Status.internetError);
@@ -74,88 +92,93 @@ class DoctorHomeController extends GetxController {
     }
   }
 
-  //==================== Get Doctor appoint ment weekly and monthly ======================//
-  RxList<AppointmentModel> appointMentListWeekly = <AppointmentModel>[].obs;
-  RxList<AppointmentModel> appointMentListMonthly = <AppointmentModel>[].obs;
+  RxBool isLoadMoreRunning = false.obs;
+  RxInt page = 1.obs;
 
-  getAllDoctorAppointmentWeeklyAndMonthy(String type) async {
-    if (type == AppStrings.weekly) {
-      var response =
-          await ApiClient.getData("${ApiUrl.doctorAppointment}?type=weekly");
+  pageInit() {
+    page.value = currentPage.value;
+  }
+
+  //======================== Get More Appoinment With Pagination =======================
+  Rx<ScrollController> homescrollControloler = ScrollController().obs;
+  Future<void> loadMoreAppointment() async {
+    if (isLoadMoreRunning.value == false &&
+        totalPage.value != 1 &&
+        totalPage.value != currentPage.value &&
+        rxRequestStatus.value != Status.loading) {
+      page.value += 1;
+
+      isLoadMoreRunning(true);
+
+      var response = tabSelectedIndex.value == 0
+          ? await ApiClient.getData(ApiUrl.getAppointmentType(
+              type: setType.value, page: page.value.toString()))
+          : await ApiClient.getData(ApiUrl.getAppoinments(
+              status: appointmentStatusList[tabSelectedIndex.value],
+              page: page.value.toString()));
+
       if (response.statusCode == 200) {
         setRxRequestStatus(Status.completed);
-        // appointMentList.add(AppointmentModel.fromJson(response.body['data']));
-
-        appointMentListWeekly.value = List<AppointmentModel>.from(
-            response.body["data"].map((x) => AppointmentModel.fromJson(x)));
+        appointMentList.addAll(
+          List<AppointmentModel>.from(
+              response.body["data"].map((x) => AppointmentModel.fromJson(x))),
+        );
+        totalPage.value = response.body["totalPages"];
+        currentPage.value = response.body["currentPage"];
+        pageInit();
+        refresh();
+        isLoadMoreRunning(false);
       } else {
         if (response.statusText == ApiClient.somethingWentWrong) {
           setRxRequestStatus(Status.internetError);
+          isLoadMoreRunning(false);
         } else {
           setRxRequestStatus(Status.error);
+          isLoadMoreRunning(false);
         }
         ApiChecker.checkApi(response);
-      }
-    } else {
-      var response =
-          await ApiClient.getData("${ApiUrl.doctorAppointment}?type=monthly");
-      if (response.statusCode == 200) {
-        setRxRequestStatus(Status.completed);
-        // appointMentList.add(AppointmentModel.fromJson(response.body['data']));
-
-        appointMentListMonthly.value = List<AppointmentModel>.from(
-            response.body["data"].map((x) => AppointmentModel.fromJson(x)));
-      } else {
-        if (response.statusText == ApiClient.somethingWentWrong) {
-          setRxRequestStatus(Status.internetError);
-        } else {
-          setRxRequestStatus(Status.error);
-        }
-        ApiChecker.checkApi(response);
+        isLoadMoreRunning(false);
       }
     }
   }
 
-//============================ Appointments cancel list =======================//
-  RxList<AppointmentModel> appointMentCalcelList = <AppointmentModel>[].obs;
-
-  getAllDoctorAppointmentCencel() async {
-    var response =
-        await ApiClient.getData("${ApiUrl.doctorAppointment}?status=rejected");
-
-    if (response.statusCode == 200) {
-      setRxRequestStatus(Status.completed);
-
-      appointMentCalcelList.value = List<AppointmentModel>.from(
-          response.body["data"].map((x) => AppointmentModel.fromJson(x)));
-    } else {
-      if (response.statusText == ApiClient.somethingWentWrong) {
-        setRxRequestStatus(Status.internetError);
-      } else {
-        setRxRequestStatus(Status.error);
-      }
-      ApiChecker.checkApi(response);
+  refreshScreen(int index) {
+    getDoctorOverview();
+    switch (index) {
+      case 0:
+        return typeRefresh();
+      case 1:
+        getAllDoctorAppointment(status: AppStrings.completed);
+      case 2:
+        getAllDoctorAppointment(status: AppStrings.rejected);
     }
   }
 
-  RxList<AppointmentModel> appointmentCompletedList = <AppointmentModel>[].obs;
-
-  getDoctorAppointmentCompleted() async {
-    var response = await ApiClient.getData(ApiUrl.completedDoctorAppointment);
-
-    if (response.statusCode == 200) {
-      setRxRequestStatus(Status.completed);
-
-      appointmentCompletedList.value = List<AppointmentModel>.from(
-          response.body["data"].map((x) => AppointmentModel.fromJson(x)));
-    } else {
-      if (response.statusText == ApiClient.somethingWentWrong) {
-        setRxRequestStatus(Status.internetError);
-      } else {
-        setRxRequestStatus(Status.error);
-      }
-      ApiChecker.checkApi(response);
+  typeRefresh() {
+    switch (setType) {
+      // ignore: constant_pattern_never_matches_value_type
+      case AppStrings.todaySmall:
+        return getAllDoctorAppointment(
+            status: AppStrings.accepted, type: AppStrings.todaySmall);
+      // ignore: constant_pattern_never_matches_value_type
+      case AppStrings.weeklySmall:
+        return getAllDoctorAppointment(
+            status: AppStrings.accepted, type: AppStrings.weeklySmall);
+      // ignore: constant_pattern_never_matches_value_type
+      case AppStrings.monthlySmall:
+        return getAllDoctorAppointment(
+            status: AppStrings.accepted, type: AppStrings.monthlySmall);
     }
+  }
+
+  Future<void> addScrollListener() async {
+    homescrollControloler.value.addListener(() {
+      if (homescrollControloler.value.position.atEdge) {
+        if (homescrollControloler.value.position.pixels != 0) {
+          loadMoreAppointment();
+        }
+      }
+    });
   }
 
   //========================================= Get doctor overview =========================///
@@ -253,16 +276,11 @@ class DoctorHomeController extends GetxController {
     }
   }
 
-  allMethod() {
-    getDoctorOverview();
-    getDoctorAcceptedAndTodayAppointment();
-    getAllDoctorAppointmentCencel();
-    getDoctorAppointmentCompleted();
-  }
-
   @override
   void onInit() {
-    allMethod();
+    homescrollControloler.value.addListener(addScrollListener);
+    getAllDoctorAppointment(status: AppStrings.accepted); 
+     getDoctorOverview();
     super.onInit();
   }
 }

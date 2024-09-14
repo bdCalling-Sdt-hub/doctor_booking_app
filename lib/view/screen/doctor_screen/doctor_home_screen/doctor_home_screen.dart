@@ -43,11 +43,15 @@ class DoctorHomeScreen extends StatelessWidget {
           case Status.error:
             return GeneralErrorScreen(
               onTap: () {
-                controller.allMethod();
+                controller.refreshScreen(controller.tabSelectedIndex.value);
               },
             );
           case Status.completed:
-            return SingleChildScrollView(
+            return RefreshIndicator(
+              backgroundColor: AppColors.blackNormal,
+              color: AppColors.white,
+              onRefresh: () =>
+                  controller.refreshScreen(controller.tabSelectedIndex.value),
               child: Column(
                 children: [
                   //================================= App bar ======================
@@ -59,156 +63,199 @@ class DoctorHomeScreen extends StatelessWidget {
                     scaffoldKey: scaffoldKey,
                   ),
                   SizedBox(height: 12.h),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 17.0, vertical: 8),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              //================================ Total blance container ================================//
-                              child: HomeContainer(
-                                title: AppStrings.totalBalance,
-                                subTitle: controller.doctorOverview.value
-                                            .availableForReceive ==
-                                        null
-                                    ? '\$0'
-                                    : "\$${controller.doctorOverview.value.availableForReceive.toString()}",
-                              ),
-                            ),
-                            SizedBox(width: 23.5.h),
-                            Expanded(
-                              //============================= Total Appointment Container ==================
-                              child: HomeContainer(
-                                  title: AppStrings.totalAppointment,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 17.0, vertical: 8),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                //================================ Total blance container ================================//
+                                child: HomeContainer(
+                                  title: AppStrings.totalBalance,
                                   subTitle: controller.doctorOverview.value
-                                              .totalAppointment?.completed ==
+                                              .availableForReceive ==
                                           null
-                                      ? '0'
-                                      : controller.doctorOverview.value
-                                          .totalAppointment!.completed
-                                          .toString()),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 24.h),
-                        Obx(() {
-                          //=========================== Tab Selector ==========================//
-                          return CustomTabSelector(
-                            tabs: controller.tabs,
-                            selectedIndex: controller.tabSelectedIndex.value,
-                            onTabSelected: (value) {
-                              controller.tabSelectedIndex.value = value;
-                              if (value == 0) {
-                                if (value == 0) {
-                                  controller
-                                      .getDoctorAcceptedAndTodayAppointment();
-                                }
-                              }
-                            },
-                            selectedColor: AppColors.grayNormal,
-                            unselectedColor: AppColors.whiteNormalHover,
-                            isTextColorActive: true,
-                            textColor: AppColors.grayNormal,
-                          );
-                        }),
-                        //  SizedBox(height: 24.h),
+                                      ? '\$0'
+                                      : "\$${controller.doctorOverview.value.availableForReceive.toString()}",
+                                ),
+                              ),
+                              SizedBox(width: 23.5.h),
+                              Expanded(
+                                //============================= Total Appointment Container ==================
+                                child: HomeContainer(
+                                    title: AppStrings.totalAppointment,
+                                    subTitle: controller.doctorOverview.value
+                                                .totalAppointment?.completed ==
+                                            null
+                                        ? '0'
+                                        : controller.doctorOverview.value
+                                            .totalAppointment!.completed
+                                            .toString()),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 24.h),
+                          Obx(() {
+                            //=========================== Tab Selector ==========================//
+                            return CustomTabSelector(
+                              tabs: controller.tabs,
+                              selectedIndex: controller.tabSelectedIndex.value,
+                              onTabSelected: (value) {
+                                controller.tabSelectedIndex.value = value;
 
-                        SizedBox(height: 16.h),
-                        //====================================== Schedule List ====================================//
-                        if (controller.tabSelectedIndex.value == 0)
-                          //=============== Today === Weekly and monthly field =================================
-                          _toDayWeeklyMonthlyField(context),
-                        if (controller.tabSelectedIndex.value == 0)
-                          //======================= To Day List ========================
+                                controller.refreshScreen(value);
+                                if (value == 0) {
+                                  controller.getAllDoctorAppointment(
+                                      status: AppStrings.accepted,
+                                      type: AppStrings.todaySmall);
+                                  controller.setType.value =
+                                      AppStrings.todaySmall;
+                                  controller.scheduleTime.value =
+                                      AppStrings.today;
+                                }
+                              },
+                              selectedColor: AppColors.grayNormal,
+                              unselectedColor: AppColors.whiteNormalHover,
+                              isTextColorActive: true,
+                              textColor: AppColors.grayNormal,
+                            );
+                          }),
+                          SizedBox(height: 16.h),
+
+                          //====================================== Schedule List ====================================//
+                          if (controller.tabSelectedIndex.value == 0)
+                            //=============== Today === Weekly and monthly field =================================
+                            _toDayWeeklyMonthlyField(context),
+                          SizedBox(height: 16.h),
+                          if (controller.tabSelectedIndex.value == 0)
+                            //======================= To Day List ========================
+                            if (controller.scheduleTime.value ==
+                                    AppStrings.today &&
+                                controller.tabSelectedIndex.value == 0)
+                              controller.appointMentList.isNotEmpty
+                                  ? Expanded(
+                                      child: ListView.builder(
+                                          controller: controller
+                                              .homescrollControloler.value,
+                                          padding: EdgeInsets.zero,
+                                          shrinkWrap: true,
+                                          itemCount:
+                                              controller.appointMentList.length,
+                                          itemBuilder: (context, index) {
+                                            var data = controller
+                                                .appointMentList[index];
+                                            if (!controller
+                                                .isLoadMoreRunning.value) {
+                                              return CustomDoctorCard(
+                                                imageUrl:
+                                                    "${ApiUrl.imageBaseUrl}${data.userId?.img}",
+                                                patentName:
+                                                    data.userId?.name ?? '',
+                                                time:
+                                                    'Today (${data.time ?? ''})',
+                                                loacation:
+                                                    data.appointmentType ?? '',
+                                                onTap: () => Get.toNamed(
+                                                    AppRoutes.patientDetails,
+                                                    arguments: data),
+                                                reScheduleButton: () {
+                                                  Navigator.pop(context);
+                                                  controller.showHomePopup(
+                                                      id: data.id.toString());
+                                                },
+                                                timeTextColor: AppColors.blackO,
+                                                videoCallOrConsaltentDoneButton:
+                                                    () {},
+                                                typeOnline: data
+                                                            .appointmentType ==
+                                                        null
+                                                    ? null
+                                                    : data.appointmentType! ==
+                                                            AppStrings.online
+                                                        ? true
+                                                        : false,
+                                                showVideoCallOrConsalttentButton:
+                                                    DateConverter
+                                                        .isWithin30MinutesOfTime(
+                                                            data.date ?? '',
+                                                            data.time ?? ''),
+                                              );
+                                            } else {
+                                              return const CustomLoader();
+                                            }
+                                          }),
+                                    )
+                                  : _emptyList(),
+                          //======================= Weekly List =====================
                           if (controller.scheduleTime.value ==
-                                  AppStrings.today &&
+                                  AppStrings.weekly &&
                               controller.tabSelectedIndex.value == 0)
-                            controller.appointMentListToday.isNotEmpty
-                                ? Column(
-                                    children: List.generate(
-                                        controller.appointMentListToday.length,
-                                        (index) {
-                                      var data = controller
-                                          .appointMentListToday[index];
-                                      return CustomDoctorCard(
-                                        imageUrl:
-                                            "${ApiUrl.imageBaseUrl}${data.userId?.img}",
-                                        patentName: data.userId?.name ?? '',
-                                        time: 'Today (${data.time ?? ''})',
-                                        loacation: data.appointmentType ?? '',
-                                        onTap: () => Get.toNamed(
-                                            AppRoutes.patientDetails,
-                                            arguments: data),
-                                        reScheduleButton: () {
-                                          Navigator.pop(context);
-                                          controller.showHomePopup(
-                                              id: data.id.toString());
-                                        },
-                                        timeTextColor: AppColors.blackO,
-                                        videoCallOrConsaltentDoneButton: () {},
-                                        typeOnline: data.appointmentType == null
-                                            ? null
-                                            : data.appointmentType! ==
-                                                    AppStrings.online
-                                                ? true
-                                                : false,
-                                        showVideoCallOrConsalttentButton:
-                                            DateConverter
-                                                .isWithin30MinutesOfTime(
-                                                    data.date ?? '',
-                                                    data.time ?? ''),
-                                      );
-                                    }),
+                            controller.appointMentList.isNotEmpty
+                                ? Expanded(
+                                    child: ListView.builder(
+                                        controller: controller
+                                            .homescrollControloler.value,
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        itemCount:
+                                            controller.appointMentList.length,
+                                        physics:
+                                            const AlwaysScrollableScrollPhysics(),
+                                        itemBuilder: (context, index) {
+                                          var data =
+                                              controller.appointMentList[index];
+                                          if (!controller
+                                              .isLoadMoreRunning.value) {
+                                            return CustomDoctorCard(
+                                              imageUrl:
+                                                  "${ApiUrl.imageBaseUrl}${data.userId?.img}",
+                                              patentName:
+                                                  data.userId?.name ?? '',
+                                              time:
+                                                  "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
+                                              loacation:
+                                                  data.appointmentType ?? '',
+                                              onTap: () {
+                                                Get.toNamed(
+                                                    AppRoutes.patientDetails,
+                                                    arguments: data);
+                                              },
+                                              reScheduleButton: () {
+                                                Navigator.pop(context);
+                                                controller.showHomePopup(
+                                                    id: data.id.toString());
+                                              },
+                                              timeTextColor: AppColors.blackO,
+                                            );
+                                          } else {
+                                            return const CustomLoader();
+                                          }
+                                        }),
                                   )
                                 : _emptyList(),
-                        //======================= Weekly List =====================
-                        if (controller.scheduleTime.value ==
-                                AppStrings.weekly &&
-                            controller.tabSelectedIndex.value == 0)
-                          controller.appointMentListWeekly.isNotEmpty
-                              ? Column(
-                                  children: List.generate(
-                                      controller.appointMentListWeekly.length,
-                                      (index) {
-                                    var data =
-                                        controller.appointMentListWeekly[index];
-                                    return CustomDoctorCard(
-                                      imageUrl:
-                                          "${ApiUrl.imageBaseUrl}${data.userId?.img}",
-                                      patentName: data.userId?.name ?? '',
-                                      time:
-                                          "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
-                                      loacation: data.appointmentType ?? '',
-                                      onTap: () => Get.toNamed(
-                                          AppRoutes.patientDetails,
-                                          arguments: data),
-                                      reScheduleButton: () =>
-                                          controller.showHomePopup(
-                                              id: data.id.toString()),
-                                      timeTextColor: AppColors.blackO,
-                                    );
-                                  }),
-                                )
-                              : _emptyList(),
-                        //======================= monthly List =====================
-                        if (controller.scheduleTime.value ==
-                                AppStrings.monthly &&
-                            controller.tabSelectedIndex.value == 0)
-                          controller.appointMentListMonthly.isNotEmpty
-                              ? _showMonthlyList()
-                              : _emptyList(),
+                          //======================= monthly List =====================
+                          if (controller.scheduleTime.value ==
+                                  AppStrings.monthly &&
+                              controller.tabSelectedIndex.value == 0)
+                            controller.appointMentList.isNotEmpty
+                                ? _showMonthlyList()
+                                : _emptyList(),
 
-                        if (controller.tabSelectedIndex.value == 1)
-                          controller.appointmentCompletedList.isNotEmpty
-                              ? _showCompltedList()
-                              : _emptyList(),
+                          if (controller.tabSelectedIndex.value == 1)
+                            controller.appointMentList.isNotEmpty
+                                ? _showCompltedList()
+                                : _emptyList(),
 
-                        //======================================= Cancel List =================================
-                        if (controller.tabSelectedIndex.value == 2)
-                          _showCancelList()
-                      ],
+                          //======================================= Cancel List =================================
+                          if (controller.tabSelectedIndex.value == 2)
+                            controller.appointMentList.isNotEmpty
+                                ? _showCancelList()
+                                : _emptyList(),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -221,74 +268,106 @@ class DoctorHomeScreen extends StatelessWidget {
   }
 
   _showMonthlyList() {
-    return Column(
-      children:
-          List.generate(controller.appointMentListMonthly.length, (index) {
-        var data = controller.appointMentListMonthly[index];
-        return CustomDoctorCard(
-          imageUrl: "${ApiUrl.imageBaseUrl}${data.userId?.img}",
-          patentName: data.userId?.name ?? '',
-          time: "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
-          loacation: data.appointmentType ?? '',
-          onTap: () => Get.toNamed(AppRoutes.patientDetails, arguments: data),
-          reScheduleButton: () =>
-              controller.showHomePopup(id: data.id.toString()),
-          timeTextColor: AppColors.blackO,
-        );
-      }),
+    return Expanded(
+      child: ListView.builder(
+          controller: controller.homescrollControloler.value,
+          padding: EdgeInsets.zero,
+          itemCount: controller.appointMentList.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            var data = controller.appointMentList[index];
+            if (!controller.isLoadMoreRunning.value) {
+              return CustomDoctorCard(
+                imageUrl: "${ApiUrl.imageBaseUrl}${data.userId?.img}",
+                patentName: data.userId?.name ?? '',
+                time:
+                    "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
+                loacation: data.appointmentType ?? '',
+                onTap: () =>
+                    Get.toNamed(AppRoutes.patientDetails, arguments: data),
+                reScheduleButton: () {
+                  Navigator.pop(context);
+                  controller.showHomePopup(id: data.id.toString());
+                },
+                timeTextColor: AppColors.blackO,
+              );
+            } else {
+              return const CustomLoader();
+            }
+          }),
     );
   }
 
   _showCompltedList() {
-    return Column(
-      children:
-          List.generate(controller.appointmentCompletedList.length, (index) {
-        var data = controller.appointmentCompletedList[index];
-        return CustomDoctorCard(
-          imageUrl: "${ApiUrl.imageBaseUrl}${data.userId?.img}",
-          patentName: data.userId?.name ?? '',
-          time: "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
-          loacation: data.appointmentType ?? '',
-          onTap: () => Get.toNamed(AppRoutes.patientDetails, arguments: data),
-          showPopupButton: false,
-          timeTextColor: AppColors.blackO,
-        );
-      }),
+    return Expanded(
+      child: ListView.builder(
+          controller: controller.homescrollControloler.value,
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          itemCount: controller.appointMentList.length,
+          itemBuilder: (context, index) {
+            var data = controller.appointMentList[index];
+            if (!controller.isLoadMoreRunning.value) {
+              return CustomDoctorCard(
+                imageUrl: "${ApiUrl.imageBaseUrl}${data.userId?.img}",
+                patentName: data.userId?.name ?? '',
+                time:
+                    "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
+                loacation: data.appointmentType ?? '',
+                onTap: () =>
+                    Get.toNamed(AppRoutes.patientDetails, arguments: data),
+                showPopupButton: false,
+                timeTextColor: AppColors.blackO,
+              );
+            } else {
+              return const CustomLoader();
+            }
+          }),
     );
   }
 
   _showCancelList() {
-    return Column(
-      children: [
-        SizedBox(height: 8.h),
-        CustomText(
-          text:
-              "${AppStrings.totalCancelation} ${controller.doctorOverview.value.totalAppointment?.rejected}",
-          fontSize: 14.w,
-          fontWeight: FontWeight.w500,
-          color: AppColors.blackNormal,
-        ),
-        SizedBox(height: 16.h),
-        Column(
-          children:
-              List.generate(controller.appointMentCalcelList.length, (index) {
-            var data = controller.appointMentCalcelList[index];
-            return CustomDoctorCard(
-              imageUrl: "${ApiUrl.imageBaseUrl}${data.userId?.img}",
-              patentName: data.userId?.name ?? '',
-              time:
-                  "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
-              loacation: data.appointmentType ?? '',
-              onTap: () {
-                var userdetails = controller.appointMentCalcelList[index];
-                Get.toNamed(AppRoutes.patientDetails, arguments: userdetails);
-              },
-              reScheduleButton: () {},
-              timeTextColor: AppColors.red,
-            );
-          }),
-        ),
-      ],
+    return Expanded(
+      child: Column(
+        children: [
+          SizedBox(height: 8.h),
+          CustomText(
+            text:
+                "${AppStrings.totalCancelation} ${controller.doctorOverview.value.totalAppointment?.rejected}",
+            fontSize: 14.w,
+            fontWeight: FontWeight.w500,
+            color: AppColors.blackNormal,
+          ),
+          SizedBox(height: 16.h),
+          ListView.builder(
+              controller: controller.homescrollControloler.value,
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              itemCount: controller.appointMentList.length,
+              itemBuilder: (context, index) {
+                var data = controller.appointMentList[index];
+                if (!controller.isLoadMoreRunning.value) {
+                  return CustomDoctorCard(
+                    imageUrl: "${ApiUrl.imageBaseUrl}${data.userId?.img}",
+                    patentName: data.userId?.name ?? '',
+                    time:
+                        "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
+                    loacation: data.appointmentType ?? '',
+                    onTap: () {
+                      var userdetails = controller.appointMentList[index];
+                      Get.toNamed(AppRoutes.patientDetails,
+                          arguments: userdetails);
+                    },
+                    reScheduleButton: () {},
+                    timeTextColor: AppColors.red,
+                    showPopupButton: false,
+                  );
+                } else {
+                  return const CustomLoader();
+                }
+              })
+        ],
+      ),
     );
   }
 
@@ -311,7 +390,11 @@ class DoctorHomeScreen extends StatelessWidget {
                 child: HomeSmallContainer(
                   onTap: () {
                     controller.scheduleTime.value = AppStrings.today;
-                    controller.getDoctorAcceptedAndTodayAppointment();
+                    controller.setType.value = AppStrings.todaySmall;
+                    controller.getAllDoctorAppointment(
+                      status: AppStrings.accepted,
+                      type: AppStrings.todaySmall,
+                    );
                   },
                   isActive: controller.scheduleTime.value == AppStrings.today,
                   title: AppStrings.today,
@@ -322,8 +405,12 @@ class DoctorHomeScreen extends StatelessWidget {
                 child: HomeSmallContainer(
                   onTap: () {
                     controller.scheduleTime.value = AppStrings.weekly;
-                    controller.getAllDoctorAppointmentWeeklyAndMonthy(
-                        AppStrings.weekly);
+
+                    controller.setType.value = AppStrings.weeklySmall;
+                    controller.getAllDoctorAppointment(
+                      status: AppStrings.accepted,
+                      type: AppStrings.weeklySmall,
+                    );
                   },
                   isActive: controller.scheduleTime.value == AppStrings.weekly,
                   title: AppStrings.weekly,
@@ -334,8 +421,12 @@ class DoctorHomeScreen extends StatelessWidget {
                 child: HomeSmallContainer(
                   onTap: () {
                     controller.scheduleTime.value = AppStrings.monthly;
-                    controller.getAllDoctorAppointmentWeeklyAndMonthy(
-                        AppStrings.monthly);
+
+                    controller.setType.value = AppStrings.monthlySmall;
+                    controller.getAllDoctorAppointment(
+                      status: AppStrings.accepted,
+                      type: AppStrings.monthlySmall,
+                    );
                   },
                   isActive: controller.scheduleTime.value == AppStrings.monthly,
                   title: AppStrings.monthly,

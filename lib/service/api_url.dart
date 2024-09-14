@@ -56,9 +56,13 @@ class ApiUrl {
   static const savePayment = '/payment/save-payment';
 
   ///=============================== Doctor Section ==============================
+  ///
   static const profile = '/auth/profile';
+
   //=============================== Appointment ===========================//
+
   static const doctorAppointment = '/appointment/get-my-appointments';
+
   //============================  Pending appointment =========================
 
   static const pendingDoctorAppointment = "$doctorAppointment?status=pending";
@@ -75,11 +79,13 @@ class ApiUrl {
   static const readAllNotification = '/notification/read-all';
 
   //============================= Change password ====================//
+
   static const changePassword = '/auth/change-password';
 
   //========================= update Doctor Profile =====================//
 
   static const updateDoctorProfile = '/auth/update-doctor/';
+
   //======================== Doctor Over view ========================//
 
   static const doctorOverveiw = '/overview/doctor-overview';
@@ -89,9 +95,24 @@ class ApiUrl {
   static const termsAndCondition = '/settings/get-settings/terms';
 
   //============================ privacy & policy =======================//
+
   static const privacyPolicy = '/settings/get-settings/privacy';
+
   //=============================== Update Appointment ===================================//
+
   static const updateAppointment = '/appointment/update-appointment/';
+
   //=========================== Doctor create payment account ==================//
+
   static const doctorCreatePaymentAccount = '/appointment/update-appointment/';
+  //=========================== Doctor payment history ==================//
+  static const doctorPaymentHistory = '/payment/user-payment-history';
+
+  //=========================== Doctor Home Type Status ==================//
+
+  static getAppointmentType({required String type, String page = '1'}) =>
+      "/appointment/get-my-appointments?page=$page&status=accepted&type=$type"; 
+
+       static getAppointmentPast({required String type, String page = '1'}) =>
+      "/appointment/get-my-appointments?page=$page&type=$type";
 }

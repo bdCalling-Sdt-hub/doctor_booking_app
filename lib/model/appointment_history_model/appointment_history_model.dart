@@ -7,9 +7,6 @@ import 'dart:convert';
 AppointmentHistoryModel appointmentHistoryModelFromJson(String str) =>
     AppointmentHistoryModel.fromJson(json.decode(str));
 
-String appointmentHistoryModelToJson(AppointmentHistoryModel data) =>
-    json.encode(data.toJson());
-
 class AppointmentHistoryModel {
   String? id;
   int? amount;
@@ -19,7 +16,9 @@ class AppointmentHistoryModel {
   RId? userId;
   bool? paymentDoctor;
   int? doctorAmount;
-  String? appointmentId;
+  AppointmentId? appointmentId;
+  String? createdAt;
+  String? updatedAt;
   int? v;
 
   AppointmentHistoryModel({
@@ -32,6 +31,8 @@ class AppointmentHistoryModel {
     this.paymentDoctor,
     this.doctorAmount,
     this.appointmentId,
+    this.createdAt,
+    this.updatedAt,
     this.v,
   });
 
@@ -46,21 +47,32 @@ class AppointmentHistoryModel {
         userId: json["userId"] == null ? null : RId.fromJson(json["userId"]),
         paymentDoctor: json["payment_doctor"],
         doctorAmount: json["doctor_amount"],
-        appointmentId: json["AppointmentId"],
+        appointmentId: json["AppointmentId"] == null
+            ? null
+            : AppointmentId.fromJson(json["AppointmentId"]),
+        createdAt: json["createdAt"],
+        updatedAt: json["updatedAt"],
         v: json["__v"],
+      );
+}
+
+class AppointmentId {
+  String? id;
+  DateTime? date;
+
+  AppointmentId({
+    this.id,
+    this.date,
+  });
+
+  factory AppointmentId.fromJson(Map<String, dynamic> json) => AppointmentId(
+        id: json["_id"],
+        date: json["date"] == null ? null : DateTime.parse(json["date"]),
       );
 
   Map<String, dynamic> toJson() => {
         "_id": id,
-        "amount": amount,
-        "transitionId": transitionId,
-        "status": status,
-        "doctorId": doctorId?.toJson(),
-        "userId": userId?.toJson(),
-        "payment_doctor": paymentDoctor,
-        "doctor_amount": doctorAmount,
-        "AppointmentId": appointmentId,
-        "__v": v,
+        "date": date?.toIso8601String(),
       };
 }
 
@@ -68,6 +80,7 @@ class RId {
   String? id;
   String? img;
   String? name;
+  int? appointmentFee;
   String? email;
   String? location;
   String? phone;
@@ -77,6 +90,7 @@ class RId {
     this.id,
     this.img,
     this.name,
+    this.appointmentFee,
     this.email,
     this.location,
     this.phone,
@@ -87,6 +101,7 @@ class RId {
         id: json["_id"],
         img: json["img"],
         name: json["name"],
+        appointmentFee: json["appointment_fee"],
         email: json["email"],
         location: json["location"],
         phone: json["phone"],
@@ -97,6 +112,7 @@ class RId {
         "_id": id,
         "img": img,
         "name": name,
+        "appointment_fee": appointmentFee,
         "email": email,
         "location": location,
         "phone": phone,

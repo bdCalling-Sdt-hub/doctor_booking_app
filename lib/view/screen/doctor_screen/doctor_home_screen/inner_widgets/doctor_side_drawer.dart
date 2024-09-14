@@ -46,6 +46,7 @@ class DoctorSideDrawer extends StatelessWidget {
                         title: AppStrings.appointmentHistory,
                         icon: AppIcons.appointmentSelected,
                         onTap: () {
+                          Navigator.pop(context);
                           Get.toNamed(AppRoutes.doctorAppointmentsHistory);
                         }),
 
@@ -54,6 +55,7 @@ class DoctorSideDrawer extends StatelessWidget {
                         title: AppStrings.termsAndConditions,
                         icon: AppIcons.terms,
                         onTap: () {
+                          Navigator.pop(context);
                           Get.toNamed(AppRoutes.termsAndConditionScreen);
                         }),
 
@@ -62,6 +64,7 @@ class DoctorSideDrawer extends StatelessWidget {
                         title: AppStrings.privacyPolicy,
                         icon: AppIcons.policy,
                         onTap: () {
+                          Navigator.pop(context);
                           Get.toNamed(AppRoutes.privacyPolicyScreen);
                         }),
 
@@ -70,6 +73,7 @@ class DoctorSideDrawer extends StatelessWidget {
                         title: AppStrings.paymentOption,
                         icon: AppIcons.addCard,
                         onTap: () {
+                          Navigator.pop(context);
                           Get.toNamed(AppRoutes.doctorPaymentScreen);
                         }),
 
@@ -78,6 +82,7 @@ class DoctorSideDrawer extends StatelessWidget {
                         title: AppStrings.settings,
                         icon: AppIcons.setting,
                         onTap: () {
+                          Navigator.pop(context);
                           Get.toNamed(AppRoutes.settingScreen);
                         }),
 
@@ -88,7 +93,7 @@ class DoctorSideDrawer extends StatelessWidget {
                     ///====================== Log Out======================>
                     GestureDetector(
                       onTap: () {
-                        Get.toNamed(AppRoutes.signInScreen);
+                        Get.offAllNamed(AppRoutes.signInScreen);
                       },
                       child: Row(
                         children: [

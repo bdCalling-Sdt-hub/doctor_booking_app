@@ -1,8 +1,9 @@
+import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_payment_screen/information_screen/inner_widget/Image_container.dart';
-import 'package:doctor_booking/view/screen/doctor_screen/doctor_payment_screen/payment_controller/payment_controller.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_payment_screen/payment_controller/doctor_payment_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
@@ -14,7 +15,8 @@ import 'package:get/get.dart';
 class InformationScreen extends StatelessWidget {
   InformationScreen({super.key});
 
-  final PaymentController paymentController = Get.find<PaymentController>();
+  final DoctorPaymentController paymentController =
+      Get.find<DoctorPaymentController>();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -269,7 +271,16 @@ class InformationScreen extends StatelessWidget {
                   //============================ Submit button =======================..
                   CustomButton(
                     onTap: () {
-                      if (formKey.currentState!.validate()) {}
+                      if (paymentController.frontImageFile.value != null &&
+                          paymentController.backImageFile.value != null) { 
+                             if (formKey.currentState!.validate()) { 
+                              
+                             }
+                      } else {
+                        showCustomSnackBar(
+                            "Please add both front and back image",
+                            isError: true);
+                      }
                     },
                     title: AppStrings.submit,
                   ),

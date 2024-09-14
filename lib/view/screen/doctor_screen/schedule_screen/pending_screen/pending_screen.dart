@@ -1,7 +1,6 @@
 import 'package:doctor_booking/helper/time_converter/time_converter.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_controller/doctor_home_controller.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/doctor_schedule_controller/doctor_schedule_controller.dart';
-import 'package:doctor_booking/model/doctor_appointment_model/appointment_model.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
@@ -14,7 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../../core/app_routes/app_routes.dart';
 import '../../../../../service/api_url.dart';
+import '../../../../widgets/custom_loader/custom_loader.dart';
 
 class PendingScreen extends StatelessWidget {
   PendingScreen({super.key});
@@ -24,44 +25,47 @@ class PendingScreen extends StatelessWidget {
   final DoctorHomeController homeController = Get.find<DoctorHomeController>();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: List.generate(
-        scheduleController.pendingAppointmentList.length,
-        (index) {
-          AppointmentModel model =
-              scheduleController.pendingAppointmentList[index];
-          return CustomDoctorPendingCard(
-            showPopupButton: false,
-            imageUrl: "${ApiUrl.imageBaseUrl}${model.userId?.img}",
-            patentName: model.userId?.name ?? '',
-            time:
-                "${DateConverter.formatDate(model.date ?? '')}(${model.time})",
-            loacation: model.userId?.location ?? '',
-            onTap: () {},
-            acceptButton: () {
-              if (model.id != null) {
-                scheduleController.appointmentStatusUpdate(
-                  status: AppStrings.accepted,
-                  appointmentId: model.id!,
-                );
-              }
-            },
-            rejectButton: () {
-              if (model.id != null) {
-                // scheduleController.appointmentStatusUpdate(
-                //     status: AppStrings.rejected, appointmentId: model.id!);
-
-                scheduleController.showRejectedPopup(id: model.id!);
-              }
-            },
-            rescheduleButton: () {
-              if (model.id != null) {
-                homeController.showHomePopup(id: model.id!);
-              }
-            },
-          );
-        },
-      ),
+    return Expanded(
+      child: ListView.builder(
+          controller: scheduleController.scrollController.value,
+          itemCount: scheduleController.appointmentList.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            final model = scheduleController.appointmentList[index];
+            if (!scheduleController.isLoadMoreRunning.value) {
+              return CustomDoctorPendingCard(
+                showPopupButton: false,
+                imageUrl: "${ApiUrl.imageBaseUrl}${model.userId?.img}",
+                patentName: model.userId?.name ?? '',
+                time:
+                    "${DateConverter.formatDate(model.date ?? '')}(${model.time})",
+                loacation: model.appointmentType ?? '',
+                onTap: () {
+                  Get.toNamed(AppRoutes.patientDetails, arguments: model);
+                },
+                acceptButton: () {
+                  if (model.id != null) {
+                    scheduleController.appointmentStatusUpdate(
+                      status: AppStrings.accepted,
+                      appointmentId: model.id!,
+                    );
+                  }
+                },
+                rejectButton: () {
+                  if (model.id != null) {
+                    scheduleController.showRejectedPopup(id: model.id!);
+                  }
+                },
+                rescheduleButton: () {
+                  if (model.id != null) {
+                    homeController.showHomePopup(id: model.id!);
+                  }
+                },
+              );
+            } else {
+              return const CustomLoader();
+            }
+          }),
     );
   }
 }
@@ -181,8 +185,8 @@ class CustomDoctorPendingCard extends StatelessWidget {
                           onTap: acceptButton ?? () {},
                           width: MediaQuery.sizeOf(context).width / 4,
                           title: AppStrings.accept,
-                          fillColor: AppColors.white,
-                          textColor: AppColors.green,
+                          fillColor: AppColors.blackNormal,
+                          textColor: AppColors.whiteNormal,
                           isBorder: true,
                         ),
                       ),
@@ -192,8 +196,8 @@ class CustomDoctorPendingCard extends StatelessWidget {
                           onTap: rejectButton ?? () {},
                           width: MediaQuery.sizeOf(context).width / 4,
                           title: AppStrings.reject,
-                          fillColor: AppColors.white,
-                          textColor: AppColors.red,
+                          fillColor: AppColors.blackNormal,
+                          textColor: AppColors.whiteNormal,
                           isBorder: true,
                         ),
                       ),
@@ -203,8 +207,8 @@ class CustomDoctorPendingCard extends StatelessWidget {
                           onTap: rescheduleButton ?? () {},
                           width: MediaQuery.sizeOf(context).width / 3,
                           title: AppStrings.reschedule,
-                          fillColor: AppColors.white,
-                          textColor: AppColors.bluNormalHover,
+                          fillColor: AppColors.blackNormal,
+                          textColor: AppColors.whiteNormal,
                           isBorder: true,
                         ),
                       )

@@ -158,6 +158,9 @@ class AppStrings {
   static const String upcoming = 'Upcoming';
   static const String past = 'Past';
 
+  static const String pastCapital = 'Past';
+
+
   static const String canceled = 'Canceled';
   static const String appointmentTime = 'Appointment Time:';
   static const String rescheduleAppointment = 'Reschedule Appointment';
@@ -223,9 +226,12 @@ class AppStrings {
   static const String totalBalance2 = 'Total Balance';
   static const String totalAppointment = 'Total \nAppointment';
   static const String totalAppointment2 = 'Total Appointment';
-  static const String today = 'Today';
   static const String weekly = 'Weekly';
+  static const String weeklySmall = 'weekly';
+  static const String today = 'Today';
+  static const String todaySmall = 'today';
   static const String monthly = 'Monthly';
+  static const String monthlySmall = 'monthly';
   static const String myAppointments = 'My appointments';
   static const String currentLocation = 'Current Location';
   static const String transectionHistory = 'Transection history';
