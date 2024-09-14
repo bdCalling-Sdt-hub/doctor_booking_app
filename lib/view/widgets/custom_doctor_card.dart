@@ -22,6 +22,7 @@ class CustomDoctorCard extends StatelessWidget {
     this.typeOnline,
     this.videoCallOrConsaltentDoneButton,
     this.showVideoCallOrConsalttentButton = false,
+    this.rescheduleButtonText,
   });
 
   final String imageUrl;
@@ -35,6 +36,7 @@ class CustomDoctorCard extends StatelessWidget {
   final bool? typeOnline;
   final VoidCallback? videoCallOrConsaltentDoneButton;
   final bool? showVideoCallOrConsalttentButton;
+  final String? rescheduleButtonText;
 
   @override
   Widget build(BuildContext context) {
@@ -146,8 +148,9 @@ class CustomDoctorCard extends StatelessWidget {
                             // row has two child icon and text.
                             child: InkWell(
                               onTap: reScheduleButton,
-                              child: const CustomText(
-                                text: AppStrings.reschedule,
+                              child: CustomText(
+                                text: rescheduleButtonText ??
+                                    AppStrings.reschedule,
                               ),
                             ),
                           ),

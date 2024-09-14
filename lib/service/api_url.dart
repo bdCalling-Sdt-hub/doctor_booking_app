@@ -107,7 +107,7 @@ class ApiUrl {
 
   //=========================== Doctor create payment account ==================//
 
-  static const doctorCreatePaymentAccount = '/appointment/update-appointment/';
+//  static const doctorCreatePaymentAccount = '/appointment/update-appointment/';
   //=========================== Doctor payment history ==================//
   static const doctorPaymentHistory = '/payment/user-payment-history';
 
@@ -118,4 +118,12 @@ class ApiUrl {
 
   static getAppointmentPast({required String type, String page = '1'}) =>
       "/appointment/get-my-appointments?page=$page&type=$type";
+
+  //=========================== Doctor create payment account ==================//
+
+  static const doctorCreatePaymentAccount = '/payment/create-connected-account';
+
+  //=================== Create doctor call history =======================//
+
+  static const createDoctorCallHistory = '/call/create-call-history';
 }

@@ -1,3 +1,4 @@
+import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_controller/doctor_home_controller.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_profile_controller/doctor_profile_controller.dart';
@@ -12,7 +13,6 @@ import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
 import 'package:doctor_booking/view/widgets/custom_tab_selected/custom_tab_selected.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:doctor_booking/view/widgets/doctor_nav_bar/doctor_nav_bar.dart';
-import 'package:doctor_booking/view/widgets/video_call/video_call.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -112,15 +112,14 @@ class ScheduleScreen extends StatelessWidget {
                           "${DateConverter.formatDate(model.date ?? '')}(${model.time})",
                       loacation: model.appointmentType ?? '',
                       onTap: () {
-                        debugPrint(
-                            "Doctor ID>>>>${model.doctorId} || Doctor name>>>>${profileController.profileModel.value.name} || Call ID ${model.id}");
-                        Get.to(() => AudioVideoCall(
-                              userID: model.doctorId ?? "",
-                              userName:
-                                  profileController.profileModel.value.name ??
-                                      "",
-                              callID: model.id ?? "",
-                            ));
+                        Get.toNamed(AppRoutes.patientDetails, arguments: model);
+                      },
+                      rescheduleButtonText: AppStrings.reject,
+                      reScheduleButton: () {
+                        Navigator.pop(context);
+                        if (model.id != null) {
+                          scheduleController.showRejectedPopup(id: model.id!);
+                        }
                       },
                     );
                   } else {

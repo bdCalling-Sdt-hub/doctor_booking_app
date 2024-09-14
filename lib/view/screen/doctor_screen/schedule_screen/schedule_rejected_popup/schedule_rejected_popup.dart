@@ -55,6 +55,7 @@ class ScheduleRejectedPopup extends StatelessWidget {
               child: CustomButton(
                 height: 40,
                 onTap: () {
+                  Navigator.pop(context);
                   scheduleController.appointmentStatusUpdate(
                       status: AppStrings.rejected,
                       appointmentId: appointmentId);
