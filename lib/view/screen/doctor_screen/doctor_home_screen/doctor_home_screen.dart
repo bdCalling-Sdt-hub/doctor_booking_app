@@ -124,7 +124,7 @@ class DoctorHomeScreen extends StatelessWidget {
                               textColor: AppColors.grayNormal,
                             );
                           }),
-                          SizedBox(height: 16.h),
+                          SizedBox(height: 10.h),
 
                           //====================================== Schedule List ====================================//
                           if (controller.tabSelectedIndex.value == 0)
@@ -357,33 +357,35 @@ class DoctorHomeScreen extends StatelessWidget {
             color: AppColors.blackNormal,
           ),
           SizedBox(height: 16.h),
-          ListView.builder(
-              controller: controller.homescrollControloler.value,
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              itemCount: controller.appointMentList.length,
-              itemBuilder: (context, index) {
-                var data = controller.appointMentList[index];
-                if (!controller.isLoadMoreRunning.value) {
-                  return CustomDoctorCard(
-                    imageUrl: "${ApiUrl.imageBaseUrl}${data.userId?.img}",
-                    patentName: data.userId?.name ?? '',
-                    time:
-                        "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
-                    loacation: data.appointmentType ?? '',
-                    onTap: () {
-                      var userdetails = controller.appointMentList[index];
-                      Get.toNamed(AppRoutes.patientDetails,
-                          arguments: userdetails);
-                    },
-                    reScheduleButton: () {},
-                    timeTextColor: AppColors.red,
-                    showPopupButton: false,
-                  );
-                } else {
-                  return const CustomLoader();
-                }
-              })
+          Expanded(
+            child: ListView.builder(
+                controller: controller.homescrollControloler.value,
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                itemCount: controller.appointMentList.length,
+                itemBuilder: (context, index) {
+                  var data = controller.appointMentList[index];
+                  if (!controller.isLoadMoreRunning.value) {
+                    return CustomDoctorCard(
+                      imageUrl: "${ApiUrl.imageBaseUrl}${data.userId?.img}",
+                      patentName: data.userId?.name ?? '',
+                      time:
+                          "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
+                      loacation: data.appointmentType ?? '',
+                      onTap: () {
+                        var userdetails = controller.appointMentList[index];
+                        Get.toNamed(AppRoutes.patientDetails,
+                            arguments: userdetails);
+                      },
+                      reScheduleButton: () {},
+                      timeTextColor: AppColors.red,
+                      showPopupButton: false,
+                    );
+                  } else {
+                    return const CustomLoader();
+                  }
+                }),
+          )
         ],
       ),
     );
