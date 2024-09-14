@@ -123,7 +123,8 @@ class AppointmentsScreen extends StatelessWidget {
                               debugPrint(
                                   "User ID>>>>${data.userId} || User name>>>>${profileController.profileData.value.name} || Call ID>>>${data.id}");
                               Get.to(() => AudioVideoCall(
-                                    userID: data.userId ?? "",
+                                    receiverId: data.doctorId?.id ?? "",
+                                    senderID: data.userId ?? "",
                                     userName: profileController
                                             .profileData.value.name ??
                                         "",
