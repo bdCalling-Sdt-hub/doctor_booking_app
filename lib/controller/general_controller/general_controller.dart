@@ -380,7 +380,27 @@ class GeneralController extends GetxController with GetxServiceMixin {
     } else {
       return false;
     }
+  } 
+
+ Future<void> createCallHistory(
+      {required String senderId, required String receiverId}) async {
+    Map<String, String> body = {
+      "doctorId": senderId,
+      "userId": receiverId,
+    };
+
+    var response = await ApiClient.postData(
+        ApiUrl.createDoctorCallHistory, jsonEncode(body));
+
+    if (response.statusCode == 200) {
+      debugPrint(
+          "===============Response body====================${response.body}");
+    } else {
+      ApiChecker.checkApi(response);
+    }
   }
+
+
 
   @override
   void onInit() {
