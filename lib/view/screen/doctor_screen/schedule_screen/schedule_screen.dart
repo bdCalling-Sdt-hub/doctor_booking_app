@@ -109,7 +109,7 @@ class ScheduleScreen extends StatelessWidget {
                       imageUrl: "${ApiUrl.imageBaseUrl}${model.userId?.img}",
                       patentName: model.userId?.name ?? '',
                       time:
-                          "${DateConverter.formatDate(model.date ?? '')}(${model.time})",
+                          "${DateConverter.timeFormetString(model.date ?? "")}(${model.time})",
                       loacation: model.appointmentType ?? '',
                       onTap: () {
                         debugPrint(
@@ -162,7 +162,7 @@ class ScheduleScreen extends StatelessWidget {
                       imageUrl: "${ApiUrl.imageBaseUrl}${model.userId?.img}",
                       patentName: model.userId?.name ?? '',
                       time:
-                          "${DateConverter.formatDate(model.date ?? '')}(${model.time})",
+                          "${DateConverter.timeFormetString(model.date ?? "")}(${model.time})",
                       loacation: model.appointmentType ?? '',
                       onTap: () {},
                       showPopupButton: true,

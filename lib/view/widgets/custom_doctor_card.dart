@@ -77,7 +77,7 @@ class CustomDoctorCard extends StatelessWidget {
                             ///==============name==========///
                             CustomText(
                               text: patentName,
-                              fontSize: 16.sp,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w400,
                               color: AppColors.grayNormal,
                               bottom: 3,
@@ -87,7 +87,7 @@ class CustomDoctorCard extends StatelessWidget {
                         //==============time=============//
                         CustomText(
                           text: time,
-                          fontSize: 14.sp,
+                          fontSize: 12.sp,
                           fontWeight: FontWeight.w400,
                           color: timeTextColor ?? AppColors.grayNormal,
                           bottom: 3,
@@ -108,7 +108,7 @@ class CustomDoctorCard extends StatelessWidget {
                                     .w), // Add spacing between location icon and text
                             CustomText(
                               text: loacation,
-                              fontSize: 12.sp,
+                              fontSize: 10.sp,
                               fontWeight: FontWeight.w400,
                               color: AppColors.whiteDarker,
                             ),

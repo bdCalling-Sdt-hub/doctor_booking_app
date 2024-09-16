@@ -38,7 +38,7 @@ class PendingScreen extends StatelessWidget {
                 imageUrl: "${ApiUrl.imageBaseUrl}${model.userId?.img}",
                 patentName: model.userId?.name ?? '',
                 time:
-                    "${DateConverter.formatDate(model.date ?? '')}(${model.time})",
+                    "${DateConverter.timeFormetString(model.date ?? "")}(${model.time})",
                 loacation: model.appointmentType ?? '',
                 onTap: () {
                   Get.toNamed(AppRoutes.patientDetails, arguments: model);
@@ -134,7 +134,7 @@ class CustomDoctorPendingCard extends StatelessWidget {
                         children: [
                           CustomText(
                             text: patentName,
-                            fontSize: 16.sp,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
                             color: AppColors.grayNormal,
                             bottom: 3,
@@ -142,7 +142,7 @@ class CustomDoctorPendingCard extends StatelessWidget {
                           //==============time=============//
                           CustomText(
                             text: time,
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w400,
                             color: timeTextColor ?? AppColors.grayNormal,
                             bottom: 3,
@@ -163,7 +163,7 @@ class CustomDoctorPendingCard extends StatelessWidget {
                                       .w), // Add spacing between location icon and text
                               CustomText(
                                 text: loacation,
-                                fontSize: 12.sp,
+                                fontSize: 10.sp,
                                 fontWeight: FontWeight.w400,
                                 color: AppColors.whiteDarker,
                               ),
