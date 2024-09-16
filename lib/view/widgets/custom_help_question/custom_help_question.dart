@@ -1,4 +1,5 @@
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
+import 'package:doctor_booking/view/screen/patient_screen/profile_screen/controller/profile_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_expanded_section/custom_expanded_section.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -6,16 +7,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CustomHelpQuestion extends StatelessWidget {
-  CustomHelpQuestion({super.key, required this.faqList});
+  CustomHelpQuestion({
+    super.key,
+  });
 
-  final List<Map<String, String>> faqList;
   final RxInt selectedFqw = 100000.obs;
+
+  final PaitentProfileController profileController =
+      Get.find<PaitentProfileController>();
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
       return Column(
-        children: List.generate(faqList.length, (index) {
+        children: List.generate(profileController.faqList.length, (index) {
+          var data = profileController.faqList[index];
           return Padding(
             padding: EdgeInsets.only(bottom: 15.h),
             child: Column(
@@ -42,7 +48,7 @@ class CustomHelpQuestion extends StatelessWidget {
                         Expanded(
                             child: CustomText(
                           textAlign: TextAlign.left,
-                          text: faqList[index]["que"]!,
+                          text: data.question ?? "",
                           fontWeight: FontWeight.w500,
                           maxLines: 2,
                         )),
@@ -87,7 +93,7 @@ class CustomHelpQuestion extends StatelessWidget {
                           ),
                           child: CustomText(
                             textAlign: TextAlign.left,
-                            text: faqList[index]["ans"]!,
+                            text: data.answer ?? "",
                             maxLines: 6,
                           ),
                         ))

@@ -40,6 +40,9 @@ class ApiUrl {
   static const favourite = '/favorite/add-remove-favorite';
   static const getFavourite = '/favorite/get-favorite-doctors?limit=100&page=1';
 
+  //============ FAQ ==========
+  static getFAQ({String search = ""}) => '/faq/get-faqs?search=$search';
+
   //============ Appoinment ==========
   static bookAppoinment({required String docId}) =>
       'appointment/update-appointment-status/$docId';
