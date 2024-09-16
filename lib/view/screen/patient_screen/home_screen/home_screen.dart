@@ -164,8 +164,8 @@ class HomeScreen extends StatelessWidget {
                     ///=================================PopularSpecialist Section==================
                     CustomRow(
                       onTap: () {
-                        Get.toNamed(AppRoutes.popularSpecialistsScreen,
-                            arguments: AppStrings.popularSpecialist);
+                        Get.toNamed(AppRoutes.specialistList,
+                            arguments: [AppStrings.popularSpecialist, true]);
                       },
                       title: AppStrings.popularSpecialist,
                       subtitle: AppStrings.viewAll,
@@ -177,7 +177,10 @@ class HomeScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: List.generate(
-                            homeController.popularDoctorList.length, (index) {
+                            homeController.popularDoctorList.length > 9
+                                ? 9
+                                : homeController.popularDoctorList.length,
+                            (index) {
                           var data = homeController.popularDoctorList[index];
                           return GestureDetector(
                             onTap: () {
@@ -214,8 +217,10 @@ class HomeScreen extends StatelessWidget {
                     ///=================================recommendedSpecialist Section==================
                     CustomRow(
                       onTap: () {
-                        Get.toNamed(AppRoutes.popularSpecialistsScreen,
-                            arguments: AppStrings.recommendedSpecialist);
+                        Get.toNamed(AppRoutes.specialistList, arguments: [
+                          AppStrings.recommendedSpecialist,
+                          false
+                        ]);
                       },
                       title: AppStrings.recommendedSpecialist,
                       subtitle: AppStrings.viewAll,
@@ -227,7 +232,9 @@ class HomeScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: List.generate(
-                            homeController.recomemdedDoctorList.length,
+                            homeController.recomemdedDoctorList.length > 9
+                                ? 9
+                                : homeController.recomemdedDoctorList.length,
                             (index) {
                           var data = homeController.recomemdedDoctorList[index];
                           return GestureDetector(

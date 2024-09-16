@@ -20,8 +20,8 @@ class ApiUrl {
 
   static const category = '/category';
   static const banner = '/banner/get-banners';
-  static const popularDoc = '/doctors/popular-doctors';
-  static const recomendedDoc = '/doctors/recommended-doctors';
+  static const popularDoc = '/doctors/popular-doctors?limit=30&page=1';
+  static const recomendedDoc = '/doctors/recommended-doctors?limit=30&page=1';
   static reviews({required String id}) => '/review/get-reviews?receiverId=$id';
 
   //=========== All Doctors ==========

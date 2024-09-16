@@ -68,14 +68,12 @@ class CategoriesScreen extends StatelessWidget {
 
                   ///===============================name================
                   CustomText(
+                    maxLines: 2,
                     text: data.name ?? "",
                     color: AppColors.grayNormal,
                     fontWeight: FontWeight.w500,
-                    fontSize: 14,
+                    fontSize: 10.w,
                   ),
-                  SizedBox(
-                    height: 8.h, // Adjusted bottom space
-                  )
                 ],
               );
             },
