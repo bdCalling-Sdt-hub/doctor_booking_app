@@ -1,4 +1,5 @@
 import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
+import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:flutter/foundation.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
@@ -22,7 +23,7 @@ class SocketApi {
       return;
     }
     socket = io.io(
-      "http://103.161.9.133:5000?userId=$userId",
+      ApiUrl.socketUrl(userID: userId),
       io.OptionBuilder().setTransports(['websocket']).build(),
     );
 

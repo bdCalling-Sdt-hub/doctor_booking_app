@@ -1,8 +1,7 @@
 class ApiUrl {
   static const baseUrl = "http://103.161.9.133:5000";
-  static const imageBaseUrl = 'http://103.161.9.133:5000/';
-  static const socketUrl =
-      'http://103.161.9.133:5000?userId=66d7efd8ca187e791dac4758';
+  static const imageBaseUrl = '$baseUrl/';
+  static socketUrl({String userID = ""}) => '$baseUrl?userId=$userID';
 
   static const stripePublicKey =
       "pk_test_51PvZAIRv9ouTNUmHJAe3Sl0oUW8zqon9fr5jb6J5B5bDmSVWmb8DVtuUTQUry4SXLCtZSKugavb72wW6bzNjsm3T00C83N7lLB";
