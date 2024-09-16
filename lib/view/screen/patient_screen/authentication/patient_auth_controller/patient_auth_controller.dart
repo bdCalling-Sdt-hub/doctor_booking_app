@@ -35,6 +35,8 @@ class PatientAuthController extends GetxController {
     "Neurologist",
   ].obs;
 
+  ///============== TODO CHOOSE INTEREST LIST
+
   RxList<bool> isSelectedList = <bool>[
     false,
     false,
@@ -45,6 +47,7 @@ class PatientAuthController extends GetxController {
     false,
   ].obs;
   RxList<String> selectedInterested = <String>[].obs;
+
   updateInterest({required int index}) async {
     isSelectedList[index] = !isSelectedList[index];
     isSelectedList.refresh();
@@ -116,6 +119,8 @@ class PatientAuthController extends GetxController {
       "phone": patientPhoneNumberController.value.text,
       "confirm_password": patientConfirmPasswordController.value.text,
       "password": patientPasswordController.value.text,
+      //TODO Update this AGE
+      "age": "24"
       //"role": "USER"
     };
 

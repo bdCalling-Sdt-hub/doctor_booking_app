@@ -98,7 +98,8 @@ class CustomAppointmentCard extends StatelessWidget {
                   ],
                 ),
               ),
-              if (trailing != null) trailing!,
+              //TODO.....Cancel Schedule
+              // if (trailing != null) trailing!,
             ],
           ),
           Row(

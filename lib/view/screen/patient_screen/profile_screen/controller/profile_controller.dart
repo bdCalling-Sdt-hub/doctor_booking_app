@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
+import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
@@ -216,6 +217,18 @@ class PaitentProfileController extends GetxController {
       }
       ApiChecker.checkApi(response);
     }
+  }
+
+  ///======================= Log Out =====================
+  logOut() {
+    SharePrefsHelper.remove(AppConstants.userImage);
+    SharePrefsHelper.remove(AppConstants.userId);
+    SharePrefsHelper.remove(AppConstants.bearerToken);
+    SharePrefsHelper.remove(AppConstants.profileID);
+    SharePrefsHelper.remove(AppConstants.id);
+    SharePrefsHelper.remove(AppConstants.userStatus);
+
+    Get.offAllNamed(AppRoutes.signInScreen);
   }
 
   @override

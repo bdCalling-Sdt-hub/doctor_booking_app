@@ -1,13 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPreferenceValue {
-  static const String searchHistory = "searchHistory";
-  static const String token = "token";
-  static const String email = "email";
-  static const String isRemember = "isRemember";
-  static const String isOnboarding = "isOnboarding";
-}
-
 class SharePrefsHelper {
   //===========================Get Data From Shared Preference===================
 

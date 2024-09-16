@@ -102,7 +102,7 @@ class _PatientNavBarState extends State<PatientNavBar> {
     } else if (index == 3 && widget.currentIndex != 3) {
       Get.to(() => AppointmentsScreen());
     } else if (index == 4 && widget.currentIndex != 4) {
-      Get.to(() => const ProfileScreen());
+      Get.to(() => ProfileScreen());
     }
   }
 }

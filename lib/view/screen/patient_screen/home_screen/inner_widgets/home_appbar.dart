@@ -49,7 +49,7 @@ class HomeAppBar extends StatelessWidget {
                   ///==================== Profile =====================
                   GestureDetector(
                     onTap: () {
-                      Get.to(() => const ProfileScreen());
+                      Get.to(() => ProfileScreen());
                     },
                     child: CustomNetworkImage(
                         boxShape: BoxShape.circle,

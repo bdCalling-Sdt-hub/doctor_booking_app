@@ -2,6 +2,7 @@ import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/profile_screen/controller/profile_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_profile_card/custom_profile_card.dart';
 import 'package:doctor_booking/view/widgets/patient_nav_bar/patient_nav_bar.dart';
@@ -9,8 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
 
+  final PaitentProfileController profileController =
+      Get.find<PaitentProfileController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +70,7 @@ class ProfileScreen extends StatelessWidget {
                 text: AppStrings.logOut,
                 leadingIcon: AppIcons.logOut,
                 onTap: () {
-                  Get.toNamed(AppRoutes.signInScreen);
+                  profileController.logOut();
                 },
                 isCevron: true),
           ],

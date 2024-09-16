@@ -32,7 +32,7 @@ class SocketApi {
     // Listen for socket connection
     socket.onConnect((_) {
       debugPrint(
-          '==============>>>>>>> Socket Connected ${socket.connected}===============<<<<<<<');
+          '==============>>>>>>> Socket Connected ${socket.connected} ===============<<<<<<<');
     });
 
     // Listen for unauthorized events
@@ -47,7 +47,7 @@ class SocketApi {
 
     // Listen for disconnection
     socket.onDisconnect((dynamic data) {
-      debugPrint('Socket instance disconnected');
+      debugPrint('>>>>>>>>>> Socket instance disconnected <<<<<<<<<<<<$data');
     });
   }
 
