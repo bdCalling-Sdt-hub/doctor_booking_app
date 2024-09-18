@@ -23,6 +23,8 @@ class CustomDoctorCard extends StatelessWidget {
     this.videoCallOrConsaltentDoneButton,
     this.showVideoCallOrConsalttentButton = false,
     this.rescheduleButtonText,
+    this.showPaymentOption = false,
+    this.paymentStatus = false,
   });
 
   final String imageUrl;
@@ -37,6 +39,8 @@ class CustomDoctorCard extends StatelessWidget {
   final VoidCallback? videoCallOrConsaltentDoneButton;
   final bool? showVideoCallOrConsalttentButton;
   final String? rescheduleButtonText;
+  final bool? showPaymentOption;
+  final bool? paymentStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -114,9 +118,34 @@ class CustomDoctorCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 8.h,
-                        ),
+                        showPaymentOption!
+                            ? Row(
+                                children: [
+                                  CustomText(
+                                    text: AppStrings.paymentStatus,
+                                    fontSize: 10.w,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColors.whiteDarker,
+                                  ),
+                                  SizedBox(
+                                    width: 4.w,
+                                  ),
+                                  paymentStatus!
+                                      ? CustomText(
+                                          text: AppStrings.paid,
+                                          fontSize: 10.w,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.bluNormalHover,
+                                        )
+                                      : CustomText(
+                                          text: AppStrings.notPaid,
+                                          fontSize: 10.w,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.red,
+                                        ),
+                                ],
+                              )
+                            : const SizedBox(),
 
                         ///======================= Video Call =======================
                         showVideoCallOrConsalttentButton!

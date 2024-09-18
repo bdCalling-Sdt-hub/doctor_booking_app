@@ -12,11 +12,11 @@ import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
 import 'package:doctor_booking/view/widgets/custom_tab_selected/custom_tab_selected.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:doctor_booking/view/widgets/doctor_nav_bar/doctor_nav_bar.dart';
-import 'package:doctor_booking/view/widgets/video_call/video_call.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/app_routes/app_routes.dart';
 import '../../../../helper/time_converter/time_converter.dart';
 
 class ScheduleScreen extends StatelessWidget {
@@ -112,17 +112,7 @@ class ScheduleScreen extends StatelessWidget {
                           "${DateConverter.timeFormetString(model.date ?? "")}(${model.time})",
                       loacation: model.appointmentType ?? '',
                       onTap: () {
-                        debugPrint(
-                            "Doctor ID>>>>${model.doctorId} || Doctor name>>>>${profileController.profileModel.value.name} || Call ID ${model.id}");
-                        Get.to(() => AudioVideoCall(
-                              senderID: model.doctorId ?? "",
-                              userName:
-                                  profileController.profileModel.value.name ??
-                                      "",
-                              callID: model.id ?? "",
-                              receiverId: model.userId?.id ?? "",
-                            ));
-                        // Get.toNamed(AppRoutes.patientDetails, arguments: model);
+                        Get.toNamed(AppRoutes.patientDetails, arguments: model);
                       },
                       rescheduleButtonText: AppStrings.reject,
                       reScheduleButton: () {
@@ -131,6 +121,13 @@ class ScheduleScreen extends StatelessWidget {
                           scheduleController.showRejectedPopup(id: model.id!);
                         }
                       },
+                      showPaymentOption: true,
+                      paymentStatus: model.paymentStatus,
+                      showPopupButton: model.paymentStatus == null
+                          ? false
+                          : model.paymentStatus!
+                              ? false
+                              : true,
                     );
                   } else {
                     return const CustomLoader();

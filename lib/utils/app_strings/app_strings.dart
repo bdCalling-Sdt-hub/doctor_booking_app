@@ -158,6 +158,7 @@ class AppStrings {
   static const String upcoming = 'Upcoming';
   static const String past = 'Past';
   static const String reScheduleReq = 'has requested for a re-schedule';
+  static const String waitingForApproval = 'Waiting for patient approval!';
 
   static const String pastCapital = 'Past';
 
@@ -171,6 +172,10 @@ class AppStrings {
 
   static const String accept = 'Accept';
   static const String reject = 'Reject';
+  static const String paymentStatus = 'Payment Status :';
+
+  static const String notPaid = 'Not Paid';
+  static const String paid = 'Paid';
 
   ///=============================Profile===================
   static const String profile = 'Profile';

@@ -61,6 +61,7 @@ class PendingScreen extends StatelessWidget {
                     homeController.showHomePopup(id: model.id!);
                   }
                 },
+                rescheduleDone: model.reSchedule ?? false,
               );
             } else {
               return const CustomLoader();
@@ -84,6 +85,7 @@ class CustomDoctorPendingCard extends StatelessWidget {
     this.acceptButton,
     this.rejectButton,
     this.rescheduleButton,
+    required this.rescheduleDone,
   });
 
   final String imageUrl;
@@ -97,6 +99,7 @@ class CustomDoctorPendingCard extends StatelessWidget {
   final VoidCallback? acceptButton;
   final VoidCallback? rejectButton;
   final VoidCallback? rescheduleButton;
+  final bool rescheduleDone;
 
   @override
   Widget build(BuildContext context) {
@@ -114,6 +117,7 @@ class CustomDoctorPendingCard extends StatelessWidget {
           child: Stack(
             children: [
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,6 +173,15 @@ class CustomDoctorPendingCard extends StatelessWidget {
                               ),
                             ],
                           ),
+                          rescheduleDone
+                              ? CustomText(
+                                  textAlign: TextAlign.start,
+                                  text: AppStrings.waitingForApproval,
+                                  fontSize: 10.w,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.red,
+                                )
+                              : const SizedBox(),
                         ],
                       ),
                     ],
@@ -176,44 +189,46 @@ class CustomDoctorPendingCard extends StatelessWidget {
                   SizedBox(
                     height: 12.h,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: CustomButton(
-                          height: 40,
-                          onTap: acceptButton ?? () {},
-                          width: MediaQuery.sizeOf(context).width / 4,
-                          title: AppStrings.accept,
-                          fillColor: AppColors.blackNormal,
-                          textColor: AppColors.whiteNormal,
-                          isBorder: true,
-                        ),
-                      ),
-                      Flexible(
-                        child: CustomButton(
-                          height: 40,
-                          onTap: rejectButton ?? () {},
-                          width: MediaQuery.sizeOf(context).width / 4,
-                          title: AppStrings.reject,
-                          fillColor: AppColors.blackNormal,
-                          textColor: AppColors.whiteNormal,
-                          isBorder: true,
-                        ),
-                      ),
-                      Flexible(
-                        child: CustomButton(
-                          height: 40,
-                          onTap: rescheduleButton ?? () {},
-                          width: MediaQuery.sizeOf(context).width / 3,
-                          title: AppStrings.reschedule,
-                          fillColor: AppColors.blackNormal,
-                          textColor: AppColors.whiteNormal,
-                          isBorder: true,
-                        ),
-                      )
-                    ],
-                  )
+                  !rescheduleDone
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              child: CustomButton(
+                                height: 40,
+                                onTap: acceptButton ?? () {},
+                                width: MediaQuery.sizeOf(context).width / 4,
+                                title: AppStrings.accept,
+                                fillColor: AppColors.blackNormal,
+                                textColor: AppColors.whiteNormal,
+                                isBorder: true,
+                              ),
+                            ),
+                            Flexible(
+                              child: CustomButton(
+                                height: 40,
+                                onTap: rejectButton ?? () {},
+                                width: MediaQuery.sizeOf(context).width / 4,
+                                title: AppStrings.reject,
+                                fillColor: AppColors.blackNormal,
+                                textColor: AppColors.whiteNormal,
+                                isBorder: true,
+                              ),
+                            ),
+                            Flexible(
+                              child: CustomButton(
+                                height: 40,
+                                onTap: rescheduleButton ?? () {},
+                                width: MediaQuery.sizeOf(context).width / 3,
+                                title: AppStrings.reschedule,
+                                fillColor: AppColors.blackNormal,
+                                textColor: AppColors.whiteNormal,
+                                isBorder: true,
+                              ),
+                            )
+                          ],
+                        )
+                      : const SizedBox(),
                 ],
               ),
               showPopupButton!
