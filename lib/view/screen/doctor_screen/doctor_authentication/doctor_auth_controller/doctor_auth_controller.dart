@@ -248,6 +248,7 @@ class DoctorAuthController extends GetxController {
       "current_affiliation": affiliationController.value.text,
       "appointment_fee": appointmentFeeController.value.text,
       "license_no": licenceNoController.value.text,
+      "desc": professionalDiscriptionController.value.text
     };
 
     // Create the multipart data for the license image
@@ -297,7 +298,7 @@ class DoctorAuthController extends GetxController {
         isError: false,
       );
 
-      Get.offAllNamed(AppRoutes.doctorHomeScreen);
+      Get.offAllNamed(AppRoutes.signInScreen);
       debugPrint("============================= Sucsses=================");
     } else {
       navigator?.pop();

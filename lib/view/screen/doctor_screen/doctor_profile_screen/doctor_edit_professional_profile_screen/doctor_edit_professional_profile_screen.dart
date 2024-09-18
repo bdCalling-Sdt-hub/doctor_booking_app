@@ -57,13 +57,8 @@ class DoctorEditProfessionalProfileScreen extends StatelessWidget {
 
                       doctorProfileController.licenseImage.value == null
                           ? DoctorEditLicenseNetworkImage(
-                              imageSrc: doctorProfileController
-                                      .profileModel.value.license!
-                                      .startsWith('http')
-                                  ? doctorProfileController
-                                          .profileModel.value.license ??
-                                      ''
-                                  : "${ApiUrl.imageBaseUrl}${doctorProfileController.profileModel.value.license}",
+                              imageSrc:
+                                  "${ApiUrl.imageBaseUrl}${doctorProfileController.profileModel.value.img}",
                               onTap: () {
                                 doctorProfileController.getDoctorLicenseImage();
                               },

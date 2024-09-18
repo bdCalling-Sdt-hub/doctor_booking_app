@@ -247,14 +247,38 @@ class DateConverter {
     String formattedDate = DateFormat('dd-MM-yyyy').format(parsedDate);
 
     return formattedDate;
-  } 
- static String formatTime(String input) {
-  // Parse the input string into a DateTime object
-  DateTime dateTime = DateTime.parse(input).toLocal(); // Convert to local timezone if needed
+  }
 
-  // Format the DateTime into the desired time format (e.g., 10:00 PM)
-  String formattedTime = DateFormat('hh:mm a').format(dateTime);
+  static String formatTime(String input) {
+    // Parse the input string into a DateTime object
+    DateTime dateTime =
+        DateTime.parse(input).toLocal(); // Convert to local timezone if needed
 
-  return formattedTime;
-}
+    // Format the DateTime into the desired time format (e.g., 10:00 PM)
+    String formattedTime = DateFormat('hh:mm a').format(dateTime);
+
+    return formattedTime;
+  }
+
+  static String formatCallsDateTime(String dateTimeString) {
+    // Parse the incoming DateTime string to a DateTime object
+    DateTime inputDate =
+        DateTime.parse(dateTimeString).toLocal(); // Convert to local time
+    DateTime now = DateTime.now();
+    DateTime today = DateTime(now.year, now.month, now.day);
+    DateTime yesterday = today.subtract(Duration(days: 1));
+
+    DateFormat timeFormat =
+        DateFormat('hh:mm a'); // Format for time (e.g., 08:30 PM)
+    DateFormat dateFormat =
+        DateFormat('dd MMM yyyy'); // Format for date (e.g., 18 Sep 2024)
+
+    if (inputDate.isAfter(today)) {
+      return 'Today (${timeFormat.format(inputDate)})';
+    } else if (inputDate.isAfter(yesterday) && inputDate.isBefore(today)) {
+      return 'Yesterday (${timeFormat.format(inputDate)})';
+    } else {
+      return '${dateFormat.format(inputDate)} (${timeFormat.format(inputDate)})';
+    }
+  }
 }

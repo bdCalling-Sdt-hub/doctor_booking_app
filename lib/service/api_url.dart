@@ -128,4 +128,8 @@ class ApiUrl {
   //=================== Create doctor call history =======================//
 
   static const createDoctorCallHistory = '/call/create-call-history';
+
+  static getDoctorCallHistory({String page = '1'}) =>
+      "/call/get-call-history?page=$page";
+
 }
