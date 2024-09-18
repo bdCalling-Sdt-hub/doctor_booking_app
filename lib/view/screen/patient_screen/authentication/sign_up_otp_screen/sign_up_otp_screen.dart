@@ -8,12 +8,25 @@ import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class SignUpOtpScreen extends StatelessWidget {
+class SignUpOtpScreen extends StatefulWidget {
+  const SignUpOtpScreen({super.key});
+
+  @override
+  State<SignUpOtpScreen> createState() => _SignUpOtpScreenState();
+}
+
+class _SignUpOtpScreenState extends State<SignUpOtpScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  SignUpOtpScreen({super.key});
-
   final PatientAuthController controller = Get.find<PatientAuthController>();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.startTimer();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +114,9 @@ class SignUpOtpScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.topRight,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    controller.resendOtp();
+                  },
                   child: CustomText(
                     text: controller.secondsRemaining.value == 0
                         ? "Resend OTP".tr

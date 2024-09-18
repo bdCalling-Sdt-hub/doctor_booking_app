@@ -266,7 +266,8 @@ class GeneralController extends GetxController with GetxServiceMixin {
 
   ///========================== Get Category ==========================
   RxList<CategoryDatum> categoryList = <CategoryDatum>[].obs;
-
+  RxList<bool> categoryBool = <bool>[].obs;
+  RxList<String> selectedInterest = <String>[].obs;
   getCategory() async {
     // categoryLoadingMethod(Status.loading);
 
@@ -292,10 +293,25 @@ class GeneralController extends GetxController with GetxServiceMixin {
     if (categoryList.isNotEmpty) {
       for (int i = 0; i < categoryList.length; i++) {
         categoryListName.add(categoryList[i].name!);
+        categoryBool.add(false);
       }
     }
   }
 
+  updateInterest({required String interest, required int index}) {
+    if (selectedInterest.contains(interest)) {
+      selectedInterest.remove(interest);
+    } else {
+      selectedInterest.add(interest);
+    }
+
+    categoryBool[index] = !categoryBool[index];
+
+    categoryBool.refresh();
+    selectedInterest.refresh();
+
+    debugPrint("Selected Interest List========>>>>>>>>>$selectedInterest");
+  }
 //================== Update Appoinment =================
 
   Future<bool> updateAppoinment(
@@ -313,9 +329,9 @@ class GeneralController extends GetxController with GetxServiceMixin {
       navigator?.pop();
       return false;
     }
-  } 
+  }
 
- Future<void> createCallHistory(
+  Future<void> createCallHistory(
       {required String senderId, required String receiverId}) async {
     Map<String, String> body = {
       "doctorId": senderId,
@@ -332,8 +348,6 @@ class GeneralController extends GetxController with GetxServiceMixin {
       ApiChecker.checkApi(response);
     }
   }
-
-
 
   @override
   void onInit() {

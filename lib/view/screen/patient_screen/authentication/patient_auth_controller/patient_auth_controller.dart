@@ -25,42 +25,26 @@ class PatientAuthController extends GetxController {
       TextEditingController(text: kDebugMode ? "1234567" : "");
 
   ///=================== Update Interest ===================
-  RxList<String> interestList = [
-    "Cardiologists",
-    "Endocrinologists",
-    "Nephrologists",
-    "Dermatologist",
-    "Gynecologists",
-    "Hematologists",
-    "Neurologist",
-  ].obs;
 
-  ///============== TODO CHOOSE INTEREST LIST
+  updateInterest() async {
+    generalController.showPopUpLoader();
+    Map<String, dynamic> body = {
+      // ignore: invalid_use_of_protected_member
+      "category": jsonEncode(generalController.selectedInterest.value),
+    };
 
-  RxList<bool> isSelectedList = <bool>[
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ].obs;
-  RxList<String> selectedInterested = <String>[].obs;
+    var response = await ApiClient.patchData(ApiUrl.updateProfile, body,
+        isContentType: false
+        //headers: {'Content-Type': 'application/json'},
+        );
 
-  updateInterest({required int index}) async {
-    isSelectedList[index] = !isSelectedList[index];
-    isSelectedList.refresh();
-
-    String selectedItem = interestList[index]; // Safely retrieve the item
-
-    if (selectedInterested.contains(selectedItem)) {
-      selectedInterested.remove(selectedItem);
+    if (response.statusCode == 200) {
+      navigator?.pop();
+      Get.offAllNamed(AppRoutes.homeScreen);
     } else {
-      selectedInterested.add(selectedItem);
+      navigator?.pop();
+      ApiChecker.checkApi(response);
     }
-    selectedInterested.refresh();
-    interestList.refresh();
   }
 
   ///======================== sign in method =====================///
@@ -119,9 +103,7 @@ class PatientAuthController extends GetxController {
       "phone": patientPhoneNumberController.value.text,
       "confirm_password": patientConfirmPasswordController.value.text,
       "password": patientPasswordController.value.text,
-      //TODO Update this AGE
-      "age": "24"
-      //"role": "USER"
+      "role": "USER"
     };
 
     var response = await ApiClient.postData(
@@ -140,7 +122,7 @@ class PatientAuthController extends GetxController {
 
   ///======================== Verify OTP Paitent ====================
   ///=============================== Verify OTP Sign Up =============================
-  RxInt secondsRemaining = 3.obs;
+  RxInt secondsRemaining = 30.obs;
   late Timer timer;
 
   void startTimer() {
@@ -161,15 +143,19 @@ class PatientAuthController extends GetxController {
       "email": patientEmailController.value.text,
       "code": otp.value,
     };
-    var response =
-        await ApiClient.postData(ApiUrl.varifyCode, body, isContentType: false);
+    var response = await ApiClient.postData(ApiUrl.varifyCode, jsonEncode(body),
+        isContentType: false,
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Authorization': 'Bearer $bearerToken'
+        });
 
     if (response.statusCode == 200) {
       navigator?.pop();
       SharePrefsHelper.setString(
-          AppConstants.bearerToken, response.body["accessToken"]);
+          AppConstants.bearerToken, response.body["token"]);
 
-      Get.offAllNamed(AppRoutes.homeScreen);
+      Get.offAllNamed(AppRoutes.selectInterest);
     } else {
       navigator?.pop();
       toastMessage(message: response.body["message"]);
@@ -230,5 +216,29 @@ class PatientAuthController extends GetxController {
         AppConstants.userImage, response.body["data"]["img"] ?? "");
 
     generalController.getSavedInfo();
+  }
+
+  ///=================== Resend OTP ====================
+  resendOtp() async {
+    generalController.showPopUpLoader();
+    Map<String, String> body = {
+      "email": patientEmailController.value.text,
+    };
+
+    var response = await ApiClient.postData(
+      ApiUrl.resendCode,
+      jsonEncode(body),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      secondsRemaining.value = 30;
+      secondsRemaining.refresh();
+      startTimer();
+      navigator?.pop();
+    } else {
+      navigator?.pop();
+      ApiChecker.checkApi(response);
+    }
   }
 }
