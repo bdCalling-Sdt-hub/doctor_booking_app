@@ -131,7 +131,8 @@ class AppointmentsScreen extends StatelessWidget {
                                         "",
                                     callID: data.id ?? "",
                                   ));
-                            } else if (data.reSchedule ?? false) {
+                            } else if (data.reSchedule! &&
+                                data.paymentStatus == false) {
                               bool complete =
                                   await generalController.updateAppoinment(
                                       appoinmentID: data.id ?? "",
