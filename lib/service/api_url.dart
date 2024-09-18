@@ -1,8 +1,7 @@
 class ApiUrl {
   static const baseUrl = "http://103.161.9.133:5000";
-  static const imageBaseUrl = 'http://103.161.9.133:5000/';
-  static const socketUrl =
-      'http://103.161.9.133:5000?userId=66d7efd8ca187e791dac4758';
+  static const imageBaseUrl = '$baseUrl/';
+  static socketUrl({String userID = ""}) => '$baseUrl?userId=$userID';
 
   static const stripePublicKey =
       "pk_test_51PvZAIRv9ouTNUmHJAe3Sl0oUW8zqon9fr5jb6J5B5bDmSVWmb8DVtuUTQUry4SXLCtZSKugavb72wW6bzNjsm3T00C83N7lLB";
@@ -20,8 +19,8 @@ class ApiUrl {
 
   static const category = '/category';
   static const banner = '/banner/get-banners';
-  static const popularDoc = '/doctors/popular-doctors';
-  static const recomendedDoc = '/doctors/recommended-doctors';
+  static const popularDoc = '/doctors/popular-doctors?limit=30&page=1';
+  static const recomendedDoc = '/doctors/recommended-doctors?limit=30&page=1';
   static reviews({required String id}) => '/review/get-reviews?receiverId=$id';
 
   //=========== All Doctors ==========
@@ -40,9 +39,12 @@ class ApiUrl {
   static const favourite = '/favorite/add-remove-favorite';
   static const getFavourite = '/favorite/get-favorite-doctors?limit=100&page=1';
 
+  //============ FAQ ==========
+  static getFAQ({String search = ""}) => '/faq/get-faqs?search=$search';
+
   //============ Appoinment ==========
   static bookAppoinment({required String docId}) =>
-      'appointment/update-appointment-status/$docId';
+      '/appointment/create-appointment/$docId';
 
   static getAppoinments({required String status, String page = "1"}) =>
       "/appointment/get-my-appointments?page=$page&status=$status";

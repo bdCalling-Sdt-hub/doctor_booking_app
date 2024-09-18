@@ -14,6 +14,8 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomAppointmentCard extends StatelessWidget {
   final String imageUrl;
   final String name;
+  final String note;
+
   final String profession;
   final String date;
   final String time;
@@ -45,6 +47,7 @@ class CustomAppointmentCard extends StatelessWidget {
     this.onTap2,
     required this.reSchedule,
     required this.doctorInfo,
+    required this.note,
   });
 
   @override
@@ -98,7 +101,8 @@ class CustomAppointmentCard extends StatelessWidget {
                   ],
                 ),
               ),
-              if (trailing != null) trailing!,
+              //TODO.....Cancel Schedule Popup
+              //if (trailing != null) trailing!,
             ],
           ),
           Row(
@@ -164,7 +168,7 @@ class CustomAppointmentCard extends StatelessWidget {
               ],
               if (type == "ONLINE")
                 CustomText(
-                  left: 5,
+                  //left: 5,
                   text: "Type: $type",
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
@@ -174,16 +178,26 @@ class CustomAppointmentCard extends StatelessWidget {
           ),
 
           if (reSchedule && appoinmentStatus == AppStrings.pending)
-            CustomText(
-              left: 5,
-              top: 4.h,
-              bottom: 4.h,
-              maxLines: 2,
-              textAlign: TextAlign.left,
-              text: "${doctorInfo.name} ${AppStrings.reScheduleReq}",
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: AppColors.red,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomText(
+                  color: AppColors.red,
+                  top: 4.h,
+                  bottom: 4.h,
+                  maxLines: 2,
+                  textAlign: TextAlign.left,
+                  text: "${doctorInfo.name} ${AppStrings.reScheduleReq}",
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
+                CustomText(
+                  //left: 5,
+                  text: "Reason: $note",
+                  color: AppColors.red,
+                  fontSize: 12,
+                )
+              ],
             ),
           SizedBox(
             height: 8.h,

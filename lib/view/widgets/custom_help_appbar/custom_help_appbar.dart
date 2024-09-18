@@ -1,19 +1,24 @@
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/profile_screen/controller/profile_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:doctor_booking/view/widgets/custom_text_field/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class CustomHelpAppBar extends StatelessWidget {
-  const CustomHelpAppBar({
+  CustomHelpAppBar({
     super.key,
     required this.scaffoldKey,
   });
 
   final GlobalKey<ScaffoldState> scaffoldKey;
+
+  final PaitentProfileController profileController =
+      Get.find<PaitentProfileController>();
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +74,10 @@ class CustomHelpAppBar extends StatelessWidget {
           ///====================================Search Section================================
 
           CustomTextField(
+            textEditingController: profileController.searchController.value,
+            onFieldSubmitted: (value) {
+              profileController.getFAQ(search: value);
+            },
             fillColor: AppColors.white,
             onTap: () {
               // Get.toNamed(AppRoutes.searchScreen);

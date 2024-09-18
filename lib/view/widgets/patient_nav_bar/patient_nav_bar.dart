@@ -96,13 +96,13 @@ class _PatientNavBarState extends State<PatientNavBar> {
     if (index == 0 && widget.currentIndex != 0) {
       Get.offAll(() => HomeScreen());
     } else if (index == 1 && widget.currentIndex != 1) {
-      Get.to(() => FavoriteScreen());
+      Get.offAll(() => FavoriteScreen());
     } else if (index == 2 && widget.currentIndex != 2) {
-      Get.to(() => LocationScreen());
+      Get.offAll(() => LocationScreen());
     } else if (index == 3 && widget.currentIndex != 3) {
-      Get.to(() => AppointmentsScreen());
+      Get.offAll(() => AppointmentsScreen());
     } else if (index == 4 && widget.currentIndex != 4) {
-      Get.to(() => const ProfileScreen());
+      Get.offAll(() => ProfileScreen());
     }
   }
 }

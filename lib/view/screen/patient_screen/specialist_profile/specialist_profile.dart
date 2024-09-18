@@ -364,8 +364,11 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                     bottom: 10,
                   ),
                   Column(
-                    children: List.generate(homeController.reviewList.length,
-                        (index) {
+                    children: List.generate(
+                        homeController.reviewList.length > 3 &&
+                                _isExpanded == false
+                            ? 3
+                            : homeController.reviewList.length, (index) {
                       var data = homeController.reviewList[index];
                       return CustomRatingCard(
                           name: data.sender?.name ?? "",
@@ -378,29 +381,31 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                     }),
                   ),
                   //
-                  ///==================================View All Condition=================
-                  Center(
-                    child: GestureDetector(
-                      onTap: _toggleExpanded,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          CustomText(
-                            text: _isExpanded ? 'ViewLess' : AppStrings.viewAll,
-                            color: AppColors.blackNormal,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          Icon(
-                            _isExpanded
-                                ? Icons.keyboard_arrow_up_rounded
-                                : Icons.keyboard_arrow_down_rounded,
-                            color: AppColors.blackO,
-                          ),
-                        ],
+                  ///================================== View All Condition =================
+                  if (homeController.reviewList.length > 3)
+                    Center(
+                      child: GestureDetector(
+                        onTap: _toggleExpanded,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CustomText(
+                              text:
+                                  _isExpanded ? 'ViewLess' : AppStrings.viewAll,
+                              color: AppColors.blackNormal,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            Icon(
+                              _isExpanded
+                                  ? Icons.keyboard_arrow_up_rounded
+                                  : Icons.keyboard_arrow_down_rounded,
+                              color: AppColors.blackO,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
                 ],
 
                 ///============================== Similar Doctor =========================

@@ -49,7 +49,8 @@ class HelpCenterScreen extends StatelessWidget {
                   //         // Handle FAQ tap
                   //       },
                   //     )),
-                  CustomHelpQuestion(faqList: profileController.faqList),
+
+                  CustomHelpQuestion(),
                   SizedBox(height: 20.h),
 
                   ///=========================Need More Help=================
@@ -62,6 +63,9 @@ class HelpCenterScreen extends StatelessWidget {
                   SizedBox(height: 10.h),
 
                   ///======================Calling====================
+
+                  ///TODO============ Change The Number
+
                   CustomHelpCard(
                     contactText: 'Call Us (+1-212-456-7890)',
                     subText: 'Our help line service is active: 24/7',

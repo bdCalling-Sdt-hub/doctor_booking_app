@@ -66,8 +66,8 @@ class FavoriteScreen extends StatelessWidget {
                           generalController
                               .makeFavourite(docID: data.id ?? "")
                               .then((value) {
-                            homeController.favouriteDocList.removeAt(index);
-                            homeController.favouriteDocList.refresh();
+                            homeController.getFavDoc.removeAt(index);
+                            homeController.getFavDoc.refresh();
                           });
                         },
                         networkImageUrl: "${ApiUrl.baseUrl}/${data.img ?? ""}",

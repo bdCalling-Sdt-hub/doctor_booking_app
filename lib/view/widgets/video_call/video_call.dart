@@ -25,7 +25,6 @@ class AudioVideoCall extends StatelessWidget {
     return ZegoUIKitPrebuiltCall(
         events: ZegoUIKitPrebuiltCallEvents(),
         onDispose: () {
-          print("---------- Dispose");
           controller.createCallHistory(
               senderId: senderID, receiverId: receiverId);
         },

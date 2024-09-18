@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
+import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
+import 'package:doctor_booking/view/screen/patient_screen/profile_screen/model/faq_model.dart';
 import 'package:doctor_booking/view/screen/patient_screen/profile_screen/model/profile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +18,10 @@ import 'package:url_launcher/url_launcher.dart';
 class PaitentProfileController extends GetxController {
   final profileLoading = Status.loading.obs;
   void profileLoadingMethod(Status value) => profileLoading.value = value;
+
+  final faqLoading = Status.loading.obs;
+  void faqLoadingMethod(Status value) => faqLoading.value = value;
+
   GeneralController generalController = Get.find<GeneralController>();
 
   Rx<TextEditingController> fullNameController = TextEditingController().obs;
@@ -44,29 +50,6 @@ class PaitentProfileController extends GetxController {
       image.value = getImages.path;
     }
   }
-
-  final List<Map<String, String>> faqList = [
-    {
-      "que": "How do I book an appointment?",
-      "ans": "This is an dummy answer, To show in UI"
-    },
-    {
-      "que": "Can I cancel or reschedule my appointment?",
-      "ans": "This is an dummy answer, To show in UI"
-    },
-    {
-      "que": "What types of doctors can I book through the app?",
-      "ans": "This is an dummy answer, To show in UI"
-    },
-    {
-      "que": "How do I check in for my appointment?",
-      "ans": "This is an dummy answer, To show in UI"
-    },
-    {
-      "que": "How can I canceled an appointment? ",
-      "ans": "This is an dummy answer, To show in UI"
-    },
-  ];
 
   ///===================Customer care method ==========
   Future<void> launchPhone(String phoneNumber) async {
@@ -210,9 +193,48 @@ class PaitentProfileController extends GetxController {
     }
   }
 
+  ///=============================== FAQ ==============================
+  RxList<FaqDatum> faqList = <FaqDatum>[].obs;
+  Rx<TextEditingController> searchController = TextEditingController().obs;
+
+  getFAQ({String search = ""}) async {
+    faqLoadingMethod(Status.loading);
+
+    var response = await ApiClient.getData(ApiUrl.getFAQ(search: search));
+
+    if (response.statusCode == 200) {
+      faqList.value = List<FaqDatum>.from(
+          response.body["data"].map((e) => FaqDatum.fromJson(e)));
+
+      saveInfo(profileData.value);
+      faqLoadingMethod(Status.completed);
+      refresh();
+    } else {
+      if (response.statusText == ApiClient.somethingWentWrong) {
+        faqLoadingMethod(Status.internetError);
+      } else {
+        faqLoadingMethod(Status.error);
+      }
+      ApiChecker.checkApi(response);
+    }
+  }
+
+  ///======================= Log Out =====================
+  logOut() {
+    SharePrefsHelper.remove(AppConstants.userImage);
+    SharePrefsHelper.remove(AppConstants.userId);
+    SharePrefsHelper.remove(AppConstants.bearerToken);
+    SharePrefsHelper.remove(AppConstants.profileID);
+    SharePrefsHelper.remove(AppConstants.id);
+    SharePrefsHelper.remove(AppConstants.userStatus);
+
+    Get.offAllNamed(AppRoutes.signInScreen);
+  }
+
   @override
   void onInit() {
     getProfile();
+    getFAQ();
     super.onInit();
   }
 }

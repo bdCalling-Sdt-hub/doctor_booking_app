@@ -13,7 +13,8 @@ class PopularSpecialistsScreen extends StatelessWidget {
   final PaitentHomeController homeController =
       Get.find<PaitentHomeController>();
 
-  final String title = Get.arguments;
+  final String title = Get.arguments[0];
+  final bool isPopular = Get.arguments[1];
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +28,13 @@ class PopularSpecialistsScreen extends StatelessWidget {
             scrollDirection: Axis.vertical,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, mainAxisSpacing: 18.0, mainAxisExtent: 250),
-            itemCount: homeController.popularDoctorList.length,
+            itemCount: isPopular
+                ? homeController.popularDoctorList.length
+                : homeController.recomemdedDoctorList.length,
             itemBuilder: (context, index) {
-              var data = homeController.popularDoctorList[index];
+              var data = isPopular
+                  ? homeController.popularDoctorList[index]
+                  : homeController.recomemdedDoctorList[index];
               return GestureDetector(
                 onTap: () {
                   Get.toNamed(AppRoutes.specialistProfile, arguments: data);

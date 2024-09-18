@@ -3,8 +3,8 @@ import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/profile_screen/profile_screen.dart';
 import 'package:doctor_booking/view/widgets/custom_circle_container/custom_circle_container.dart';
-import 'package:doctor_booking/view/widgets/custom_filter/custom_filter.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text_field/custom_text_field.dart';
@@ -14,7 +14,7 @@ import 'package:get/get.dart';
 import '../../../../widgets/custom_text/custom_text.dart';
 
 class HomeAppBar extends StatelessWidget {
-  HomeAppBar({
+  const HomeAppBar({
     super.key,
     required this.scaffoldKey,
     required this.image,
@@ -27,7 +27,7 @@ class HomeAppBar extends StatelessWidget {
   final String name;
   final String location;
 
-  final TextEditingController _locationController = TextEditingController();
+  // final TextEditingController _locationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +47,16 @@ class HomeAppBar extends StatelessWidget {
               Row(
                 children: [
                   ///==================== Profile =====================
-                  CustomNetworkImage(
-                      boxShape: BoxShape.circle,
-                      imageUrl: "${ApiUrl.baseUrl}/$image",
-                      height: 60,
-                      width: 60),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => ProfileScreen());
+                    },
+                    child: CustomNetworkImage(
+                        boxShape: BoxShape.circle,
+                        imageUrl: "${ApiUrl.baseUrl}/$image",
+                        height: 60,
+                        width: 60),
+                  ),
 
                   SizedBox(
                     width: 16.w,
@@ -115,13 +120,13 @@ class HomeAppBar extends StatelessWidget {
             ],
           ),
 
-          ///====================================Search Section================================
-
           SizedBox(
             height: 16.h,
           ),
           Row(
             children: [
+              ///========================== Search Field ==========================
+
               Expanded(
                 flex: 12,
                 child: CustomTextField(
@@ -149,28 +154,31 @@ class HomeAppBar extends StatelessWidget {
               SizedBox(
                 width: 14.h,
               ),
-              Expanded(
-                flex: 2,
-                child: InkWell(
-                  onTap: () {
-                    Get.dialog(
-                      CustomFilter(
-                        locationController: _locationController,
-                      ),
-                    );
-                    // Get.toNamed(AppRoute.filterSelectedGenresScreen);
-                  },
-                  child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 15),
-                      height: 47,
-                      width: 45,
-                      decoration: BoxDecoration(
-                          color: AppColors.blackNormal,
-                          borderRadius: BorderRadius.circular(4)),
-                      child: const CustomImage(imageSrc: AppIcons.filterList)),
-                ),
-              )
+
+              ///========================== Filter Button ==========================
+
+              // Expanded(
+              //   flex: 2,
+              //   child: InkWell(
+              //     onTap: () {
+              //       Get.dialog(
+              //         CustomFilter(
+              //           locationController: _locationController,
+              //         ),
+              //       );
+              //       // Get.toNamed(AppRoute.filterSelectedGenresScreen);
+              //     },
+              //     child: Container(
+              //         padding: const EdgeInsets.symmetric(
+              //             horizontal: 12, vertical: 15),
+              //         height: 47,
+              //         width: 45,
+              //         decoration: BoxDecoration(
+              //             color: AppColors.blackNormal,
+              //             borderRadius: BorderRadius.circular(4)),
+              //         child: const CustomImage(imageSrc: AppIcons.filterList)),
+              //   ),
+              // )
             ],
           ),
         ],
