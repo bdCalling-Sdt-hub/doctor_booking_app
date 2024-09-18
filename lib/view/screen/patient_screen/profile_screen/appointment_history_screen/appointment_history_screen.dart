@@ -25,12 +25,12 @@ class _AppointmentHistoryScreenState extends State<AppointmentHistoryScreen> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) {
-        appointmentController.getMyAppoinment(
-            status: AppStrings.completed, isHistory: true);
-      },
-    );
+    // WidgetsBinding.instance.addPostFrameCallback(
+    //   (timeStamp) {
+    //     appointmentController.getMyAppoinment(
+    //         status: AppStrings.completed, isHistory: true);
+    //   },
+    // );
 
     super.initState();
   }

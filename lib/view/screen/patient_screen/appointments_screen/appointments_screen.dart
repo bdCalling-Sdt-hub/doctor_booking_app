@@ -79,6 +79,7 @@ class AppointmentsScreen extends StatelessWidget {
                               .isLoadMoreRunning.value ==
                           false) {
                         return CustomAppointmentCard(
+                          note: data.notes ?? "",
                           doctorInfo: data.doctorId!,
                           reSchedule: data.reSchedule ?? false,
                           onTap2: () async {

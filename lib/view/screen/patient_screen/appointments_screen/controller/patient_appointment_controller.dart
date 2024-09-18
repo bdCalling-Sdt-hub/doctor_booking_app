@@ -14,7 +14,8 @@ import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/mo
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PatientAppointmentController extends GetxController {
+class PatientAppointmentController extends GetxController
+    with GetxServiceMixin {
   Rx<TextEditingController> resonOfVisitController =
       TextEditingController().obs;
 
@@ -234,6 +235,7 @@ class PatientAppointmentController extends GetxController {
   @override
   void onInit() {
     getMyAppoinment(status: AppStrings.pending);
+    getMyAppoinment(status: AppStrings.completed, isHistory: true);
     scrollController.value.addListener(addScrollListener);
     super.onInit();
   }
