@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 
 import '../../core/app_routes/app_routes.dart';
 
@@ -360,19 +361,33 @@ class GeneralController extends GetxController with GetxServiceMixin {
 
   deleteAccount() async {
     String email = await SharePrefsHelper.getString(AppConstants.email);
+    String bearerToken =
+        await SharePrefsHelper.getString(AppConstants.bearerToken);
+
     Map<String, String> body = {
       "email": email,
       "password": passwordController.value.text,
     };
+
+    var mainHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $bearerToken'
+    };
+
     debugPrint("======================== $email ========================");
-    var response = await ApiClient.deleteData(ApiUrl.deleteAccount,
-        body: jsonEncode(body));
+
+    // Convert the body to JSON string
+    http.Response response = await http.delete(
+      Uri.parse("${ApiUrl.baseUrl}/${ApiUrl.deleteAccount}"),
+      headers: mainHeaders,
+      body: jsonEncode(body), // Encode the body as JSON
+    );
 
     if (response.statusCode == 200) {
-      Get.back();
       Get.offAllNamed(AppRoutes.signInScreen);
     } else {
-      ApiChecker.checkApi(response);
+      // Handle error response
+      //ApiChecker.checkApi(response);
     }
   }
 
