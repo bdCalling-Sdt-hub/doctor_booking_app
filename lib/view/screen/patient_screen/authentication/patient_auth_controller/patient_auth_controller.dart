@@ -276,7 +276,7 @@ class PatientAuthController extends GetxController {
 
   ///============================== Verify Forgot Password OTP =============================
 
-  RxString acccesToken = "".obs;
+  RxString? acccesToken;
 
   Rx<TextEditingController> otpController = TextEditingController().obs;
 
@@ -294,12 +294,14 @@ class PatientAuthController extends GetxController {
         });
 
     if (response.statusCode == 200) {
-      acccesToken.value = response.body["accessToken"];
-      refresh();
-      debugPrint(
-          "============================ acccesToken=================${acccesToken.value}");
+      acccesToken?.value = response.body["accessToken"];
+
+      // SharePrefsHelper.setString(
+      //     AppConstants.accesToken, response.body["accessToken"]);
+
       SharePrefsHelper.setString(
           AppConstants.bearerToken, response.body["accessToken"]);
+      refresh();
       Get.offAllNamed(AppRoutes.resetPasswordScreen);
     } else {
       toastMessage(message: response.body["message"]);
@@ -341,6 +343,10 @@ class PatientAuthController extends GetxController {
   RxBool resetPasswordLoading = false.obs;
 
   Future<void> resetPassword() async {
+    final token = await SharePrefsHelper.getString(AppConstants.accesToken);
+
+    debugPrint("============================ token=================$token");
+
     resetPasswordLoading.value = true;
     refresh();
     Map<String, String> body = {
@@ -351,10 +357,7 @@ class PatientAuthController extends GetxController {
     var response = await ApiClient.postData(
       ApiUrl.resetPassword,
       jsonEncode(body),
-      // headers: {
-      //   'Content-Type': 'application/json',
-      //   'Authorization': acccesToken.value
-      // },
+      // headers: {'Content-Type': 'application/json', 'Authorization': token},
     );
     if (response.statusCode == 200) {
       toastMessage(message: response.body["message"], colors: Colors.green);

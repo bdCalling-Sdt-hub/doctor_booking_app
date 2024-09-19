@@ -1,5 +1,6 @@
 import 'package:doctor_booking/model/calls_history_model/calls_history_model.dart';
 import 'package:doctor_booking/service/api_url.dart';
+import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/call_screen/call_popup/calls_popup.dart';
 import 'package:flutter/material.dart';
@@ -133,6 +134,7 @@ class CallsController extends GetxController {
     var response = await ApiClient.deleteData(ApiUrl.deleteCallHistory(id: id));
 
     if (response.statusCode == 200) {
+      showCustomSnackBar(response.body["message"], isError: false);
       debugPrint(
           "======================== Delelte History ==========================");
       getDoctorCallHistory();
