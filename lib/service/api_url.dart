@@ -127,7 +127,6 @@ class ApiUrl {
   static const doctorCreatePaymentAccount = '/payment/create-connected-account';
   static const forgotPassword = '/auth/send-verify-email';
 
-
   static getDoctorCallHistory({String page = '1'}) =>
       "/call/get-call-history?page=$page";
 
@@ -135,7 +134,6 @@ class ApiUrl {
 
   static const createDoctorCallHistory = '/call/create-call-history';
   static const resetPassword = '/auth/reset-password';
-
 
 //================ Delete Account =================
   static const deleteAccount = 'auth/delete-account';
@@ -148,7 +146,6 @@ class ApiUrl {
   static deleteCallHistoryPaitent({required String id}) =>
       '/call/delete-call-history/$id';
 
-
-
-
+  static searchHistoryDoctor({required String name}) =>
+      '/call/get-call-history?search=$name';
 }

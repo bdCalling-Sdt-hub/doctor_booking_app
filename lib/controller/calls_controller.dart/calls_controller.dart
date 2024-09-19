@@ -142,4 +142,35 @@ class CallsController extends GetxController {
       ApiChecker.checkApi(response);
     }
   }
+//============================================ Search Calls History ==============================
+
+  Rx<TextEditingController> searchController = TextEditingController().obs;
+  RxList<DoctorCallHistoryModel> doctorSearchCallHistoryList =
+      <DoctorCallHistoryModel>[].obs;
+
+  searchCallsHistory() async {
+    doctorCallHistoryList.value = [];
+
+    var response = await ApiClient.getData(
+        ApiUrl.searchHistoryDoctor(name: searchController.value.text));
+    if (response.statusCode == 200) {
+      setRxRequestStatus(Status.completed);
+      doctorSearchCallHistoryList.value = List<DoctorCallHistoryModel>.from(
+          response.body["data"].map((x) => DoctorCallHistoryModel.fromJson(x)));
+
+      pageInit();
+      refresh();
+    } else {
+      if (response.statusText == ApiClient.somethingWentWrong) {
+        setRxRequestStatus(Status.internetError);
+      } else {
+        setRxRequestStatus(Status.error);
+      }
+      ApiChecker.checkApi(response);
+    }
+  }
+
+
+
+ 
 }

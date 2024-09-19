@@ -43,12 +43,17 @@ class CallScreen extends StatelessWidget {
                       height: 8.h,
                     ),
                     ScearchCard(
-                      controller: TextEditingController(),
+                      controller: callsController.searchController.value,
                       prefixIcon: const Icon(
                         Icons.search,
                         color: AppColors.whiteDarker,
                       ),
                       hintText: AppStrings.searchHere,
+                      onChanged: (value) {
+                        callsController.searchCallsHistory();
+
+                        callsController.callsScrollControloler.refresh();
+                      },
                     ),
                     SizedBox(
                       height: 20.h,
@@ -59,33 +64,67 @@ class CallScreen extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: ListView.builder(
-                    // reverse: true,
-                    controller: callsController.callsScrollControloler.value,
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    itemCount: callsController.doctorCallHistoryList.length,
-                    itemBuilder: (context, index) {
-                      DoctorCallHistoryModel model =
-                          callsController.doctorCallHistoryList[index];
-                      return callsController.isLoadMoreRunning.value == false
-                          ? CustomCallHistory(
-                              image:
-                                  "${ApiUrl.imageBaseUrl}${model.userId?.img}",
-                              name: model.userId?.name ?? '',
-                              date: model.createdAt == null
-                                  ? ""
-                                  : DateConverter.formatCallsDateTime(
-                                      model.createdAt!),
-                              moreButton: () {
-                                if (model.id != null) {
-                                  callsController.deleteSingalCallHistory(
-                                      id: model.id!);
-                                }
-                              },
-                            )
-                          : const CustomLoader();
-                    },
-                  ),
+                  child: callsController.searchController.value.text.isEmpty
+                      ? ListView.builder(
+                          // reverse: true,
+                          controller:
+                              callsController.callsScrollControloler.value,
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          itemCount:
+                              callsController.doctorCallHistoryList.length,
+                          itemBuilder: (context, index) {
+                            DoctorCallHistoryModel model =
+                                callsController.doctorCallHistoryList[index];
+                            return callsController.isLoadMoreRunning.value ==
+                                    false
+                                ? CustomCallHistory(
+                                    image:
+                                        "${ApiUrl.imageBaseUrl}${model.userId?.img}",
+                                    name: model.userId?.name ?? '',
+                                    date: model.createdAt == null
+                                        ? ""
+                                        : DateConverter.formatCallsDateTime(
+                                            model.createdAt!),
+                                    moreButton: () {
+                                      if (model.id != null) {
+                                        callsController.deleteSingalCallHistory(
+                                            id: model.id!);
+                                      }
+                                    },
+                                  )
+                                : const CustomLoader();
+                          },
+                        )
+                      : ListView.builder(
+                          // reverse: true,
+                          controller:
+                              callsController.callsScrollControloler.value,
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          itemCount: callsController
+                              .doctorSearchCallHistoryList.length,
+                          itemBuilder: (context, index) {
+                            DoctorCallHistoryModel model = callsController
+                                .doctorSearchCallHistoryList[index];
+                            return callsController.isLoadMoreRunning.value ==
+                                    false
+                                ? CustomCallHistory(
+                                    image:
+                                        "${ApiUrl.imageBaseUrl}${model.userId?.img}",
+                                    name: model.userId?.name ?? '',
+                                    date: model.createdAt == null
+                                        ? ""
+                                        : DateConverter.formatCallsDateTime(
+                                            model.createdAt!),
+                                    moreButton: () {
+                                      if (model.id != null) {
+                                        callsController.deleteSingalCallHistory(
+                                            id: model.id!);
+                                      }
+                                    },
+                                  )
+                                : const CustomLoader();
+                          },
+                        ),
                 ),
               ),
             ],

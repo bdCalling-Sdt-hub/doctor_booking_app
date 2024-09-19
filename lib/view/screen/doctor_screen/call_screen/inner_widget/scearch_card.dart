@@ -14,7 +14,7 @@ class ScearchCard extends StatelessWidget {
   final String? Function(dynamic)? validator;
   final bool? hintTextChangeColor;
   final Widget? prefixIcon;
-
+  final Function(String)? onChanged;
   const ScearchCard({
     super.key,
     required this.controller,
@@ -27,12 +27,13 @@ class ScearchCard extends StatelessWidget {
     this.validator,
     this.hintText,
     this.hintTextChangeColor = false,
-    this.prefixIcon,
+    this.prefixIcon, this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    return CustomTextField(
+    return CustomTextField( 
+      onChanged:onChanged ,
       validator: validator,
       readOnly: readOnly,
       hintText: hintText,
