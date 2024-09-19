@@ -216,9 +216,7 @@ class CustomAppointmentCard extends StatelessWidget {
               title: AppStrings.videoCall,
             ),
 
-          if (!paymentStatus &&
-              appoinmentStatus == AppStrings.accepted &&
-              !reSchedule)
+          if (!paymentStatus && appoinmentStatus == AppStrings.accepted)
             CustomButton(
               onTap: () {
                 onTap!();

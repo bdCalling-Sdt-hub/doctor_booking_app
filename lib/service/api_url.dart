@@ -12,6 +12,7 @@ class ApiUrl {
   static const doctorSignUp = '/auth/doctor-sign-up';
   static const paitentSignUp = '/auth/sign-up';
   static const varifyCode = '/auth/verify-code';
+  static const resendCode = '/auth/send-verify-email';
 
   ///=============================================== Paitent Section ======================================
 
