@@ -21,6 +21,7 @@ class ProfileScreen extends StatelessWidget {
 
       ///===========================Profile Appbar==================
       appBar: const CustomAppBar(
+        showBackButton: false,
         appBarContent: AppStrings.profile,
       ),
       bottomNavigationBar: const PatientNavBar(currentIndex: 4),

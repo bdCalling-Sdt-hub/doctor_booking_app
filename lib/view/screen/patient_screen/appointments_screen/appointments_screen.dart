@@ -79,7 +79,7 @@ class AppointmentsScreen extends StatelessWidget {
                               .isLoadMoreRunning.value ==
                           false) {
                         return CustomAppointmentCard(
-                          note: data.notes ?? "",
+                          note: data.notes ?? "Nothing",
                           doctorInfo: data.doctorId!,
                           reSchedule: data.reSchedule ?? false,
                           onTap2: () async {
@@ -125,7 +125,7 @@ class AppointmentsScreen extends StatelessWidget {
                                   "User ID>>>>${data.userId} || User name>>>>${profileController.profileData.value.name} || Call ID>>>${data.id}");
                               Get.to(() => AudioVideoCall(
                                     receiverId: data.doctorId?.id ?? "",
-                                    senderID: data.userId ?? "",
+                                    doctorId: data.userId ?? "",
                                     userName: profileController
                                             .profileData.value.name ??
                                         "",

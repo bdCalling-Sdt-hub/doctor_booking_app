@@ -12,9 +12,12 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String? appBarContent;
   final IconData? iconData;
   final bool? buttonHare;
+  final bool showBackButton;
+
   final VoidCallback? onTap;
 
   const CustomAppBar({
+    this.showBackButton = true,
     this.appBarHeight = 64,
     this.appBarWidth,
     this.appBarBgColor = Colors.white,
@@ -44,17 +47,19 @@ class _CustomAppBarState extends State<CustomAppBar> {
         decoration: BoxDecoration(color: widget.appBarBgColor),
         child: Row(
           children: [
-            IconButton(
-              icon: const CustomImage(imageSrc: AppIcons.arrowLeft),
-              color: AppColors.grayNormal,
-              onPressed: widget.buttonHare!
-                  ? widget.onTap
-                  : () {
-                      Navigator.of(context).pop();
-                    },
-            ),
+            if (widget.showBackButton)
+              IconButton(
+                icon: const CustomImage(imageSrc: AppIcons.arrowLeft),
+                color: AppColors.grayNormal,
+                onPressed: widget.buttonHare!
+                    ? widget.onTap
+                    : () {
+                        Navigator.of(context).pop();
+                      },
+              ),
             if (widget.appBarContent != null)
               CustomText(
+                left: widget.showBackButton ? 0 : 20,
                 text: widget.appBarContent!,
                 fontWeight: FontWeight.w500,
                 fontSize: 17.sp,

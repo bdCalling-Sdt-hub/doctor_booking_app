@@ -26,6 +26,7 @@ class FavoriteScreen extends StatelessWidget {
         bottomNavigationBar: const PatientNavBar(currentIndex: 1),
         backgroundColor: AppColors.whiteLightActive,
         appBar: const CustomAppBar(
+          showBackButton: false,
           appBarContent: AppStrings.favorites,
         ),
         body: Obx(() {
