@@ -128,4 +128,16 @@ class CallsController extends GetxController {
 
     super.onInit();
   }
+
+  deleteSingalCallHistory({required String id}) async {
+    var response = await ApiClient.deleteData(ApiUrl.deleteCallHistory(id: id));
+
+    if (response.statusCode == 200) {
+      debugPrint(
+          "======================== Delelte History ==========================");
+      getDoctorCallHistory();
+    } else {
+      ApiChecker.checkApi(response);
+    }
+  }
 }

@@ -1,5 +1,4 @@
 import 'package:doctor_booking/view/screen/patient_screen/authentication/patient_auth_controller/patient_auth_controller.dart';
-import 'package:doctor_booking/core/app_routes/app_routes.dart';
 
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
@@ -60,7 +59,8 @@ class ForgetPasswordScreen extends StatelessWidget {
               CustomFormCard(
                 hintText: AppStrings.enterEmailAddress,
                 title: AppStrings.email,
-                controller: TextEditingController(),
+                controller:
+                    patientAuthController.forgotPasswordEmailController.value,
                 validator: (value) {
                   if (value == null || value.toString().isEmpty) {
                     return AppStrings.fieldCantBeEmpty.tr;
@@ -80,7 +80,7 @@ class ForgetPasswordScreen extends StatelessWidget {
               CustomButton(
                 onTap: () {
                   if (globalKey.currentState!.validate()) {
-                    Get.toNamed(AppRoutes.resetPasswordScreen);
+                    patientAuthController.forgotPassword();
                   }
                 },
                 title: AppStrings.sendACode,

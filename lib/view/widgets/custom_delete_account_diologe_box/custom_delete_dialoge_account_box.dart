@@ -1,3 +1,4 @@
+import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ import '../../../utils/app_icons/app_icons.dart';
 
 void showDialogBox(
     BuildContext context, TextEditingController passwordController) {
+  final GeneralController generalController = Get.find<GeneralController>();
   Get.dialog(
     AlertDialog(
       backgroundColor: AppColors.white,
@@ -63,7 +65,7 @@ void showDialogBox(
               isPassword: true,
               fillColor: AppColors.whiteNormal,
               fieldBorderColor: AppColors.white,
-              textEditingController: passwordController,
+              textEditingController: generalController.passwordController.value,
             ),
             SizedBox(height: 20.h),
             Row(
@@ -71,13 +73,12 @@ void showDialogBox(
                 Expanded(
                   flex: 5,
                   child: ElevatedButton(
-                    // style: ButtonStyle(
-                    //   backgroundColor:
-                    //       WidgetStateProperty.all<Color>(AppColors.red),
-                    // ),
+                    style: ButtonStyle(
+                      backgroundColor:
+                          WidgetStateProperty.all<Color>(AppColors.red),
+                    ),
                     onPressed: () {
-                      // Handle "Yes" action
-                      Get.back();
+                      generalController.deleteAccount();
                     },
                     child: CustomText(
                       text: AppStrings.yes,
@@ -91,12 +92,11 @@ void showDialogBox(
                 Expanded(
                   flex: 5,
                   child: ElevatedButton(
-                    // style: ButtonStyle(
-                    //   backgroundColor:
-                    //       WidgetStateProperty.all<Color>(AppColors.green),
-                    // ),
+                    style: ButtonStyle(
+                      backgroundColor:
+                          WidgetStateProperty.all<Color>(AppColors.green),
+                    ),
                     onPressed: () {
-                      // Handle "Cancel" action
                       Get.back();
                     },
                     child: CustomText(

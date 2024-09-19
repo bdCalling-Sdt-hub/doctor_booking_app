@@ -1,20 +1,22 @@
-import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_auth_controller/doctor_auth_controller.dart';
-import 'package:doctor_booking/utils/app_colors/app_colors.dart';
-import 'package:doctor_booking/utils/app_strings/app_strings.dart';
+import 'package:doctor_booking/view/screen/patient_screen/authentication/patient_auth_controller/patient_auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
-import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class SignUpDoctorOtpScreen extends StatelessWidget {
+import '../../../../../utils/app_colors/app_colors.dart';
+import '../../../../../utils/app_strings/app_strings.dart';
+import '../../../../widgets/custom_button/custom_button.dart';
+import '../../../../widgets/custom_text/custom_text.dart';
+
+class ForgotOtpScreen extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  SignUpDoctorOtpScreen({super.key});
+  ForgotOtpScreen({super.key});
 
   // final String email = Get.arguments;
-  final DoctorAuthController authController = Get.find<DoctorAuthController>();
+  final PatientAuthController authController =
+      Get.find<PatientAuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +95,7 @@ class SignUpDoctorOtpScreen extends StatelessWidget {
                   inactiveColor: AppColors.blackLight,
                   activeColor: AppColors.whiteDarker,
                 ),
-                controller: authController.verifyCodeController.value,
+                controller: authController.otpController.value,
                 length: 6,
                 enableActiveFill: true,
               );
@@ -120,8 +122,8 @@ class SignUpDoctorOtpScreen extends StatelessWidget {
             ///==================================Verify Button===========================>
             CustomButton(
               onTap: () {
-                if (authController.verifyCodeController.value.text.isNotEmpty) {
-                  authController.varifyEmail();
+                if (authController.otpController.value.text.isNotEmpty) {
+                  authController.verifyOTPForgotPassword();
                 }
               },
               title: AppStrings.verifyCode,

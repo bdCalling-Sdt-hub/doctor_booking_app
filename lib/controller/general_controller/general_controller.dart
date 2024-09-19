@@ -16,6 +16,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
+import '../../core/app_routes/app_routes.dart';
+
 class GeneralController extends GetxController with GetxServiceMixin {
   RxString profileID = "".obs;
 
@@ -331,11 +333,15 @@ class GeneralController extends GetxController with GetxServiceMixin {
     }
   }
 
+  //================== Create Call History =================
   Future<void> createCallHistory(
-      {required String senderId, required String receiverId}) async {
+      {required String senderId,
+      required String receiverId,
+      required String userName}) async {
     Map<String, String> body = {
       "doctorId": senderId,
       "userId": receiverId,
+      "name": userName,
     };
 
     var response = await ApiClient.postData(
@@ -344,6 +350,28 @@ class GeneralController extends GetxController with GetxServiceMixin {
     if (response.statusCode == 200) {
       debugPrint(
           "===============Response body====================${response.body}");
+    } else {
+      ApiChecker.checkApi(response);
+    }
+  }
+  //======================================= Delete Account ===========================
+
+  Rx<TextEditingController> passwordController = TextEditingController().obs;
+
+  deleteAccount() async {
+    String email = await SharePrefsHelper.getString(AppConstants.email);
+    Map<String, String> body = {
+      "email": email,
+      "password": passwordController.value.text,
+    };
+    debugPrint("======================== $email ========================");
+    var response = await ApiClient.postData(
+      ApiUrl.deleteAccount,
+      jsonEncode(body),
+    );
+
+    if (response.statusCode == 200) {
+      Get.offAllNamed(AppRoutes.signInScreen);
     } else {
       ApiChecker.checkApi(response);
     }

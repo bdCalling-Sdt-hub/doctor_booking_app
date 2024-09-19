@@ -305,4 +305,27 @@ class DoctorAuthController extends GetxController {
       toastMessage(message: response.body["message"]);
     }
   }
+ 
+  resendForgotOtp() async {
+    generalController.showPopUpLoader();
+    Map<String, String> body = {
+      "email": doctorEmailController.value.text,
+    };
+
+    var response = await ApiClient.postData(
+      ApiUrl.resendCode,
+      jsonEncode(body),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      // secondsRemaining.value = 30;
+      // secondsRemaining.refresh();
+      // startTimer();
+      navigator?.pop();
+    } else {
+      navigator?.pop();
+      ApiChecker.checkApi(response);
+    }
+  }
 }

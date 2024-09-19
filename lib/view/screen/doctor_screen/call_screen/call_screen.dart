@@ -76,7 +76,12 @@ class CallScreen extends StatelessWidget {
                                   ? ""
                                   : DateConverter.formatCallsDateTime(
                                       model.createdAt!),
-                              moreButton: () {},
+                              moreButton: () {
+                                if (model.id != null) {
+                                  callsController.deleteSingalCallHistory(
+                                      id: model.id!);
+                                }
+                              },
                             )
                           : const CustomLoader();
                     },
