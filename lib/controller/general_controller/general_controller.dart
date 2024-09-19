@@ -365,12 +365,11 @@ class GeneralController extends GetxController with GetxServiceMixin {
       "password": passwordController.value.text,
     };
     debugPrint("======================== $email ========================");
-    var response = await ApiClient.postData(
-      ApiUrl.deleteAccount,
-      jsonEncode(body),
-    );
+    var response = await ApiClient.deleteData(ApiUrl.deleteAccount,
+        body: jsonEncode(body));
 
     if (response.statusCode == 200) {
+      Get.back();
       Get.offAllNamed(AppRoutes.signInScreen);
     } else {
       ApiChecker.checkApi(response);
