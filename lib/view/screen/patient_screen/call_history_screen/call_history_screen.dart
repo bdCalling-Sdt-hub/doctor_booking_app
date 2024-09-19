@@ -56,7 +56,10 @@ class CallHistoryScreen extends StatelessWidget {
                               DateTime.now()),
                           moreButton: () {
                             historyController.removeCallHistory(
-                                callID: data?.id ?? "", index: index);
+                                callID: historyController
+                                        .callHistoryList[index].id ??
+                                    "",
+                                index: index);
                           },
                         );
                       }),

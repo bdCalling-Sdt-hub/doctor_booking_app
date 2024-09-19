@@ -173,7 +173,7 @@ class DoctorHomeScreen extends StatelessWidget {
                                                   debugPrint(
                                                       "Doctor ID>>>>${data.doctorId} || Doctor name>>>>${doctorProfileController.profileModel.value.name} || Call ID ${data.id}");
                                                   Get.to(() => AudioVideoCall(
-                                                        doctorId:
+                                                        senderID:
                                                             data.doctorId ?? "",
                                                         userName:
                                                             doctorProfileController

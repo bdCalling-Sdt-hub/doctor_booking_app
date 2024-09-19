@@ -39,7 +39,7 @@ class CallHistoryController extends GetxController {
     generalController.showPopUpLoader();
     //TODO============= Change URL
     var response = await ApiClient.deleteData(
-      ApiUrl.deleteCallHistory(id: callID),
+      ApiUrl.deleteCallHistoryPaitent(id: callID),
     );
     if (response.statusCode == 200) {
       callHistoryList.removeAt(index);

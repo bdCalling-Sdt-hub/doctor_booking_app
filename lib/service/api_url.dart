@@ -4,7 +4,7 @@ class ApiUrl {
   static socketUrl({String userID = ""}) => '$baseUrl?userId=$userID';
 
   static const stripePublicKey =
-      "pk_live_51Jw074LLQHQhmkgVSKCKMQpB6l1DyuCyChhR1Dp1OVrSrZUF1jZqoz9bk1ruB7Clb1dl2OGoFikAzL6tyTiui3Av00EPxTSOKO";
+      "pk_test_51Jw074LLQHQhmkgVnHTXLkdiUOFC7bh7FuIsBhWQJcxxQcKGnbvKNuAyfCQKNI9i7whOvTcAsV1Xv0HrifQEzKYa00EOlYl93L";
 
   ///=============================== Auth Section ==============================
 
@@ -141,6 +141,6 @@ class ApiUrl {
 
   static deleteCallHistory({required String id}) => "delete-call-history/$id";
   static const getCallHistory = '/call/get-call-history';
-  static deleteCallHistory({required String id}) =>
+  static deleteCallHistoryPaitent({required String id}) =>
       '/call/delete-call-history/$id';
 }

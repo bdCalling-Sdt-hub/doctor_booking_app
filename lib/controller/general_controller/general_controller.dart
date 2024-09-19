@@ -21,7 +21,7 @@ import '../../core/app_routes/app_routes.dart';
 class GeneralController extends GetxController with GetxServiceMixin {
   RxString profileID = "".obs;
 
-  RxString role = "".obs;
+  // RxString role = "".obs;
 
   ///================== Show Loader ====================
 

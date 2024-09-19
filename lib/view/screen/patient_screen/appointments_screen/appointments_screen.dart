@@ -124,8 +124,8 @@ class AppointmentsScreen extends StatelessWidget {
                               debugPrint(
                                   "User ID>>>>${data.userId} || User name>>>>${profileController.profileData.value.name} || Call ID>>>${data.id}");
                               Get.to(() => AudioVideoCall(
-                                    receiverId: data.doctorId?.id ?? "",
-                                    doctorId: data.userId ?? "",
+                                    receiverId: data.userId ?? "",
+                                    senderID: data.doctorId?.id ?? "",
                                     userName: profileController
                                             .profileData.value.name ??
                                         "",
@@ -145,6 +145,7 @@ class AppointmentsScreen extends StatelessWidget {
                             } else {
                               paitentPaymentController.makePayment(
                                   appoinmentDate: data.date ?? "",
+                                  
                                   amount: data.doctorId?.appointmentFee ?? 0,
                                   userID: data.userId ?? "",
                                   doctorID: data.doctorId?.id ?? "",

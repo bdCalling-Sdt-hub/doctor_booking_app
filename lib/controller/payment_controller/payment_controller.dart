@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 
-
 class PaitentPaymentController extends GetxController {
   GeneralController generalController = Get.find<GeneralController>();
   PatientAppointmentController appointmentController =
@@ -73,7 +72,8 @@ class PaitentPaymentController extends GetxController {
     } catch (e, s) {
       navigator!.pop();
 
-      debugPrint("Error2 ================>>>>>>>>>>>>>${e.toString()}");
+      debugPrint(
+          "Socket Error================>>>>>>>>>>>>>${e.toString()} -------- ${s.toString()}");
       toastMessage(message: "Error $s");
       return false;
     }
