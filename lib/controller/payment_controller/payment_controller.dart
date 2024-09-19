@@ -69,12 +69,17 @@ class PaitentPaymentController extends GetxController {
       } else {
         return false;
       }
+    } on StripeException catch (e) {
+      navigator!.pop();
+      // Specific Stripe error
+      debugPrint("Stripe error: ${e.error.localizedMessage}");
+      toastMessage(message: "Payment failed: ${e.error.localizedMessage}");
+      return false;
     } catch (e, s) {
       navigator!.pop();
-
-      debugPrint(
-          "Socket Error================>>>>>>>>>>>>>${e.toString()} -------- ${s.toString()}");
-      toastMessage(message: "Error $s");
+      // General error handling
+      debugPrint("General error: ${e.toString()} -------- ${s.toString()}");
+      toastMessage(message: "An error occurred: $e");
       return false;
     }
   }

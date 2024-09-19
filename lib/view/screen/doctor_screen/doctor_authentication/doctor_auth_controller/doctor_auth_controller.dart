@@ -305,7 +305,7 @@ class DoctorAuthController extends GetxController {
       toastMessage(message: response.body["message"]);
     }
   }
- 
+
   resendForgotOtp() async {
     generalController.showPopUpLoader();
     Map<String, String> body = {

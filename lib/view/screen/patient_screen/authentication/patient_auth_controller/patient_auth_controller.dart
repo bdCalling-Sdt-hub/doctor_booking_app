@@ -367,4 +367,9 @@ class PatientAuthController extends GetxController {
       refresh();
     }
   }
+
+///==================== Change Password =======================
+
+
+
 }

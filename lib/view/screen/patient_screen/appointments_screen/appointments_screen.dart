@@ -145,8 +145,7 @@ class AppointmentsScreen extends StatelessWidget {
                             } else {
                               paitentPaymentController.makePayment(
                                   appoinmentDate: data.date ?? "",
-                                  
-                                  amount: data.doctorId?.appointmentFee ?? 0,
+                                  amount: 100,
                                   userID: data.userId ?? "",
                                   doctorID: data.doctorId?.id ?? "",
                                   appoinmentId: data.id ?? "");
