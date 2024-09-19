@@ -27,7 +27,7 @@ class AudioVideoCall extends StatelessWidget {
         onDispose: () {
           //TODO Have to FIX it
           controller.createCallHistory(
-              senderId: senderID, receiverId: receiverId, userName: userName);
+              senderId: doctorId, receiverId: receiverId, userName: userName);
         },
         appID: ZEGOCLOUD_APP_ID,
         appSign: ZEGOCLOUD_APP_SIGN,
