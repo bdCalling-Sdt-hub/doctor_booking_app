@@ -215,6 +215,9 @@ class PatientAuthController extends GetxController {
     SharePrefsHelper.setString(
         AppConstants.userImage, response.body["data"]["img"] ?? "");
 
+    SharePrefsHelper.setString(
+        AppConstants.email, response.body["data"]["email"] ?? "");
+
     generalController.getSavedInfo();
   }
 
@@ -239,6 +242,129 @@ class PatientAuthController extends GetxController {
     } else {
       navigator?.pop();
       ApiChecker.checkApi(response);
+    }
+  }
+
+  //================================== Forgot Password =============================
+
+  Rx<TextEditingController> forgotPasswordEmailController =
+      TextEditingController().obs;
+
+  RxBool forgotLoading = false.obs;
+
+  Future<void> forgotPassword() async {
+    forgotLoading.value = true;
+    refresh();
+    Map<String, String> body = {
+      "email": forgotPasswordEmailController.value.text,
+    };
+
+    var response = await ApiClient.postData(
+      ApiUrl.forgotPassword,
+      jsonEncode(body),
+    );
+    if (response.statusCode == 200) {
+      Get.offAllNamed(AppRoutes.forgotOtpScreen);
+      forgotLoading.value = false;
+      refresh();
+    } else {
+      ApiChecker.checkApi(response);
+      forgotLoading.value = false;
+      refresh();
+    }
+  }
+
+  ///============================== Verify Forgot Password OTP =============================
+
+  RxString acccesToken = "".obs;
+
+  Rx<TextEditingController> otpController = TextEditingController().obs;
+
+  Future<void> verifyOTPForgotPassword() async {
+    generalController.showPopUpLoader();
+    var body = {
+      "email": forgotPasswordEmailController.value.text,
+      "code": otpController.value.text,
+    };
+    var response = await ApiClient.postData(ApiUrl.varifyCode, jsonEncode(body),
+        isContentType: false,
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Authorization': 'Bearer $bearerToken'
+        });
+
+    if (response.statusCode == 200) {
+      acccesToken.value = response.body["accessToken"];
+      refresh();
+      debugPrint(
+          "============================ acccesToken=================${acccesToken.value}");
+      SharePrefsHelper.setString(
+          AppConstants.bearerToken, response.body["accessToken"]);
+      Get.offAllNamed(AppRoutes.resetPasswordScreen);
+    } else {
+      toastMessage(message: response.body["message"]);
+    }
+  }
+
+  resendForgotOtp() async {
+    generalController.showPopUpLoader();
+    Map<String, String> body = {
+      "email": forgotPasswordEmailController.value.text,
+    };
+
+    var response = await ApiClient.postData(
+      ApiUrl.resendCode,
+      jsonEncode(body),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      secondsRemaining.value = 30;
+      secondsRemaining.refresh();
+      startTimer();
+      navigator?.pop();
+    } else {
+      navigator?.pop();
+      ApiChecker.checkApi(response);
+    }
+  }
+
+  //======================== Reset Password ====================
+
+  Rx<TextEditingController> resetPasswordController =
+      TextEditingController().obs;
+  Rx<TextEditingController> resetConfirmPasswordController =
+      TextEditingController().obs;
+
+  RxBool resetPasswordLoading = false.obs;
+
+  Future<void> resetPassword() async {
+    resetPasswordLoading.value = true;
+    refresh();
+    Map<String, String> body = {
+      "password": resetPasswordController.value.text,
+      "confirm_password": resetConfirmPasswordController.value.text,
+    };
+
+    var response = await ApiClient.postData(
+      ApiUrl.resetPassword,
+      jsonEncode(body),
+      // headers: {
+      //   'Content-Type': 'application/json',
+      //   'Authorization': acccesToken.value
+      // },
+    );
+    if (response.statusCode == 200) {
+      toastMessage(message: response.body["message"], colors: Colors.green);
+      Get.offAllNamed(AppRoutes.signInScreen);
+      resetPasswordLoading.value = false;
+      refresh();
+    } else {
+      ApiChecker.checkApi(response);
+      resetPasswordLoading.value = false;
+      refresh();
     }
   }
 }

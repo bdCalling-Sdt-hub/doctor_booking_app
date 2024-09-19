@@ -125,10 +125,21 @@ class ApiUrl {
   //=========================== Doctor create payment account ==================//
 
   static const doctorCreatePaymentAccount = '/payment/create-connected-account';
+  static const forgotPassword = '/auth/send-verify-email';
 
   //=================== Create doctor call history =======================//
 
   static const createDoctorCallHistory = '/call/create-call-history';
+  static const resetPassword = '/auth/reset-password';
+
+  static getDoctorCallHistory({String page = '1'}) =>
+      "/call/get-call-history?page=$page";
+//================ Delete Account =================
+  static const deleteAccount = 'auth/delete-account';
+
+//===================== Delete Doctor Call histoiory ===================
+
+  static deleteCallHistory({required String id}) => "delete-call-history/$id";
   static const getCallHistory = '/call/get-call-history';
   static deleteCallHistory({required String id}) =>
       '/call/delete-call-history/$id';

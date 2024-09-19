@@ -20,6 +20,7 @@ import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_one/onb
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_three/onboard_screen_three.dart';
 import 'package:doctor_booking/view/screen/onboard_screen/onboard_screen_two/onboard_screen_two.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/forget_password_screen/forget_password_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/authentication/forgot_otp_screen/forgot_otp_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/reset_password_screen/reset_password_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/select_interest/select_interest.dart';
 import 'package:doctor_booking/view/screen/patient_screen/authentication/sign_in_screen/sign_in_screen.dart';
@@ -124,6 +125,7 @@ class AppRoutes {
   static const String allPatientListScreen = "/AllPatientListScreen";
   static const String informationScreen = "/InformationScreen";
   static const String patientDetails2 = "/PatientDetailsScreen";
+  static const String forgotOtpScreen = "/ForgotOtpScreen";
   //================= Reschedule Appointment Screen ===================//
 
   static const String rescheduleAppointmentScreen =
@@ -160,6 +162,7 @@ class AppRoutes {
     GetPage(name: signInScreen, page: () => SignInScreen()),
     // GetPage(name: onboardScreen, page: () => OnboardScreen()),
     GetPage(name: signUpScreen, page: () => SignUpScreen()),
+    GetPage(name: forgotOtpScreen, page: () => ForgotOtpScreen()),
     GetPage(
         name: doctorForgetPasswordScreen,
         page: () => const DoctorForgetPasswordScreen()),
@@ -167,7 +170,7 @@ class AppRoutes {
     GetPage(name: forgetPasswordScreen, page: () => ForgetPasswordScreen()),
     GetPage(name: signUpOtpScreen, page: () => const SignUpOtpScreen()),
     GetPage(name: forgetPasswordScreen, page: () => ForgetPasswordScreen()),
-    GetPage(name: resetPasswordScreen, page: () => const ResetPasswordScreen()),
+    GetPage(name: resetPasswordScreen, page: () => ResetPasswordScreen()),
     GetPage(name: selectInterest, page: () => SelectInterest()),
 
     ///=============================Hospital Section======================

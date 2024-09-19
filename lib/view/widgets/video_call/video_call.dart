@@ -9,13 +9,13 @@ class AudioVideoCall extends StatelessWidget {
     super.key,
     required this.callID,
     required this.userName,
-    required this.doctorId,
+    required this.senderID,
     required this.receiverId,
   });
 
   final String callID;
   final String userName;
-  final String doctorId;
+  final String senderID;
   final String receiverId;
 
   //final String userID = Random().nextInt(1000000).toString();
@@ -25,14 +25,13 @@ class AudioVideoCall extends StatelessWidget {
     return ZegoUIKitPrebuiltCall(
         events: ZegoUIKitPrebuiltCallEvents(),
         onDispose: () {
-          //TODO Have to FIX it
           controller.createCallHistory(
-              doctorId: doctorId, paitentId: receiverId);
+              senderId: senderID, receiverId: receiverId, userName: userName);
         },
         appID: ZEGOCLOUD_APP_ID,
         appSign: ZEGOCLOUD_APP_SIGN,
         callID: callID,
-        userID: doctorId,
+        userID: senderID,
         userName: userName,
         config: ZegoUIKitPrebuiltCallConfig.oneOnOneVideoCall());
   }

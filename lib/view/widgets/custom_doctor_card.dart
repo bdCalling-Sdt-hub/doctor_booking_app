@@ -23,6 +23,8 @@ class CustomDoctorCard extends StatelessWidget {
     this.videoCallOrConsaltentDoneButton,
     this.showVideoCallOrConsalttentButton = false,
     this.rescheduleButtonText,
+    this.showPaymentOption = false,
+    this.paymentStatus = false,
   });
 
   final String imageUrl;
@@ -37,6 +39,8 @@ class CustomDoctorCard extends StatelessWidget {
   final VoidCallback? videoCallOrConsaltentDoneButton;
   final bool? showVideoCallOrConsalttentButton;
   final String? rescheduleButtonText;
+  final bool? showPaymentOption;
+  final bool? paymentStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +81,7 @@ class CustomDoctorCard extends StatelessWidget {
                             ///==============name==========///
                             CustomText(
                               text: patentName,
-                              fontSize: 16.sp,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w400,
                               color: AppColors.grayNormal,
                               bottom: 3,
@@ -87,7 +91,7 @@ class CustomDoctorCard extends StatelessWidget {
                         //==============time=============//
                         CustomText(
                           text: time,
-                          fontSize: 14.sp,
+                          fontSize: 12.sp,
                           fontWeight: FontWeight.w400,
                           color: timeTextColor ?? AppColors.grayNormal,
                           bottom: 3,
@@ -108,15 +112,40 @@ class CustomDoctorCard extends StatelessWidget {
                                     .w), // Add spacing between location icon and text
                             CustomText(
                               text: loacation,
-                              fontSize: 12.sp,
+                              fontSize: 10.sp,
                               fontWeight: FontWeight.w400,
                               color: AppColors.whiteDarker,
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 8.h,
-                        ),
+                        showPaymentOption!
+                            ? Row(
+                                children: [
+                                  CustomText(
+                                    text: AppStrings.paymentStatus,
+                                    fontSize: 10.w,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColors.whiteDarker,
+                                  ),
+                                  SizedBox(
+                                    width: 4.w,
+                                  ),
+                                  paymentStatus!
+                                      ? CustomText(
+                                          text: AppStrings.paid,
+                                          fontSize: 10.w,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.bluNormalHover,
+                                        )
+                                      : CustomText(
+                                          text: AppStrings.notPaid,
+                                          fontSize: 10.w,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.red,
+                                        ),
+                                ],
+                              )
+                            : const SizedBox(),
 
                         ///======================= Video Call =======================
                         showVideoCallOrConsalttentButton!

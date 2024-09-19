@@ -331,6 +331,7 @@ class _CustomCalender extends State<CustomCalender> {
                 height:
                     100, // Adjust the height as per your design requirements
                 child: PageView.builder(
+                  reverse: true,
                   onPageChanged: onWeekChange,
                   controller: pageController,
                   physics: widget.scrollPhysics,

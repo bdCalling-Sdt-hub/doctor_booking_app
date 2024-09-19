@@ -233,7 +233,7 @@ class DoctorHomeScreen extends StatelessWidget {
                                               patentName:
                                                   data.userId?.name ?? '',
                                               time:
-                                                  "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
+                                                  "${DateConverter.timeFormetString(data.date ?? "")}(${data.time})",
                                               loacation:
                                                   data.appointmentType ?? '',
                                               onTap: () {
@@ -299,7 +299,7 @@ class DoctorHomeScreen extends StatelessWidget {
                 imageUrl: "${ApiUrl.imageBaseUrl}${data.userId?.img}",
                 patentName: data.userId?.name ?? '',
                 time:
-                    "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
+                    "${DateConverter.timeFormetString(data.date ?? "")}(${data.time})",
                 loacation: data.appointmentType ?? '',
                 onTap: () =>
                     Get.toNamed(AppRoutes.patientDetails, arguments: data),
@@ -330,7 +330,7 @@ class DoctorHomeScreen extends StatelessWidget {
                 imageUrl: "${ApiUrl.imageBaseUrl}${data.userId?.img}",
                 patentName: data.userId?.name ?? '',
                 time:
-                    "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
+                    "${DateConverter.timeFormetString(data.date ?? "")}(${data.time})",
                 loacation: data.appointmentType ?? '',
                 onTap: () =>
                     Get.toNamed(AppRoutes.patientDetails, arguments: data),
@@ -370,7 +370,7 @@ class DoctorHomeScreen extends StatelessWidget {
                       imageUrl: "${ApiUrl.imageBaseUrl}${data.userId?.img}",
                       patentName: data.userId?.name ?? '',
                       time:
-                          "${DateConverter.formatDate(data.date ?? '')}(${data.time})",
+                          "${DateConverter.timeFormetString(data.date ?? "")}(${data.time})",
                       loacation: data.appointmentType ?? '',
                       onTap: () {
                         var userdetails = controller.appointMentList[index];

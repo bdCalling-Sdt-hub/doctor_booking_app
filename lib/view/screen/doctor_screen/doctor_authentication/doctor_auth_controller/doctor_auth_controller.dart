@@ -248,6 +248,7 @@ class DoctorAuthController extends GetxController {
       "current_affiliation": affiliationController.value.text,
       "appointment_fee": appointmentFeeController.value.text,
       "license_no": licenceNoController.value.text,
+      "desc": professionalDiscriptionController.value.text
     };
 
     // Create the multipart data for the license image
@@ -297,11 +298,34 @@ class DoctorAuthController extends GetxController {
         isError: false,
       );
 
-      Get.offAllNamed(AppRoutes.doctorHomeScreen);
+      Get.offAllNamed(AppRoutes.signInScreen);
       debugPrint("============================= Sucsses=================");
     } else {
       navigator?.pop();
       toastMessage(message: response.body["message"]);
+    }
+  }
+ 
+  resendForgotOtp() async {
+    generalController.showPopUpLoader();
+    Map<String, String> body = {
+      "email": doctorEmailController.value.text,
+    };
+
+    var response = await ApiClient.postData(
+      ApiUrl.resendCode,
+      jsonEncode(body),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      // secondsRemaining.value = 30;
+      // secondsRemaining.refresh();
+      // startTimer();
+      navigator?.pop();
+    } else {
+      navigator?.pop();
+      ApiChecker.checkApi(response);
     }
   }
 }
