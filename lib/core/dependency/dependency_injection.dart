@@ -5,6 +5,7 @@ import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doct
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_payment_screen/payment_controller/doctor_payment_controller.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_profile_screen/doctor_profile_controller/doctor_profile_controller.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/doctor_schedule_controller/doctor_schedule_controller.dart';
+import 'package:doctor_booking/view/screen/patient_screen/call_history_screen/controller/call_history_controller.dart';
 import 'package:doctor_booking/view/screen/patient_screen/hospital_screen/controller/hospital_controller.dart';
 import 'package:doctor_booking/controller/notification_controller/notification_controller.dart';
 import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/controller/patient_appointment_controller.dart';
@@ -23,6 +24,7 @@ class DependencyInjection extends Bindings {
     Get.lazyPut(() => HospitalController(), fenix: true);
     Get.lazyPut(() => PatientAppointmentController(), fenix: true);
     Get.lazyPut(() => PaitentPaymentController(), fenix: true);
+    Get.lazyPut(() => CallHistoryController(), fenix: true);
 
     ///========================== Doctor Home section ==================
 

@@ -151,7 +151,7 @@ class AppRoutes {
     GetPage(name: privacyPolicyScreen, page: () => PrivacyPolicyScreen()),
     GetPage(
         name: termsAndConditionScreen, page: () => TermsAndConditionScreen()),
-    GetPage(name: callHistoryScreen, page: () => const CallHistoryScreen()),
+    GetPage(name: callHistoryScreen, page: () => CallHistoryScreen()),
     GetPage(name: categoriesScreen, page: () => CategoriesScreen()),
     GetPage(name: subCategoriesScreen, page: () => const SubCategoriesScreen()),
     GetPage(name: specialistList, page: () => PopularSpecialistsScreen()),

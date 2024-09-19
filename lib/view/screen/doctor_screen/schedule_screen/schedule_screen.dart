@@ -115,7 +115,7 @@ class ScheduleScreen extends StatelessWidget {
                         debugPrint(
                             "Doctor ID>>>>${model.doctorId} || Doctor name>>>>${profileController.profileModel.value.name} || Call ID ${model.id}");
                         Get.to(() => AudioVideoCall(
-                              senderID: model.doctorId ?? "",
+                              doctorId: model.doctorId ?? "",
                               userName:
                                   profileController.profileModel.value.name ??
                                       "",

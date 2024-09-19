@@ -1,7 +1,5 @@
 import 'package:doctor_booking/controller/calls_controller.dart/calls_controller.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
-import 'package:doctor_booking/utils/app_icons/app_icons.dart';
-import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_image.dart';
 import 'package:doctor_booking/view/widgets/custom_popupmenu_button/custom_popupmenu_button.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
@@ -61,13 +59,13 @@ class CustomCallHistory extends StatelessWidget {
             SizedBox(
               width: 16.w, // Adjusted for consistency
             ),
-            const CustomImage(
-              imageSrc: AppIcons.videoCammera,
-              imageColor: AppColors.grayNormal,
-            ),
-            SizedBox(
-              width: 16.w, // Consistent spacing
-            ),
+            // const CustomImage(
+            //   imageSrc: AppIcons.videoCammera,
+            //   imageColor: AppColors.grayNormal,
+            // ),
+            // SizedBox(
+            //   width: 16.w, // Consistent spacing
+            // ),
 
             CustomPopupmenuButton(
                 onChanged: (value) {

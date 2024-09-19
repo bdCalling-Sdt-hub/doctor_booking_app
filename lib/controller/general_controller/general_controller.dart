@@ -332,10 +332,15 @@ class GeneralController extends GetxController with GetxServiceMixin {
   }
 
   Future<void> createCallHistory(
-      {required String senderId, required String receiverId}) async {
+      {required String doctorId, required String paitentId}) async {
+    // Map<String, String> body = {
+    //   "doctorId": senderId,
+    //   "userId": receiverId,
+    // };
+
     Map<String, String> body = {
-      "doctorId": senderId,
-      "userId": receiverId,
+      "doctorId": doctorId,
+      "userId": paitentId,
     };
 
     var response = await ApiClient.postData(

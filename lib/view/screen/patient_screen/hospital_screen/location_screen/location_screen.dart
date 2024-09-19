@@ -21,7 +21,10 @@ class LocationScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.whiteLightActive,
       bottomNavigationBar: const PatientNavBar(currentIndex: 2),
-      appBar: const CustomAppBar(appBarContent: AppStrings.location),
+      appBar: const CustomAppBar(
+        appBarContent: AppStrings.location,
+        showBackButton: false,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
