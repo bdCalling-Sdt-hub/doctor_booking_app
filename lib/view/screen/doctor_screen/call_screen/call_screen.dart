@@ -6,6 +6,7 @@ import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 
 import 'package:doctor_booking/view/screen/doctor_screen/call_screen/inner_widget/scearch_card.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
+import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_call_history/custom_call_history.dart';
 import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
 import 'package:doctor_booking/view/widgets/doctor_nav_bar/doctor_nav_bar.dart';
@@ -42,18 +43,51 @@ class CallScreen extends StatelessWidget {
                     SizedBox(
                       height: 8.h,
                     ),
-                    ScearchCard(
-                      controller: callsController.searchController.value,
-                      prefixIcon: const Icon(
-                        Icons.search,
-                        color: AppColors.whiteDarker,
-                      ),
-                      hintText: AppStrings.searchHere,
-                      onChanged: (value) {
-                        callsController.searchCallsHistory();
+                    Column(
+                      children: [
+                        //============================= Search Field =======================
+                        ScearchCard(
+                          controller: callsController.searchController.value,
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: AppColors.whiteDarker,
+                          ),
+                          hintText: AppStrings.searchHere,
+                          onChanged: (value) {
+                            if (value.isNotEmpty) {
+                              callsController.searchCallsHistory();
+                            } else {
+                              callsController.getDoctorCallHistory();
+                              FocusScope.of(context).unfocus();
+                            }
+                          },
+                        ),
 
-                        callsController.callsScrollControloler.refresh();
-                      },
+                        //============================ Search Clear button =====================
+                        callsController.searchController.value.text.isNotEmpty
+                            ? Column(
+                                children: [
+                                  SizedBox(height: 8.h),
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: CustomButton(
+                                      width: 90.w,
+                                      height: 30.h,
+                                      onTap: () {
+                                        callsController.searchController.value
+                                            .clear();
+
+                                        callsController.getDoctorCallHistory();
+
+                                        FocusScope.of(context).unfocus();
+                                      },
+                                      title: "Clear",
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : const SizedBox()
+                      ],
                     ),
                     SizedBox(
                       height: 20.h,
