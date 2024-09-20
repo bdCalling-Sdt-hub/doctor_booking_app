@@ -9,7 +9,6 @@ import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -49,26 +48,26 @@ class DoctorAuthController extends GetxController {
 
   //===================== Doctor Personal info controller =======================
   Rx<TextEditingController> doctorNameController =
-      TextEditingController(text: kDebugMode ? "Rafsan" : "").obs;
+      TextEditingController().obs;
 
   Rx<TextEditingController> doctorDateOfBirthController =
-      TextEditingController(text: kDebugMode ? "Augest 25, 2024" : "").obs;
+      TextEditingController().obs;
 
   Rx<TextEditingController> doctorEmailController =
-      TextEditingController(text: kDebugMode ? "nababej364@kwalah.com" : "")
+      TextEditingController()
           .obs;
 
   Rx<TextEditingController> doctorPhoneNumberController =
-      TextEditingController(text: kDebugMode ? "123456789" : "").obs;
+      TextEditingController().obs;
 
   Rx<TextEditingController> doctorLocationController =
-      TextEditingController(text: kDebugMode ? "Badda, Dhaka" : "").obs;
+      TextEditingController().obs;
 
   Rx<TextEditingController> doctorPasswordController =
-      TextEditingController(text: kDebugMode ? "1234567Rr" : "").obs;
+      TextEditingController().obs;
 
   Rx<TextEditingController> doctorConfirmPasswordController =
-      TextEditingController(text: kDebugMode ? "1234567Rr" : "").obs;
+      TextEditingController().obs;
 
   //================== Doctor Appointment Time controller ==========================//
   Rx<TextEditingController> sundayTypeController = TextEditingController().obs;
@@ -117,23 +116,23 @@ class DoctorAuthController extends GetxController {
 
   ///============================== Professional Information ===============================
   Rx<TextEditingController> specialisController =
-      TextEditingController(text: kDebugMode ? "Teeth" : "").obs;
+      TextEditingController().obs;
 
   Rx<TextEditingController> appointmentFeeController =
-      TextEditingController(text: kDebugMode ? "50" : "").obs;
+      TextEditingController().obs;
 
   Rx<TextEditingController> experienceController =
-      TextEditingController(text: kDebugMode ? "8" : "").obs;
+      TextEditingController().obs;
 
   Rx<TextEditingController> educationController =
-      TextEditingController(text: kDebugMode ? "CSE" : "").obs;
+      TextEditingController().obs;
 
   Rx<TextEditingController> affiliationController =
-      TextEditingController(text: kDebugMode ? "BdCalling" : "").obs;
+      TextEditingController().obs;
   Rx<TextEditingController> licenceNoController =
-      TextEditingController(text: kDebugMode ? "123456789765432" : "").obs;
+      TextEditingController().obs;
   Rx<TextEditingController> professionalDiscriptionController =
-      TextEditingController(text: kDebugMode ? "This is discription" : "").obs;
+      TextEditingController().obs;
 
   getTime({
     required int day,

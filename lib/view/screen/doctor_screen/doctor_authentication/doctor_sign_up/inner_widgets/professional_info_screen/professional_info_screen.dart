@@ -65,10 +65,13 @@ class ProfessionalInfoScreen extends StatelessWidget {
                   hasBackgroundColor: true,
                   title: 'Appointment Fee',
                   controller:
-                      doctorAuthController.appointmentFeeController.value,
+                      doctorAuthController.appointmentFeeController.value, 
+                  keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.toString().isEmpty) {
                       return AppStrings.fieldCantBeEmpty;
+                    }else if(double.parse(value) <= 49){
+                      return 'Minimum fee is 50';
                     }
                     return null;
                   },

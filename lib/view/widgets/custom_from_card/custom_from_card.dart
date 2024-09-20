@@ -18,7 +18,8 @@ class CustomFormCard extends StatelessWidget {
   final String? Function(dynamic)? validator;
   final bool? hintTextChangeColor;
   final int? maxLine;
-  final Widget? suffixIcon;
+  final Widget? suffixIcon; 
+  final TextInputType? keyboardType;
 
   const CustomFormCard({
     super.key,
@@ -34,7 +35,7 @@ class CustomFormCard extends StatelessWidget {
     this.hintText,
     this.hintTextChangeColor = false,
     this.maxLine,
-    this.suffixIcon,
+    this.suffixIcon, this.keyboardType,
   });
 
   @override
@@ -51,7 +52,8 @@ class CustomFormCard extends StatelessWidget {
           bottom: 12.h,
           maxLines: 2,
         ),
-        CustomTextField(
+        CustomTextField( 
+          
           validator: validator,
           readOnly: readOnly,
           hintText: hintText,
@@ -75,8 +77,8 @@ class CustomFormCard extends StatelessWidget {
           fillColor:
               hasBackgroundColor ? AppColors.white : AppColors.whiteNormal,
           fieldBorderColor: AppColors.grayLightHover,
-          keyboardType:
-              isPassword ? TextInputType.visiblePassword : TextInputType.text,
+          keyboardType: keyboardType?? TextInputType.text,
+             
           onTap: onTap,
           maxLines: isMultiLine ? 8 : maxLine ?? 1,
         ),

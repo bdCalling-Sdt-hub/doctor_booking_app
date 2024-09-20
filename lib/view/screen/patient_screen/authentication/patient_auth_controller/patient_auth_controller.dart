@@ -10,7 +10,6 @@ import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/service/socket_service.dart';
 import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -20,9 +19,9 @@ class PatientAuthController extends GetxController {
 // ============================ Sign in text Editing controller ======================
 
   final TextEditingController emailController =
-      TextEditingController(text: kDebugMode ? "powirrrde4919@daypey.com" : "");
+      TextEditingController();
   final TextEditingController passwordController =
-      TextEditingController(text: kDebugMode ? "1234567" : "");
+      TextEditingController();
 
   ///=================== Update Interest ===================
 
@@ -179,26 +178,26 @@ class PatientAuthController extends GetxController {
   //=============================== Patient Sing up Controller =========================//
 
   TextEditingController patientNameController =
-      TextEditingController(text: kDebugMode ? "Rafsan" : "");
+      TextEditingController();
 
   Rx<TextEditingController> patientDateOfBirthController =
-      TextEditingController(text: kDebugMode ? "August 10, 2024" : "").obs;
+      TextEditingController().obs;
 
   Rx<TextEditingController> patientEmailController =
-      TextEditingController(text: kDebugMode ? "nababej364@kwalah.com" : "")
+      TextEditingController()
           .obs;
 
   Rx<TextEditingController> patientPhoneNumberController =
-      TextEditingController(text: kDebugMode ? "1234567" : "").obs;
+      TextEditingController().obs;
 
   Rx<TextEditingController> patientLoactionController =
-      TextEditingController(text: kDebugMode ? "Badda, Dhaka" : "").obs;
+      TextEditingController().obs;
 
   Rx<TextEditingController> patientPasswordController =
-      TextEditingController(text: kDebugMode ? "1234567Rr" : "").obs;
+      TextEditingController().obs;
 
   Rx<TextEditingController> patientConfirmPasswordController =
-      TextEditingController(text: kDebugMode ? "1234567Rr" : "").obs;
+      TextEditingController().obs;
 
   ////=========================== Save Info =============================
   saveInfo({required Response<dynamic> response}) {
