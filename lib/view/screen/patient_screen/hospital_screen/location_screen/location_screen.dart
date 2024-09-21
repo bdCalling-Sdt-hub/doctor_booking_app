@@ -5,6 +5,7 @@ import 'package:doctor_booking/view/screen/patient_screen/hospital_screen/contro
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
+import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:doctor_booking/view/widgets/patient_nav_bar/patient_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +27,9 @@ class LocationScreen extends StatelessWidget {
         showBackButton: false,
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Column(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: Obx(() {
+          return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const CustomImage(
@@ -67,21 +68,23 @@ class LocationScreen extends StatelessWidget {
               ),
 
               ///=========================Allow Access Button===================
-              CustomButton(
-                onTap: () {
-                  hospitalController.determinePosition()
-                      // .then((value) {
-                      //   value.latitude;
-                      //   value.longitude;
-                      // })
-                      ;
-                  //Get.toNamed(AppRoutes.hospitalScreen);
-                },
-                title: AppStrings.allowAccess,
-              )
+              hospitalController.isLoading.value
+                  ? const CustomLoader()
+                  : CustomButton(
+                      onTap: () {
+                        hospitalController.determinePosition()
+                            // .then((value) {
+                            //   value.latitude;
+                            //   value.longitude;
+                            // })
+                            ;
+                        //Get.toNamed(AppRoutes.hospitalScreen);
+                      },
+                      title: AppStrings.allowAccess,
+                    )
             ],
-          ),
-        ),
+          );
+        }),
       ),
     );
   }

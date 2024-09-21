@@ -202,6 +202,7 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
           experience: data.experience ?? "",
           location: data.location ?? "",
           appointmentFee: data.appointmentFee,
+          dateOfBirth: data.dateOfBirth??""
         ));
       }
 

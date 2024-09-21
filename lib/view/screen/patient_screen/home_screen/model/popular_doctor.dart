@@ -3,7 +3,7 @@ class PopularDoctorDatum {
   String? img;
   String? name;
   String? email;
-  DateTime? dateOfBirth;
+  String? dateOfBirth;
   String? location;
   String? phone;
   String? password;
@@ -13,7 +13,6 @@ class PopularDoctorDatum {
   String? role;
   bool? verified;
   bool? isFavorite;
-
   int? access;
   AvailableDays? availableDays;
   AvailableFor? availableFor;
@@ -29,86 +28,118 @@ class PopularDoctorDatum {
   int? v;
   int? appointmentFee;
 
-  PopularDoctorDatum(
-      {this.id,
-      this.img,
-      this.name,
-      this.email,
-      this.dateOfBirth,
-      this.location,
-      this.phone,
-      this.password,
-      this.provider,
-      this.isFavorite,
-      this.gender,
-      this.block,
-      this.role,
-      this.verified,
-      this.access,
-      this.availableDays,
-      this.availableFor,
-      this.license,
-      this.specialization,
-      this.experience,
-      this.educationalBackground,
-      this.currentAffiliation,
-      this.rating,
-      this.totalRated,
-      this.createdAt,
-      this.updatedAt,
-      this.v,
-      this.appointmentFee});
+  PopularDoctorDatum({
+    this.id,
+    this.img,
+    this.name,
+    this.email,
+    this.dateOfBirth,
+    this.location,
+    this.phone,
+    this.password,
+    this.provider,
+    this.gender,
+    this.block,
+    this.role,
+    this.verified,
+    this.isFavorite,
+    this.access,
+    this.availableDays,
+    this.availableFor,
+    this.license,
+    this.specialization,
+    this.experience,
+    this.educationalBackground,
+    this.currentAffiliation,
+    this.rating,
+    this.totalRated,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+    this.appointmentFee,
+  });
 
-  factory PopularDoctorDatum.fromJson(Map<String, dynamic> json) =>
-      PopularDoctorDatum(
-          id: json["_id"],
-          img: json["img"],
-          name: json["name"],
-          email: json["email"],
-          dateOfBirth: json["date_of_birth"] == null
-              ? null
-              : DateTime.parse(json["date_of_birth"]),
-          location: json["location"],
-          phone: json["phone"],
-          password: json["password"],
-          provider: json["provider"],
-          gender: json["gender"],
-          block: json["block"],
-          role: json["role"],
-          verified: json["verified"],
-          isFavorite: json["isFavorite"],
-          access: json["access"],
-          availableDays: json["available_days"] == null
-              ? null
-              : AvailableDays.fromJson(json["available_days"]),
-          availableFor: json["available_for"] == null
-              ? null
-              : AvailableFor.fromJson(json["available_for"]),
-          license: json["license"],
-          specialization: json["specialization"],
-          experience: json["experience"],
-          educationalBackground: json["educational_background"],
-          currentAffiliation: json["current_affiliation"],
-          rating: json["rating"],
-          totalRated: json["total_rated"],
-          createdAt: json["createdAt"] == null
-              ? null
-              : DateTime.parse(json["createdAt"]),
-          updatedAt: json["updatedAt"] == null
-              ? null
-              : DateTime.parse(json["updatedAt"]),
-          v: json["__v"],
-          appointmentFee: json["appointment_fee"]);
+  factory PopularDoctorDatum.fromJson(Map<String, dynamic> json) {
+    return PopularDoctorDatum(
+      id: json["_id"],
+      img: json["img"],
+      name: json["name"],
+      email: json["email"],
+      dateOfBirth: json["date_of_birth"],
+      location: json["location"],
+      phone: json["phone"],
+      password: json["password"],
+      provider: json["provider"],
+      gender: json["gender"],
+      block: json["block"],
+      role: json["role"],
+      verified: json["verified"],
+      isFavorite: json["isFavorite"],
+      access: json["access"],
+      availableDays: json["available_days"] != null
+          ? AvailableDays.fromJson(json["available_days"])
+          : null,
+      availableFor: json["available_for"] != null
+          ? AvailableFor.fromJson(json["available_for"])
+          : null,
+      license: json["license"],
+      specialization: json["specialization"],
+      experience: json["experience"],
+      educationalBackground: json["educational_background"],
+      currentAffiliation: json["current_affiliation"],
+      rating: json["rating"],
+      totalRated: json["total_rated"],
+      createdAt:
+          json["createdAt"] != null ? DateTime.parse(json["createdAt"]) : null,
+      updatedAt:
+          json["updatedAt"] != null ? DateTime.parse(json["updatedAt"]) : null,
+      v: json["__v"],
+      appointmentFee: json["appointment_fee"],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "_id": id,
+      "img": img,
+      "name": name,
+      "email": email,
+      "date_of_birth": dateOfBirth,
+      "location": location,
+      "phone": phone,
+      "password": password,
+      "provider": provider,
+      "gender": gender,
+      "block": block,
+      "role": role,
+      "verified": verified,
+      "isFavorite": isFavorite,
+      "access": access,
+      "available_days": availableDays?.toJson(),
+      "available_for": availableFor?.toJson(),
+      "license": license,
+      "specialization": specialization,
+      "experience": experience,
+      "educational_background": educationalBackground,
+      "current_affiliation": currentAffiliation,
+      "rating": rating,
+      "total_rated": totalRated,
+      "createdAt": createdAt?.toIso8601String(),
+      "updatedAt": updatedAt?.toIso8601String(),
+      "__v": v,
+      "appointment_fee": appointmentFee,
+    };
+  }
 }
 
 class AvailableDays {
-  List<dynamic>? monday;
+  List<String>? monday;
   List<String>? tuesday;
-  List<dynamic>? wednesday;
-  List<dynamic>? thursday;
-  List<dynamic>? friday;
-  List<dynamic>? saturday;
-  List<dynamic>? sunday;
+  List<String>? wednesday;
+  List<String>? thursday;
+  List<String>? friday;
+  List<String>? saturday;
+  List<String>? sunday;
 
   AvailableDays({
     this.monday,
@@ -120,47 +151,33 @@ class AvailableDays {
     this.sunday,
   });
 
-  factory AvailableDays.fromJson(Map<String, dynamic> json) => AvailableDays(
-        monday: json["monday"] == null
-            ? []
-            : List<dynamic>.from(json["monday"]!.map((x) => x)),
-        tuesday: json["tuesday"] == null
-            ? []
-            : List<String>.from(json["tuesday"]!.map((x) => x)),
-        wednesday: json["wednesday"] == null
-            ? []
-            : List<dynamic>.from(json["wednesday"]!.map((x) => x)),
-        thursday: json["thursday"] == null
-            ? []
-            : List<dynamic>.from(json["thursday"]!.map((x) => x)),
-        friday: json["friday"] == null
-            ? []
-            : List<dynamic>.from(json["friday"]!.map((x) => x)),
-        saturday: json["saturday"] == null
-            ? []
-            : List<dynamic>.from(json["saturday"]!.map((x) => x)),
-        sunday: json["sunday"] == null
-            ? []
-            : List<dynamic>.from(json["sunday"]!.map((x) => x)),
-      );
+  factory AvailableDays.fromJson(Map<String, dynamic> json) {
+    return AvailableDays(
+      monday: json["monday"] != null ? List<String>.from(json["monday"]) : [],
+      tuesday:
+          json["tuesday"] != null ? List<String>.from(json["tuesday"]) : [],
+      wednesday:
+          json["wednesday"] != null ? List<String>.from(json["wednesday"]) : [],
+      thursday:
+          json["thursday"] != null ? List<String>.from(json["thursday"]) : [],
+      friday: json["friday"] != null ? List<String>.from(json["friday"]) : [],
+      saturday:
+          json["saturday"] != null ? List<String>.from(json["saturday"]) : [],
+      sunday: json["sunday"] != null ? List<String>.from(json["sunday"]) : [],
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        "monday":
-            monday == null ? [] : List<dynamic>.from(monday!.map((x) => x)),
-        "tuesday":
-            tuesday == null ? [] : List<dynamic>.from(tuesday!.map((x) => x)),
-        "wednesday": wednesday == null
-            ? []
-            : List<dynamic>.from(wednesday!.map((x) => x)),
-        "thursday":
-            thursday == null ? [] : List<dynamic>.from(thursday!.map((x) => x)),
-        "friday":
-            friday == null ? [] : List<dynamic>.from(friday!.map((x) => x)),
-        "saturday":
-            saturday == null ? [] : List<dynamic>.from(saturday!.map((x) => x)),
-        "sunday":
-            sunday == null ? [] : List<dynamic>.from(sunday!.map((x) => x)),
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      "monday": monday ?? [],
+      "tuesday": tuesday ?? [],
+      "wednesday": wednesday ?? [],
+      "thursday": thursday ?? [],
+      "friday": friday ?? [],
+      "saturday": saturday ?? [],
+      "sunday": sunday ?? [],
+    };
+  }
 
   List<dynamic> getTimesForDay(String day) {
     switch (day) {
@@ -203,23 +220,27 @@ class AvailableFor {
     this.sunday,
   });
 
-  factory AvailableFor.fromJson(Map<String, dynamic> json) => AvailableFor(
-        monday: json["monday"],
-        tuesday: json["tuesday"],
-        wednesday: json["wednesday"],
-        thursday: json["thursday"],
-        friday: json["friday"],
-        saturday: json["saturday"],
-        sunday: json["sunday"],
-      );
+  factory AvailableFor.fromJson(Map<String, dynamic> json) {
+    return AvailableFor(
+      monday: json["monday"],
+      tuesday: json["tuesday"],
+      wednesday: json["wednesday"],
+      thursday: json["thursday"],
+      friday: json["friday"],
+      saturday: json["saturday"],
+      sunday: json["sunday"],
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        "monday": monday,
-        "tuesday": tuesday,
-        "wednesday": wednesday,
-        "thursday": thursday,
-        "friday": friday,
-        "saturday": saturday,
-        "sunday": sunday,
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      "monday": monday,
+      "tuesday": tuesday,
+      "wednesday": wednesday,
+      "thursday": thursday,
+      "friday": friday,
+      "saturday": saturday,
+      "sunday": sunday,
+    };
+  }
 }

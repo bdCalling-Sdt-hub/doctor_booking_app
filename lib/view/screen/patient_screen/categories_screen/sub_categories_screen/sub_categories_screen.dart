@@ -60,7 +60,7 @@ class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
                 itemCount: homeController.allDoctorList.length,
                 itemBuilder: (context, index) {
                   PopularDoctorDatum docData =
-                      homeController.popularDoctorList[index];
+                      homeController.allDoctorList[index];
                   return GestureDetector(
                     onTap: () {
                       Get.toNamed(AppRoutes.specialistProfile,
@@ -72,12 +72,12 @@ class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
                             .makeFavourite(docID: docData.id ?? "")
                             .then((value) {
                           if (value) {
-                            homeController.popuDocFavouList[index] =
-                                !homeController.popuDocFavouList[index];
+                            homeController.allDocFavouList[index] =
+                                !homeController.allDocFavouList[index];
                           }
                         });
                       },
-                      isFavourite: homeController.popuDocFavouList[index],
+                      isFavourite: true,
                       networkImageUrl: "${ApiUrl.baseUrl}/${docData.img ?? ""}",
                       name: docData.name ?? "",
                       profession: docData.specialization ?? "",

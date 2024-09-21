@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 
 class HospitalController extends GetxController {
   //======================== Get permission from user device ======================
+  RxBool isLoading = false.obs;
 
   void determinePosition() async {
     if (!await Permission.location.isGranted) {
@@ -44,6 +45,8 @@ class HospitalController extends GetxController {
 
   void fetchNearbyHospitals(
       double latitude, double longitude, String apiKey) async {
+    isLoading.value = true;
+    refresh();
     var url = Uri.parse(
         'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$latitude,$longitude&radius=2000&type=hospital&key=$apiKey');
 
@@ -56,11 +59,15 @@ class HospitalController extends GetxController {
           data["results"].map((x) => HospitalModel.fromJson(x)));
 
       debugPrint("Hospital List=======>>>>>>>>>${hospitalList.length}");
+      isLoading.value = false;
+      refresh();
 
       Get.toNamed(
         AppRoutes.hospitalScreen,
       );
     } else {
+      isLoading.value = false;
+      refresh();
       toastMessage(message: "Failed to load hospitals");
     }
   }

@@ -10,6 +10,7 @@ import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/service/socket_service.dart';
 import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -19,9 +20,9 @@ class PatientAuthController extends GetxController {
 // ============================ Sign in text Editing controller ======================
 
   final TextEditingController emailController =
-      TextEditingController();
+      TextEditingController(text: kDebugMode ? "mdh95831@gmail.com" : "");
   final TextEditingController passwordController =
-      TextEditingController();
+      TextEditingController(text: kDebugMode ? "1234567Rr" : "");
 
   ///=================== Update Interest ===================
 
@@ -177,15 +178,13 @@ class PatientAuthController extends GetxController {
 
   //=============================== Patient Sing up Controller =========================//
 
-  TextEditingController patientNameController =
-      TextEditingController();
+  TextEditingController patientNameController = TextEditingController();
 
   Rx<TextEditingController> patientDateOfBirthController =
       TextEditingController().obs;
 
   Rx<TextEditingController> patientEmailController =
-      TextEditingController()
-          .obs;
+      TextEditingController().obs;
 
   Rx<TextEditingController> patientPhoneNumberController =
       TextEditingController().obs;
@@ -370,8 +369,5 @@ class PatientAuthController extends GetxController {
     }
   }
 
-///==================== Change Password =======================
-
-
-
+  ///==================== Change Password =======================
 }

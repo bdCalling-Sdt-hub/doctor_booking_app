@@ -40,7 +40,7 @@ class DoctorId {
   String? img;
   String? name;
   String? email;
-  DateTime? dateOfBirth;
+  String? dateOfBirth;
   String? location;
   String? phone;
   String? password;
@@ -99,9 +99,7 @@ class DoctorId {
         img: json["img"],
         name: json["name"],
         email: json["email"],
-        dateOfBirth: json["date_of_birth"] == null
-            ? null
-            : DateTime.parse(json["date_of_birth"]),
+        dateOfBirth: json["date_of_birth"],
         location: json["location"],
         phone: json["phone"],
         password: json["password"],
