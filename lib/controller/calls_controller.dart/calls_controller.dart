@@ -1,6 +1,6 @@
+import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/model/calls_history_model/calls_history_model.dart';
 import 'package:doctor_booking/service/api_url.dart';
-import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/call_screen/call_popup/calls_popup.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,11 @@ import '../../service/api_check.dart';
 import '../../service/api_client.dart';
 import '../../utils/app_const/app_const.dart';
 
-class CallsController extends GetxController {
+class CallsController extends GetxController { 
+  
+  final GeneralController generalController = Get.find<GeneralController>();
+
+
   //===================== Call history remove popup =====================
   showCallsPopup() {
     return showDialog(
@@ -130,15 +134,17 @@ class CallsController extends GetxController {
     super.onInit();
   }
 
-  deleteSingalCallHistory({required String id}) async {
-    var response = await ApiClient.deleteData(ApiUrl.deleteCallHistory(id: id));
+   removeCallHistory({required String callID, required int index}) async {
+    generalController.showPopUpLoader();
 
+    var response = await ApiClient.deleteData(
+      ApiUrl.deleteCallHistoryPaitent(id: callID),
+    );
     if (response.statusCode == 200) {
-      showCustomSnackBar(response.body["message"], isError: false);
-      debugPrint(
-          "======================== Delelte History ==========================");
-      getDoctorCallHistory();
+      doctorCallHistoryList.removeAt(index);
+      navigator?.pop();
     } else {
+      navigator?.pop();
       ApiChecker.checkApi(response);
     }
   }
