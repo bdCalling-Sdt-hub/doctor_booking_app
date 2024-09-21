@@ -121,8 +121,8 @@ class CallScreen extends StatelessWidget {
                                             model.createdAt!),
                                     moreButton: () {
                                       if (model.id != null) {
-                                        callsController.deleteSingalCallHistory(
-                                            id: model.id!);
+                                       callsController.removeCallHistory(
+                                            callID: model.id!,index: index);
                                       }
                                     },
                                   )
@@ -151,8 +151,8 @@ class CallScreen extends StatelessWidget {
                                             model.createdAt!),
                                     moreButton: () {
                                       if (model.id != null) {
-                                        callsController.deleteSingalCallHistory(
-                                            id: model.id!);
+                                        callsController.removeCallHistory(
+                                            callID: model.id!,index: index);
                                       }
                                     },
                                   )

@@ -162,7 +162,7 @@ class ScheduleScreen extends StatelessWidget {
                           "${DateConverter.timeFormetString(model.date ?? "")}(${model.time})",
                       loacation: model.appointmentType ?? '',
                       onTap: () {},
-                      showPopupButton: true,
+                      showPopupButton: false,
                       reScheduleButton: () {
                         if (model.id != null) {
                           Navigator.pop(context);

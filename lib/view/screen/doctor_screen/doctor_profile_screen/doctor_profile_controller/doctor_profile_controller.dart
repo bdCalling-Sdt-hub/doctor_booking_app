@@ -222,7 +222,7 @@ class DoctorProfileController extends GetxController {
     var response = licenseImage.value != null
         ? await ApiClient.patchMultipartData(
             "${ApiUrl.updateDoctorProfile}$id", body,
-            multipartBody: [MultipartBody("img", licenseImage.value!)])
+            multipartBody: [MultipartBody("license", licenseImage.value!)])
         : await ApiClient.patchData(
             "${ApiUrl.updateDoctorProfile}$id", jsonEncode(body));
 
