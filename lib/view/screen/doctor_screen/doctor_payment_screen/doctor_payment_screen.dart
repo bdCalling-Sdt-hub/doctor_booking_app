@@ -1,4 +1,5 @@
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
+import 'package:doctor_booking/model/stripe_account_model/stripe_account_model.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_images/app_images.dart';
@@ -10,8 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'payment_controller/doctor_payment_controller.dart';
+
 class DoctorPaymentScreen extends StatelessWidget {
-  const DoctorPaymentScreen({super.key});
+   DoctorPaymentScreen({super.key}); 
+
+  final DoctorPaymentController doctorPaymentController = Get.find<DoctorPaymentController>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,35 +27,47 @@ class DoctorPaymentScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 20.h,
-            ),
-            CustomText(
-              text: AppStrings.creditDebitCards,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-              color: AppColors.grayNormal,
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            PaymentCard(
-              title: 'Dianne Russell',
-              subTitle: "* * * *   * * * *   7498",
-              deleteButton: () {},
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            AddNewButton(
-              onTap: () {
-                Get.toNamed(AppRoutes.informationScreen);
-              },
-            ),
-          ],
+        child: Obx(
+         () {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 20.h,
+                ),
+                CustomText(
+                  text: AppStrings.creditDebitCards,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.grayNormal,
+                ),
+                SizedBox(
+                  height: 20.h,
+                ), 
+              doctorPaymentController.stripeAccountList.isEmpty ? const SizedBox() :  Column(children: List.generate(doctorPaymentController.stripeAccountList.length, (index){ 
+                  StripeAccountModel data = doctorPaymentController.stripeAccountList[index];
+                  return  PaymentCard(
+                  title: data.name??'',
+                  subTitle: data.stripeAccountId != null ? data.stripeAccountId!.trArgs() : '',
+                  deleteButton: () {},
+                );
+                }),),
+                // PaymentCard(
+                //   title: 'Dianne Russell',
+                //   subTitle: "* * * *   * * * *   7498",
+                //   deleteButton: () {},
+                // ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                AddNewButton(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.informationScreen);
+                  },
+                ),
+              ],
+            );
+          }
         ),
       ),
     );

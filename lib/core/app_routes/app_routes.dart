@@ -206,7 +206,7 @@ class AppRoutes {
     GetPage(name: appointmentInfoScreen, page: () => AppointmentInfoScreen()),
     GetPage(name: personalInfoScreen, page: () => PersonalInfoScreen()),
     GetPage(name: professionalInfoScreen, page: () => ProfessionalInfoScreen()),
-    GetPage(name: doctorPaymentScreen, page: () => const DoctorPaymentScreen()),
+    GetPage(name: doctorPaymentScreen, page: () =>  DoctorPaymentScreen()),
     GetPage(name: informationScreen, page: () => InformationScreen()),
 
     //====================== Doctor appointments history ========================//

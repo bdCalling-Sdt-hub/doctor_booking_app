@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:doctor_booking/model/stripe_account_model/stripe_account_model.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
@@ -161,11 +162,43 @@ class DoctorPaymentController extends GetxController {
       }
       ApiChecker.checkApi(response);
     }
+  } 
+
+
+  RxList<StripeAccountModel> stripeAccountList =
+      <StripeAccountModel>[].obs;
+  Future<void> getStripeAccount() async {
+    var response = await ApiClient.getData(ApiUrl.getStripeAccount);
+
+    if (response.statusCode == 200) {
+      setRxRequestStatus(Status.completed);
+
+       if (response.body['data'] is List) {
+      // Handle list of StripeAccountModel
+      stripeAccountList.value = List<StripeAccountModel>.from(
+        (response.body['data'] as List).map((x) => StripeAccountModel.fromJson(x))
+      );
+    } else if (response.body['data'] is Map) {
+      // Handle the map case if needed
+      var dataMap = response.body['data'] as Map<String, dynamic>;
+      stripeAccountList.value = [
+        StripeAccountModel.fromJson(dataMap)
+      ];
+    }
+    } else {
+      if (response.statusText == ApiClient.somethingWentWrong) {
+        setRxRequestStatus(Status.internetError);
+      } else {
+        setRxRequestStatus(Status.error);
+      }
+      ApiChecker.checkApi(response);
+    }
   }
 
   @override
   void onInit() {
-    getMyAppoinmentHistory();
+    getMyAppoinmentHistory(); 
+    getStripeAccount();
     super.onInit();
   }
 }

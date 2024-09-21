@@ -112,7 +112,8 @@ class ApiUrl {
 
 //  static const doctorCreatePaymentAccount = '/appointment/update-appointment/';
   //=========================== Doctor payment history ==================//
-  static const doctorPaymentHistory = '/payment/user-payment-history';
+  static const doctorPaymentHistory = '/payment/user-payment-history'; 
+  static const getStripeAccount = '/payment/get-my-stripe-card'; 
 
   //=========================== Doctor Home Type Status ==================//
 
