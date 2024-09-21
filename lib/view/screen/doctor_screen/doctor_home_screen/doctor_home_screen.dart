@@ -228,6 +228,24 @@ class DoctorHomeScreen extends StatelessWidget {
                                           if (!controller
                                               .isLoadMoreRunning.value) {
                                             return CustomDoctorCard(
+                                              videoCallOrConsaltentDoneButton:
+                                                  () {
+                                                debugPrint(
+                                                    "Doctor ID>>>>${data.doctorId} || Doctor name>>>>${doctorProfileController.profileModel.value.name} || Call ID ${data.id}");
+                                                Get.to(() => AudioVideoCall(
+                                                      senderID:
+                                                          data.doctorId ?? "",
+                                                      userName:
+                                                          doctorProfileController
+                                                                  .profileModel
+                                                                  .value
+                                                                  .name ??
+                                                              "",
+                                                      callID: data.id ?? "",
+                                                      receiverId:
+                                                          data.userId?.id ?? "",
+                                                    ));
+                                              },
                                               imageUrl:
                                                   "${ApiUrl.imageBaseUrl}${data.userId?.img}",
                                               patentName:
@@ -237,9 +255,24 @@ class DoctorHomeScreen extends StatelessWidget {
                                               loacation:
                                                   data.appointmentType ?? '',
                                               onTap: () {
-                                                Get.toNamed(
-                                                    AppRoutes.patientDetails,
-                                                    arguments: data);
+                                                // Get.toNamed(
+                                                //     AppRoutes.patientDetails,
+                                                //     arguments: data);
+                                                debugPrint(
+                                                    "Doctor ID>>>>${data.doctorId} || Doctor name>>>>${doctorProfileController.profileModel.value.name} || Call ID ${data.id}");
+                                                Get.to(() => AudioVideoCall(
+                                                      senderID:
+                                                          data.doctorId ?? "",
+                                                      userName:
+                                                          doctorProfileController
+                                                                  .profileModel
+                                                                  .value
+                                                                  .name ??
+                                                              "",
+                                                      callID: data.id ?? "",
+                                                      receiverId:
+                                                          data.userId?.id ?? "",
+                                                    ));
                                               },
                                               reScheduleButton: () {
                                                 Navigator.pop(context);

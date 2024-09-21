@@ -6,51 +6,13 @@ import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/service/socket_service.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
-import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_notification_screen/doctor_notification_popup/doctor_notification_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NotificationController extends GetxController {
   GeneralController generalController = Get.find<GeneralController>();
-  final List<Map<String, dynamic>> notificationList = [
-    {
-      "title": "Appointment Success!",
-      "subtitle": 'Your appointment is confirmed',
-      "time": '5:07 Am',
-      'icon': AppIcons.eventAvailable
-    },
-    {
-      "title": "Appointment Remainder",
-      "subtitle": 'Your appointment is confirmed',
-      "time": '5:07 Am',
-      'icon': AppIcons.calendarClock
-    },
-    {
-      "title": "Appointment Canceled",
-      "subtitle": 'Your appointment is confirmed',
-      "time": '5:07 Am',
-      'icon': AppIcons.eventBusy
-    },
-    {
-      "title": "Payment Successful!",
-      "subtitle": 'Your appointment is confirmed',
-      "time": '5:07 Am',
-      'icon': AppIcons.payments
-    },
-    {
-      "title": "Schedule Changed",
-      "subtitle": 'Your appointment is confirmed',
-      "time": '5:07 Am',
-      'icon': AppIcons.eventRepeat
-    },
-    {
-      "title": "Share Your Experience ",
-      "subtitle": 'Your appointment is confirmed',
-      "time": '5:07 Am',
-      'icon': AppIcons.review
-    },
-  ];
+
   //=================== Doctor Notification controller ===================//
 
   showNotificationPopup() {

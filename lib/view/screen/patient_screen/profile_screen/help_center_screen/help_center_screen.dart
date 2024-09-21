@@ -67,10 +67,10 @@ class HelpCenterScreen extends StatelessWidget {
                   ///TODO============ Change The Number
 
                   CustomHelpCard(
-                    contactText: 'Call Us (+1-212-456-7890)',
+                    contactText: 'Email us at info@ileratravelhealth.com',
                     subText: 'Our help line service is active: 24/7',
                     onTap: () {
-                      profileController.launchPhone('01731090564');
+                      //profileController.launchPhone('01731090564');
                     },
                   ),
                 ],

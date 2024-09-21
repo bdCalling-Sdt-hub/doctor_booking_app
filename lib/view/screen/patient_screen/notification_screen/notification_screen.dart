@@ -1,9 +1,11 @@
 import 'package:doctor_booking/controller/notification_controller/notification_controller.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
+import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:doctor_booking/view/widgets/custom_circle_container/custom_circle_container.dart';
 import 'package:doctor_booking/view/widgets/custom_notification/custom_notification.dart';
+import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,19 +25,22 @@ class NotificationScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Column(
-            children: List.generate(
-                notificationController.notificationList.length, (index) {
-          return NotificationItem(
-            container: CustomCircleContainer(
-              iconSrc: notificationController.notificationList[index]['icon'],
-            ),
-            title: notificationController.notificationList[index]['title'],
-            description: notificationController.notificationList[index]
-                ['subtitle'],
-            time: notificationController.notificationList[index]['time'],
-          );
-        })),
+        child: notificationController.doctorNotificationList.isEmpty
+            ? const Center(child: CustomText(text: "No Notifications Yet"))
+            : Column(
+                children: List.generate(
+                    notificationController.doctorNotificationList.length,
+                    (index) {
+                var data = notificationController.doctorNotificationList[index];
+                return NotificationItem(
+                  container: const CustomCircleContainer(
+                    iconSrc: AppIcons.calendarClock,
+                  ),
+                  title: data.title ?? "",
+                  description: data.body ?? "",
+                  time: data.createdAt ?? "",
+                );
+              })),
       ),
     );
   }
