@@ -3,12 +3,10 @@ import 'package:doctor_booking/helper/time_converter/time_converter.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
-import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/inner_widget/appointments_history_card.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_home_screen/doctor_home_controller/doctor_home_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
-import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:doctor_booking/view/widgets/general_error.dart';
@@ -67,26 +65,26 @@ class DoctorAppointmentsHistory extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    //================== Date ===================//
-                                    CustomText(
-                                      text: 'February 2024',
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColors.bluNormalHover,
-                                    ),
-                                    SizedBox(
-                                      width: 11.w,
-                                    ),
-                                    CustomImage(
-                                      imageSrc: AppIcons.calendarClock,
-                                      sizeWidth: 20.h,
-                                      imageColor: AppColors.bluNormalHover,
-                                    ),
-                                  ],
-                                ),
+                                // Row(
+                                //   mainAxisAlignment: MainAxisAlignment.center,
+                                //   children: [
+                                //     //================== Date ===================//
+                                //     CustomText(
+                                //       text: 'February 2024',
+                                //       fontSize: 14.sp,
+                                //       fontWeight: FontWeight.w400,
+                                //       color: AppColors.bluNormalHover,
+                                //     ),
+                                //     SizedBox(
+                                //       width: 11.w,
+                                //     ),
+                                //     CustomImage(
+                                //       imageSrc: AppIcons.calendarClock,
+                                //       sizeWidth: 20.h,
+                                //       imageColor: AppColors.bluNormalHover,
+                                //     ),
+                                //   ],
+                                // ),
                                 SizedBox(
                                   height: 4.h,
                                 ),

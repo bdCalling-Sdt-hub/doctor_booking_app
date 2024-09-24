@@ -87,14 +87,15 @@ class DoctorHomeScreen extends StatelessWidget {
                               Expanded(
                                 //============================= Total Appointment Container ==================
                                 child: HomeContainer(
-                                    title: AppStrings.totalAppointment,
-                                    subTitle: controller.doctorOverview.value
-                                                .totalAppointment?.completed ==
-                                            null
-                                        ? '0'
-                                        : controller.doctorOverview.value
-                                            .totalAppointment!.completed
-                                            .toString()),
+                                  title: AppStrings.totalAppointment,
+                                  subTitle: controller.doctorOverview.value
+                                              .totalAppointment?.completed ==
+                                          null
+                                      ? '0'
+                                      : controller.doctorOverview.value
+                                          .totalAppointment!.completed
+                                          .toString(),
+                                ),
                               ),
                             ],
                           ),
