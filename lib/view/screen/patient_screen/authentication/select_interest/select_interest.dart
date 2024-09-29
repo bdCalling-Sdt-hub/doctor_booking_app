@@ -20,6 +20,7 @@ class SelectInterest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       extendBody: true,
       bottomNavigationBar: CustomButton(
           title: isUpdate ? AppStrings.update : AppStrings.continues,
@@ -33,7 +34,7 @@ class SelectInterest extends StatelessWidget {
           CustomText(
             left: 20.w,
             right: 20.w,
-            top: 64.h,
+            //top: 64.h,
             text: AppStrings.chooseOneOrMore,
             maxLines: 6,
             bottom: 10.h,
