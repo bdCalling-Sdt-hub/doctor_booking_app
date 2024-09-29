@@ -266,7 +266,7 @@ class DateConverter {
         DateTime.parse(dateTimeString).toLocal(); // Convert to local time
     DateTime now = DateTime.now();
     DateTime today = DateTime(now.year, now.month, now.day);
-    DateTime yesterday = today.subtract(Duration(days: 1));
+    DateTime yesterday = today.subtract(const Duration(days: 1));
 
     DateFormat timeFormat =
         DateFormat('hh:mm a'); // Format for time (e.g., 08:30 PM)

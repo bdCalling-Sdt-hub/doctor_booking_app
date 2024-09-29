@@ -191,6 +191,7 @@ class ApiClient extends GetxService {
 
   static Future<Response> patchMultipartData(String uri, dynamic body,
       {List<MultipartBody>? multipartBody,
+      bool haveImage = true,
       Map<String, String>? headers}) async {
     try {
       bearerToken = await SharePrefsHelper.getString(AppConstants.bearerToken);
@@ -207,9 +208,9 @@ class ApiClient extends GetxService {
           http.MultipartRequest('PATCH', Uri.parse(ApiUrl.baseUrl + uri));
       request.fields.addAll(body);
 
-      if (multipartBody!.isNotEmpty) {
+      if (haveImage) {
         // ignore: avoid_function_literals_in_foreach_calls
-        multipartBody.forEach((element) async {
+        multipartBody?.forEach((element) async {
           debugPrint("path : ${element.file.path}");
 
           var mimeType = lookupMimeType(element.file.path);

@@ -53,7 +53,20 @@ class ProfileScreen extends StatelessWidget {
             //     text: AppStrings.paymentOption,
             //     leadingIcon: AppIcons.addCard,
             //     onTap: () {},
-            //     isCevron: true),
+            //
+            //
+            //   isCevron: true),
+
+            ///======================= Update Interest =============
+
+            CustomProfileCard(
+                text: AppStrings.updateInterest,
+                leadingIcon: AppIcons.northEast,
+                onTap: () {
+                  Get.toNamed(AppRoutes.selectInterest,
+                      arguments: true);
+                },
+                isCevron: true),
 
             ///=======================helpCenter==============
 

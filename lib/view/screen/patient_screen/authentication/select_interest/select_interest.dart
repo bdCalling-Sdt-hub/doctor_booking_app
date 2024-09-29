@@ -15,11 +15,14 @@ class SelectInterest extends StatelessWidget {
   final PatientAuthController controller = Get.find<PatientAuthController>();
   final GeneralController generalController = Get.find<GeneralController>();
 
+  final bool isUpdate = Get.arguments;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       bottomNavigationBar: CustomButton(
-          title: AppStrings.continues,
+          title: isUpdate ? AppStrings.update : AppStrings.continues,
           marginVerticel: 24.h,
           marginHorizontal: 20.w,
           onTap: () {
@@ -28,9 +31,11 @@ class SelectInterest extends StatelessWidget {
       body: Column(
         children: [
           CustomText(
+            left: 20.w,
+            right: 20.w,
             top: 64.h,
             text: AppStrings.chooseOneOrMore,
-            maxLines: 3,
+            maxLines: 6,
             bottom: 10.h,
           ),
           Expanded(child: Obx(() {

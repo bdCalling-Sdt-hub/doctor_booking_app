@@ -28,15 +28,14 @@ class PatientAuthController extends GetxController {
 
   updateInterest() async {
     generalController.showPopUpLoader();
-    Map<String, dynamic> body = {
+    Map<String, String> body = {
       // ignore: invalid_use_of_protected_member
       "category": jsonEncode(generalController.selectedInterest.value),
     };
 
-    var response = await ApiClient.patchData(ApiUrl.updateProfile, body,
-        isContentType: false
-        //headers: {'Content-Type': 'application/json'},
-        );
+    var response = await ApiClient.patchMultipartData(
+        ApiUrl.updateProfile, body,
+        haveImage: false);
 
     if (response.statusCode == 200) {
       navigator?.pop();
@@ -155,7 +154,7 @@ class PatientAuthController extends GetxController {
       SharePrefsHelper.setString(
           AppConstants.bearerToken, response.body["token"]);
 
-      Get.offAllNamed(AppRoutes.selectInterest);
+      Get.offAllNamed(AppRoutes.selectInterest, arguments: false);
     } else {
       navigator?.pop();
       toastMessage(message: response.body["message"]);

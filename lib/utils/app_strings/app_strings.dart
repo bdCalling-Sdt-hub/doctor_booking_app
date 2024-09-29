@@ -53,7 +53,7 @@ class AppStrings {
   static const String dateOfBirth = "Date of birth";
   static const String email = "Email";
   static const String chooseOneOrMore =
-      "Choose one or more categories that represent what categories you want to see. ";
+      "Choose one or more categories that represent what categories you want to see.\n based on that you will get recomemded docctor ";
 
   static const String weekend = "WEEKEND";
   static const String licenseNo = "License No";
@@ -186,6 +186,8 @@ class AppStrings {
   static const String phoneNumberColon = 'Phone Number:';
   static const String dateOfBirthColon = 'Date of Birth:';
   static const String genderColon = 'Gender:';
+  static const String updateInterest = 'Update Interest';
+
   static const String locationColon = 'Location:';
   static const String editAccountInfo = 'Edit Account Info';
   static const String uploadPhoto = 'Upload Photo';

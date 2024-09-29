@@ -169,7 +169,7 @@ class AppRoutes {
     GetPage(name: signUpOtpScreen, page: () => const SignUpOtpScreen()),
     GetPage(name: forgetPasswordScreen, page: () => ForgetPasswordScreen()),
     GetPage(name: signUpOtpScreen, page: () => const SignUpOtpScreen()),
-  //  GetPage(name: forgetPasswordScreen, page: () => ForgetPasswordScreen()),
+    //  GetPage(name: forgetPasswordScreen, page: () => ForgetPasswordScreen()),
     GetPage(name: resetPasswordScreen, page: () => ResetPasswordScreen()),
     GetPage(name: selectInterest, page: () => SelectInterest()),
 
