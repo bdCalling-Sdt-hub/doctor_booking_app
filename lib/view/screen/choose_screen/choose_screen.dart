@@ -19,6 +19,9 @@ class ChooseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.whiteNormal,
+      ),
       backgroundColor: AppColors.whiteNormal,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 20),

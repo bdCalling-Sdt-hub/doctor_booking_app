@@ -1,3 +1,4 @@
+import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
@@ -15,6 +16,8 @@ class PopularSpecialistsScreen extends StatelessWidget {
 
   final String title = Get.arguments[0];
   final bool isPopular = Get.arguments[1];
+
+  final GeneralController generalController = Get.find<GeneralController>();
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +42,32 @@ class PopularSpecialistsScreen extends StatelessWidget {
                 onTap: () {
                   Get.toNamed(AppRoutes.specialistProfile, arguments: data);
                 },
-                child: CustomCard(
-                  favouriteOntap: () {},
-                  networkImageUrl: "${ApiUrl.baseUrl}/${data.img ?? ""}",
-                  name: data.name ?? "",
-                  profession: data.specialization ?? "",
-                  rating: data.rating.toString(),
-                ),
+                child: Obx(() {
+                  return CustomCard(
+                    isFavourite: isPopular
+                        ? homeController.popuDocFavouList[index]
+                        : homeController.recomemdedDocFavouList[index],
+                    favouriteOntap: () {
+                      generalController
+                          .makeFavourite(docID: data.id ?? "")
+                          .then((value) {
+                        if (value) {
+                          if (isPopular) {
+                            homeController.popuDocFavouList[index] =
+                                !homeController.popuDocFavouList[index];
+                          } else {
+                            homeController.recomemdedDocFavouList[index] =
+                                !homeController.recomemdedDocFavouList[index];
+                          }
+                        }
+                      });
+                    },
+                    networkImageUrl: "${ApiUrl.baseUrl}/${data.img ?? ""}",
+                    name: data.name ?? "",
+                    profession: data.specialization ?? "",
+                    rating: data.rating.toString(),
+                  );
+                }),
               );
             },
             shrinkWrap: true,

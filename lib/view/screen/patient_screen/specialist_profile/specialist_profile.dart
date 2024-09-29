@@ -168,9 +168,9 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
 
                                 ///================= Total Checked Paitients =================
 
-                                const InfoCard(
+                                InfoCard(
                                   label: AppStrings.patientsChecked,
-                                  value: '12,000+',
+                                  value: "${data.totalBooking ?? 0}",
                                 ),
                                 SizedBox(
                                   width: 10.w,
@@ -198,18 +198,18 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                 SizedBox(height: 18.h),
 
                 ///========================== Appointment Fee Section================
-                const CustomRow(
-                    title: AppStrings.appointmentFee, subtitle: '\$25.00'),
-                const SizedBox(height: 8),
+                CustomRow(
+                    title: AppStrings.appointmentFee,
+                    subtitle: '\$ ${data.appointmentFee ?? 0}'),
+                // const SizedBox(height: 8),
                 const CustomText(
                   top: 18,
                   text: 'Schedule',
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
                   color: AppColors.grayNormal,
-                  bottom: 8,
+                  bottom: 16,
                 ),
-                const SizedBox(height: 8),
 
                 ///==============================Schedule Section=====================
                 SingleChildScrollView(
@@ -347,10 +347,9 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                         data.availableFor!)),
 
                 ///=================================Details===================
-                const DetailsSection(
+                DetailsSection(
                   title: AppStrings.details,
-                  details:
-                      'Dr. Ralph is the top most Cardiologist in Care Hospital New York. He is available for private consultation.',
+                  details: data.des ?? "",
                 ),
 
                 ///==================================Review And Rating =======================

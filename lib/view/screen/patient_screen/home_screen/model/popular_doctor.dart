@@ -27,6 +27,8 @@ class PopularDoctorDatum {
   DateTime? updatedAt;
   int? v;
   int? appointmentFee;
+  int? totalBooking;
+  String? des;
 
   PopularDoctorDatum({
     this.id,
@@ -57,6 +59,8 @@ class PopularDoctorDatum {
     this.updatedAt,
     this.v,
     this.appointmentFee,
+    this.totalBooking,
+    this.des,
   });
 
   factory PopularDoctorDatum.fromJson(Map<String, dynamic> json) {
@@ -95,40 +99,9 @@ class PopularDoctorDatum {
           json["updatedAt"] != null ? DateTime.parse(json["updatedAt"]) : null,
       v: json["__v"],
       appointmentFee: json["appointment_fee"],
+      totalBooking: json["total_booking"],
+      des: json["desc"],
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      "_id": id,
-      "img": img,
-      "name": name,
-      "email": email,
-      "date_of_birth": dateOfBirth,
-      "location": location,
-      "phone": phone,
-      "password": password,
-      "provider": provider,
-      "gender": gender,
-      "block": block,
-      "role": role,
-      "verified": verified,
-      "isFavorite": isFavorite,
-      "access": access,
-      "available_days": availableDays?.toJson(),
-      "available_for": availableFor?.toJson(),
-      "license": license,
-      "specialization": specialization,
-      "experience": experience,
-      "educational_background": educationalBackground,
-      "current_affiliation": currentAffiliation,
-      "rating": rating,
-      "total_rated": totalRated,
-      "createdAt": createdAt?.toIso8601String(),
-      "updatedAt": updatedAt?.toIso8601String(),
-      "__v": v,
-      "appointment_fee": appointmentFee,
-    };
   }
 }
 

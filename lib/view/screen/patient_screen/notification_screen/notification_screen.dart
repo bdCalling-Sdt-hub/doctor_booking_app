@@ -23,25 +23,28 @@ class NotificationScreen extends StatelessWidget {
       appBar: const CustomAppBar(
         appBarContent: AppStrings.notifications,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: notificationController.doctorNotificationList.isEmpty
-            ? const Center(child: CustomText(text: "No Notifications Yet"))
-            : Column(
-                children: List.generate(
-                    notificationController.doctorNotificationList.length,
-                    (index) {
-                var data = notificationController.doctorNotificationList[index];
-                return NotificationItem(
-                  container: const CustomCircleContainer(
-                    iconSrc: AppIcons.calendarClock,
-                  ),
-                  title: data.title ?? "",
-                  description: data.body ?? "",
-                  time: data.createdAt ?? "",
-                );
-              })),
-      ),
+      body: Obx(() {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: notificationController.doctorNotificationList.isEmpty
+              ? const Center(child: CustomText(text: "No Notifications Yet"))
+              : Column(
+                  children: List.generate(
+                      notificationController.doctorNotificationList.length,
+                      (index) {
+                  var data =
+                      notificationController.doctorNotificationList[index];
+                  return NotificationItem(
+                    container: const CustomCircleContainer(
+                      iconSrc: AppIcons.calendarClock,
+                    ),
+                    title: data.title ?? "",
+                    description: data.body ?? "",
+                    time: data.createdAt ?? "",
+                  );
+                })),
+        );
+      }),
     );
   }
 }
