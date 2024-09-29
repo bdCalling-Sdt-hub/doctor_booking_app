@@ -8,6 +8,7 @@ import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/inner_widget/appointments_history_dialog.dart';
+import 'package:doctor_booking/view/screen/patient_screen/home_screen/controller/paitent_home_controller.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/category_model.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/popular_doctor.dart';
 import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
@@ -16,6 +17,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/app_routes/app_routes.dart';
 
@@ -257,6 +259,8 @@ class GeneralController extends GetxController with GetxServiceMixin {
     );
 
     if (response.statusCode == 200) {
+      PaitentHomeController homeController = Get.find<PaitentHomeController>();
+      homeController.getFavouriteDocList();
       toastMessage(message: response.body["message"], colors: Colors.green);
       navigator?.pop();
       return true;
@@ -388,6 +392,44 @@ class GeneralController extends GetxController with GetxServiceMixin {
     } else {
       // Handle error response
       //ApiChecker.checkApi(response);
+    }
+  }
+
+  /// ==============================- Lunch Map =============================
+
+  launchMap(BuildContext context, double? lat, double? lng) async {
+    var googleMapsUrl =
+        'https://www.google.com/maps/search/?api=1&query=$lat,$lng';
+    var appleMapsUrl = 'https://maps.apple.com/?q=$lat,$lng';
+    var googleMapsAppUrl =
+        'comgooglemaps://?saddr=&daddr=$lat,$lng&directionsmode=driving';
+
+    try {
+      if (Platform.isAndroid) {
+        // Attempt to open Google Maps in the browser if the app cannot be opened
+        if (await canLaunchUrl(Uri.parse(googleMapsUrl))) {
+          await launchUrl(Uri.parse(googleMapsUrl));
+        } else {
+          throw 'Could not launch Google Maps in browser: $googleMapsUrl';
+        }
+      } else if (Platform.isIOS) {
+        // Try opening Google Maps app first
+        if (await canLaunchUrl(Uri.parse(googleMapsAppUrl))) {
+          await launchUrl(Uri.parse(googleMapsAppUrl));
+        } else {
+          // Fall back to Apple Maps
+          if (await canLaunchUrl(Uri.parse(appleMapsUrl))) {
+            await launchUrl(Uri.parse(appleMapsUrl));
+          } else {
+            throw 'Could not launch Apple Maps or Google Maps app';
+          }
+        }
+      } else {
+        throw 'Unsupported platform';
+      }
+    } catch (e) {
+      debugPrint('Error launching map: $e');
+      throw 'Could not launch map';
     }
   }
 

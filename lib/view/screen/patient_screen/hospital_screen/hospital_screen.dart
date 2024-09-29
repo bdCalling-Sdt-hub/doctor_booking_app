@@ -1,3 +1,4 @@
+import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/utils/api_keys.dart';
 import 'package:doctor_booking/view/screen/patient_screen/hospital_screen/controller/hospital_controller.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
@@ -14,6 +15,7 @@ class HospitalScreen extends StatelessWidget {
   HospitalScreen({super.key});
 
   final HospitalController hospitalController = Get.find<HospitalController>();
+  final GeneralController generalController = Get.find<GeneralController>();
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +38,17 @@ class HospitalScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             var data = hospitalController.hospitalList[index];
 
-            return customHospital(
-              image: data.photos!.isEmpty
-                  ? data.icon ?? ""
-                  : 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${data.photos?[0].photoReference}&key=$GOOGLE_MAP_KEY',
-              name: data.name ?? "",
+            return GestureDetector(
+              onTap: () {
+                generalController.launchMap(context,
+                    data.geometry?.location?.lat, data.geometry?.location?.lng);
+              },
+              child: customHospital(
+                image: data.photos!.isEmpty
+                    ? data.icon ?? ""
+                    : 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${data.photos?[0].photoReference}&key=$GOOGLE_MAP_KEY',
+                name: data.name ?? "",
+              ),
             );
           },
         );

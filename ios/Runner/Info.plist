@@ -3,6 +3,16 @@
 <plist version="1.0">
 <dict>
 
+<!-- ======= Map Luncher ======= -->
+
+
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>googlechromes</string>
+    <string>comgooglemaps</string>
+</array>
+
+
 <!-- ======= Google Map Setup ======= -->
 
 <key>NSLocationWhenInUseUsageDescription</key>
