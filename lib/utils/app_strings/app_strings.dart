@@ -11,6 +11,8 @@ class AppStrings {
       "Password must be 8 characters long & must include one capital letter";
   static const String enterAValidName = "Enter a valid name";
   static const String enterValidEamil = "Please Enter Your Email Address";
+  static const String byRegistering = "By registering you are agreed to our";
+  static const String termsOfUse = "terms of use";
 
   ///=======================OnBoard==================
   static const String welcomeToIlera = "Welcome to ilera";

@@ -35,6 +35,7 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
 
   RxInt bannerIndex = 0.obs;
   RxBool isSearch = false.obs;
+  RxBool isAgree = false.obs;
 
   Rx<PageController> pageController = PageController().obs;
   List<String> categories = [
@@ -192,18 +193,17 @@ class PaitentHomeController extends GetxController with GetxServiceMixin {
       for (int i = 0; i < favouriteDocList.length; i++) {
         var data = favouriteDocList[i].doctorId;
         getFavDoc.add(PopularDoctorDatum(
-          id: data?.id ?? "",
-          availableDays: data!.availableDays,
-          availableFor: data.availableFor,
-          img: data.img ?? "",
-          name: data.name ?? "",
-          specialization: data.specialization ?? "",
-          rating: data.rating,
-          experience: data.experience ?? "",
-          location: data.location ?? "",
-          appointmentFee: data.appointmentFee,
-          dateOfBirth: data.dateOfBirth??""
-        ));
+            id: data?.id ?? "",
+            availableDays: data!.availableDays,
+            availableFor: data.availableFor,
+            img: data.img ?? "",
+            name: data.name ?? "",
+            specialization: data.specialization ?? "",
+            rating: data.rating,
+            experience: data.experience ?? "",
+            location: data.location ?? "",
+            appointmentFee: data.appointmentFee,
+            dateOfBirth: data.dateOfBirth ?? ""));
       }
 
       for (int i = 0; i < getFavDoc.length; i++) {
