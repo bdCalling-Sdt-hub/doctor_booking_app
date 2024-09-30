@@ -1,5 +1,4 @@
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
-import 'package:doctor_booking/view/widgets/custom_spacer_widget/custom_spacer_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../custom_text/custom_text.dart';
@@ -18,6 +17,7 @@ class CustomRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CustomText(
           text: title,
@@ -25,7 +25,6 @@ class CustomRow extends StatelessWidget {
           fontSize: 16,
           color: AppColors.grayNormal,
         ),
-        const SpacerWidget(),
         GestureDetector(
           onTap: onTap ??
               () {}, // Provide a default no-op function if onTap is null

@@ -1,5 +1,8 @@
 import 'package:doctor_booking/core/app_routes/app_routes.dart';
+import 'package:doctor_booking/core/dependency/dependency_injection.dart';
+import 'package:doctor_booking/helper/shared_prefe/shared_prefe.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
+import 'package:doctor_booking/utils/app_const/app_const.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_images/app_images.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
@@ -77,6 +80,15 @@ class SideDrawer extends StatelessWidget {
                     ///====================== Log Out======================>
                     GestureDetector(
                       onTap: () {
+                        SharePrefsHelper.remove(AppConstants.bearerToken);
+                        SharePrefsHelper.remove(AppConstants.role);
+                        SharePrefsHelper.remove(AppConstants.rememberMe);
+
+                        Get.deleteAll(force: true).then((_) {
+                          DependencyInjection di = DependencyInjection();
+                          di.dependencies();
+                        }); // Dispose of all instances forcefully
+
                         Get.toNamed(AppRoutes.signInScreen);
                       },
                       child: Row(

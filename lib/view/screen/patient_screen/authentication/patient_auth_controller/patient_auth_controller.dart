@@ -24,6 +24,14 @@ class PatientAuthController extends GetxController {
   final TextEditingController passwordController =
       TextEditingController(text: kDebugMode ? "1234567Rr" : "");
 
+  /// ================= Remember Me =================
+  RxBool rememberMe = false.obs;
+  updateRememberMe() {
+    rememberMe.value = !rememberMe.value;
+
+    SharePrefsHelper.setBool(AppConstants.rememberMe, rememberMe.value);
+  }
+
   ///=================== Update Interest ===================
 
   updateInterest() async {
@@ -75,10 +83,12 @@ class PatientAuthController extends GetxController {
         saveInfo(response: response);
         SocketApi.init();
         Get.offAllNamed(AppRoutes.doctorHomeScreen);
-      } else {
+      } else if (response.body['data']['role'] == 'USER') {
         saveInfo(response: response);
         SocketApi.init();
         Get.offAllNamed(AppRoutes.homeScreen);
+      } else {
+        toastMessage(message: "As a admin you can't login with this gmail");
       }
     } else {
       ApiChecker.checkApi(response);
@@ -201,6 +211,9 @@ class PatientAuthController extends GetxController {
   saveInfo({required Response<dynamic> response}) {
     SharePrefsHelper.setString(
         AppConstants.bearerToken, response.body["token"]);
+
+    SharePrefsHelper.setString(
+        AppConstants.role, response.body['data']['role']);
 
     SharePrefsHelper.setString(
         AppConstants.userName, response.body["data"]["name"]);
@@ -340,7 +353,7 @@ class PatientAuthController extends GetxController {
   RxBool resetPasswordLoading = false.obs;
 
   Future<void> resetPassword() async {
-    final token = await SharePrefsHelper.getString(AppConstants.accesToken);
+    final token = await SharePrefsHelper.getString(AppConstants.bearerToken);
 
     debugPrint("============================ token=================$token");
 

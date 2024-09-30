@@ -39,6 +39,7 @@ class AppStrings {
   static const String availableFor = "Available For";
   static const String healthProfessional = "Health Professional";
   static const String continues = "Continue";
+  static const String rememberMe = "Remember Me";
   static const String signIn = "Sign In";
   static const String emailAddress = "Email Address";
   static const String enterEmailAddress = "Enter email address";

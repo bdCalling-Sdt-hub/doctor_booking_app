@@ -16,18 +16,43 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   navigate() async {
-    bool isOnboarding =
+    // Fetch stored preferences using `await` for async values
+    bool? isOnboarding =
         await SharePrefsHelper.getBool(AppConstants.onBoard) ?? false;
 
-    String token = await SharePrefsHelper.getString(AppConstants.bearerToken);
+    bool? isRememberMe =
+        await SharePrefsHelper.getBool(AppConstants.rememberMe) ?? false;
 
-    Future.delayed(const Duration(seconds: 2), () {
-      if (isOnboarding || token.isEmpty || token == "null") {
-        Get.offAllNamed(AppRoutes.signInScreen);
+    String? token = await SharePrefsHelper.getString(AppConstants.bearerToken);
+
+    String? role = await SharePrefsHelper.getString(AppConstants.role);
+
+    // Logging the retrieved values for debugging purposes
+    debugPrint(
+        "From SplashScreen >>> Onboarding: $isOnboarding, RememberMe: $isRememberMe, Role: $role, HasToken: ${token.isNotEmpty}");
+
+    // Navigate after 2 seconds delay
+    await Future.delayed(const Duration(seconds: 2));
+
+    // Logic checks and navigation
+    if (token.isNotEmpty && isRememberMe) {
+      // Navigate based on user role
+      if (role == "USER") {
+        Get.offAllNamed(AppRoutes.homeScreen);
+      } else if (role == "DOCTOR") {
+        Get.offAllNamed(AppRoutes.doctorHomeScreen);
       } else {
+        // Handle any unexpected roles if necessary
         Get.offAllNamed(AppRoutes.onboardScreenOne);
       }
-    });
+    } else if (isOnboarding && token.isEmpty) {
+      // If onboarding is complete but no token, set rememberMe and redirect to sign in
+      await SharePrefsHelper.setBool(AppConstants.rememberMe, true);
+      Get.offAllNamed(AppRoutes.signInScreen);
+    } else {
+      // Default onboarding screen
+      Get.offAllNamed(AppRoutes.onboardScreenOne);
+    }
   }
 
   @override

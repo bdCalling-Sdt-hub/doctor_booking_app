@@ -8,7 +8,6 @@ import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
-import 'package:doctor_booking/view/widgets/custom_spacer_widget/custom_spacer_widget.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -94,23 +93,36 @@ class SignInScreen extends StatelessWidget {
                   },
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SpacerWidget(),
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed(AppRoutes.forgetPasswordScreen);
-                      },
-                      child: CustomText(
-                        top: 8.h,
-                        text: AppStrings.forgotPassword,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.whiteDarker,
-                        bottom: 45,
-                      ),
-                    ),
+                    Obx(() {
+                      return Row(
+                        children: [
+                          Checkbox(
+                            value: patientAuthController.rememberMe.value,
+                            onChanged: (value) {
+                              patientAuthController.updateRememberMe();
+                            },
+                          ),
+                          const CustomText(
+                            text: AppStrings.rememberMe,
+                            color: AppColors.whiteDarker,
+                            fontSize: 12,
+                          )
+                        ],
+                      );
+                    }),
+                    IconButton(
+                        onPressed: () {},
+                        icon: const CustomText(
+                          text: AppStrings.forgotPassword,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.whiteDarker,
+                        ))
                   ],
                 ),
+
                 //======================================= Sign in button ===========================//
                 Obx(() {
                   return patientAuthController.signInLoading.value
