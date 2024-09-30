@@ -7,6 +7,7 @@ import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
+import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_appointments_history/inner_widget/appointments_history_dialog.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/controller/paitent_home_controller.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/model/category_model.dart';
@@ -230,19 +231,47 @@ class GeneralController extends GetxController with GetxServiceMixin {
   String getAvailableFor(String day, AvailableFor availableFor) {
     switch (day) {
       case 'Monday':
-        return availableFor.monday ?? "";
+        return availableFor.monday == AppStrings.onlineCapital
+            ? AppStrings.online
+            : availableFor.monday == AppStrings.offlineCapital
+                ? AppStrings.inPerson
+                : AppStrings.unavailable;
       case 'Tuesday':
-        return availableFor.tuesday ?? "";
+        return availableFor.tuesday == AppStrings.onlineCapital
+            ? AppStrings.online
+            : availableFor.tuesday == AppStrings.offlineCapital
+                ? AppStrings.inPerson
+                : AppStrings.unavailable;
       case 'Wednesday':
-        return availableFor.wednesday ?? "";
+        return availableFor.wednesday == AppStrings.onlineCapital
+            ? AppStrings.online
+            : availableFor.wednesday == AppStrings.offlineCapital
+                ? AppStrings.inPerson
+                : AppStrings.unavailable;
       case 'Thursday':
-        return availableFor.thursday ?? "";
+        return availableFor.thursday == AppStrings.onlineCapital
+            ? AppStrings.online
+            : availableFor.thursday == AppStrings.offlineCapital
+                ? AppStrings.inPerson
+                : AppStrings.unavailable;
       case 'Friday':
-        return availableFor.friday ?? "";
+        return availableFor.friday == AppStrings.onlineCapital
+            ? AppStrings.online
+            : availableFor.friday == AppStrings.offlineCapital
+                ? AppStrings.inPerson
+                : AppStrings.unavailable;
       case 'Saturday':
-        return availableFor.saturday ?? "";
+        return availableFor.saturday == AppStrings.onlineCapital
+            ? AppStrings.online
+            : availableFor.saturday == AppStrings.offlineCapital
+                ? AppStrings.inPerson
+                : AppStrings.unavailable;
       case 'Sunday':
-        return availableFor.sunday ?? "";
+        return availableFor.sunday == AppStrings.onlineCapital
+            ? AppStrings.online
+            : availableFor.sunday == AppStrings.offlineCapital
+                ? AppStrings.inPerson
+                : AppStrings.unavailable;
       default:
         return "Not Found";
     }

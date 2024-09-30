@@ -60,6 +60,8 @@ class AppointmentInfoScreen extends StatelessWidget {
                 availableTab: (value) {
                   doctorAuthController.mondayTypeController.value.text =
                       value ?? "";
+
+                  print(doctorAuthController.mondayTypeController.value.text);
                   doctorAuthController.mondayTypeController.refresh();
                 },
                 startController:

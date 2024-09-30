@@ -41,7 +41,11 @@ class CustomAppointmentInfo extends StatelessWidget {
 
   final bool? readOnly;
 
-  final List<String> genderItems = ['OFFLINE', 'ONLINE', "WEEKEND"];
+  final List<String> abilityItems = [
+    AppStrings.online,
+    AppStrings.inPerson,
+    AppStrings.unavailable
+  ];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -76,7 +80,7 @@ class CustomAppointmentInfo extends StatelessWidget {
           ),
           items: readOnly!
               ? []
-              : genderItems
+              : abilityItems
                   .map((item) => DropdownMenuItem<String>(
                         value: item,
                         child: Text(

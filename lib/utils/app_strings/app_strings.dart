@@ -100,6 +100,13 @@ class AppStrings {
   static const String notification = "Notification";
   static const String favorites = "Favorites";
   static const String clear = "Clear";
+  static const String online = "Online";
+  static const String offlineCapital = "OFFLINE";
+  static const String weekendCapital = "WEEKEND";
+
+
+  static const String inPerson = "In Person";
+  static const String unavailable = "Unavailable";
 
   static const String allowAccess = "Allow Access";
   static const String allowLocationAccess = "Allow Location Access";
@@ -146,7 +153,7 @@ class AppStrings {
   static const String bankAccountNumber = "Bank Account Number";
   static const String back = "Back";
   static const String submit = "Submit";
-  static const String online = "ONLINE";
+  static const String onlineCapital = "ONLINE";
 
   ///==========================Schedule=================
   static const String schedule = 'Schedule';

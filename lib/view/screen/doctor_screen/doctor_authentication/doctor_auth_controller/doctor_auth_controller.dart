@@ -9,6 +9,7 @@ import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/utils/ToastMsg/toast_message.dart';
 import 'package:doctor_booking/utils/app_const/app_const.dart';
+import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -47,15 +48,12 @@ class DoctorAuthController extends GetxController {
   }
 
   //===================== Doctor Personal info controller =======================
-  Rx<TextEditingController> doctorNameController =
-      TextEditingController().obs;
+  Rx<TextEditingController> doctorNameController = TextEditingController().obs;
 
   Rx<TextEditingController> doctorDateOfBirthController =
       TextEditingController().obs;
 
-  Rx<TextEditingController> doctorEmailController =
-      TextEditingController()
-          .obs;
+  Rx<TextEditingController> doctorEmailController = TextEditingController().obs;
 
   Rx<TextEditingController> doctorPhoneNumberController =
       TextEditingController().obs;
@@ -115,22 +113,17 @@ class DoctorAuthController extends GetxController {
       TextEditingController().obs;
 
   ///============================== Professional Information ===============================
-  Rx<TextEditingController> specialisController =
-      TextEditingController().obs;
+  Rx<TextEditingController> specialisController = TextEditingController().obs;
 
   Rx<TextEditingController> appointmentFeeController =
       TextEditingController().obs;
 
-  Rx<TextEditingController> experienceController =
-      TextEditingController().obs;
+  Rx<TextEditingController> experienceController = TextEditingController().obs;
 
-  Rx<TextEditingController> educationController =
-      TextEditingController().obs;
+  Rx<TextEditingController> educationController = TextEditingController().obs;
 
-  Rx<TextEditingController> affiliationController =
-      TextEditingController().obs;
-  Rx<TextEditingController> licenceNoController =
-      TextEditingController().obs;
+  Rx<TextEditingController> affiliationController = TextEditingController().obs;
+  Rx<TextEditingController> licenceNoController = TextEditingController().obs;
   Rx<TextEditingController> professionalDiscriptionController =
       TextEditingController().obs;
 
@@ -201,13 +194,41 @@ class DoctorAuthController extends GetxController {
 
       // Appointment
       "available_for": jsonEncode({
-        "monday": mondayTypeController.value.text,
-        "tuesday": tuesdayTypeController.value.text,
-        "wednesday": weddayTypeController.value.text,
-        "thursday": thursdayTypeController.value.text,
-        "friday": fridayTypeController.value.text,
-        "saturday": saturdayTypeController.value.text,
-        "sunday": sundayTypeController.value.text
+        "monday": mondayTypeController.value.text == AppStrings.online
+            ? AppStrings.onlineCapital
+            : mondayTypeController.value.text == AppStrings.inPerson
+                ? AppStrings.offlineCapital
+                : AppStrings.weekend,
+        "tuesday": tuesdayTypeController.value.text == AppStrings.online
+            ? AppStrings.onlineCapital
+            : tuesdayTypeController.value.text == AppStrings.inPerson
+                ? AppStrings.offlineCapital
+                : AppStrings.weekend,
+        "wednesday": weddayTypeController.value.text == AppStrings.online
+            ? AppStrings.onlineCapital
+            : weddayTypeController.value.text == AppStrings.inPerson
+                ? AppStrings.offlineCapital
+                : AppStrings.weekend,
+        "thursday": thursdayTypeController.value.text == AppStrings.online
+            ? AppStrings.onlineCapital
+            : thursdayTypeController.value.text == AppStrings.inPerson
+                ? AppStrings.offlineCapital
+                : AppStrings.weekend,
+        "friday": fridayTypeController.value.text == AppStrings.online
+            ? AppStrings.onlineCapital
+            : fridayTypeController.value.text == AppStrings.inPerson
+                ? AppStrings.offlineCapital
+                : AppStrings.weekend,
+        "saturday": saturdayTypeController.value.text == AppStrings.online
+            ? AppStrings.onlineCapital
+            : saturdayTypeController.value.text == AppStrings.inPerson
+                ? AppStrings.offlineCapital
+                : AppStrings.weekend,
+        "sunday": sundayTypeController.value.text == AppStrings.online
+            ? AppStrings.onlineCapital
+            : sundayTypeController.value.text == AppStrings.inPerson
+                ? AppStrings.offlineCapital
+                : AppStrings.weekend,
       }),
       "available_days": jsonEncode({
         "monday": {

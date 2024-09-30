@@ -192,7 +192,8 @@ class DoctorHomeScreen extends StatelessWidget {
                                                         null
                                                     ? null
                                                     : data.appointmentType! ==
-                                                            AppStrings.online
+                                                            AppStrings
+                                                                .onlineCapital
                                                         ? true
                                                         : false,
                                                 showVideoCallOrConsalttentButton:
