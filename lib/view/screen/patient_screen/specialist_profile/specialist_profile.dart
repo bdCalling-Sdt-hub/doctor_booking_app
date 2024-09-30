@@ -432,14 +432,14 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                               arguments: data);
                         },
                         child: CustomCard(
-                            isFavourite: homeController.favBool[index],
+                            isFavourite: homeController.allDocFavouList[index],
                             favouriteOntap: () {
                               generalController
                                   .makeFavourite(docID: data.id ?? "")
                                   .then((value) {
                                 if (value) {
-                                  homeController.favBool[index] =
-                                      !homeController.favBool[index];
+                                  homeController.allDocFavouList[index] =
+                                      !homeController.allDocFavouList[index];
                                 }
                               });
                             },
@@ -452,6 +452,7 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                     }),
                   ),
                 ),
+
                 SizedBox(
                   height: 70.h,
                 ),
