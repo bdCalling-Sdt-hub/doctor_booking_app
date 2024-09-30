@@ -161,10 +161,13 @@ class GeneralController extends GetxController with GetxServiceMixin {
           DateFormat('EEEE').format(nextDay); // Get the day (e.g., Fri)
       String date = DateFormat('d').format(nextDay); // Get the date (e.g., 12)
 
+      int month = nextDay.month;
+
       // Add the day and date to the map
       Map<String, String> dayMap = {
         'Day': day,
         'Date': date,
+        "month": month.toString()
       };
 
       // Add the map to the list

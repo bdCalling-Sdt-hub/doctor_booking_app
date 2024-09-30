@@ -76,7 +76,11 @@ class PatientAppointmentController extends GetxController
       "day": selectedDay.value,
       "time": selectedTime.value,
       "date": selectedDate.value,
-      "appointment_type": availableFor
+      "appointment_type": availableFor == AppStrings.online
+          ? AppStrings.onlineCapital
+          : AppStrings.inPerson == AppStrings.offlineCapital
+              ? AppStrings.offlineCapital
+              : AppStrings.weekendCapital
     };
 
     List<MultipartBody>? multipartBody = [];

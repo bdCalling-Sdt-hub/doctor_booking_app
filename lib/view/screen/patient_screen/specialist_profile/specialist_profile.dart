@@ -231,9 +231,10 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                                         ?.toLowerCase() ??
                                     "";
 
-                            //===== Get Selected Date =======-
+                            //========= Get Selected Date ==========
+                            ///TODO Need to Update the month
                             patientAppointmentController.selectedDate.value =
-                                "${generalController.next7Days[index]["Date"] ?? ""}-${DateTime.now().month}-${DateTime.now().year}";
+                                "${generalController.next7Days[index]["Date"] ?? ""}-${generalController.next7Days[index]["month"] ?? ""}-${DateTime.now().year}";
 
                             ///====== Get Available For =======
                           });
@@ -332,6 +333,7 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                     }),
                   ),
                 ),
+
                 SizedBox(
                   height: 10.h,
                 ),
