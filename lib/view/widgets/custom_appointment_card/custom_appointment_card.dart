@@ -156,7 +156,7 @@ class CustomAppointmentCard extends StatelessWidget {
           ),
           Row(
             children: [
-              if (type == "OFFLINE") ...[
+              if (type == AppStrings.inPerson) ...[
                 const CustomImage(imageSrc: AppIcons.location),
                 CustomText(
                   left: 5,
@@ -166,7 +166,7 @@ class CustomAppointmentCard extends StatelessWidget {
                   color: AppColors.grayNormal,
                 ),
               ],
-              if (type == "ONLINE")
+              if (type == AppStrings.online)
                 CustomText(
                   //left: 5,
                   text: "Type: $type",

@@ -70,6 +70,8 @@ class PatientAppointmentController extends GetxController
       {required String doctorID, required String availableFor}) async {
     generalController.showPopUpLoader();
 
+    debugPrint("Available For ===============>>>>>>>>> $availableFor");
+
     Map<String, String> body = {
       "desc": describePbmController.value.text,
       "reason": resonOfVisitController.value.text,
@@ -78,7 +80,7 @@ class PatientAppointmentController extends GetxController
       "date": selectedDate.value,
       "appointment_type": availableFor == AppStrings.online
           ? AppStrings.onlineCapital
-          : AppStrings.inPerson == AppStrings.offlineCapital
+          : availableFor == AppStrings.inPerson
               ? AppStrings.offlineCapital
               : AppStrings.weekendCapital
     };

@@ -97,7 +97,12 @@ class AppointmentsScreen extends StatelessWidget {
                           appoinmentType: data.appointmentType ?? "",
                           appoinmentStatus: data.status ?? "",
                           paymentStatus: data.paymentStatus ?? false,
-                          type: data.appointmentType ?? "",
+                          type: data.appointmentType == AppStrings.onlineCapital
+                              ? AppStrings.online
+                              : data.appointmentType ==
+                                      AppStrings.offlineCapital
+                                  ? AppStrings.inPerson
+                                  : AppStrings.unavailable,
                           imageUrl:
                               "${ApiUrl.baseUrl}/${data.doctorId?.img ?? ""}",
                           name: data.name ?? "",
