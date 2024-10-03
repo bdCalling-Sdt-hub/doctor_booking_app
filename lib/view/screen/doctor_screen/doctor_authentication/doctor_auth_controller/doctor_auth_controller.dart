@@ -286,10 +286,10 @@ class DoctorAuthController extends GetxController {
       Get.offAllNamed(AppRoutes.doctorSignupOtpScreen,
           arguments: doctorEmailController.value.text);
     } else {
-      if (response.statusText == ApiClient.somethingWentWrong) {
-        signUpLoading.value = false;
-        refresh();
-      } else {}
+      // if (response.statusText == ApiClient.somethingWentWrong) {
+      //   signUpLoading.value = false;
+      //   refresh();
+      // } else {}
       ApiChecker.checkApi(response);
       signUpLoading.value = false;
       refresh();

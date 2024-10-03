@@ -12,7 +12,6 @@ import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
 import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
 import 'package:doctor_booking/view/widgets/custom_popupmenu_button/custom_popupmenu_button.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -65,12 +64,12 @@ class ProfessionalInfoScreen extends StatelessWidget {
                   hasBackgroundColor: true,
                   title: 'Appointment Fee',
                   controller:
-                      doctorAuthController.appointmentFeeController.value, 
+                      doctorAuthController.appointmentFeeController.value,
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.toString().isEmpty) {
                       return AppStrings.fieldCantBeEmpty;
-                    }else if(double.parse(value) <= 49){
+                    } else if (double.parse(value) <= 49) {
                       return 'Minimum fee is 50';
                     }
                     return null;
@@ -154,75 +153,76 @@ class ProfessionalInfoScreen extends StatelessWidget {
                 ),
 
                 ///==============Checkbox============
-                Row(
-                  children: [
-                    Checkbox(
-                      value: doctorAuthController.isRemember.value,
-                      checkColor: AppColors.blackNormal,
-                      activeColor: AppColors.white,
-                      onChanged: (value) {
-                        doctorAuthController.toggleRemember();
-                      },
-                    ),
-                    Expanded(
-                      child: RichText(
-                        maxLines: 4,
-                        text: TextSpan(
-                          children: <TextSpan>[
-                            const TextSpan(
-                              text: AppStrings.byContinueYouAccept,
-                              style: TextStyle(
-                                color: AppColors.blackNormal,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                              ),
-                            ),
+                // Row(
+                //   children: [
+                //     Checkbox(
+                //       value: doctorAuthController.isRemember.value,
+                //       checkColor: AppColors.blackNormal,
+                //       activeColor: AppColors.white,
+                //       onChanged: (value) {
+                //         doctorAuthController.toggleRemember();
+                //       },
+                //     ),
+                //     Expanded(
+                //       child: RichText(
+                //         maxLines: 4,
+                //         text: TextSpan(
+                //           children: <TextSpan>[
+                //             const TextSpan(
+                //               text: AppStrings.byContinueYouAccept,
+                //               style: TextStyle(
+                //                 color: AppColors.blackNormal,
+                //                 fontWeight: FontWeight.w400,
+                //                 fontSize: 12,
+                //               ),
+                //             ),
 
-                            ///==========================Terms of use=======================
-                            TextSpan(
-                              text: "\n${AppStrings.termsAndConditions}  ",
-                              style: const TextStyle(
-                                color: AppColors.blackNormal,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Get.toNamed(
-                                      AppRoutes.termsAndConditionScreen);
-                                },
-                            ),
-                            const TextSpan(
-                              text: "${AppStrings.and}  ",
-                              style: TextStyle(
-                                color: AppColors.blackNormal,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                              ),
-                            ),
+                //             ///==========================Terms of use=======================
+                //             TextSpan(
+                //               text: "\n${AppStrings.termsAndConditions}  ",
+                //               style: const TextStyle(
+                //                 color: AppColors.blackNormal,
+                //                 fontSize: 12,
+                //                 fontWeight: FontWeight.w500,
+                //               ),
+                //               recognizer: TapGestureRecognizer()
+                //                 ..onTap = () {
+                //                   Get.toNamed(
+                //                       AppRoutes.termsAndConditionScreen);
+                //                 },
+                //             ),
+                //             const TextSpan(
+                //               text: "${AppStrings.and}  ",
+                //               style: TextStyle(
+                //                 color: AppColors.blackNormal,
+                //                 fontWeight: FontWeight.w400,
+                //                 fontSize: 12,
+                //               ),
+                //             ),
 
-                            ///==============================Privacy policy====================
-                            TextSpan(
-                              text: AppStrings.privacyPolicy,
-                              style: const TextStyle(
-                                color: AppColors.blackNormal,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Get.toNamed(AppRoutes.privacyPolicyScreen);
-                                },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
+                //             ///==============================Privacy policy====================
+                //             TextSpan(
+                //               text: AppStrings.privacyPolicy,
+                //               style: const TextStyle(
+                //                 color: AppColors.blackNormal,
+                //                 fontSize: 12,
+                //                 fontWeight: FontWeight.w500,
+                //               ),
+                //               recognizer: TapGestureRecognizer()
+                //                 ..onTap = () {
+                //                   Get.toNamed(AppRoutes.privacyPolicyScreen);
+                //                 },
+                //             ),
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+
+                // SizedBox(
+                //   height: 10.h,
+                // ),
 
                 ///================================= Sign up Button ============================
 

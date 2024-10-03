@@ -182,6 +182,11 @@ class DoctorScheduleController extends GetxController {
     }
   }
 
+  /// =================== Additional Charge ====================
+  Rx<TextEditingController> additionalFeature = TextEditingController().obs;
+  RxList<String> additionalFeatureList = <String>[].obs;
+  RxInt additionalPrice = 0.obs;
+  
   @override
   void onInit() {
     getDoctorAppointment(AppStrings.accepted);
