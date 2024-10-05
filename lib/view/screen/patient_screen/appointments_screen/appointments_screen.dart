@@ -79,6 +79,8 @@ class AppointmentsScreen extends StatelessWidget {
                               .isLoadMoreRunning.value ==
                           false) {
                         return CustomAppointmentCard(
+                          data: data,
+                          additionalFee: data.additionalFee ?? 0,
                           note: data.notes ?? "Nothing",
                           doctorInfo: data.doctorId!,
                           reSchedule: data.reSchedule ?? false,
@@ -150,7 +152,9 @@ class AppointmentsScreen extends StatelessWidget {
                             } else {
                               paitentPaymentController.makePayment(
                                   appoinmentDate: data.date ?? "",
-                                  amount: 100,
+                                  amount: data.additionalTreatmentList!.isEmpty
+                                      ? data.appointmentFee ?? 0
+                                      : data.additionalFee ?? 0,
                                   userID: data.userId ?? "",
                                   doctorID: data.doctorId?.id ?? "",
                                   appoinmentId: data.id ?? "");

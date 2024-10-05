@@ -11,35 +11,38 @@ class AppoinmentListModel {
   String? appointmentType;
   String? desc;
   List<String>? prescription;
+  List<String>? additionalTreatmentList;
   bool? review;
   String? notes;
   bool? reSchedule;
   bool? paymentStatus;
   DateTime? createdAt;
   DateTime? updatedAt;
-  int? v;
+  int? additionalFee;
+  int? appointmentFee;
 
-  AppoinmentListModel({
-    this.id,
-    this.name,
-    this.doctorId,
-    this.userId,
-    this.date,
-    this.time,
-    this.day,
-    this.status,
-    this.reason,
-    this.appointmentType,
-    this.desc,
-    this.prescription,
-    this.review,
-    this.notes,
-    this.reSchedule,
-    this.paymentStatus,
-    this.createdAt,
-    this.updatedAt,
-    this.v,
-  });
+  AppoinmentListModel(
+      {this.id,
+      this.name,
+      this.doctorId,
+      this.userId,
+      this.date,
+      this.time,
+      this.day,
+      this.status,
+      this.reason,
+      this.appointmentType,
+      this.desc,
+      this.prescription,
+      this.additionalTreatmentList,
+      this.review,
+      this.notes,
+      this.reSchedule,
+      this.paymentStatus,
+      this.createdAt,
+      this.updatedAt,
+      this.additionalFee,
+      this.appointmentFee});
 
   factory AppoinmentListModel.fromJson(Map<String, dynamic> json) =>
       AppoinmentListModel(
@@ -49,7 +52,7 @@ class AppoinmentListModel {
             ? null
             : DoctorId.fromJson(json["doctorId"]),
         userId: json["userId"],
-        date: json["date"] ,
+        date: json["date"],
         time: json["time"],
         day: json["day"],
         status: json["status"],
@@ -59,6 +62,9 @@ class AppoinmentListModel {
         prescription: json["prescription"] == null
             ? []
             : List<String>.from(json["prescription"]!.map((x) => x)),
+        additionalTreatmentList: json["additionalTreatmentList"] == null
+            ? []
+            : List<String>.from(json["additionalTreatmentList"]!.map((x) => x)),
         review: json["review"],
         notes: json["notes"],
         reSchedule: json["reSchedule"],
@@ -69,7 +75,8 @@ class AppoinmentListModel {
         updatedAt: json["updatedAt"] == null
             ? null
             : DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
+        additionalFee: json["additionalFee"] ?? 0,
+        appointmentFee: json["appointment_fee"] ?? 0,
       );
 }
 
@@ -83,26 +90,23 @@ class DoctorId {
   String? specialization;
   int? appointmentFee;
 
-
-  DoctorId({
-    this.id,
-    this.img,
-    this.name,
-    this.email,
-    this.location,
-    this.phone,
-    this.specialization,
-    this.appointmentFee
-  });
+  DoctorId(
+      {this.id,
+      this.img,
+      this.name,
+      this.email,
+      this.location,
+      this.phone,
+      this.specialization,
+      this.appointmentFee});
 
   factory DoctorId.fromJson(Map<String, dynamic> json) => DoctorId(
-        id: json["_id"],
-        img: json["img"],
-        name: json["name"],
-        email: json["email"],
-        location: json["location"],
-        phone: json["phone"],
-        specialization: json["specialization"],
-        appointmentFee: json["appointment_fee"]
-      );
+      id: json["_id"],
+      img: json["img"],
+      name: json["name"],
+      email: json["email"],
+      location: json["location"],
+      phone: json["phone"],
+      specialization: json["specialization"],
+      appointmentFee: json["appointment_fee"]);
 }

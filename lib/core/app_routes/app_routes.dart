@@ -30,6 +30,7 @@ import 'package:doctor_booking/view/screen/patient_screen/book_appointment_patie
 import 'package:doctor_booking/view/screen/patient_screen/call_history_screen/call_history_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/categories_screen/categories_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/categories_screen/sub_categories_screen/sub_categories_screen.dart';
+import 'package:doctor_booking/view/screen/patient_screen/custom_treatment/custom_treatment.dart';
 import 'package:doctor_booking/view/screen/patient_screen/home_screen/home_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/hospital_screen/hospital_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/notification_screen/notification_screen.dart';
@@ -76,6 +77,7 @@ class AppRoutes {
   static const String categoriesScreen = "/CategoriesScreen";
   static const String subCategoriesScreen = "/SubCategoriesScreen";
   static const String specialistList = "/PopularSpecialistsScreen";
+  static const String customOfferView = "/customOfferView";
 
   ///===========================patient Authentication=====================
 
@@ -156,6 +158,8 @@ class AppRoutes {
     GetPage(name: callHistoryScreen, page: () => CallHistoryScreen()),
     GetPage(name: categoriesScreen, page: () => CategoriesScreen()),
     GetPage(name: subCategoriesScreen, page: () => const SubCategoriesScreen()),
+    GetPage(name: customOfferView, page: () => CustomTreatment()),
+
     GetPage(name: specialistList, page: () => PopularSpecialistsScreen()),
 
     ///================================patient Auth========================

@@ -1,3 +1,4 @@
+import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
@@ -9,13 +10,15 @@ import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomAppointmentCard extends StatelessWidget {
   final String imageUrl;
   final String name;
   final String note;
-
+  final int additionalFee;
+  final AppoinmentListModel data;
   final String profession;
   final String date;
   final String time;
@@ -33,6 +36,7 @@ class CustomAppointmentCard extends StatelessWidget {
   const CustomAppointmentCard({
     super.key,
     required this.imageUrl,
+    required this.additionalFee,
     required this.name,
     required this.profession,
     this.trailing,
@@ -48,6 +52,7 @@ class CustomAppointmentCard extends StatelessWidget {
     required this.reSchedule,
     required this.doctorInfo,
     required this.note,
+    required this.data,
   });
 
   @override
@@ -176,6 +181,22 @@ class CustomAppointmentCard extends StatelessWidget {
                 ),
             ],
           ),
+
+          /// ===================== Additional Req =====================
+
+          if (additionalFee != 0)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const CustomText(text: "Custom treatment requsted"),
+                IconButton(
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.customOfferView, arguments: data);
+                    },
+                    icon: const CustomText(
+                        text: "View", decoration: TextDecoration.underline))
+              ],
+            ),
 
           if (reSchedule && appoinmentStatus == AppStrings.pending)
             Column(

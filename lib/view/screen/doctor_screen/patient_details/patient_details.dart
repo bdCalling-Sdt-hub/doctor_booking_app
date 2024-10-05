@@ -32,7 +32,7 @@ class PatientDetails extends StatelessWidget {
       appBar: const CustomAppBar(
         appBarContent: AppStrings.patientDetails,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Obx(() {
           return Column(
@@ -223,17 +223,25 @@ class PatientDetails extends StatelessWidget {
                 ],
               ),
 
-              Expanded(
-                  child: GridView.builder(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20.w,
-                ),
-                itemCount:
-                    doctorScheduleController.additionalTreatmentList.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                itemBuilder: (context, index) {
-                  return Row(
+              // GridView.builder(
+              //   padding: EdgeInsets.symmetric(
+              //     horizontal: 20.w,
+              //   ),
+              //   itemCount:
+              //       doctorScheduleController.additionalTreatmentList.length,
+              //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              //       crossAxisCount: 2),
+              //   itemBuilder: (context, index) {
+              //     return
+              //   },
+              // ),
+
+              ...List.generate(
+                  doctorScheduleController.additionalTreatmentList.length,
+                  (int index) {
+                return Padding(
+                  padding: EdgeInsets.all(6.h),
+                  child: Row(
                     children: [
                       CustomText(
                         fontSize: 14.r,
@@ -258,16 +266,16 @@ class PatientDetails extends StatelessWidget {
                         ),
                       )
                     ],
-                  );
-                },
-              )),
+                  ),
+                );
+              }),
 
               CustomButton(
                 onTap: () {
                   doctorScheduleController.sendCustomOffer(
                       appoinmentID: model.id ?? "");
                 },
-                marginVerticel: 20.h,
+                marginVerticel: 24.h,
                 title: "Send Request",
               )
             ],

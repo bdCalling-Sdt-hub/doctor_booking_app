@@ -4,7 +4,7 @@ class ApiUrl {
   static socketUrl({String userID = ""}) => '$baseUrl?userId=$userID';
 
   static const stripePublicKey =
-      "pk_test_51Jw074LLQHQhmkgVnHTXLkdiUOFC7bh7FuIsBhWQJcxxQcKGnbvKNuAyfCQKNI9i7whOvTcAsV1Xv0HrifQEzKYa00EOlYl93L";
+      "pk_test_51PvZAIRv9ouTNUmHJAe3Sl0oUW8zqon9fr5jb6J5B5bDmSVWmb8DVtuUTQUry4SXLCtZSKugavb72wW6bzNjsm3T00C83N7lLB";
 
   ///=============================== Auth Section ==============================
 
