@@ -358,7 +358,7 @@ class GeneralController extends GetxController with GetxServiceMixin {
     showPopUpLoader();
 
     var response = await ApiClient.patchData(
-        ApiUrl.updateAppoinment(appoinmentID: appoinmentID),
+        ApiUrl.updateAppoinmentStatus(appoinmentID: appoinmentID),
         jsonEncode({"status": status}));
 
     if (response.statusCode == 200) {

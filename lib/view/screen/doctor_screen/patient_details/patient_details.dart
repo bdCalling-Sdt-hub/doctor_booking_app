@@ -5,6 +5,7 @@ import 'package:doctor_booking/view/screen/doctor_screen/patient_details/inner_w
 import 'package:doctor_booking/view/screen/doctor_screen/patient_details/inner_widget.dart/patient_details_containert.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/doctor_schedule_controller/doctor_schedule_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
+import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:doctor_booking/view/widgets/custom_text_field/custom_text_field.dart';
@@ -31,7 +32,7 @@ class PatientDetails extends StatelessWidget {
       appBar: const CustomAppBar(
         appBarContent: AppStrings.patientDetails,
       ),
-      body: SingleChildScrollView(
+      body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Obx(() {
           return Column(
@@ -147,33 +148,65 @@ class PatientDetails extends StatelessWidget {
               CustomText(
                 top: 8.h,
                 bottom: 8.h,
-                text: "Request for additional treatment",
+                text: "Request for Custom treatment",
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w500,
                 color: AppColors.grayNormal,
               ),
+
+              ///=========================== Custom Cost =======================
+
+              CustomTextField(
+                hintText: AppStrings.additionalCost,
+                onChanged: (value) {
+                  doctorScheduleController.additionalPrice.value.text = value;
+                },
+                onFieldSubmitted: (value) {
+                  doctorScheduleController.additionalPrice.value.text = value;
+                },
+                textEditingController:
+                    doctorScheduleController.additionalPrice.value,
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
               Row(
                 children: [
+                  ///=========================== Treatment Field =======================
+
                   Expanded(
                       child: CustomTextField(
+                    hintText: AppStrings.treatmentName,
+                    onChanged: (value) {
+                      doctorScheduleController.additionalFeature.value.text =
+                          value;
+                    },
+                    onFieldSubmitted: (value) {
+                      doctorScheduleController.additionalFeature.value.text =
+                          value;
+                    },
                     textEditingController:
                         doctorScheduleController.additionalFeature.value,
                   )),
                   GestureDetector(
                     onTap: () {
-                      if (doctorScheduleController.additionalFeatureList
+                      if (doctorScheduleController.additionalTreatmentList
                           .contains(doctorScheduleController
                               .additionalFeature.value.text)) {
-                        doctorScheduleController.additionalFeatureList.remove(
+                        doctorScheduleController.additionalTreatmentList.remove(
                             doctorScheduleController
                                 .additionalFeature.value.text);
                       } else {
-                        doctorScheduleController.additionalFeatureList.add(
+                        doctorScheduleController.additionalTreatmentList.insert(
+                            0,
                             doctorScheduleController
                                 .additionalFeature.value.text);
                       }
 
-                      doctorScheduleController.additionalFeatureList.refresh();
+                      doctorScheduleController.additionalFeature.value.clear();
+
+                      doctorScheduleController.additionalTreatmentList
+                          .refresh();
                     },
                     child: Container(
                       margin: EdgeInsets.only(left: 20.w),
@@ -188,6 +221,54 @@ class PatientDetails extends StatelessWidget {
                     ),
                   )
                 ],
+              ),
+
+              Expanded(
+                  child: GridView.builder(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20.w,
+                ),
+                itemCount:
+                    doctorScheduleController.additionalTreatmentList.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                itemBuilder: (context, index) {
+                  return Row(
+                    children: [
+                      CustomText(
+                        fontSize: 14.r,
+                        text: doctorScheduleController
+                            .additionalTreatmentList[index],
+                        right: 4.w,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          doctorScheduleController.additionalTreatmentList
+                              .removeAt(index);
+                        },
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              color: AppColors.blackDarker,
+                              shape: BoxShape.circle),
+                          padding: EdgeInsets.all(1.r),
+                          child: const Icon(
+                            Icons.remove,
+                            color: AppColors.white,
+                          ),
+                        ),
+                      )
+                    ],
+                  );
+                },
+              )),
+
+              CustomButton(
+                onTap: () {
+                  doctorScheduleController.sendCustomOffer(
+                      appoinmentID: model.id ?? "");
+                },
+                marginVerticel: 20.h,
+                title: "Send Request",
               )
             ],
           );

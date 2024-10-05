@@ -50,8 +50,11 @@ class ApiUrl {
   static getAppoinments({required String status, String page = "1"}) =>
       "/appointment/get-my-appointments?page=$page&status=$status";
 
-  static updateAppoinment({required String appoinmentID}) =>
+  static updateAppoinmentStatus({required String appoinmentID}) =>
       '/appointment/update-appointment-status/$appoinmentID';
+
+  // static updateAppoinment({required String appoinmentID}) =>
+  //     '/appointment/update-appointment/$appoinmentID';
 
   ///============= Payment Section ===============
 

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/model/doctor_appointment_model/appointment_model.dart';
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
@@ -13,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DoctorScheduleController extends GetxController {
+  GeneralController generalController = Get.find<GeneralController>();
   //============================> Tab selector item list =========================
   List<String> scheduleTabs = [
     AppStrings.upcoming,
@@ -184,9 +186,33 @@ class DoctorScheduleController extends GetxController {
 
   /// =================== Additional Charge ====================
   Rx<TextEditingController> additionalFeature = TextEditingController().obs;
-  RxList<String> additionalFeatureList = <String>[].obs;
-  RxInt additionalPrice = 0.obs;
-  
+  RxList<String> additionalTreatmentList = <String>[].obs;
+  Rx<TextEditingController> additionalPrice = TextEditingController().obs;
+
+  /// ===================== Accept Treatment with Custom Cost ======================
+
+  sendCustomOffer({required String appoinmentID}) async {
+    generalController.showPopUpLoader();
+    var body = {
+      // ignore: invalid_use_of_protected_member
+      "additionalTreatmentList": jsonEncode(additionalTreatmentList.value),
+      "additionalFee": additionalPrice.value.text.trim(),
+      "status": "accepted"
+    };
+
+    var response = await ApiClient.patchData(
+        ApiUrl.updateAppoinmentStatus(appoinmentID: appoinmentID),
+        jsonEncode(body));
+
+    if (response.statusCode == 200) {
+      navigator?.pop();
+      toastMessage(message: response.body["message"], colors: Colors.green);
+    } else {
+      navigator?.pop();
+      ApiChecker.checkApi(response);
+    }
+  }
+
   @override
   void onInit() {
     getDoctorAppointment(AppStrings.accepted);

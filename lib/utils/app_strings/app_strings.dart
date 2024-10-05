@@ -100,10 +100,12 @@ class AppStrings {
   static const String notification = "Notification";
   static const String favorites = "Favorites";
   static const String clear = "Clear";
+  static const String treatmentName = "Treatment name";
+  static const String additionalCost = "Custom Cost";
+
   static const String online = "Online";
   static const String offlineCapital = "OFFLINE";
   static const String weekendCapital = "WEEKEND";
-
 
   static const String inPerson = "In Person";
   static const String unavailable = "Unavailable";
