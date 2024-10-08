@@ -29,39 +29,40 @@ class PopularDoctorDatum {
   int? appointmentFee;
   int? totalBooking;
   String? des;
+  List<Service>? services;
 
-  PopularDoctorDatum({
-    this.id,
-    this.img,
-    this.name,
-    this.email,
-    this.dateOfBirth,
-    this.location,
-    this.phone,
-    this.password,
-    this.provider,
-    this.gender,
-    this.block,
-    this.role,
-    this.verified,
-    this.isFavorite,
-    this.access,
-    this.availableDays,
-    this.availableFor,
-    this.license,
-    this.specialization,
-    this.experience,
-    this.educationalBackground,
-    this.currentAffiliation,
-    this.rating,
-    this.totalRated,
-    this.createdAt,
-    this.updatedAt,
-    this.v,
-    this.appointmentFee,
-    this.totalBooking,
-    this.des,
-  });
+  PopularDoctorDatum(
+      {this.id,
+      this.img,
+      this.name,
+      this.email,
+      this.dateOfBirth,
+      this.location,
+      this.phone,
+      this.password,
+      this.provider,
+      this.gender,
+      this.block,
+      this.role,
+      this.verified,
+      this.isFavorite,
+      this.access,
+      this.availableDays,
+      this.availableFor,
+      this.license,
+      this.specialization,
+      this.experience,
+      this.educationalBackground,
+      this.currentAffiliation,
+      this.rating,
+      this.totalRated,
+      this.createdAt,
+      this.updatedAt,
+      this.v,
+      this.appointmentFee,
+      this.totalBooking,
+      this.des,
+      this.services});
 
   factory PopularDoctorDatum.fromJson(Map<String, dynamic> json) {
     return PopularDoctorDatum(
@@ -101,6 +102,10 @@ class PopularDoctorDatum {
       appointmentFee: json["appointment_fee"],
       totalBooking: json["total_booking"],
       des: json["desc"],
+      services: json["services"] == null
+          ? []
+          : List<Service>.from(
+              json["services"]!.map((x) => Service.fromJson(x))),
     );
   }
 }
@@ -216,4 +221,24 @@ class AvailableFor {
       "sunday": sunday,
     };
   }
+}
+
+class Service {
+  String? name;
+  int? price;
+
+  Service({
+    this.name,
+    this.price,
+  });
+
+  factory Service.fromJson(Map<String, dynamic> json) => Service(
+        name: json["name"],
+        price: json["price"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "price": price,
+      };
 }

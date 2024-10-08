@@ -15,10 +15,13 @@ class CustomButton extends StatelessWidget {
     this.fillColor = AppColors.blackNormal,
     this.textColor = AppColors.whiteNormal,
     this.isBorder = false,
+    this.fontSize = 14,
   });
 
   final double height;
   final double width;
+  final double fontSize;
+
   final Color? fillColor;
   final Color textColor;
   final bool isBorder;
@@ -47,7 +50,7 @@ class CustomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(100),
             color: fillColor),
         child: CustomText(
-            fontSize: 14,
+            fontSize: fontSize,
             fontWeight: FontWeight.w500,
             color: textColor,
             textAlign: TextAlign.center,

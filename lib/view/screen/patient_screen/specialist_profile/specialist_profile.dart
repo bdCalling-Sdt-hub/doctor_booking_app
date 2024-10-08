@@ -195,12 +195,12 @@ class _DoctorProfileScreenState extends State<SpecialistProfile> {
                     ],
                   ),
                 ),
-                SizedBox(height: 18.h),
+                //SizedBox(height: 18.h),
 
                 ///========================== Appointment Fee Section================
-                CustomRow(
-                    title: AppStrings.appointmentFee,
-                    subtitle: '\$ ${data.appointmentFee ?? 0}'),
+                // CustomRow(
+                //     title: AppStrings.appointmentFee,
+                //     subtitle: '\$ ${data.appointmentFee ?? 0}'),
                 // const SizedBox(height: 8),
                 const CustomText(
                   top: 18,

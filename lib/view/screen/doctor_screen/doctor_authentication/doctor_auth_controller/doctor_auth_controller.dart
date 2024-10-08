@@ -182,6 +182,7 @@ class DoctorAuthController extends GetxController {
   RxList<TextEditingController> servicePrice = <TextEditingController>[].obs;
 
   doctorSignUp({required List<Map<String, String>> services}) async {
+    String fcmToken = await SharePrefsHelper.getString(AppConstants.fcmToken);
     signUpLoading.value = true;
     refresh();
     // Create a Map for the request body
@@ -276,7 +277,7 @@ class DoctorAuthController extends GetxController {
       // Service ----------->>>>>>>>>>>
 
       "services": jsonEncode(services),
-      "fcm": "ueyfgweifgweiufgweidufgwaeuygaewkuyg"
+      "fcm": fcmToken
     };
 
     // Create the multipart data for the license image

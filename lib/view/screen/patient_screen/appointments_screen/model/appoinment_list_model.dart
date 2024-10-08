@@ -21,6 +21,8 @@ class AppoinmentListModel {
   int? additionalFee;
   int? appointmentFee;
 
+  List<Service>? services;
+
   AppoinmentListModel(
       {this.id,
       this.name,
@@ -42,7 +44,8 @@ class AppoinmentListModel {
       this.createdAt,
       this.updatedAt,
       this.additionalFee,
-      this.appointmentFee});
+      this.appointmentFee,
+      this.services});
 
   factory AppoinmentListModel.fromJson(Map<String, dynamic> json) =>
       AppoinmentListModel(
@@ -77,6 +80,10 @@ class AppoinmentListModel {
             : DateTime.parse(json["updatedAt"]),
         additionalFee: json["additionalFee"] ?? 0,
         appointmentFee: json["appointment_fee"] ?? 0,
+        services: json["services"] == null
+            ? []
+            : List<Service>.from(
+                json["services"]!.map((x) => Service.fromJson(x))),
       );
 }
 
@@ -109,4 +116,24 @@ class DoctorId {
       phone: json["phone"],
       specialization: json["specialization"],
       appointmentFee: json["appointment_fee"]);
+}
+
+class Service {
+  String? name;
+  int? price;
+
+  Service({
+    this.name,
+    this.price,
+  });
+
+  factory Service.fromJson(Map<String, dynamic> json) => Service(
+        name: json["name"],
+        price: json["price"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "price": price,
+      };
 }

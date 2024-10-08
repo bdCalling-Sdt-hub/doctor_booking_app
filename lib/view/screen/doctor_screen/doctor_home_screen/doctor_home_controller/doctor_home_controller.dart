@@ -276,8 +276,6 @@ class DoctorHomeController extends GetxController {
     }
   }
 
- 
-
   @override
   void onInit() {
     homescrollControloler.value.addListener(addScrollListener);

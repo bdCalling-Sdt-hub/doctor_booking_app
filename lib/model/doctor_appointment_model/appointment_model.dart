@@ -28,27 +28,29 @@ class AppointmentModel {
   DateTime? updatedAt;
   int? v;
 
-  AppointmentModel({
-    this.id,
-    this.name,
-    this.doctorId,
-    this.userId,
-    this.date,
-    this.time,
-    this.day,
-    this.status,
-    this.reason,
-    this.appointmentType,
-    this.desc,
-    this.prescription,
-    this.review,
-    this.notes,
-    this.reSchedule,
-    this.paymentStatus,
-    this.createdAt,
-    this.updatedAt,
-    this.v,
-  });
+  List<Service>? services;
+
+  AppointmentModel(
+      {this.id,
+      this.name,
+      this.doctorId,
+      this.userId,
+      this.date,
+      this.time,
+      this.day,
+      this.status,
+      this.reason,
+      this.appointmentType,
+      this.desc,
+      this.prescription,
+      this.review,
+      this.notes,
+      this.reSchedule,
+      this.paymentStatus,
+      this.createdAt,
+      this.updatedAt,
+      this.v,
+      this.services});
 
   factory AppointmentModel.fromJson(Map<String, dynamic> json) =>
       AppointmentModel(
@@ -77,6 +79,10 @@ class AppointmentModel {
             ? null
             : DateTime.parse(json["updatedAt"]),
         v: json["__v"],
+        services: json["services"] == null
+            ? []
+            : List<Service>.from(
+                json["services"]!.map((x) => Service.fromJson(x))),
       );
 }
 
@@ -117,5 +123,25 @@ class UserId {
         "location": location,
         "phone": phone,
         "img": img,
+      };
+}
+
+class Service {
+  String? name;
+  int? price;
+
+  Service({
+    this.name,
+    this.price,
+  });
+
+  factory Service.fromJson(Map<String, dynamic> json) => Service(
+        name: json["name"],
+        price: json["price"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "price": price,
       };
 }

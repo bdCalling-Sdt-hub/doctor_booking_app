@@ -17,12 +17,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class BookAppointmentPatientDetails extends StatelessWidget {
-  BookAppointmentPatientDetails({super.key});
+// ignore: must_be_immutable
+class BookAppointmentPatientDetails extends StatefulWidget {
+  BookAppointmentPatientDetails({super.key, this.selectedService});
 
+  Service? selectedService;
+
+  @override
+  State<BookAppointmentPatientDetails> createState() =>
+      _BookAppointmentPatientDetailsState();
+}
+
+class _BookAppointmentPatientDetailsState
+    extends State<BookAppointmentPatientDetails> {
   // final controller = Get.find<GeneralController>();
-
   final PopularDoctorDatum data = Get.arguments[0];
+
   final availableFor = Get.arguments[1];
 
   final GeneralController generalController = Get.find<GeneralController>();
@@ -31,10 +41,12 @@ class BookAppointmentPatientDetails extends StatelessWidget {
       Get.find<PaitentProfileController>();
 
   //  final AppointmentController appointmentController = Get.find<AppointmentController>();
-
   final PatientAppointmentController appointmentController =
       Get.find<PatientAppointmentController>();
 
+  List<Map<String, String>> selectedServices = [];
+  double totalPrice = 0.0;
+  // List<Map<String, String>> getServiceJson() {
   final scaffoldKey = GlobalKey<FormState>();
 
   @override
@@ -70,6 +82,102 @@ class BookAppointmentPatientDetails extends StatelessWidget {
                 SizedBox(
                   height: 15.h,
                 ),
+
+                /// =================== Choose the Treamnet you Want ===================
+
+                // CustomText(
+                //   text: "Choose the treatment you want",
+                //   fontSize: 16.sp,
+                //   fontWeight: FontWeight.w500,
+                //   color: AppColors.grayNormal,
+                // ),
+
+                DropdownButton<Service>(
+                  value: widget.selectedService,
+                  hint: const CustomText(text: "Choose the treatment you want"),
+                  icon: const Icon(Icons.arrow_drop_down),
+                  isExpanded: true,
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
+                  items: data.services?.map((Service service) {
+                    return DropdownMenuItem<Service>(
+                      value: service,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(service.name ?? ''),
+                          Text('£ ${service.price.toString()}'),
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (Service? newValue) {
+                    // if (selectedServices.contains({
+                    //   "name": newValue?.name ?? "",
+                    //   "price": "${newValue?.price}"
+                    // })) {
+                    // } else {
+                    //   selectedServices.add({
+                    //     "name": newValue?.name ?? "",
+                    //     "price": "${newValue?.price}"
+                    //   });
+                    // }
+                    selectedServices.add({
+                      "name": newValue?.name ?? "",
+                      "price": "${newValue?.price}"
+                    });
+
+                    // Assuming 'price' is stored as a String, we first convert it to a double
+                    double price =
+                        double.tryParse(newValue?.price.toString() ?? "") ??
+                            0.0;
+                    totalPrice += price;
+
+                    setState(() {});
+
+                    debugPrint(
+                        "selectedServices ----------->>>>>>> ${newValue?.price}");
+                  },
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+
+                ...List.generate(selectedServices.length, (index) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(text: selectedServices[index]["name"] ?? ""),
+                      Row(
+                        children: [
+                          CustomText(
+                              textAlign: TextAlign.left,
+                              text:
+                                  "£${selectedServices[index]["price"] ?? ""}"),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                // Get the price of the service being removed
+                                double price = double.tryParse(
+                                        selectedServices[index]["price"] ??
+                                            "") ??
+                                    0.0;
+
+                                // Subtract the price of the service being removed from the total price
+                                totalPrice -= price;
+
+                                // Remove the service from the selectedServices list
+                                selectedServices.removeAt(index);
+                              });
+                            },
+                            icon: const Icon(Icons.remove),
+                          ),
+                        ],
+                      )
+                    ],
+                  );
+                }),
+
+                ////
                 SizedBox(
                   child: CustomText(
                     text: AppStrings.reasonOfVisit,
@@ -224,17 +332,19 @@ class BookAppointmentPatientDetails extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(
-                  height: 60.h,
-                ),
-
                 /// ======================= Book button ==============//
                 CustomButton(
-                  title: AppStrings.bookAppointment,
+                  marginVerticel: 40,
+                  fontSize: 12.w,
+                  title: "${AppStrings.bookAppointment} Total £ $totalPrice",
                   onTap: () {
-                    if (scaffoldKey.currentState!.validate()) {
+                    if (selectedServices.isEmpty) {
+                      return;
+                    } else if (scaffoldKey.currentState!.validate()) {
                       appointmentController.bookAppoinment(
-                          doctorID: data.id ?? "", availableFor: availableFor);
+                          selectedServices: selectedServices,
+                          doctorID: data.id ?? "",
+                          availableFor: availableFor);
                     }
                   },
                 ),

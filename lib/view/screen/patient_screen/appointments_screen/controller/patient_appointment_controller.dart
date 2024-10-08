@@ -67,7 +67,7 @@ class PatientAppointmentController extends GetxController
   //RxString appointmentType = "".obs;
 
   bookAppoinment(
-      {required String doctorID, required String availableFor}) async {
+      {required String doctorID, required String availableFor , required List<Map<String, String>> selectedServices}) async {
     generalController.showPopUpLoader();
 
     debugPrint("Available For ===============>>>>>>>>> $availableFor");
@@ -82,7 +82,8 @@ class PatientAppointmentController extends GetxController
           ? AppStrings.onlineCapital
           : availableFor == AppStrings.inPerson
               ? AppStrings.offlineCapital
-              : AppStrings.weekendCapital
+              : AppStrings.weekendCapital,
+      "services": jsonEncode(selectedServices)
     };
 
     List<MultipartBody>? multipartBody = [];

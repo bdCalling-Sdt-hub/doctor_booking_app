@@ -5,10 +5,8 @@ import 'package:doctor_booking/view/screen/doctor_screen/patient_details/inner_w
 import 'package:doctor_booking/view/screen/doctor_screen/patient_details/inner_widget.dart/patient_details_containert.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/schedule_screen/doctor_schedule_controller/doctor_schedule_controller.dart';
 import 'package:doctor_booking/view/widgets/custom_app_bar/custom_app_bar.dart';
-import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_netwrok_image/custom_network_image.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
-import 'package:doctor_booking/view/widgets/custom_text_field/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -33,9 +31,8 @@ class PatientDetails extends StatelessWidget {
         appBarContent: AppStrings.patientDetails,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Obx(() {
-          return Column(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
@@ -143,145 +140,29 @@ class PatientDetails extends StatelessWidget {
                 ),
               ],
 
-              ///======================== Additional Request ========================
-
-              CustomText(
-                top: 8.h,
-                bottom: 8.h,
-                text: "Request for Custom treatment",
-                fontSize: 14.sp,
+              /// ====================== Services The Client Wants =====================
+              const CustomText(
+                text: "Requested Services",
+                fontSize: 18,
                 fontWeight: FontWeight.w500,
-                color: AppColors.grayNormal,
+                bottom: 18,
               ),
-
-              ///=========================== Custom Cost =======================
-
-              CustomTextField(
-                hintText: AppStrings.additionalCost,
-                onChanged: (value) {
-                  doctorScheduleController.additionalPrice.value.text = value;
-                },
-                onFieldSubmitted: (value) {
-                  doctorScheduleController.additionalPrice.value.text = value;
-                },
-                textEditingController:
-                    doctorScheduleController.additionalPrice.value,
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Row(
-                children: [
-                  ///=========================== Treatment Field =======================
-
-                  Expanded(
-                      child: CustomTextField(
-                    hintText: AppStrings.treatmentName,
-                    onChanged: (value) {
-                      doctorScheduleController.additionalFeature.value.text =
-                          value;
-                    },
-                    onFieldSubmitted: (value) {
-                      doctorScheduleController.additionalFeature.value.text =
-                          value;
-                    },
-                    textEditingController:
-                        doctorScheduleController.additionalFeature.value,
-                  )),
-                  GestureDetector(
-                    onTap: () {
-                      if (doctorScheduleController.additionalTreatmentList
-                          .contains(doctorScheduleController
-                              .additionalFeature.value.text)) {
-                        doctorScheduleController.additionalTreatmentList.remove(
-                            doctorScheduleController
-                                .additionalFeature.value.text);
-                      } else {
-                        doctorScheduleController.additionalTreatmentList.insert(
-                            0,
-                            doctorScheduleController
-                                .additionalFeature.value.text);
-                      }
-
-                      doctorScheduleController.additionalFeature.value.clear();
-
-                      doctorScheduleController.additionalTreatmentList
-                          .refresh();
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 20.w),
-                      height: 50.r,
-                      width: 50.r,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: AppColors.blackDarker),
-                      child: const Icon(
-                        Icons.add,
-                        color: AppColors.white,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-
-              // GridView.builder(
-              //   padding: EdgeInsets.symmetric(
-              //     horizontal: 20.w,
-              //   ),
-              //   itemCount:
-              //       doctorScheduleController.additionalTreatmentList.length,
-              //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              //       crossAxisCount: 2),
-              //   itemBuilder: (context, index) {
-              //     return
-              //   },
-              // ),
 
               ...List.generate(
-                  doctorScheduleController.additionalTreatmentList.length,
-                  (int index) {
-                return Padding(
-                  padding: EdgeInsets.all(6.h),
-                  child: Row(
+                model.services?.length ?? 0,
+                (index) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      CustomText(text: model.services?[index].name ?? ""),
                       CustomText(
-                        fontSize: 14.r,
-                        text: doctorScheduleController
-                            .additionalTreatmentList[index],
-                        right: 4.w,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          doctorScheduleController.additionalTreatmentList
-                              .removeAt(index);
-                        },
-                        child: Container(
-                          decoration: const BoxDecoration(
-                              color: AppColors.blackDarker,
-                              shape: BoxShape.circle),
-                          padding: EdgeInsets.all(1.r),
-                          child: const Icon(
-                            Icons.remove,
-                            color: AppColors.white,
-                          ),
-                        ),
-                      )
+                          text: "£${model.services?[index].price ?? ""}"),
                     ],
-                  ),
-                );
-              }),
-
-              CustomButton(
-                onTap: () {
-                  doctorScheduleController.sendCustomOffer(
-                      appoinmentID: model.id ?? "");
+                  );
                 },
-                marginVerticel: 24.h,
-                title: "Send Request",
               )
             ],
-          );
-        }),
-      ),
+          )),
     );
   }
 }

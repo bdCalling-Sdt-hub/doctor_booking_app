@@ -63,6 +63,7 @@ class DoctorHomeScreen extends StatelessWidget {
                             '',
                     scaffoldKey: scaffoldKey,
                   ),
+
                   SizedBox(height: 12.h),
                   Expanded(
                     child: Padding(

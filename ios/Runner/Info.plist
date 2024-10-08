@@ -37,7 +37,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Doctor Booking App</string>
+	<string>ilera</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>

@@ -20,6 +20,9 @@ class AppConstants {
   static String userId = "userId";
   static String email = "email";
 
+  static String fcmToken = "fcmToken";
+
+
   static String userNtr =
       'https://www.india.com/wp-content/uploads/2022/03/Jr-NTR-On-RRR-Massive-Success.jpg';
 }

@@ -234,43 +234,44 @@ class GeneralController extends GetxController with GetxServiceMixin {
   String getAvailableFor(String day, AvailableFor availableFor) {
     switch (day) {
       case 'Monday':
-        return availableFor.monday == AppStrings.onlineCapital
+        return availableFor.monday == AppStrings.online
             ? AppStrings.online
             : availableFor.monday == AppStrings.offlineCapital
                 ? AppStrings.inPerson
                 : AppStrings.unavailable;
+
       case 'Tuesday':
-        return availableFor.tuesday == AppStrings.onlineCapital
+        return availableFor.tuesday == AppStrings.online
             ? AppStrings.online
             : availableFor.tuesday == AppStrings.offlineCapital
                 ? AppStrings.inPerson
                 : AppStrings.unavailable;
       case 'Wednesday':
-        return availableFor.wednesday == AppStrings.onlineCapital
+        return availableFor.wednesday == AppStrings.online
             ? AppStrings.online
             : availableFor.wednesday == AppStrings.offlineCapital
                 ? AppStrings.inPerson
                 : AppStrings.unavailable;
       case 'Thursday':
-        return availableFor.thursday == AppStrings.onlineCapital
+        return availableFor.thursday == AppStrings.online
             ? AppStrings.online
             : availableFor.thursday == AppStrings.offlineCapital
                 ? AppStrings.inPerson
                 : AppStrings.unavailable;
       case 'Friday':
-        return availableFor.friday == AppStrings.onlineCapital
+        return availableFor.friday == AppStrings.online
             ? AppStrings.online
             : availableFor.friday == AppStrings.offlineCapital
                 ? AppStrings.inPerson
                 : AppStrings.unavailable;
       case 'Saturday':
-        return availableFor.saturday == AppStrings.onlineCapital
+        return availableFor.saturday == AppStrings.online
             ? AppStrings.online
             : availableFor.saturday == AppStrings.offlineCapital
                 ? AppStrings.inPerson
                 : AppStrings.unavailable;
       case 'Sunday':
-        return availableFor.sunday == AppStrings.onlineCapital
+        return availableFor.sunday == AppStrings.online
             ? AppStrings.online
             : availableFor.sunday == AppStrings.offlineCapital
                 ? AppStrings.inPerson

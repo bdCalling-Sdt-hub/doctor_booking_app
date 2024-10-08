@@ -25,7 +25,7 @@ class AppointmentInfoScreen extends StatelessWidget {
               CustomAppointmentInfo(
                 isClosed:
                     doctorAuthController.sundayTypeController.value.text ==
-                        AppStrings.weekend,
+                        AppStrings.unavailable,
                 dayName: 'Sunday',
                 startTimeTap: () async {
                   await doctorAuthController.getTime(day: 1, num: 1);
@@ -49,7 +49,7 @@ class AppointmentInfoScreen extends StatelessWidget {
               CustomAppointmentInfo(
                 isClosed:
                     doctorAuthController.mondayTypeController.value.text ==
-                        AppStrings.weekend,
+                        AppStrings.unavailable,
                 dayName: 'Monday',
                 startTimeTap: () async {
                   await doctorAuthController.getTime(day: 2, num: 1);
@@ -75,7 +75,7 @@ class AppointmentInfoScreen extends StatelessWidget {
               CustomAppointmentInfo(
                 isClosed:
                     doctorAuthController.tuesdayTypeController.value.text ==
-                        AppStrings.weekend,
+                        AppStrings.unavailable,
                 dayName: 'Tuesday',
                 startTimeTap: () async {
                   await doctorAuthController.getTime(day: 3, num: 1);
@@ -99,7 +99,7 @@ class AppointmentInfoScreen extends StatelessWidget {
               CustomAppointmentInfo(
                 isClosed:
                     doctorAuthController.weddayTypeController.value.text ==
-                        AppStrings.weekend,
+                        AppStrings.unavailable,
                 dayName: 'Wednesday',
                 startTimeTap: () async {
                   await doctorAuthController.getTime(day: 4, num: 1);
@@ -123,7 +123,7 @@ class AppointmentInfoScreen extends StatelessWidget {
               CustomAppointmentInfo(
                 isClosed:
                     doctorAuthController.thursdayTypeController.value.text ==
-                        AppStrings.weekend,
+                        AppStrings.unavailable,
                 dayName: 'Thursday',
                 startTimeTap: () async {
                   await doctorAuthController.getTime(day: 5, num: 1);
@@ -148,7 +148,7 @@ class AppointmentInfoScreen extends StatelessWidget {
               CustomAppointmentInfo(
                 isClosed:
                     doctorAuthController.fridayTypeController.value.text ==
-                        AppStrings.weekend,
+                        AppStrings.unavailable,
                 dayName: 'Friday',
                 startTimeTap: () async {
                   await doctorAuthController.getTime(day: 6, num: 1);
@@ -172,7 +172,7 @@ class AppointmentInfoScreen extends StatelessWidget {
               CustomAppointmentInfo(
                 isClosed:
                     doctorAuthController.saturdayTypeController.value.text ==
-                        AppStrings.weekend,
+                        AppStrings.unavailable,
                 dayName: 'Saturday',
                 startTimeTap: () async {
                   await doctorAuthController.getTime(day: 7, num: 1);
