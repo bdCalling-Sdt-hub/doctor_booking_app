@@ -4,6 +4,7 @@ import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/appointment_info_screen/appointment_info_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/personal_info_screen/personal_info_screen.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/professional_info_screen/professional_info_screen.dart';
+import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_sign_up/inner_widgets/service_info/service_info.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -78,6 +79,10 @@ class DoctorSignUp extends StatelessWidget {
                     customStep: CustomText(text: '3'),
                     title: 'Professional  \n Info',
                   ),
+                  EasyStep(
+                    customStep: CustomText(text: '3'),
+                    title: 'Service  \n Info',
+                  ),
                 ],
                 onStepReached: (index) {
                   doctorAuthController.updateStep(index);
@@ -94,6 +99,9 @@ class DoctorSignUp extends StatelessWidget {
                     return AppointmentInfoScreen();
                   case 2:
                     return ProfessionalInfoScreen();
+
+                  case 3:
+                    return ServiceInfo();
                   default:
                     return PersonalInfoScreen();
                 }

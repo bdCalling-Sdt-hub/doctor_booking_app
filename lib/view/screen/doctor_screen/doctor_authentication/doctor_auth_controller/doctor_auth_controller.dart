@@ -178,7 +178,10 @@ class DoctorAuthController extends GetxController {
 
   ///========================= Doctor Sign Up ===========================
   RxBool signUpLoading = false.obs;
-  doctorSignUp() async {
+  RxList<TextEditingController> serviceName = <TextEditingController>[].obs;
+  RxList<TextEditingController> servicePrice = <TextEditingController>[].obs;
+
+  doctorSignUp({required List<Map<String, String>> services}) async {
     signUpLoading.value = true;
     refresh();
     // Create a Map for the request body
@@ -266,9 +269,14 @@ class DoctorAuthController extends GetxController {
       "experience": experienceController.value.text,
       "educational_background": educationController.value.text,
       "current_affiliation": affiliationController.value.text,
-      "appointment_fee": appointmentFeeController.value.text,
+      "appointment_fee": "0",
       "license_no": licenceNoController.value.text,
-      "desc": professionalDiscriptionController.value.text
+      "desc": professionalDiscriptionController.value.text,
+
+      // Service ----------->>>>>>>>>>>
+
+      "services": jsonEncode(services),
+      "fcm": "ueyfgweifgweiufgweidufgwaeuygaewkuyg"
     };
 
     // Create the multipart data for the license image

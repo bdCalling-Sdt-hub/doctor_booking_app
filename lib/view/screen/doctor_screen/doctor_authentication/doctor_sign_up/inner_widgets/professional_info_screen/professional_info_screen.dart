@@ -1,15 +1,12 @@
 import 'dart:io';
-
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
 import 'package:doctor_booking/view/screen/doctor_screen/doctor_authentication/doctor_auth_controller/doctor_auth_controller.dart';
-import 'package:doctor_booking/core/app_routes/app_routes.dart';
 import 'package:doctor_booking/utils/app_colors/app_colors.dart';
 import 'package:doctor_booking/utils/app_icons/app_icons.dart';
 import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
 import 'package:doctor_booking/view/widgets/custom_from_card/custom_from_card.dart';
 import 'package:doctor_booking/view/widgets/custom_image/custom_image.dart';
-import 'package:doctor_booking/view/widgets/custom_loader/custom_loader.dart';
 import 'package:doctor_booking/view/widgets/custom_popupmenu_button/custom_popupmenu_button.dart';
 import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -58,23 +55,23 @@ class ProfessionalInfoScreen extends StatelessWidget {
                     return null;
                   },
                 ),
-                //=========================== Appointment fee ========================//
-                CustomFormCard(
-                  hintText: 'Enter your fee',
-                  hasBackgroundColor: true,
-                  title: 'Appointment Fee',
-                  controller:
-                      doctorAuthController.appointmentFeeController.value,
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value == null || value.toString().isEmpty) {
-                      return AppStrings.fieldCantBeEmpty;
-                    } else if (double.parse(value) <= 49) {
-                      return 'Minimum fee is 50';
-                    }
-                    return null;
-                  },
-                ),
+                // //=========================== Appointment fee ========================//
+                // CustomFormCard(
+                //   hintText: 'Enter your fee',
+                //   hasBackgroundColor: true,
+                //   title: 'Appointment Fee',
+                //   controller:
+                //       doctorAuthController.appointmentFeeController.value,
+                //   keyboardType: TextInputType.number,
+                //   validator: (value) {
+                //     if (value == null || value.toString().isEmpty) {
+                //       return AppStrings.fieldCantBeEmpty;
+                //     } else if (double.parse(value) <= 49) {
+                //       return 'Minimum fee is 50';
+                //     }
+                //     return null;
+                //   },
+                // ),
 
                 // /==================================specialization==========================
                 CustomFormCard(
@@ -224,47 +221,18 @@ class ProfessionalInfoScreen extends StatelessWidget {
                 //   height: 10.h,
                 // ),
 
-                ///================================= Sign up Button ============================
-
-                doctorAuthController.signUpLoading.value
-                    ? const CustomLoader()
-                    : CustomButton(
-                        onTap: () {
-                          // Get.toNamed(AppRoutes.doctorHomeScreen);
-
-                          if (formKey.currentState!.validate()) {
-                            doctorAuthController.doctorSignUp();
-                          }
-                        },
-                        title: AppStrings.signUp,
-                      ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const CustomText(
-                      text: AppStrings.alreadyHaveAAccount,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.whiteDarker,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed(AppRoutes.signInScreen);
-                      },
-                      child: const CustomText(
-                        left: 8,
-                        text: AppStrings.signIn,
-                        color: AppColors.bluNormalHover,
-                      ),
-                    ),
-                  ],
+                ///================================Next button====================
+                CustomButton(
+                  onTap: () {
+                    if (formKey.currentState!.validate()) {
+                      doctorAuthController.updateStep(3);
+                    }
+                  },
+                  title: AppStrings.next,
                 ),
                 SizedBox(
-                  height: 10.h,
-                ),
+                  height: 20.h,
+                )
               ],
             ),
           );
