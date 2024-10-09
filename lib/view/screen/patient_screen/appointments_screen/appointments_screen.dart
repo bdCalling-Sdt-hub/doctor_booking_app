@@ -1,5 +1,4 @@
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
-import 'package:doctor_booking/controller/payment_controller/payment_controller.dart';
 import 'package:doctor_booking/helper/time_converter/time_converter.dart';
 import 'package:doctor_booking/service/api_url.dart';
 import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/controller/patient_appointment_controller.dart';
@@ -25,9 +24,6 @@ class AppointmentsScreen extends StatelessWidget {
 
   final PaitentProfileController profileController =
       Get.find<PaitentProfileController>();
-
-  final PaitentPaymentController paitentPaymentController =
-      Get.find<PaitentPaymentController>();
 
   final GeneralController generalController = Get.find<GeneralController>();
 
@@ -150,14 +146,19 @@ class AppointmentsScreen extends StatelessWidget {
                               }
                               debugPrint("Reschedule Reject>>>>>>>>>>>>>>>");
                             } else {
-                              paitentPaymentController.makePayment(
-                                  appoinmentDate: data.date ?? "",
-                                  amount: data.additionalTreatmentList!.isEmpty
-                                      ? data.appointmentFee ?? 0
-                                      : data.additionalFee ?? 0,
-                                  userID: data.userId ?? "",
-                                  doctorID: data.doctorId?.id ?? "",
-                                  appoinmentId: data.id ?? "");
+                              // paitentPaymentController.makePayment(
+                              //     appoinmentDate: data.date ?? "",
+                              //     amount: data.additionalTreatmentList!.isEmpty
+                              //         ? data.appointmentFee ?? 0
+                              //         : data.additionalFee ?? 0,
+                              //     userID: data.userId ?? "",
+                              //     doctorID: data.doctorId?.id ?? "",
+                              //     appoinmentId: data.id ?? "");
+
+                              patientAppointmentController.paymentDetails(
+                                  data: data,
+                                  context: context,
+                                  service: data.services);
                             }
                           },
                           date: DateConverter.timeFormetString(data.date ?? ""),

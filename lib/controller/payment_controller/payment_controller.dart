@@ -43,6 +43,7 @@ class PaitentPaymentController extends GetxController {
       required String appoinmentId}) async {
     Map<String, dynamic>? paymentIntentData;
     try {
+      navigator?.pop();
       paymentIntentData = await createPaymentIntent(
         amount: amount,
       );

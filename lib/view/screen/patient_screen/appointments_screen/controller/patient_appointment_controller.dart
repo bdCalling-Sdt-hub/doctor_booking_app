@@ -1,6 +1,6 @@
 import 'dart:convert';
-
 import 'package:doctor_booking/controller/general_controller/general_controller.dart';
+import 'package:doctor_booking/controller/payment_controller/payment_controller.dart';
 import 'package:doctor_booking/service/api_check.dart';
 import 'package:doctor_booking/service/api_client.dart';
 import 'package:doctor_booking/service/api_url.dart';
@@ -11,6 +11,8 @@ import 'package:doctor_booking/utils/app_strings/app_strings.dart';
 import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/appointment_screen_popup/appointment_cancel_popup.dart';
 import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/appointments_screen.dart';
 import 'package:doctor_booking/view/screen/patient_screen/appointments_screen/model/appoinment_list_model.dart';
+import 'package:doctor_booking/view/widgets/custom_button/custom_button.dart';
+import 'package:doctor_booking/view/widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +23,8 @@ class PatientAppointmentController extends GetxController
 
   Rx<TextEditingController> describePbmController = TextEditingController().obs;
   GeneralController generalController = Get.find<GeneralController>();
-
+  final PaitentPaymentController paitentPaymentController =
+      Get.find<PaitentPaymentController>();
   Rx<Status> appoinmentLoading = Status.loading.obs;
   void appoinmentLoadingMethod({required Status status}) =>
       appoinmentLoading = status.obs;
@@ -67,7 +70,9 @@ class PatientAppointmentController extends GetxController
   //RxString appointmentType = "".obs;
 
   bookAppoinment(
-      {required String doctorID, required String availableFor , required List<Map<String, String>> selectedServices}) async {
+      {required String doctorID,
+      required String availableFor,
+      required List<Map<String, String>> selectedServices}) async {
     generalController.showPopUpLoader();
 
     debugPrint("Available For ===============>>>>>>>>> $availableFor");
@@ -121,6 +126,8 @@ class PatientAppointmentController extends GetxController
   RxList<AppoinmentListModel> appoinmentList = <AppoinmentListModel>[].obs;
   RxList<AppoinmentListModel> appoinmentHistory = <AppoinmentListModel>[].obs;
 
+  RxList<int> paymentAmmount = <int>[].obs;
+
   getMyAppoinment({required String status, bool isHistory = false}) async {
     appoinmentList.value = [];
     appoinmentLoadingMethod(status: Status.loading);
@@ -131,6 +138,10 @@ class PatientAppointmentController extends GetxController
     if (response.statusCode == 200) {
       appoinmentList.value = List<AppoinmentListModel>.from(
           response.body["data"].map((x) => AppoinmentListModel.fromJson(x)));
+
+      // for (int i = 0; i < appoinmentList.length; i++) {
+      //   paymentAmmount.value += appoinmentList[i].services[i].price;
+      // }
 
       if (isHistory) {
         appoinmentHistory.value = List<AppoinmentListModel>.from(
@@ -237,6 +248,68 @@ class PatientAppointmentController extends GetxController
       navigator?.pop();
       ApiChecker.checkApi(response);
     }
+  }
+
+  paymentDetails(
+      {required BuildContext context,
+      required List<Service>? service,
+     
+      required AppoinmentListModel data}) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            // height: context.height / 2,
+            width: double.maxFinite,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ...List.generate(
+                    service?.length ?? 0,
+                    (index) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CustomText(text: service?[index].name ?? ""),
+                          CustomText(text: "£${service?[index].price ?? ""}"),
+                        ],
+                      );
+                    },
+                  ),
+                  CustomButton(
+                    marginVerticel: 20,
+                    onTap: () {
+                      int ammount() {
+                        int getAmmoun = 0;
+
+                        for (var serviceItem in service!) {
+                          getAmmoun += serviceItem.price ?? 0;
+                        }
+
+                        return getAmmoun;
+                      }
+
+                     
+
+                      paitentPaymentController.makePayment(
+                          appoinmentDate: data.date ?? "",
+                          amount: ammount(),
+                          userID: data.userId ?? "",
+                          doctorID: data.doctorId?.id ?? "",
+                          appoinmentId: data.id ?? "");
+                    },
+                    title: "Make Payment",
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
